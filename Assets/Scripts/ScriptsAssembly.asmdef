@@ -1,0 +1,20 @@
+{
+    "name": "ScriptAssembly",
+    "rootNamespace": "",
+    "references": [
+        "Unity.InputSystem",
+        "TweenAssembly",
+        "Unity.TextMeshPro",
+        "StandardAssetsAssembly",
+        "PluginsAssembly"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

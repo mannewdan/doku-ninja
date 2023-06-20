@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToonBasicOutline
+  m_Shader: {fileID: 4800000, guid: 0835f492084252f4ab6007029ab48a9e, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 01b2769a3a8dd7149af87a767996093f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 17da6d53ec93a0444bd0f751b1d02477, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonShade:
+        m_Texture: {fileID: 8900000, guid: b995d4bd9d11078d11005b9844295342, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AmbientLightStrength: 0.5
+    - _CelAdd: 0
+    - _CelShading: 0.5
+    - _CelStep: 3
+    - _CustomTime: -30.08
+    - _DepthBlend: 0
+    - _EPS: 0
+    - _LOD: 0
+    - _MinAmbientStrength: 0
+    - _NoiseScale: 0.05
+    - _NoiseStrength: 0.6
+    - _Opacity: 0.5
+    - _OpacityBlending: 0
+    - _OpacityPower: 0
+    - _OpacityStep: 0
+    - _Outline: 0.002
+    - _RaymarchSteps: 0
+    - _RaymarchThreshold: 0
+    - _Shininess: 0.579717
+    - _Smoothing: 0
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorMax: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorMin: {r: 0.1875, g: 0.20833334, b: 0.25, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseDirection: {r: 1, g: 1, b: 0, a: 0}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Sphere1Params: {r: 0, g: 0, b: 0, a: 0}
+    - _Sphere1PosScale: {r: 0, g: 0, b: 0, a: 0}
+    - _Sphere2Params: {r: 0, g: 0, b: 0, a: 0}
+    - _Sphere2PosScale: {r: 0, g: 0, b: 0, a: 0}
+    - _Sphere3Params: {r: 0, g: 0, b: 0, a: 0}
+    - _Sphere3PosScale: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!1002 &2100001
+EditorExtensionImpl:
+  serializedVersion: 6
