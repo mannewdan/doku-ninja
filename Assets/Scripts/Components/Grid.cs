@@ -15,9 +15,27 @@ public class Grid : MonoBehaviour {
     }
   }
   public void Start() {
+    GenerateGrid();
+    GenerateBorder();
+
+    foreach (KeyValuePair<Point, Tile> tile in tiles) {
+      tile.Value.SetUVs();
+    }
+  }
+
+  void GenerateGrid() {
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
-        NewTile(new TileData() { pos = new Point(x, y) });
+        NewTile(new TileData() { pos = new Point(x, y), type = TileType.Ground });
+      }
+    }
+  }
+  void GenerateBorder() {
+    for (int x = -1; x < width + 1; x++) {
+      for (int y = -1; y < height + 1; y++) {
+        if (!(x == -1 || x == width || y == -1 || y == height)) continue;
+
+        NewTile(new TileData() { pos = new Point(x, y), type = TileType.Cliff });
       }
     }
   }
@@ -26,7 +44,7 @@ public class Grid : MonoBehaviour {
     GameObject newTile = Instantiate(tilePrefab) as GameObject;
     newTile.transform.parent = transform;
     Tile t = newTile.GetComponent<Tile>();
-    t.Load(data);
+    t.Load(data, this);
     tiles.Add(t.pos, t);
     return t;
   }

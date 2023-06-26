@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class TileData : ScriptableObject {
   public Point pos;
+  public TileType type;
 }

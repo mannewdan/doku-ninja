@@ -109,7 +109,7 @@ Material:
     - _G1: {r: 0, g: 0, b: 0, a: 0}
     - _G2: {r: 0, g: 0, b: 0, a: 0}
     - _HighlightColor: {r: 0, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0.29096776, g: 0.30870968, b: 0.33, a: 1}
+    - _OutlineColor: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 1}
     - _R1: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
     - _R2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -1,3 +1,12 @@
+v1.9.1.7
+
+   Editor
+      * Fixed Start Screen high CPU/GPU usage
+
+   Templates
+      * Fixed decal angle fade in (HDRP 12x 14x 15x)
+      * Fixed positionCS errors in Lit shader (URP 15x)
+
 v1.9.1.6
 
    Editor

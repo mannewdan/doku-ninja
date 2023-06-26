@@ -64,7 +64,7 @@ namespace AmplifyShaderEditor
 		[MenuItem( "Assets/Create/Amplify Shader/Templates/UI-Default", false, 85 )]
 		public static void ApplyTemplateTemplatesUIDefault()
 		{
-			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "e21eb5af408cf914ea3f0afeb00c8bf4" );
+			AmplifyShaderEditorWindow.CreateConfirmationTemplateShader( "ce4033fbdaf2f784a8e055b5dda3eec2" );
 		}
 		[MenuItem( "Assets/Create/Amplify Shader/UI/Default", false, 85 )]
 		public static void ApplyTemplateUIDefault()

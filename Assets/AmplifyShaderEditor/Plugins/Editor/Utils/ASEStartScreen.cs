@@ -398,9 +398,6 @@ namespace AmplifyShaderEditor
 				}
 			}
 			EditorGUILayout.EndHorizontal();
-
-			// Find a better way to update link buttons without repainting the window
-			Repaint();
 		}
 
 		void ImportSample( string pipeline, TemplateSRPType srpType )

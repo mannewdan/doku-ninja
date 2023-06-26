@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor
+// Made with Amplify Shader Editor v1.9.1.6
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "Custom/IconBasic"
 {
@@ -79,8 +79,8 @@ Shader "Custom/IconBasic"
 			float cos8 = cos( temp_output_10_0 );
 			float sin8 = sin( temp_output_10_0 );
 			float2 rotator8 = mul( uv_Alpha - _RotationCenter , float2x2( cos8 , -sin8 , sin8 , cos8 )) + _RotationCenter;
-			float2 uv2_RotationMask = i.uv2_texcoord2 * _RotationMask_ST.xy + _RotationMask_ST.zw;
-			o.Alpha = ( tex2D( _Alpha, rotator8 ).r * tex2D( _RotationMask, uv2_RotationMask ).r * _Opacity );
+			float2 uv1_RotationMask = i.uv2_texcoord2 * _RotationMask_ST.xy + _RotationMask_ST.zw;
+			o.Alpha = ( tex2D( _Alpha, rotator8 ).r * tex2D( _RotationMask, uv1_RotationMask ).r * _Opacity );
 		}
 
 		ENDCG
@@ -88,8 +88,7 @@ Shader "Custom/IconBasic"
 	CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
-Version=18935
-163;396;1417;623;389.471;352.6936;1;True;False
+Version=19106
 Node;AmplifyShaderEditor.TexturePropertyNode;16;-2429.471,-106.378;Inherit;True;Property;_Texture;Texture;2;0;Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RangedFloatNode;12;-2382.974,199.1836;Inherit;False;Property;_RotationSpeed;RotationSpeed;5;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;11;-2377.674,125.1835;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
@@ -120,7 +119,7 @@ Node;AmplifyShaderEditor.LerpOp;25;211.4775,-99.2074;Inherit;False;3;0;COLOR;0,0
 Node;AmplifyShaderEditor.RangedFloatNode;33;232.029,-177.6936;Inherit;False;Property;_Lighten;Lighten;12;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;7;-1178.813,363.4408;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;32;447.029,-123.6936;Inherit;False;2;2;0;FLOAT;0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;708.935,4.663351;Float;False;True;-1;2;ASEMaterialInspector;0;0;Unlit;Custom/IconBasic;False;False;False;False;True;True;True;True;True;True;False;False;False;False;False;False;False;False;False;False;False;Back;1;False;-1;3;False;-1;False;0;False;-1;0;False;-1;False;0;Custom;0.5;True;False;0;True;Transparent;;Transparent;All;18;all;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;False;2;5;False;-1;10;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;True;Relative;0;;10;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;False;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
+Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;708.935,4.663351;Float;False;True;-1;2;ASEMaterialInspector;0;0;Unlit;Custom/IconBasic;False;False;False;False;True;True;True;True;True;True;False;False;False;False;False;False;False;False;False;False;False;Back;1;False;;3;False;;False;0;False;;0;False;;False;0;Custom;0.5;True;False;0;True;Transparent;;Transparent;All;12;all;True;True;True;True;0;False;;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;2;15;10;25;False;0.5;False;2;5;False;;10;False;;0;0;False;;0;False;;0;False;;0;False;;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;True;Relative;0;;10;-1;-1;-1;0;False;0;0;False;;-1;0;False;;0;0;0;False;0.1;False;;0;False;;False;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;15;2;16;0
 WireConnection;10;0;11;0
 WireConnection;10;1;12;0
@@ -160,4 +159,4 @@ WireConnection;32;1;25;0
 WireConnection;0;2;32;0
 WireConnection;0;9;7;0
 ASEEND*/
-//CHKSM=39EFC0787F61B52655EE0B9D6D172670B6466269
+//CHKSM=009FD19F16A240964A0C82E9988E73370B4AF47B
