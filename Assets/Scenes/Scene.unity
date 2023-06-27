@@ -617,8 +617,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 6323020963102674632, guid: 3c6679b2feb3b334a8865ba801cabed5, type: 3}
-  tipLength: 0.05
-  overshoot: 0.075
+  tipLength: 0.01
+  overshoot: 0.025
+  widthFactor: 75
+  colorMajor: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 1}
+  colorMinor: {r: 0.51, g: 0.4593619, b: 0.42279, a: 1}
 --- !u!1 &1109041702
 GameObject:
   m_ObjectHideFlags: 0

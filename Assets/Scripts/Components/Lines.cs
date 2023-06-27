@@ -6,6 +6,9 @@ public class Lines : MonoBehaviour {
   [SerializeField] GameObject linePrefab;
   [SerializeField] float tipLength;
   [SerializeField] float overshoot;
+  [SerializeField] float widthFactor;
+  [SerializeField] Color colorMajor;
+  [SerializeField] Color colorMinor;
 
   List<LineRenderer> lines = new List<LineRenderer>();
   float orthoSize = 0;
@@ -13,7 +16,7 @@ public class Lines : MonoBehaviour {
   void Update() {
     if (Camera.main.orthographicSize != orthoSize) {
       orthoSize = Camera.main.orthographicSize;
-      float newWidth = orthoSize / 100.0f;
+      float newWidth = orthoSize / widthFactor;
 
       foreach (LineRenderer line in lines) {
         line.widthMultiplier = newWidth;
@@ -31,7 +34,7 @@ public class Lines : MonoBehaviour {
       points[1] = new Vector2(x - 0.5f, -(0.5f + overshoot - tipLength));
       points[2] = new Vector2(x - 0.5f, height - 1f + (0.5f + overshoot - tipLength));
       points[3] = new Vector2(x - 0.5f, height - 1f + (0.5f + overshoot));
-      BuildLine(points);
+      BuildLine(points, x % (width > 4 ? 3 : 2) == 0);
     }
 
     //horizontal lines
@@ -41,18 +44,19 @@ public class Lines : MonoBehaviour {
       points[1] = new Vector2(-(0.5f + overshoot - tipLength), y - 0.5f);
       points[2] = new Vector2(width - 1f + (0.5f + overshoot - tipLength), y - 0.5f);
       points[3] = new Vector2(width - 1f + (0.5f + overshoot), y - 0.5f);
-      BuildLine(points);
+      BuildLine(points, y % (height > 6 ? 3 : 2) == 0);
     }
   }
-  void BuildLine(Vector3[] points) {
+  void BuildLine(Vector3[] points, bool isMajor) {
     GameObject newLine = Instantiate(linePrefab);
     newLine.transform.parent = transform;
-    newLine.transform.localPosition = Vector3.zero;
+    newLine.transform.localPosition = isMajor ? new Vector3(0, 0, -0.1f) : Vector3.zero;
     newLine.transform.localEulerAngles = Vector3.zero;
 
     LineRenderer lRenderer = newLine.GetComponent<LineRenderer>();
     if (lRenderer) {
       lRenderer.SetPositions(points);
+      lRenderer.material.SetColor("_Color", isMajor ? colorMajor : colorMinor);
       lines.Add(lRenderer);
     }
   }
