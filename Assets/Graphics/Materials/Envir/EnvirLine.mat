@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UnitNinjaOutline
-  m_Shader: {fileID: 4800000, guid: 5fc756756c6b46e49b7d9b49aae5aae3, type: 3}
+  m_Name: EnvirLine
+  m_Shader: {fileID: 4800000, guid: ad7391a4feb9e9f498edfe0310d9d54f, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _MASKISDEFAULTCOLORS_ON
-  m_LightmapFlags: 4
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -22,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Alpha:
-        m_Texture: {fileID: 2800000, guid: 8bbe4ccde797ec041be04af910b4cd89, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -49,15 +48,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Mask1:
-        m_Texture: {fileID: 2800000, guid: b767b2d39fefc234c92c0aec22b0c708, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Mask2:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
+    - _Multiply:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,10 +62,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: b767b2d39fefc234c92c0aec22b0c708, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -86,30 +77,19 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HighlightPower: 0
-    - _MaskIsDefaultColors: 1
+    - _Intensity: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineDistance: 0.2
-    - _OutlineThickness: 1.5
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Transparency: 0.35
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _B1: {r: 0, g: 0, b: 0, a: 0}
-    - _B2: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _D: {r: 0.1596154, g: 0.1798077, b: 0.2, a: 1}
+    - _Color: {r: 0.403, g: 0.37466404, b: 0.35262498, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _G1: {r: 0, g: 0, b: 0, a: 0}
-    - _G2: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightColor: {r: 0, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 1}
-    - _R1: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
-    - _R2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
