@@ -49,7 +49,7 @@ public class Grid : MonoBehaviour {
 
   Tile NewTile(TileData data) {
     GameObject newTile = Instantiate(tilePrefab) as GameObject;
-    newTile.transform.parent = transform;
+    newTile.transform.SetParent(transform);
     Tile t = newTile.GetComponent<Tile>();
     t.Load(data, this);
     tiles.Add(t.pos, t);

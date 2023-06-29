@@ -49,7 +49,7 @@ public class Tile : MonoBehaviour {
 
     MeshFilter mFilter = GetComponent<MeshFilter>();
     List<Vector2> uvs = new List<Vector2>(mFilter.mesh.uv);
-    float t = GridTextureParams.TexScale;
+    float t = GridParams.TexScale;
     uvs[0] = new Vector2(coordinates.x * t, coordinates.y * t);
     uvs[1] = new Vector2(coordinates.x * t + t, coordinates.y * t);
     uvs[2] = new Vector2(coordinates.x * t, coordinates.y * t + t);

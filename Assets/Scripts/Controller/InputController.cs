@@ -17,36 +17,30 @@ public class InputController : MonoBehaviour {
 
   //properties
   Controls controls { get { return _controls ??= new Controls(); } }
-  Repeater up { get { return _up ??= new Repeater(controls, controls.ui.Up.id); } }
-  Repeater down { get { return _down ??= new Repeater(controls, controls.ui.Down.id); } }
-  Repeater left { get { return _left ??= new Repeater(controls, controls.ui.Left.id); } }
-  Repeater right { get { return _right ??= new Repeater(controls, controls.ui.Right.id); } }
-  Repeater tabLeft { get { return _tabLeft ??= new Repeater(controls, controls.ui.TabLeft.id); } }
-  Repeater tabRight { get { return _tabRight ??= new Repeater(controls, controls.ui.TabRight.id); } }
+  Repeater up { get { return _up ??= new Repeater(controls, controls.general.Up.id); } }
+  Repeater down { get { return _down ??= new Repeater(controls, controls.general.Down.id); } }
+  Repeater left { get { return _left ??= new Repeater(controls, controls.general.Left.id); } }
+  Repeater right { get { return _right ??= new Repeater(controls, controls.general.Right.id); } }
+  Repeater tabLeft { get { return _tabLeft ??= new Repeater(controls, controls.general.TabLeft.id); } }
+  Repeater tabRight { get { return _tabRight ??= new Repeater(controls, controls.general.TabRight.id); } }
 
   //events
-  string[] _buttons = new string[] { "ui/Confirm", "ui/Cancel" };
-  public static event EventHandler<InfoEventArgs<Point>> moveEvent;
-  public static event EventHandler<InfoEventArgs<int>> fireEvent;
+  string[] _buttons = new string[] { "general/Confirm", "general/Cancel" };
 
   void OnEnable() { controls.Enable(); }
   void OnDisable() { controls.Disable(); }
   void Update() {
-    int x = (left.Update() ? -1 : 0) + (right.Update() ? 1 : 0);
-    int y = (down.Update() ? -1 : 0) + (up.Update() ? 1 : 0);
+    int x = (left.Update(true) ? -1 : 0) + (right.Update(true) ? 1 : 0);
+    int y = (down.Update(true) ? -1 : 0) + (up.Update(true) ? 1 : 0);
 
     if (x != 0 || y != 0) {
-      if (moveEvent != null) {
-        moveEvent(this, new InfoEventArgs<Point>(new Point(x, y)));
-      }
+      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, y)));
     }
 
     for (int i = 0; i < _buttons.Length; i++) {
       var action = controls.FindAction(_buttons[i]);
       if (action != null && action.WasReleasedThisFrame()) {
-        if (fireEvent != null) {
-          fireEvent(this, new InfoEventArgs<int>(i));
-        }
+        this.PostNotification(Notifications.FIRE, new InfoEventArgs<int>(i));
       }
     }
   }
@@ -65,13 +59,13 @@ class Repeater {
     _controls = controls;
     _buttonID = buttonID.ToString();
   }
-  public bool Update() {
+  public bool Update(bool firstOnly = false) {
     bool retValue = false;
     bool value = _controls.FindAction(_buttonID).ReadValue<float>() > 0;
 
     if (value) {
       if (Time.time > _next) {
-        retValue = true;
+        retValue = (firstOnly && _hold) ? false : true;
         _next = Time.time + (_hold ? Rate : Threshold);
         _hold = true;
       }

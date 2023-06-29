@@ -49,7 +49,7 @@ public class Lines : MonoBehaviour {
   }
   void BuildLine(Vector3[] points, bool isMajor) {
     GameObject newLine = Instantiate(linePrefab);
-    newLine.transform.parent = transform;
+    newLine.transform.SetParent(transform);
     newLine.transform.localPosition = isMajor ? new Vector3(0, 0, -0.1f) : Vector3.zero;
     newLine.transform.localEulerAngles = Vector3.zero;
 
