@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour {
-  [SerializeField] bool isPlayer;
+  public UnitData data;
 
-  Point pos;
+  public bool isPlayer { get { return data.isPlayer; } }
+  public Point pos { get { return data.pos; } set { data.pos = value; } }
 
+  void Awake() {
+    if (data == null) data = new UnitData(false);
+  }
+  void Load(UnitData data) {
+    this.data = data;
+    if (enabled) OnEnable();
+  }
   void OnEnable() {
     if (isPlayer) this.AddObserver(OnMoveEvent, Notifications.MOVE);
   }
