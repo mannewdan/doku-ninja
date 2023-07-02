@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a24e9739589ddd44d8ee3990be94d996
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Chow Fun
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 96e6fde207dfd214db0082d581b0775d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

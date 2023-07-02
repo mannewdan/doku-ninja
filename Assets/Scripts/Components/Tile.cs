@@ -7,20 +7,24 @@ public class Tile : MonoBehaviour {
   [SerializeField] Material cliffMat;
   [SerializeField] Material groundMat;
 
-  public Point pos;
-  public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
-  public TileType type;
-
+  private TileData data;
+  private TileType type;
   private Grid grid;
+
+  public Point pos { get { return data.pos; } set { data.pos = value; } }
+  public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
+  public Digit solutionDigit { get { return data.solution; } }
+  public Digit currentDigit;
 
   void Snap() {
     transform.localPosition = center;
     transform.localScale = new Vector3(1, 1, 1);
   }
-  public void Load(TileData p, Grid grid) {
+  public void Load(TileData data, TileType type, Grid grid) {
+    this.data = data;
+    this.type = type;
     this.grid = grid;
-    pos = p.pos;
-    type = p.type;
+    currentDigit = data.given;
     Snap();
 
     MeshRenderer mRenderer = GetComponent<MeshRenderer>();

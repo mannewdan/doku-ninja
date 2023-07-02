@@ -17,18 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: cc024c6e2b7f904488eaa63e8b471a3a
   m_SerializeEntries:
-  - m_GUID: 3b7d28755b2d6ad42aac6e9f77687bae
-    m_Address: Assets/Tilemaps/6x6/map_001_Start.csv
+  - m_GUID: 5123fc9e15e922d48aa3c7a7d952e9e7
+    m_Address: Assets/Tilemaps
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 61b99d216269a57469648bc59cf1843f
-    m_Address: Assets/Tilemaps/6x6/map_001_Solution.csv
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 73222657241fec74585545ea60528176
-    m_Address: Assets/Tilemaps/6x6/map_001_Units.csv
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - tilemap
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3a1e5561752d3664bb7c28288b7427e1, type: 2}
   m_SchemaSet:

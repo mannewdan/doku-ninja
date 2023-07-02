@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class TileData : ScriptableObject {
   public Point pos;
-  public TileType type;
+  public Digit given;
+  public Digit solution;
 }

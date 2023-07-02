@@ -15,12 +15,7 @@ public class Lines : MonoBehaviour {
 
   void Update() {
     if (Camera.main.orthographicSize != orthoSize) {
-      orthoSize = Camera.main.orthographicSize;
-      float newWidth = orthoSize / widthFactor;
-
-      foreach (LineRenderer line in lines) {
-        line.widthMultiplier = newWidth;
-      }
+      UpdateSize();
     }
   }
 
@@ -46,6 +41,8 @@ public class Lines : MonoBehaviour {
       points[3] = new Vector2(width - 1f + (0.5f + overshoot), y - 0.5f);
       BuildLine(points, y % (height > 6 ? 3 : 2) == 0);
     }
+
+    UpdateSize();
   }
   void BuildLine(Vector3[] points, bool isMajor) {
     GameObject newLine = Instantiate(linePrefab);
@@ -58,6 +55,20 @@ public class Lines : MonoBehaviour {
       lRenderer.SetPositions(points);
       lRenderer.material.SetColor("_Color", isMajor ? colorMajor : colorMinor);
       lines.Add(lRenderer);
+    }
+  }
+  public void Clear() {
+    for (int i = lines.Count - 1; i >= 0; i--) {
+      Destroy(lines[i].gameObject);
+    }
+    lines.Clear();
+  }
+  public void UpdateSize() {
+    orthoSize = Camera.main.orthographicSize;
+    float newWidth = orthoSize / widthFactor;
+
+    foreach (LineRenderer line in lines) {
+      line.widthMultiplier = newWidth;
     }
   }
 }

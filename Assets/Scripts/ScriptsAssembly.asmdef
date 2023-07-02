@@ -3,10 +3,12 @@
     "rootNamespace": "",
     "references": [
         "Unity.InputSystem",
-        "TweenAssembly",
+        "Unity.ResourceManager",
+        "Unity.Addressables",
         "Unity.TextMeshPro",
         "StandardAssetsAssembly",
-        "PluginsAssembly"
+        "PluginsAssembly",
+        "TweenAssembly"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
