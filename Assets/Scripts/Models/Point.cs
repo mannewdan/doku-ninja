@@ -38,4 +38,13 @@ public struct Point {
   public override string ToString() {
     return string.Format("({0}, {1})", x, y);
   }
+  public void Clamp(int min, int max) {
+    Clamp(min, max, min, max);
+  }
+  public void Clamp(int Xmin, int Xmax, int yMin, int yMax) {
+    if (x < Xmin) x = Xmin;
+    if (x > Xmax) x = Xmax;
+    if (y < yMin) y = yMin;
+    if (y > yMax) y = yMax;
+  }
 }

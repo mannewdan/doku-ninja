@@ -161,6 +161,96 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""0"",
+                    ""type"": ""Button"",
+                    ""id"": ""4682a683-3ae9-45b3-be89-3e3926a47130"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c9108e8-47f5-4878-92ea-d1db6a7fdbc7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""2"",
+                    ""type"": ""Button"",
+                    ""id"": ""66b0bd66-386e-42ed-8529-1f7b5c7ead2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""3"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d134d18-ce68-440e-83a2-c90c8a3897f7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""4"",
+                    ""type"": ""Button"",
+                    ""id"": ""c692af23-0e29-40ba-b44e-16dd5c3917d6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""5"",
+                    ""type"": ""Button"",
+                    ""id"": ""e129b90c-f116-47d1-bde0-22319e9e0a45"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""6"",
+                    ""type"": ""Button"",
+                    ""id"": ""d41f6618-1790-4a5f-b3e0-d3543d066fbb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""7"",
+                    ""type"": ""Button"",
+                    ""id"": ""534321a2-8b17-4681-9697-8211149bdba4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""8"",
+                    ""type"": ""Button"",
+                    ""id"": ""19dd2435-e05e-480a-ab56-74261fecdf57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""9"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfd0a864-fe4e-4194-aa86-0394380d0c1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -647,6 +737,226 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""100aca6b-937c-4988-b01b-8046d9f0dc0f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acedbd16-cb08-4b84-900b-de5d469eb8e9"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdddec01-9ecf-4678-9522-c56a20cfffd0"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b38bebd-bee6-429e-8d9b-dd827ed86382"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df57fe39-51cd-4776-bfad-f3f5ba3d419d"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7553afa8-6922-4cae-a175-c48c77feb18e"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01876b85-c429-48fa-974b-0796fb48da8d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e46a28bc-4dbc-4002-8621-6074140e3bfa"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34b24135-a72b-47f8-9c3c-50cda282158a"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac6e3f80-92a2-4832-9e21-2adb720c3693"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8287932d-953c-4c67-a533-06ddfcf50627"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad3b60ac-e9e3-4f86-bca3-2d6922f70bd2"",
+                    ""path"": ""<Keyboard>/numpad5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74edd4e5-a5b3-4010-bfaf-0c950b06eb58"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55888068-e362-4fb2-a62f-f7526622370b"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af286472-c70b-4338-b671-dc92757bd280"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70238f8a-129a-42f8-a040-a0159c78a8f5"",
+                    ""path"": ""<Keyboard>/numpad7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f81737b4-a4ac-427c-9a92-4b30bca7c956"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62f37868-a07f-47d8-aae2-86d469903dc2"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f213e90b-4238-4d59-9ae7-0eeec6a077b8"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a3f5b3f-dc79-46ac-9326-63e85a789d5f"",
+                    ""path"": ""<Keyboard>/numpad9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -903,6 +1213,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_general_Right = m_general.FindAction("Right", throwIfNotFound: true);
         m_general_Confirm = m_general.FindAction("Confirm", throwIfNotFound: true);
         m_general_Cancel = m_general.FindAction("Cancel", throwIfNotFound: true);
+        m_general__0 = m_general.FindAction("0", throwIfNotFound: true);
+        m_general__1 = m_general.FindAction("1", throwIfNotFound: true);
+        m_general__2 = m_general.FindAction("2", throwIfNotFound: true);
+        m_general__3 = m_general.FindAction("3", throwIfNotFound: true);
+        m_general__4 = m_general.FindAction("4", throwIfNotFound: true);
+        m_general__5 = m_general.FindAction("5", throwIfNotFound: true);
+        m_general__6 = m_general.FindAction("6", throwIfNotFound: true);
+        m_general__7 = m_general.FindAction("7", throwIfNotFound: true);
+        m_general__8 = m_general.FindAction("8", throwIfNotFound: true);
+        m_general__9 = m_general.FindAction("9", throwIfNotFound: true);
         // camera
         m_camera = asset.FindActionMap("camera", throwIfNotFound: true);
         m_camera_Horizontal = m_camera.FindAction("Horizontal", throwIfNotFound: true);
@@ -987,6 +1307,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_general_Right;
     private readonly InputAction m_general_Confirm;
     private readonly InputAction m_general_Cancel;
+    private readonly InputAction m_general__0;
+    private readonly InputAction m_general__1;
+    private readonly InputAction m_general__2;
+    private readonly InputAction m_general__3;
+    private readonly InputAction m_general__4;
+    private readonly InputAction m_general__5;
+    private readonly InputAction m_general__6;
+    private readonly InputAction m_general__7;
+    private readonly InputAction m_general__8;
+    private readonly InputAction m_general__9;
     public struct GeneralActions
     {
         private @Controls m_Wrapper;
@@ -1006,6 +1336,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Right => m_Wrapper.m_general_Right;
         public InputAction @Confirm => m_Wrapper.m_general_Confirm;
         public InputAction @Cancel => m_Wrapper.m_general_Cancel;
+        public InputAction @_0 => m_Wrapper.m_general__0;
+        public InputAction @_1 => m_Wrapper.m_general__1;
+        public InputAction @_2 => m_Wrapper.m_general__2;
+        public InputAction @_3 => m_Wrapper.m_general__3;
+        public InputAction @_4 => m_Wrapper.m_general__4;
+        public InputAction @_5 => m_Wrapper.m_general__5;
+        public InputAction @_6 => m_Wrapper.m_general__6;
+        public InputAction @_7 => m_Wrapper.m_general__7;
+        public InputAction @_8 => m_Wrapper.m_general__8;
+        public InputAction @_9 => m_Wrapper.m_general__9;
         public InputActionMap Get() { return m_Wrapper.m_general; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1060,6 +1400,36 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @_0.started += instance.On_0;
+            @_0.performed += instance.On_0;
+            @_0.canceled += instance.On_0;
+            @_1.started += instance.On_1;
+            @_1.performed += instance.On_1;
+            @_1.canceled += instance.On_1;
+            @_2.started += instance.On_2;
+            @_2.performed += instance.On_2;
+            @_2.canceled += instance.On_2;
+            @_3.started += instance.On_3;
+            @_3.performed += instance.On_3;
+            @_3.canceled += instance.On_3;
+            @_4.started += instance.On_4;
+            @_4.performed += instance.On_4;
+            @_4.canceled += instance.On_4;
+            @_5.started += instance.On_5;
+            @_5.performed += instance.On_5;
+            @_5.canceled += instance.On_5;
+            @_6.started += instance.On_6;
+            @_6.performed += instance.On_6;
+            @_6.canceled += instance.On_6;
+            @_7.started += instance.On_7;
+            @_7.performed += instance.On_7;
+            @_7.canceled += instance.On_7;
+            @_8.started += instance.On_8;
+            @_8.performed += instance.On_8;
+            @_8.canceled += instance.On_8;
+            @_9.started += instance.On_9;
+            @_9.performed += instance.On_9;
+            @_9.canceled += instance.On_9;
         }
 
         private void UnregisterCallbacks(IGeneralActions instance)
@@ -1109,6 +1479,36 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @_0.started -= instance.On_0;
+            @_0.performed -= instance.On_0;
+            @_0.canceled -= instance.On_0;
+            @_1.started -= instance.On_1;
+            @_1.performed -= instance.On_1;
+            @_1.canceled -= instance.On_1;
+            @_2.started -= instance.On_2;
+            @_2.performed -= instance.On_2;
+            @_2.canceled -= instance.On_2;
+            @_3.started -= instance.On_3;
+            @_3.performed -= instance.On_3;
+            @_3.canceled -= instance.On_3;
+            @_4.started -= instance.On_4;
+            @_4.performed -= instance.On_4;
+            @_4.canceled -= instance.On_4;
+            @_5.started -= instance.On_5;
+            @_5.performed -= instance.On_5;
+            @_5.canceled -= instance.On_5;
+            @_6.started -= instance.On_6;
+            @_6.performed -= instance.On_6;
+            @_6.canceled -= instance.On_6;
+            @_7.started -= instance.On_7;
+            @_7.performed -= instance.On_7;
+            @_7.canceled -= instance.On_7;
+            @_8.started -= instance.On_8;
+            @_8.performed -= instance.On_8;
+            @_8.canceled -= instance.On_8;
+            @_9.started -= instance.On_9;
+            @_9.performed -= instance.On_9;
+            @_9.canceled -= instance.On_9;
         }
 
         public void RemoveCallbacks(IGeneralActions instance)
@@ -1274,6 +1674,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void On_0(InputAction.CallbackContext context);
+        void On_1(InputAction.CallbackContext context);
+        void On_2(InputAction.CallbackContext context);
+        void On_3(InputAction.CallbackContext context);
+        void On_4(InputAction.CallbackContext context);
+        void On_5(InputAction.CallbackContext context);
+        void On_6(InputAction.CallbackContext context);
+        void On_7(InputAction.CallbackContext context);
+        void On_8(InputAction.CallbackContext context);
+        void On_9(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

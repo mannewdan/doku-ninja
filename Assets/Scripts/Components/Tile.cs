@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class Tile : MonoBehaviour {
   [SerializeField] Material cliffMat;
@@ -10,11 +11,13 @@ public class Tile : MonoBehaviour {
   private TileData data;
   private TileType type;
   private Grid grid;
+  private TextMeshPro digitText;
 
   public Point pos { get { return data.pos; } set { data.pos = value; } }
   public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
-  public Digit solutionDigit { get { return data.solution; } }
-  public Digit currentDigit;
+  public int solutionDigit { get { return data.solution; } }
+  public int currentDigit { get { return _currentDigit; } set { _currentDigit = value; UpdateDigit(); } }
+  [SerializeField] private int _currentDigit;
 
   void Snap() {
     transform.localPosition = center;
@@ -28,10 +31,20 @@ public class Tile : MonoBehaviour {
     Snap();
 
     MeshRenderer mRenderer = GetComponent<MeshRenderer>();
+    digitText = GetComponentInChildren<TextMeshPro>();
     switch (type) {
-      case TileType.Cliff: mRenderer.sharedMaterial = cliffMat; break;
-      case TileType.Ground: mRenderer.sharedMaterial = groundMat; break;
+      case TileType.Cliff:
+        mRenderer.sharedMaterial = cliffMat;
+        if (digitText) Destroy(digitText.gameObject);
+        break;
+      case TileType.Ground:
+        mRenderer.sharedMaterial = groundMat;
+        UpdateDigit();
+        break;
     }
+  }
+  public void UpdateDigit() {
+    if (digitText) digitText.text = currentDigit > 0 ? currentDigit.ToString() : "";
   }
   public void SetUVs() {
     Point pWest = new Point(pos.x - 1, pos.y);

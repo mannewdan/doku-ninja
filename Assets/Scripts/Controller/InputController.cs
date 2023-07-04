@@ -36,11 +36,10 @@ public class InputController : MonoBehaviour {
     if (x != 0 || y != 0) {
       this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, y)));
     }
-
-    for (int i = 0; i < _buttons.Length; i++) {
-      var action = controls.FindAction(_buttons[i]);
+    for (int i = 0; i <= 9; i++) {
+      var action = controls.FindAction($"general/{i}");
       if (action != null && action.WasReleasedThisFrame()) {
-        this.PostNotification(Notifications.FIRE, new InfoEventArgs<int>(i));
+        this.PostNotification(Notifications.NUMBER, new InfoEventArgs<int>(i));
       }
     }
   }
