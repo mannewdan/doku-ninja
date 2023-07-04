@@ -21,7 +21,7 @@ public class EditController : StateMachine {
   public Point pos;
 
   void Start() {
-    ChangeState<InitEditState>();
+    ChangeState<EditStateInit>();
   }
   void Update() {
     if (Input.GetKeyDown(KeyCode.Space)) {

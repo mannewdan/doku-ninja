@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class InitEditState : EditState {
+public class EditStateInit : EditState {
   public override void Enter() {
     base.Enter();
     Timing.RunCoroutine(_Init());
@@ -14,6 +14,6 @@ public class InitEditState : EditState {
     grid.Load(gridData);
     SnapMarker();
     yield return 0;
-    owner.ChangeState<GivenEditState>();
+    owner.ChangeState<EditStateGiven>();
   }
 }
