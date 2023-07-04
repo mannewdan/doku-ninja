@@ -16,14 +16,19 @@ public abstract class EditState : State {
 
   protected override void AddListeners() {
     this.AddObserver(OnMove, Notifications.MOVE);
+    this.AddObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.AddObserver(OnNumber, Notifications.NUMBER);
   }
   protected override void RemoveListeners() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
+    this.RemoveObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
   }
 
   protected virtual void OnMove(object sender, object e) {
+
+  }
+  protected virtual void OnMoveRepeat(object sender, object e) {
 
   }
   protected virtual void OnNumber(object sender, object e) {

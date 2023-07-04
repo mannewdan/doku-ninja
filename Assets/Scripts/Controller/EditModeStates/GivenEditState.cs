@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GivenEditState : EditState {
-  protected override void OnMove(object sender, object e) {
+  protected override void OnMoveRepeat(object sender, object e) {
     pos += ((InfoEventArgs<Point>)e).info;
     pos = pos.Clamp(0, gridData.width - 1, 0, gridData.height - 1);
     SnapMarker();

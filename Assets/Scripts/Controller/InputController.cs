@@ -30,11 +30,21 @@ public class InputController : MonoBehaviour {
   void OnEnable() { controls.Enable(); }
   void OnDisable() { controls.Disable(); }
   void Update() {
-    int x = (left.Update(true) ? -1 : 0) + (right.Update(true) ? 1 : 0);
-    int y = (down.Update(true) ? -1 : 0) + (up.Update(true) ? 1 : 0);
+    int l = left.Update(out bool leftFirstPress) ? -1 : 0;
+    int r = right.Update(out bool rightFirstPress) ? 1 : 0;
+    int d = down.Update(out bool downFirstPress) ? -1 : 0;
+    int u = up.Update(out bool upFirstPress) ? 1 : 0;
+
+    int x = (leftFirstPress ? l : 0) + (rightFirstPress ? r : 0);
+    int y = (downFirstPress ? d : 0) + (upFirstPress ? u : 0);
+    int xRepeat = l + r;
+    int yRepeat = d + u;
 
     if (x != 0 || y != 0) {
       this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, y)));
+    }
+    if (xRepeat != 0 || yRepeat != 0) {
+      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(xRepeat, yRepeat)));
     }
     for (int i = 0; i <= 9; i++) {
       var action = controls.FindAction($"general/{i}");
@@ -46,8 +56,8 @@ public class InputController : MonoBehaviour {
 }
 
 class Repeater {
-  const float Threshold = 0.5f;
-  const float Rate = 0.25f;
+  const float Threshold = 0.35f;
+  const float Rate = 0.075f;
 
   float _next;
   public bool _hold;
@@ -58,13 +68,15 @@ class Repeater {
     _controls = controls;
     _buttonID = buttonID.ToString();
   }
-  public bool Update(bool firstOnly = false) {
+  public bool Update(out bool isFirst) {
     bool retValue = false;
     bool value = _controls.FindAction(_buttonID).ReadValue<float>() > 0;
 
+    isFirst = false;
     if (value) {
       if (Time.time > _next) {
-        retValue = (firstOnly && _hold) ? false : true;
+        if (!_hold) isFirst = true;
+        retValue = true;
         _next = Time.time + (_hold ? Rate : Threshold);
         _hold = true;
       }
