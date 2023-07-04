@@ -9,12 +9,6 @@ public class Grid : MonoBehaviour {
   private int width;
   private int height;
 
-  public void Initialize(int width, int height) {
-    ClearMap();
-    this.width = width;
-    this.height = height;
-    BuildMap();
-  }
   public void Load(GridData data) {
     ClearMap();
     width = data.width;
