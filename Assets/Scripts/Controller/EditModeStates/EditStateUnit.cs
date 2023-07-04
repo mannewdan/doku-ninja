@@ -9,13 +9,13 @@ public class EditStateUnit : EditStateDraw {
   public override void Enter() {
     base.Enter();
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.displayMode = Tile.DisplayMode.Faded;
+      tile.Value.SetDisplayMode(DigitDisplayMode.Faded);
     }
   }
   public override void Exit() {
     base.Exit();
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.displayMode = Tile.DisplayMode.Current;
+      tile.Value.SetDisplayMode(DigitDisplayMode.Current);
     }
   }
 }

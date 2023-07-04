@@ -27,7 +27,7 @@ public class Grid : MonoBehaviour {
     GenerateBorder(width, height);
 
     foreach (KeyValuePair<Point, Tile> tile in tiles) {
-      tile.Value.SetUVs();
+      tile.Value.RenderTile();
     }
 
     Lines lines = transform.parent.GetComponentInChildren<Lines>();
@@ -49,8 +49,8 @@ public class Grid : MonoBehaviour {
     data.height = height;
     data.tiles.Clear();
     foreach (Tile t in tiles.Values) {
-      if (t.type == TileType.Cliff) continue;
-      data.tiles.Add(t.GatherData());
+      var d = t.GatherData();
+      if (d != null) data.tiles.Add(d);
     }
     return data;
   }
