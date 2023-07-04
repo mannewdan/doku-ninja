@@ -5,19 +5,27 @@ using Random = UnityEngine.Random;
 using TMPro;
 
 public class Tile : MonoBehaviour {
+  public enum DisplayMode { Current, Solution, Faded }
+
   [SerializeField] Material cliffMat;
   [SerializeField] Material groundMat;
+  [SerializeField] Color textColorCurrent;
+  [SerializeField] Color textColorSolution;
+  [SerializeField] Color textColorFaded;
 
   private TileData data;
   private Grid grid;
   private TextMeshPro digitText;
 
   public TileType type { get { return data.type; } }
+  public DisplayMode displayMode { get { return _displayMode; } set { _displayMode = value; UpdateDigit(); } }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
   public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
-  public int solutionDigit { get { return data.solution; } }
+  public int solutionDigit { get { return data.solution; } set { data.solution = value; UpdateDigit(); } }
   public int currentDigit { get { return _currentDigit; } set { _currentDigit = value; UpdateDigit(); } }
+
   [SerializeField] private int _currentDigit;
+  [SerializeField] private DisplayMode _displayMode;
 
   void Snap() {
     transform.localPosition = center;
@@ -43,12 +51,26 @@ public class Tile : MonoBehaviour {
     }
   }
   public TileData GatherData() {
-    data.solution = solutionDigit;
     data.given = currentDigit;
     return data;
   }
   public void UpdateDigit() {
-    if (digitText) digitText.text = currentDigit > 0 ? currentDigit.ToString() : "";
+    if (!digitText) return;
+
+    var target = currentDigit;
+    var color = textColorCurrent;
+    switch (displayMode) {
+      case DisplayMode.Solution:
+        target = solutionDigit;
+        color = textColorSolution;
+        break;
+      case DisplayMode.Faded:
+        color = textColorFaded;
+        break;
+    }
+
+    digitText.text = target > 0 ? target.ToString() : "";
+    digitText.color = color;
   }
   public void SetUVs() {
     Point pWest = new Point(pos.x - 1, pos.y);

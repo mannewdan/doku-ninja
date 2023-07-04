@@ -222,7 +222,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cliffMat: {fileID: 2100000, guid: 2cb06c10ef21eb4428f4d9e2be4099e0, type: 2}
   groundMat: {fileID: 2100000, guid: 34aa1b33fcd5b3b4291e2931b0fa0b8a, type: 2}
+  textColorCurrent: {r: 0.9, g: 0.98333335, b: 1, a: 1}
+  textColorSolution: {r: 0.98039216, g: 0.9111111, b: 0.5647059, a: 1}
+  textColorFaded: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 0.5019608}
   _currentDigit: 0
+  _displayMode: 0
 --- !u!33 &6759478737907214526
 MeshFilter:
   m_ObjectHideFlags: 0

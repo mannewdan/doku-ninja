@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour {
-
   //fields 
   Controls _controls;
   Repeater _up;
@@ -24,12 +23,14 @@ public class InputController : MonoBehaviour {
   Repeater tabLeft { get { return _tabLeft ??= new Repeater(controls, controls.general.TabLeft.id); } }
   Repeater tabRight { get { return _tabRight ??= new Repeater(controls, controls.general.TabRight.id); } }
 
-  //events
-  string[] _buttons = new string[] { "general/Confirm", "general/Cancel" };
-
   void OnEnable() { controls.Enable(); }
   void OnDisable() { controls.Disable(); }
   void Update() {
+    UpdateMove();
+    UpdateNumber();
+    UpdateTab();
+  }
+  void UpdateMove() {
     int l = left.Update(out bool leftFirstPress) ? -1 : 0;
     int r = right.Update(out bool rightFirstPress) ? 1 : 0;
     int d = down.Update(out bool downFirstPress) ? -1 : 0;
@@ -46,11 +47,23 @@ public class InputController : MonoBehaviour {
     if (xRepeat != 0 || yRepeat != 0) {
       this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(xRepeat, yRepeat)));
     }
+  }
+  void UpdateNumber() {
     for (int i = 0; i <= 9; i++) {
       var action = controls.FindAction($"general/{i}");
       if (action != null && action.WasReleasedThisFrame()) {
         this.PostNotification(Notifications.NUMBER, new InfoEventArgs<int>(i));
       }
+    }
+  }
+  void UpdateTab() {
+    var tabRight = controls.FindAction(controls.general.TabRight.id.ToString());
+    var tabLeft = controls.FindAction(controls.general.TabLeft.id.ToString());
+
+    if (tabLeft != null && tabLeft.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(-1));
+    } else if (tabRight != null && tabRight.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(1));
     }
   }
 }
