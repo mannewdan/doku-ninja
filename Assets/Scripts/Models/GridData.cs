@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridData : ScriptableObject {
+[System.Serializable]
+public class GridData {
   public string id;
   public int width;
   public int height;

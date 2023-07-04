@@ -9,10 +9,10 @@ public class Tile : MonoBehaviour {
   [SerializeField] Material groundMat;
 
   private TileData data;
-  private TileType type;
   private Grid grid;
   private TextMeshPro digitText;
 
+  public TileType type { get { return data.type; } }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
   public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
   public int solutionDigit { get { return data.solution; } }
@@ -23,9 +23,8 @@ public class Tile : MonoBehaviour {
     transform.localPosition = center;
     transform.localScale = new Vector3(1, 1, 1);
   }
-  public void Load(TileData data, TileType type, Grid grid) {
+  public void Load(TileData data, Grid grid) {
     this.data = data;
-    this.type = type;
     this.grid = grid;
     currentDigit = data.given;
     Snap();
@@ -42,6 +41,11 @@ public class Tile : MonoBehaviour {
         UpdateDigit();
         break;
     }
+  }
+  public TileData GatherData() {
+    data.solution = solutionDigit;
+    data.given = currentDigit;
+    return data;
   }
   public void UpdateDigit() {
     if (digitText) digitText.text = currentDigit > 0 ? currentDigit.ToString() : "";

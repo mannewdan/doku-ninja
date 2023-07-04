@@ -21,7 +21,7 @@ public class EditModeController : StateMachine {
   public Point pos;
 
   void Start() {
-    if (!gridData) gridData = new GridData();
+    if (gridData == null) gridData = new GridData();
     grid.Initialize(gridData.width, gridData.height);
     Snap();
   }
@@ -39,7 +39,7 @@ public class EditModeController : StateMachine {
   }
   void OnMoveEvent(object sender, object e) {
     pos += ((InfoEventArgs<Point>)e).info;
-    if (gridData) pos.Clamp(0, gridData.width - 1, 0, gridData.height - 1);
+    if (gridData != null) pos.Clamp(0, gridData.width - 1, 0, gridData.height - 1);
     Snap();
   }
   void OnNumberEvent(object sender, object e) {
@@ -53,7 +53,8 @@ public class EditModeController : StateMachine {
 
   void Update() {
     if (Input.GetKeyDown(KeyCode.Space)) {
-      grid.Initialize(4, 4);
+      GridData d = grid.GatherData();
+      gridData = d;
     }
   }
 

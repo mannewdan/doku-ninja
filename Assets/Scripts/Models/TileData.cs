@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileData : ScriptableObject {
+[System.Serializable]
+public class TileData {
   public Point pos;
   public int given;
   public int solution;
+  public TileType type;
 }
