@@ -10,8 +10,7 @@ public class EditStateInit : EditState {
   }
 
   IEnumerator<float> _Init() {
-    if (gridData == null) gridData = new GridData();
-    grid.Load(gridData);
+    grid.Load(new GridData());
     SnapMarker();
     yield return 0;
     owner.ChangeState<EditStateGiven>();

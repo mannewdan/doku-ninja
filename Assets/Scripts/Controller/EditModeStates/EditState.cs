@@ -8,7 +8,7 @@ public abstract class EditState : State {
   public Transform marker { get { return owner.marker; } }
   public Point pos { get { return owner.pos; } set { owner.pos = value; } }
   public Grid grid { get { return owner.grid; } }
-  public GridData gridData { get { return owner.gridData; } set { owner.gridData = value; } }
+  public GridData gridData { get { return owner.gridData; } }
 
   protected virtual void Awake() {
     owner = GetComponent<EditController>();

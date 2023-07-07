@@ -8,11 +8,13 @@ public class GridData {
   public int width;
   public int height;
   public List<TileData> tiles;
+  public List<UnitData> units;
 
   public GridData() {
     id = "default";
     width = 6;
     height = 6;
     tiles = new List<TileData>();
+    units = new List<UnitData>();
   }
 }

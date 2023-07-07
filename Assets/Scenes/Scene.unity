@@ -308,7 +308,6 @@ GameObject:
   m_Component:
   - component: {fileID: 507794111}
   - component: {fileID: 507794110}
-  - component: {fileID: 507794109}
   m_Layer: 0
   m_Name: EditMode
   m_TagString: Untagged
@@ -316,21 +315,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &507794109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 507794108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23de74a00fe06a44a32fe1663fb391e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assetLabelReference:
-    m_LabelString: tilemap
-  DEBUG_tilemapIds: []
 --- !u!114 &507794110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +329,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 1269989962}
+  gridData:
+    id: default
+    width: 6
+    height: 6
+    tiles: []
+  pos:
+    x: 0
+    y: 0
 --- !u!4 &507794111
 Transform:
   m_ObjectHideFlags: 0
@@ -992,7 +984,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1863317452}
   - component: {fileID: 1863317453}
-  - component: {fileID: 1863317454}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -1030,26 +1021,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe1d25fba7eec14ba133f13a189c2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemapReader: {fileID: 1863317454}
   grid: {fileID: 1337858338}
-  gridData: {fileID: 0}
+  gridData:
+    id: default
+    width: 6
+    height: 6
+    tiles: []
   player: {fileID: 1316255646}
   enemies: []
---- !u!114 &1863317454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863317451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23de74a00fe06a44a32fe1663fb391e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assetLabelReference:
-    m_LabelString: tilemap
-  DEBUG_tilemapIds: []
 --- !u!1 &1926838747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3647738785093465337, guid: ab52b1f2d6ab6d54993b223cc52c5e5b, type: 3}

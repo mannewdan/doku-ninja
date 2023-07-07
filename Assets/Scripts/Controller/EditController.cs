@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EditController : StateMachine {
+public class EditController : StateMachine, IPersistence {
   [SerializeField] GameObject selectionIndicatorPrefab;
 
   private Transform _marker;
@@ -17,16 +17,18 @@ public class EditController : StateMachine {
     }
   }
   public Grid grid;
-  public GridData gridData;
+  public GridData gridData { get { return grid.GatherData(); } }
   public Point pos;
+
+  //debug
+  [SerializeField] GridData _gridData;
 
   void Start() {
     ChangeState<EditStateInit>();
   }
   void Update() {
     if (Input.GetKeyDown(KeyCode.Space)) {
-      GridData d = grid.GatherData();
-      gridData = d;
+      _gridData = gridData;
     }
   }
 }
