@@ -20,15 +20,10 @@ public class EditController : StateMachine, IPersistence {
   public GridData gridData { get { return grid.GatherData(); } }
   public Point pos;
 
-  //debug
-  [SerializeField] GridData _gridData;
-
   void Start() {
     ChangeState<EditStateInit>();
   }
   void Update() {
-    if (Input.GetKeyDown(KeyCode.Space)) {
-      _gridData = gridData;
-    }
+
   }
 }

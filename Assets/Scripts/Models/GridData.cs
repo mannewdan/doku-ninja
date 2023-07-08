@@ -11,7 +11,7 @@ public class GridData {
   public List<UnitData> units;
 
   public GridData() {
-    id = "default";
+    id = System.Guid.NewGuid().ToString() + IPersistence.GRID_DATA_EXTENSION;
     width = 6;
     height = 6;
     tiles = new List<TileData>();

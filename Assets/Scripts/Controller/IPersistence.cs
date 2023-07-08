@@ -4,6 +4,8 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 public interface IPersistence {
+  public const string GRID_DATA_EXTENSION = ".griddata";
+
   public void SaveGridData(GridData data) {
     Debug.Log($"{data.id} {data.width} {data.height} {data.tiles.Count} {data.units.Count}");
 
