@@ -13,9 +13,6 @@ public abstract class EditState : State {
   protected virtual void Awake() {
     owner = GetComponent<EditController>();
   }
-  public override void Enter() {
-    base.Enter();
-  }
 
   protected override void AddListeners() {
     this.AddObserver(OnMove, Notifications.MOVE);

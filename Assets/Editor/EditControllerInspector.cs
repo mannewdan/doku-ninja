@@ -11,8 +11,13 @@ public class EditControllerInspector : Editor {
   public override void OnInspectorGUI() {
     DrawDefaultInspector();
 
-    if (GUILayout.Button("Save to Projects")) {
+    if (GUILayout.Button("Save grid")) {
       persistence.SaveGridData(current.gridData);
+    }
+    if (GUILayout.Button("Load grid")) {
+      GridData data = persistence.LoadGridData(current.gridToLoad);
+      current.stateData = data;
+      current.ChangeState<EditStateLoad>();
     }
   }
 }
