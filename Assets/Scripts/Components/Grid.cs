@@ -6,13 +6,13 @@ public class Grid : MonoBehaviour {
   [SerializeField] GameObject tilePrefab;
 
   public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-  private int width;
-  private int height;
+  [SerializeField] private GridData gridData;
+  private int width { get { return gridData.width; } }
+  private int height { get { return gridData.height; } }
 
   public void Load(GridData data) {
+    gridData = data;
     ClearMap();
-    width = data.width;
-    height = data.height;
     BuildMap();
     foreach (TileData t in data.tiles) {
       if (tiles.ContainsKey(t.pos)) {
@@ -23,8 +23,8 @@ public class Grid : MonoBehaviour {
     }
   }
   public void BuildMap() {
-    GenerateGrid(width, height);
-    GenerateBorder(width, height);
+    GenerateGrid();
+    GenerateBorder();
 
     foreach (KeyValuePair<Point, Tile> tile in tiles) {
       tile.Value.RenderTile();
@@ -44,25 +44,24 @@ public class Grid : MonoBehaviour {
     if (lines) lines.Clear();
   }
   public GridData GatherData() {
-    GridData data = new GridData();
-    data.width = width;
-    data.height = height;
-    data.tiles.Clear();
+    if (gridData == null) gridData = new GridData();
+
+    gridData.tiles.Clear();
     foreach (Tile t in tiles.Values) {
       var d = t.GatherData();
-      if (d != null) data.tiles.Add(d);
+      if (d != null) gridData.tiles.Add(d);
     }
-    return data;
+    return gridData;
   }
 
-  void GenerateGrid(int width, int height) {
+  void GenerateGrid() {
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
         NewTile(new TileData() { pos = new Point(x, y), type = TileType.Ground });
       }
     }
   }
-  void GenerateBorder(int width, int height) {
+  void GenerateBorder() {
     for (int x = -1; x < width + 1; x++) {
       for (int y = -1; y < height + 1; y++) {
         if (!(x == -1 || x == width || y == -1 || y == height)) continue;

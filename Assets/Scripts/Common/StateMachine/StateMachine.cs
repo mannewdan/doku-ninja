@@ -9,6 +9,8 @@ public class StateMachine : MonoBehaviour {
   }
   protected State _currentState;
   protected bool _inTransition;
+  protected object _stateData;
+  public object stateData { get { return _stateData; } set { _stateData = value; } }
 
   public virtual T GetState<T>() where T : State {
     T target = GetComponent<T>();
@@ -25,6 +27,6 @@ public class StateMachine : MonoBehaviour {
     _currentState = value;
     if (_currentState != null) _currentState.Enter();
     _inTransition = false;
+    _stateData = null;
   }
-
 }

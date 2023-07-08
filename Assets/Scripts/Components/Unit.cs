@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
   public UnitData data;
 
-  public bool isPlayer { get { return data.isPlayer; } }
+  public bool isPlayer { get { return false; } }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
 
   void Awake() {
