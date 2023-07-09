@@ -17,11 +17,13 @@ public class EditController : StateMachine, IPersistence {
     }
   }
   public Grid grid;
+  public UnitManager units;
   public Point pos;
   public string gridToLoad;
   public MapData mapData {
     get {
       grid.GatherData(ref _mapData);
+      units.GatherData(ref _mapData);
       return _mapData;
     }
     set {

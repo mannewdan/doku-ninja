@@ -6,34 +6,39 @@ public class UnitManager : MonoBehaviour {
   [SerializeField] GameObject ninjaPrefab;
   [SerializeField] GameObject skellyBasicPrefab;
 
-  public Unit player;
+  public Point spawn;
+  public Unit player {
+    get {
+      if (_player == null) {
+        GameObject newNinja = Instantiate(ninjaPrefab);
+        newNinja.transform.SetParent(transform);
+        _player = newNinja.GetComponent<Unit>();
+        _player.pos = spawn;
+        _player.Snap();
+      }
+      return _player;
+    }
+  }
   public List<Unit> enemies = new List<Unit>();
+
+  private Unit _player;
+
+  void Start() {
+    player.pos = spawn;
+  }
 
   public void Load(MapData data) {
     Clear();
-    GameObject newNinja = Instantiate(ninjaPrefab);
-    newNinja.transform.SetParent(transform);
-
-    player = newNinja.GetComponent<Unit>();
-    player.pos = data.spawn;
-    player.Snap();
 
     for (int i = 0; i < data.enemies.Count; i++) {
       EnemyData ed = data.enemies[i];
-      GameObject newEnemy = Instantiate(skellyBasicPrefab);
-      newEnemy.transform.SetParent(transform);
-
-      Unit enemy = newEnemy.GetComponent<Unit>();
-      enemy.pos = ed.pos;
-      enemy.Snap();
-      enemies.Add(enemy);
+      NewEnemy(ed.pos);
     }
   }
   public void Clear() {
-    if (player) {
-      Destroy(player.gameObject);
-      player = null;
-    }
+    spawn = new Point(0, 0);
+    player.pos = spawn;
+    player.Snap();
 
     for (int i = enemies.Count - 1; i >= 0; i--) {
       if (enemies[i]) {
@@ -41,5 +46,41 @@ public class UnitManager : MonoBehaviour {
       }
     }
     enemies.Clear();
+  }
+  public void GatherData(ref MapData mapData) {
+    mapData.spawn = spawn;
+    mapData.enemies = new List<EnemyData>();
+    foreach (Unit unit in enemies) {
+      if (unit == null) continue;
+      mapData.enemies.Add(new EnemyData() { pos = unit.pos });
+    }
+  }
+  public void SetSpawn(Point pos) {
+    RemoveEnemy(pos);
+    spawn = pos;
+  }
+  public void PlaceEnemy(Point pos) {
+    if (spawn == pos) return;
+    RemoveEnemy(pos);
+    NewEnemy(pos);
+  }
+  public void RemoveEnemy(Point pos) {
+    for (int i = enemies.Count - 1; i >= 0; i--) {
+      if (enemies[i].pos == pos) {
+        Destroy(enemies[i].gameObject);
+        enemies.RemoveAt(i);
+        break;
+      }
+    }
+  }
+  public Unit NewEnemy(Point pos) {
+    GameObject newEnemy = Instantiate(skellyBasicPrefab);
+    newEnemy.transform.SetParent(transform);
+
+    Unit enemy = newEnemy.GetComponent<Unit>();
+    enemy.pos = pos;
+    enemy.Snap();
+    enemies.Add(enemy);
+    return enemy;
   }
 }

@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class EditStateUnit : EditStateDraw {
   protected override void OnNumber(object sender, object e) {
-
+    units.PlaceEnemy(pos);
+  }
+  protected override void OnConfirm(object sender, object e) {
+    units.SetSpawn(pos);
+    units.player.pos = pos;
+    units.player.Snap();
+  }
+  protected override void OnCancel(object sender, object e) {
+    units.RemoveEnemy(pos);
   }
   public override void Enter() {
     base.Enter();

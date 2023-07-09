@@ -725,6 +725,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c5e9d52a-968c-443f-9d70-68a76bdbf673"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0c8de3b9-f982-4c2a-b81a-d58a91677c36"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",

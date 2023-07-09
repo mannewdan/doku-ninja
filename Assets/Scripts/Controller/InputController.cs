@@ -29,6 +29,7 @@ public class InputController : MonoBehaviour {
     UpdateMove();
     UpdateNumber();
     UpdateTab();
+    UpdateCommand();
   }
   void UpdateMove() {
     int l = left.Update(out bool leftFirstPress) ? -1 : 0;
@@ -71,6 +72,17 @@ public class InputController : MonoBehaviour {
       this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(-1));
     } else if (right) {
       this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(1));
+    }
+  }
+  void UpdateCommand() {
+    var confirm = controls.FindAction(controls.general.Confirm.id.ToString());
+    var cancel = controls.FindAction(controls.general.Cancel.id.ToString());
+
+    if (confirm != null && confirm.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.CONFIRM, null);
+    }
+    if (cancel != null && cancel.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.CANCEL, null);
     }
   }
 }
