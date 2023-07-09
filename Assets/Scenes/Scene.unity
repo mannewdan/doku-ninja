@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d800a130e014cca4f85469be2a5d00cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alwaysSaveToPersistentPath: 0
+  _alwaysSaveToPersistentPath: 1
 --- !u!4 &506255712
 Transform:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   pos:
     x: 0
     y: 0
-  gridToLoad: 2fa8b542-8ec0-49cb-a9dc-a682ab6d246f
+  gridToLoad: f7f3b148-866f-4636-bddd-34820e4f01a5
 --- !u!4 &507794111
 Transform:
   m_ObjectHideFlags: 0

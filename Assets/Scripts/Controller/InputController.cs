@@ -57,12 +57,19 @@ public class InputController : MonoBehaviour {
     }
   }
   void UpdateTab() {
+    var tab = controls.FindAction(controls.general.Tab.id.ToString());
+    var shiftMod = controls.FindAction(controls.general.Shift.id.ToString());
     var tabRight = controls.FindAction(controls.general.TabRight.id.ToString());
     var tabLeft = controls.FindAction(controls.general.TabLeft.id.ToString());
 
-    if (tabLeft != null && tabLeft.WasReleasedThisFrame()) {
+    bool right = (tabRight != null && tabRight.WasReleasedThisFrame()) ||
+      (tab != null && tab.WasReleasedThisFrame() && !(shiftMod != null && shiftMod.IsPressed()));
+    bool left = (tabLeft != null && tabLeft.WasReleasedThisFrame()) ||
+      (tab != null && tab.WasReleasedThisFrame() && shiftMod != null && shiftMod.IsPressed());
+
+    if (left) {
       this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(-1));
-    } else if (tabRight != null && tabRight.WasReleasedThisFrame()) {
+    } else if (right) {
       this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(1));
     }
   }

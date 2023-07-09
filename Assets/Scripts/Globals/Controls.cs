@@ -91,6 +91,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d2b561f-9bc3-467c-8d8b-4713a1f8fc4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tab"",
+                    ""type"": ""Button"",
+                    ""id"": ""746efc01-ff42-42d5-8704-4c83b16d419f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""TabLeft"",
                     ""type"": ""Button"",
                     ""id"": ""95ef59d7-ff65-495a-aac4-ea27a3b3656e"",
@@ -497,53 +515,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""a731596b-c5e8-4ea0-a754-a50842c5fed1"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TabLeft"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Modifier"",
-                    ""id"": ""671274a6-0932-4f49-b70f-d1ee1f432784"",
-                    ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TabLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Button"",
-                    ""id"": ""4d6ef400-ad53-489c-95ea-66b24f1c32bd"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TabLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""23070ac4-7c5a-4b72-a056-eb4182c420f1"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TabRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f5144a21-6a1e-4bfb-bc2c-f0f4cf203722"",
-                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1001,6 +975,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""9"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf410d21-bb7b-47ad-8a0a-14de50935e50"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""471d49dc-fb77-4943-bce8-b23d8e1fc78b"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1249,6 +1245,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_general_LeftClick = m_general.FindAction("LeftClick", throwIfNotFound: true);
         m_general_RightClick = m_general.FindAction("RightClick", throwIfNotFound: true);
         m_general_ScrollWheel = m_general.FindAction("ScrollWheel", throwIfNotFound: true);
+        m_general_Shift = m_general.FindAction("Shift", throwIfNotFound: true);
+        m_general_Tab = m_general.FindAction("Tab", throwIfNotFound: true);
         m_general_TabLeft = m_general.FindAction("TabLeft", throwIfNotFound: true);
         m_general_TabRight = m_general.FindAction("TabRight", throwIfNotFound: true);
         m_general_Up = m_general.FindAction("Up", throwIfNotFound: true);
@@ -1343,6 +1341,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_general_LeftClick;
     private readonly InputAction m_general_RightClick;
     private readonly InputAction m_general_ScrollWheel;
+    private readonly InputAction m_general_Shift;
+    private readonly InputAction m_general_Tab;
     private readonly InputAction m_general_TabLeft;
     private readonly InputAction m_general_TabRight;
     private readonly InputAction m_general_Up;
@@ -1372,6 +1372,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_general_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_general_RightClick;
         public InputAction @ScrollWheel => m_Wrapper.m_general_ScrollWheel;
+        public InputAction @Shift => m_Wrapper.m_general_Shift;
+        public InputAction @Tab => m_Wrapper.m_general_Tab;
         public InputAction @TabLeft => m_Wrapper.m_general_TabLeft;
         public InputAction @TabRight => m_Wrapper.m_general_TabRight;
         public InputAction @Up => m_Wrapper.m_general_Up;
@@ -1420,6 +1422,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ScrollWheel.started += instance.OnScrollWheel;
             @ScrollWheel.performed += instance.OnScrollWheel;
             @ScrollWheel.canceled += instance.OnScrollWheel;
+            @Shift.started += instance.OnShift;
+            @Shift.performed += instance.OnShift;
+            @Shift.canceled += instance.OnShift;
+            @Tab.started += instance.OnTab;
+            @Tab.performed += instance.OnTab;
+            @Tab.canceled += instance.OnTab;
             @TabLeft.started += instance.OnTabLeft;
             @TabLeft.performed += instance.OnTabLeft;
             @TabLeft.canceled += instance.OnTabLeft;
@@ -1499,6 +1507,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ScrollWheel.started -= instance.OnScrollWheel;
             @ScrollWheel.performed -= instance.OnScrollWheel;
             @ScrollWheel.canceled -= instance.OnScrollWheel;
+            @Shift.started -= instance.OnShift;
+            @Shift.performed -= instance.OnShift;
+            @Shift.canceled -= instance.OnShift;
+            @Tab.started -= instance.OnTab;
+            @Tab.performed -= instance.OnTab;
+            @Tab.canceled -= instance.OnTab;
             @TabLeft.started -= instance.OnTabLeft;
             @TabLeft.performed -= instance.OnTabLeft;
             @TabLeft.canceled -= instance.OnTabLeft;
@@ -1710,6 +1724,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
+        void OnShift(InputAction.CallbackContext context);
+        void OnTab(InputAction.CallbackContext context);
         void OnTabLeft(InputAction.CallbackContext context);
         void OnTabRight(InputAction.CallbackContext context);
         void OnUp(InputAction.CallbackContext context);
