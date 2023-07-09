@@ -17,9 +17,20 @@ public class EditController : StateMachine, IPersistence {
     }
   }
   public Grid grid;
-  public MapData mapData { get { return grid.GatherData(); } }
   public Point pos;
   public string gridToLoad;
+  public MapData mapData {
+    get {
+      grid.GatherData(ref _mapData);
+      return _mapData;
+    }
+    set {
+      _mapData = value;
+      grid.Load(_mapData);
+    }
+  }
+
+  [SerializeField] private MapData _mapData;
 
   void Start() {
     ChangeState<EditStateInit>();

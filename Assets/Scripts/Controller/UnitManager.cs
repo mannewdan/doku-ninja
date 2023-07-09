@@ -26,6 +26,7 @@ public class UnitManager : MonoBehaviour {
       Unit enemy = newEnemy.GetComponent<Unit>();
       enemy.pos = ed.pos;
       enemy.Snap();
+      enemies.Add(enemy);
     }
   }
   public void Clear() {

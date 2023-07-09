@@ -47,7 +47,7 @@
         "x": 0,
         "y": 4
       },
-      "given": 0,
+      "given": 2,
       "solution": 0,
       "type": 1
     },
@@ -101,7 +101,7 @@
         "x": 1,
         "y": 4
       },
-      "given": 0,
+      "given": 3,
       "solution": 0,
       "type": 1
     },
@@ -155,7 +155,7 @@
         "x": 2,
         "y": 4
       },
-      "given": 0,
+      "given": 4,
       "solution": 7,
       "type": 1
     },
@@ -209,7 +209,7 @@
         "x": 3,
         "y": 4
       },
-      "given": 0,
+      "given": 5,
       "solution": 8,
       "type": 1
     },
@@ -263,7 +263,7 @@
         "x": 4,
         "y": 4
       },
-      "given": 0,
+      "given": 6,
       "solution": 9,
       "type": 1
     },
@@ -317,7 +317,7 @@
         "x": 5,
         "y": 4
       },
-      "given": 0,
+      "given": 7,
       "solution": 0,
       "type": 1
     },

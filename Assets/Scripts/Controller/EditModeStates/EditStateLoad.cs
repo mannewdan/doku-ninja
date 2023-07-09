@@ -18,7 +18,7 @@ public class EditStateLoad : EditState {
   }
 
   IEnumerator<float> _Load() {
-    grid.Load(dataToLoad);
+    owner.mapData = dataToLoad;
     SnapMarker();
     yield return 0;
     owner.ChangeState<EditStateGiven>();
