@@ -44,8 +44,6 @@ public class Grid : MonoBehaviour {
     if (lines) lines.Clear();
   }
   public void GatherData(ref MapData mapData) {
-    if (mapData == null) mapData = new MapData();
-
     mapData.width = width;
     mapData.height = height;
     mapData.tiles.Clear();

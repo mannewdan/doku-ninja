@@ -30,6 +30,10 @@ public class UnitManager : MonoBehaviour {
   public void Load(MapData data) {
     Clear();
 
+    spawn = data.spawn;
+    player.pos = spawn;
+    player.Snap();
+
     for (int i = 0; i < data.enemies.Count; i++) {
       EnemyData ed = data.enemies[i];
       NewEnemy(ed.pos);
@@ -58,6 +62,8 @@ public class UnitManager : MonoBehaviour {
   public void SetSpawn(Point pos) {
     RemoveEnemy(pos);
     spawn = pos;
+    player.pos = spawn;
+    player.Snap();
   }
   public void PlaceEnemy(Point pos) {
     if (spawn == pos) return;

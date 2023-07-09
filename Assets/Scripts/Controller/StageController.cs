@@ -7,10 +7,10 @@ public class StageController : StateMachine, IPersistence {
   public UnitManager units;
   public IPersistence persistence { get { return (IPersistence)this; } }
 
-  public string gridToLoad;
+  public string mapToLoad;
 
   void Start() {
-    Load(gridToLoad);
+    Load(mapToLoad);
   }
 
   public void Load(string fileName) {

@@ -11,8 +11,8 @@ public class StageControllerInspector : Editor {
   public override void OnInspectorGUI() {
     DrawDefaultInspector();
 
-    if (GUILayout.Button("Load grid")) {
-      current.Load(current.gridToLoad);
+    if (GUILayout.Button("Load Map")) {
+      current.Load(current.mapToLoad);
     }
   }
 }

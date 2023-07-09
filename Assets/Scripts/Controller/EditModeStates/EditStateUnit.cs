@@ -8,8 +8,6 @@ public class EditStateUnit : EditStateDraw {
   }
   protected override void OnConfirm(object sender, object e) {
     units.SetSpawn(pos);
-    units.player.pos = pos;
-    units.player.Snap();
   }
   protected override void OnCancel(object sender, object e) {
     units.RemoveEnemy(pos);

@@ -19,9 +19,10 @@ public class EditController : StateMachine, IPersistence {
   public Grid grid;
   public UnitManager units;
   public Point pos;
-  public string gridToLoad;
+  public string mapToLoad;
   public MapData mapData {
     get {
+      if (_mapData == null) mapData = new MapData();
       grid.GatherData(ref _mapData);
       units.GatherData(ref _mapData);
       return _mapData;
@@ -29,6 +30,7 @@ public class EditController : StateMachine, IPersistence {
     set {
       _mapData = value;
       grid.Load(_mapData);
+      units.Load(_mapData);
     }
   }
 

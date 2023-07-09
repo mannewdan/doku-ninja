@@ -11,11 +11,11 @@ public class EditControllerInspector : Editor {
   public override void OnInspectorGUI() {
     DrawDefaultInspector();
 
-    if (GUILayout.Button("Save grid")) {
+    if (GUILayout.Button("Save Map")) {
       persistence.SaveMapData(current.mapData);
     }
-    if (GUILayout.Button("Load grid")) {
-      MapData data = persistence.LoadMapData(current.gridToLoad);
+    if (GUILayout.Button("Load Map")) {
+      MapData data = persistence.LoadMapData(current.mapToLoad);
       current.stateData = data;
       current.ChangeState<EditStateLoad>();
     }

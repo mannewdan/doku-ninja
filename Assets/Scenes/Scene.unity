@@ -322,7 +322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &507794110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   pos:
     x: 0
     y: 0
-  gridToLoad: default
+  mapToLoad: default
   _mapData:
     id: e600969a-d961-419d-a96c-2e8bd0f6be49
     width: 6
@@ -1141,7 +1141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1863317452
 Transform:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1337858338}
   units: {fileID: 2143150914}
-  gridToLoad: default
+  mapToLoad: default
 --- !u!1 &2029093449
 GameObject:
   m_ObjectHideFlags: 0
