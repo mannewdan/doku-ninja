@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class UnitData {
+public class EnemyData {
   public Point pos;
-
-  public UnitData(bool isPlayer) {
-
-  }
 }

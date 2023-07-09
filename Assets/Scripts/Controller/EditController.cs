@@ -17,7 +17,7 @@ public class EditController : StateMachine, IPersistence {
     }
   }
   public Grid grid;
-  public GridData gridData { get { return grid.GatherData(); } }
+  public MapData mapData { get { return grid.GatherData(); } }
   public Point pos;
   public string gridToLoad;
 

@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GridData : SaveData {
+public class MapData : SaveData {
   public int width;
   public int height;
+  public Point spawn;
   public List<TileData> tiles;
-  public List<UnitData> units;
+  public List<EnemyData> enemies;
 
-  public GridData() : base() {
+  public MapData() : base() {
     SetDefaults();
   }
-  public GridData(string fileName) : base(fileName) {
+  public MapData(string fileName) : base(fileName) {
     SetDefaults();
   }
 
   private void SetDefaults() {
+    spawn = new Point(0, 0);
     width = 6;
     height = 6;
     tiles = new List<TileData>();
-    units = new List<UnitData>();
+    enemies = new List<EnemyData>();
   }
 }

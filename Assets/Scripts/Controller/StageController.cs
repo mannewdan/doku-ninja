@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageController : StateMachine {
+public class StageController : StateMachine, IPersistence {
   public Grid grid;
-  public GridData gridData;
-  public Unit player;
-  public List<Unit> enemies = new List<Unit>();
+  public UnitManager units;
+  public IPersistence persistence { get { return (IPersistence)this; } }
 
-  public void Update() {
+  public string gridToLoad;
 
+  void Start() {
+    Load(gridToLoad);
+  }
+
+  public void Load(string fileName) {
+    MapData data = persistence.LoadMapData(fileName);
+    stateData = data;
+    ChangeState<StageStateLoad>();
   }
 }

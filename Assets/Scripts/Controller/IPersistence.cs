@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 public interface IPersistence {
-  public const string GRID_DATA_EXTENSION = ".griddata";
+  public const string MAP_DATA_EXTENSION = ".mapdata";
   private const string MAPS_FOLDER = "/Maps";
 
   private string dataPath {
@@ -17,11 +17,11 @@ public interface IPersistence {
     get { return $"{dataPath}{MAPS_FOLDER}"; }
   }
 
-  public void SaveGridData(GridData data) {
-    WriteToFile<GridData>(dataPathForGrids, data, GRID_DATA_EXTENSION);
+  public void SaveMapData(MapData data) {
+    WriteToFile<MapData>(dataPathForGrids, data, MAP_DATA_EXTENSION);
   }
-  public GridData LoadGridData(string fileName) {
-    GridData data = ReadFromFile<GridData>(dataPathForGrids, fileName, GRID_DATA_EXTENSION);
+  public MapData LoadMapData(string fileName) {
+    MapData data = ReadFromFile<MapData>(dataPathForGrids, fileName, MAP_DATA_EXTENSION);
     return data;
   }
 

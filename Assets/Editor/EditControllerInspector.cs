@@ -12,10 +12,10 @@ public class EditControllerInspector : Editor {
     DrawDefaultInspector();
 
     if (GUILayout.Button("Save grid")) {
-      persistence.SaveGridData(current.gridData);
+      persistence.SaveMapData(current.mapData);
     }
     if (GUILayout.Button("Load grid")) {
-      GridData data = persistence.LoadGridData(current.gridToLoad);
+      MapData data = persistence.LoadMapData(current.gridToLoad);
       current.stateData = data;
       current.ChangeState<EditStateLoad>();
     }

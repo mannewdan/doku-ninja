@@ -9,7 +9,7 @@ public abstract class EditStateDraw : EditState {
 
   protected override void OnMoveRepeat(object sender, object e) {
     pos += ((InfoEventArgs<Point>)e).info;
-    pos = pos.Clamp(0, gridData.width - 1, 0, gridData.height - 1);
+    pos = pos.Clamp(0, mapData.width - 1, 0, mapData.height - 1);
     SnapMarker();
   }
   protected override void OnTab(object sender, object e) {

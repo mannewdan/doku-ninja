@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class EditStateLoad : EditState {
+public class StageStateLoad : StageState {
   MapData dataToLoad;
 
   public override void Enter() {
@@ -19,12 +19,12 @@ public class EditStateLoad : EditState {
 
   IEnumerator<float> _Load() {
     grid.Load(dataToLoad);
-    SnapMarker();
+    units.Load(dataToLoad);
     yield return 0;
-    owner.ChangeState<EditStateGiven>();
+    owner.ChangeState<StageStatePlayerMove>();
   }
   IEnumerator<float> _Failure() {
     yield return 0;
-    owner.ChangeState<EditStateInit>();
+    Debug.LogError("Stage controller is stuck because an exit plan on failed load has not yet been implemented.");
   }
 }

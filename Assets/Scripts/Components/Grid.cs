@@ -6,12 +6,12 @@ public class Grid : MonoBehaviour {
   [SerializeField] GameObject tilePrefab;
 
   public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-  [SerializeField] private GridData gridData;
-  private int width { get { return gridData.width; } }
-  private int height { get { return gridData.height; } }
+  [SerializeField] private MapData mapData;
+  private int width { get { return mapData.width; } }
+  private int height { get { return mapData.height; } }
 
-  public void Load(GridData data) {
-    gridData = data;
+  public void Load(MapData data) {
+    mapData = data;
     ClearMap();
     BuildMap();
     foreach (TileData t in data.tiles) {
@@ -43,15 +43,15 @@ public class Grid : MonoBehaviour {
     Lines lines = transform.parent.GetComponentInChildren<Lines>();
     if (lines) lines.Clear();
   }
-  public GridData GatherData() {
-    if (gridData == null) gridData = new GridData();
+  public MapData GatherData() {
+    if (mapData == null) mapData = new MapData();
 
-    gridData.tiles.Clear();
+    mapData.tiles.Clear();
     foreach (Tile t in tiles.Values) {
       var d = t.GatherData();
-      if (d != null) gridData.tiles.Add(d);
+      if (d != null) mapData.tiles.Add(d);
     }
-    return gridData;
+    return mapData;
   }
 
   void GenerateGrid() {

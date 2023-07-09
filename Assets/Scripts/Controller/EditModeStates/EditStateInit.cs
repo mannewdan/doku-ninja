@@ -10,7 +10,7 @@ public class EditStateInit : EditState {
   }
 
   IEnumerator<float> _Init() {
-    grid.Load(new GridData());
+    grid.Load(new MapData());
     SnapMarker();
     yield return 0;
     owner.ChangeState<EditStateGiven>();
