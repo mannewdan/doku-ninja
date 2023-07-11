@@ -21,7 +21,7 @@ public class StageStateLoad : StageState {
     grid.Load(dataToLoad);
     units.Load(dataToLoad);
     yield return 0;
-    owner.ChangeState<StageStatePlayerMove>();
+    owner.ChangeState<StageStatePlayerStart>();
   }
   IEnumerator<float> _Failure() {
     yield return 0;

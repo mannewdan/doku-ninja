@@ -14,7 +14,6 @@ public class UnitManager : MonoBehaviour {
         newNinja.transform.SetParent(transform);
         _player = newNinja.GetComponent<Unit>();
         _player.pos = spawn;
-        _player.Snap();
       }
       return _player;
     }
@@ -32,7 +31,6 @@ public class UnitManager : MonoBehaviour {
 
     spawn = data.spawn;
     player.pos = spawn;
-    player.Snap();
 
     for (int i = 0; i < data.enemies.Count; i++) {
       EnemyData ed = data.enemies[i];
@@ -42,7 +40,6 @@ public class UnitManager : MonoBehaviour {
   public void Clear() {
     spawn = new Point(0, 0);
     player.pos = spawn;
-    player.Snap();
 
     for (int i = enemies.Count - 1; i >= 0; i--) {
       if (enemies[i]) {
@@ -63,7 +60,6 @@ public class UnitManager : MonoBehaviour {
     RemoveEnemy(pos);
     spawn = pos;
     player.pos = spawn;
-    player.Snap();
   }
   public void PlaceEnemy(Point pos) {
     if (spawn == pos) return;
@@ -85,7 +81,6 @@ public class UnitManager : MonoBehaviour {
 
     Unit enemy = newEnemy.GetComponent<Unit>();
     enemy.pos = pos;
-    enemy.Snap();
     enemies.Add(enemy);
     return enemy;
   }

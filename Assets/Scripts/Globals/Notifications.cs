@@ -9,4 +9,7 @@ public static class Notifications {
   public const string TAB = "TAB_NOTIFICATION";
   public const string CONFIRM = "CONFIRM_NOTIFICATION";
   public const string CANCEL = "CANCEL_NOTIFICATION";
+  public const string PLAYER_TURN_START = "PLAYER_TURN_START_NOTIFICATION";
+  public const string PLAYER_TURN_END = "PLAYER_TURN_END_NOTIFICATION";
+  public const string PLAYER_SPENT_AP = "PLAYER_SPENT_AP_NOTIFICATION";
 }

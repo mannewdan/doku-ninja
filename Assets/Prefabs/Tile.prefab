@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7248278eeab20484781cf90a7e8f177b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textColorCurrent: {r: 0.9, g: 0.98333335, b: 1, a: 1}
+  textColorCurrent: {r: 0.7154361, g: 0.8, b: 0.6016, a: 1}
   textColorSolution: {r: 0.98039216, g: 0.9111111, b: 0.5647059, a: 1}
   textColorFaded: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 0.5019608}
 --- !u!23 &2864296806081819133

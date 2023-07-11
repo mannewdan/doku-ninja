@@ -1135,6 +1135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1863317452}
   - component: {fileID: 1863317453}
+  - component: {fileID: 1863317454}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -1174,7 +1175,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1337858338}
   units: {fileID: 2143150914}
+  apManager: {fileID: 1863317454}
   mapToLoad: default
+--- !u!114 &1863317454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863317451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e324afe4f1b0342a65255e5eecfe9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ap: 0
 --- !u!1 &2029093449
 GameObject:
   m_ObjectHideFlags: 0
