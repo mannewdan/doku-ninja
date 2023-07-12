@@ -17,4 +17,12 @@ public class StageStatePlayerMove : StageState {
       owner.ChangeState<StageStatePlayerEnd>();
     }
   }
+  protected override void OnNumber(object sender, object e) {
+    if (e is InfoEventArgs<int> a) {
+      int val = a.info;
+
+      owner.stateData = val;
+      owner.ChangeState<StageStatePlayerCard>();
+    }
+  }
 }

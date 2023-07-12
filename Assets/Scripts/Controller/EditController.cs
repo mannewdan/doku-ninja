@@ -16,9 +16,9 @@ public class EditController : StateMachine, IPersistence {
       return _marker;
     }
   }
+  public Point pos;
   public Grid grid;
   public UnitManager units;
-  public Point pos;
   public string mapToLoad;
   public MapData mapData {
     get {
