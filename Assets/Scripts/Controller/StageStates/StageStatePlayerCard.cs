@@ -8,6 +8,7 @@ public class StageStatePlayerCard : StageState {
   public override void Enter() {
     base.Enter();
     marker.gameObject.SetActive(true);
+    pos = player.pos + player.lastDirection;
     if (owner.stateData is int val) {
       this.val = val;
     }

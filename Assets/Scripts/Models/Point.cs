@@ -49,12 +49,14 @@ public struct Point {
     if (p.y > yMax) p.y = yMax;
     return p;
   }
-  public Point Normalized() {
+  public Point Normalized(bool oneAxisOnly = false) {
     Point p = this;
     if (p.x > 1) p.x = 1;
     if (p.x < -1) p.x = -1;
     if (p.y > 1) p.y = 1;
     if (p.y < -1) p.y = 1;
+
+    if (oneAxisOnly && p.x != 0 && p.y != 0) p.y = 0;
     return p;
   }
 }
