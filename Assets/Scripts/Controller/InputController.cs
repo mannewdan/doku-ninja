@@ -42,11 +42,17 @@ public class InputController : MonoBehaviour {
     int xRepeat = l + r;
     int yRepeat = d + u;
 
-    if (x != 0 || y != 0) {
-      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, y)));
+    if (x != 0) {
+      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, 0)));
     }
-    if (xRepeat != 0 || yRepeat != 0) {
-      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(xRepeat, yRepeat)));
+    if (y != 0) {
+      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(0, y)));
+    }
+    if (xRepeat != 0) {
+      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(xRepeat, 0)));
+    }
+    if (yRepeat != 0) {
+      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(0, yRepeat)));
     }
   }
   void UpdateNumber() {
