@@ -35,10 +35,18 @@ public class StageStatePlayerCard : StageState {
   protected override void OnConfirm(object sender, object e) {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     if (tile) {
-      tile.currentDigit = val;
-      owner.ChangeState<StageStatePlayerMove>();
+      if (apManager.SpendAP(1)) {
+        tile.currentDigit = val;
+      }
     } else {
       Debug.Log("Couldn't find a tile at position: " + pos.ToString());
+    }
+  }
+  protected override void OnSpentAP(object sender, object e) {
+    if (apManager.ap <= 0) {
+      owner.ChangeState<StageStatePlayerEnd>();
+    } else {
+      owner.ChangeState<StageStatePlayerMove>();
     }
   }
   protected override void OnCancel(object sender, object e) {
