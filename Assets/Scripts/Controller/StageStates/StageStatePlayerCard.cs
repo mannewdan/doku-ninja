@@ -8,7 +8,7 @@ public class StageStatePlayerCard : StageState {
   public override void Enter() {
     base.Enter();
     marker.gameObject.SetActive(true);
-    pos = player.pos + player.lastDirection;
+    pos = BestPos(player.pos, player.lastDirection);
     if (owner.stateData is int val) {
       this.val = val;
     }
@@ -20,10 +20,7 @@ public class StageStatePlayerCard : StageState {
 
   protected override void OnMove(object sender, object e) {
     if (e is InfoEventArgs<Point> move) {
-      var newPos = player.pos + move.info;
-      if (InBounds(newPos)) {
-        pos = newPos;
-      }
+      pos = BestPos(player.pos, move.info);
     }
   }
   protected override void OnNumber(object sender, object e) {

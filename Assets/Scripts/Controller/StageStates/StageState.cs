@@ -37,4 +37,5 @@ public abstract class StageState : State {
   protected virtual void OnCancel(object sender, object e) { }
 
   protected bool InBounds(Point p) { return owner.InBounds(p); }
+  protected Point BestPos(Point start, Point dir) { return owner.BestPos(start, dir); }
 }

@@ -31,4 +31,23 @@ public class StateMachineBoard : StateMachine, IPersistence {
     if (p.y < 0 || p.y > grid.height - 1) return false;
     return true;
   }
+  public Point BestPos(Point start, Point dir) {
+    var newPos = start + dir;
+    //desired pos
+    if (InBounds(newPos)) return newPos;
+
+    //adjacent pos
+    var adjacent = new Point(dir.y, dir.x);
+    newPos = start + adjacent;
+    if (InBounds(newPos)) return newPos;
+
+    newPos = start - adjacent;
+    if (InBounds(newPos)) return newPos;
+
+    //opposite pos
+    newPos = start - dir;
+    if (InBounds(newPos)) return newPos;
+
+    return start;
+  }
 }
