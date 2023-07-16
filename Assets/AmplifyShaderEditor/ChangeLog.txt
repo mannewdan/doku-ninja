@@ -1,3 +1,16 @@
+v1.9.1.8
+
+   Editor
+      * Fixed Undo-related error spam (#205)
+      * Fix for UIUtils console spam on Unity 2022.3+ (#208)
+      * Fixed "Indirect Diffuse Light" node errors on URP 15 (#209)
+      * Added "Device Depth" node; depth range compatible with "Depth Value" input
+      
+   Templates
+      * Fixed "Depth Value" input issues on URP (#190)
+      * Fixed EarlyZ errors on URP (#191)      
+      * Fixed "Depth Offset" input issues on HDRP
+
 v1.9.1.7
 
    Editor

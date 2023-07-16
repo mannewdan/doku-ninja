@@ -19,7 +19,6 @@ public class EditStateLoad : EditState {
 
   IEnumerator<float> _Load() {
     owner.mapData = dataToLoad;
-    SnapMarker();
     yield return 0;
     owner.ChangeState<EditStateGiven>();
   }

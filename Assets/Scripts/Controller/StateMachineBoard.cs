@@ -25,4 +25,10 @@ public class StateMachineBoard : StateMachine, IPersistence {
   public Grid grid;
   public UnitManager units;
   public string mapToLoad;
+
+  public bool InBounds(Point p) {
+    if (p.x < 0 || p.x > grid.width - 1) return false;
+    if (p.y < 0 || p.y > grid.height - 1) return false;
+    return true;
+  }
 }

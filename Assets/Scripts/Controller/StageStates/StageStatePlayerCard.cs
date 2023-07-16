@@ -20,7 +20,10 @@ public class StageStatePlayerCard : StageState {
 
   protected override void OnMove(object sender, object e) {
     if (e is InfoEventArgs<Point> move) {
-      pos = player.pos + move.info;
+      var newPos = player.pos + move.info;
+      if (InBounds(newPos)) {
+        pos = newPos;
+      }
     }
   }
   protected override void OnNumber(object sender, object e) {

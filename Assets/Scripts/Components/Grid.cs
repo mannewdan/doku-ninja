@@ -6,8 +6,8 @@ public class Grid : MonoBehaviour {
   [SerializeField] GameObject tilePrefab;
 
   public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-  private int width;
-  private int height;
+  public int width;
+  public int height;
 
   public void Load(MapData data) {
     width = data.width;

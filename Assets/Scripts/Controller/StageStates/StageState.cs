@@ -35,4 +35,6 @@ public abstract class StageState : State {
   protected virtual void OnNumber(object sender, object e) { }
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
+
+  protected bool InBounds(Point p) { return owner.InBounds(p); }
 }

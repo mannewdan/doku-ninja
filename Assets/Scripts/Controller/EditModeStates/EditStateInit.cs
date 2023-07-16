@@ -11,7 +11,7 @@ public class EditStateInit : EditState {
 
   IEnumerator<float> _Init() {
     grid.Load(new MapData());
-    SnapMarker();
+    pos = new Point(0, 0);
     yield return 0;
     owner.ChangeState<EditStateGiven>();
   }

@@ -39,7 +39,5 @@ public abstract class EditState : State {
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
 
-  protected virtual void SnapMarker() {
-    marker.transform.localPosition = new Vector3(pos.x, pos.y);
-  }
+  protected bool InBounds(Point p) { return owner.InBounds(p); }
 }

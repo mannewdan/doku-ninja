@@ -8,9 +8,12 @@ public abstract class EditStateDraw : EditState {
   protected static readonly Type[] cycleOrder = new Type[] { typeof(EditStateGiven), typeof(EditStateSolution), typeof(EditStateUnit) };
 
   protected override void OnMoveRepeat(object sender, object e) {
-    pos += ((InfoEventArgs<Point>)e).info;
-    pos = pos.Clamp(0, mapData.width - 1, 0, mapData.height - 1);
-    SnapMarker();
+    if (e is InfoEventArgs<Point> move) {
+      var newPos = pos + move.info;
+      if (InBounds(newPos)) {
+        pos = newPos;
+      }
+    }
   }
   protected override void OnTab(object sender, object e) {
     var increment = ((InfoEventArgs<int>)e).info;

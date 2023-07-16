@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class StageStatePlayerMove : StageState {
   protected override void OnMove(object sender, object e) {
-    if (e is InfoEventArgs<Point> a) {
-      Point delta = a.info;
-
-      if (apManager.SpendAP(1)) {
-        player.pos += delta;
+    if (e is InfoEventArgs<Point> move) {
+      var newPos = player.pos + move.info;
+      if (InBounds(newPos)) {
+        if (apManager.SpendAP(1)) {
+          player.pos = newPos;
+        }
       }
     }
   }
