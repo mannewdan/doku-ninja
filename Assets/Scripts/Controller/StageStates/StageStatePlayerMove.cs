@@ -6,6 +6,8 @@ public class StageStatePlayerMove : StageState {
   protected override void OnMove(object sender, object e) {
     if (e is InfoEventArgs<Point> move) {
       var newPos = player.pos + move.info;
+
+      if (IsOccupied(newPos)) return;
       if (InBounds(newPos)) {
         if (apManager.SpendAP(1)) {
           player.pos = newPos;

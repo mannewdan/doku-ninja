@@ -24,8 +24,17 @@ public class StateMachineBoard : StateMachine, IPersistence {
   }
   public Grid grid;
   public UnitManager units;
+  public Unit player { get { return units.player; } }
+  public List<Unit> enemies { get { return units.enemies; } }
   public string mapToLoad;
 
+  public bool IsOccupied(Point p) {
+    if (player.pos == p) return true;
+    foreach (Unit u in enemies) {
+      if (u.pos == p) return true;
+    }
+    return false;
+  }
   public bool InBounds(Point p) {
     if (p.x < 0 || p.x > grid.width - 1) return false;
     if (p.y < 0 || p.y > grid.height - 1) return false;

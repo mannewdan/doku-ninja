@@ -8,9 +8,9 @@ public abstract class StageState : State {
   public Point pos { get { return owner.pos; } set { owner.pos = value; } }
   public Grid grid { get { return owner.grid; } }
   public UnitManager units { get { return owner.units; } }
-  public Unit player { get { return units.player; } }
+  public Unit player { get { return owner.player; } }
+  public List<Unit> enemies { get { return owner.enemies; } }
   public ActionPointsManager apManager { get { return owner.apManager; } }
-  public List<Unit> enemies { get { return units.enemies; } }
 
   protected virtual void Awake() {
     owner = GetComponent<StageController>();
@@ -37,5 +37,6 @@ public abstract class StageState : State {
   protected virtual void OnCancel(object sender, object e) { }
 
   protected bool InBounds(Point p) { return owner.InBounds(p); }
+  protected bool IsOccupied(Point p) { return owner.IsOccupied(p); }
   protected Point BestPos(Point start, Point dir) { return owner.BestPos(start, dir); }
 }

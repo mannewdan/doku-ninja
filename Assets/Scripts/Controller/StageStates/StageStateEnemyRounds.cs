@@ -10,15 +10,24 @@ public class StageStateEnemyRounds : StageState {
   }
 
   IEnumerator<float> _Loop() {
-    for (int i = units.enemies.Count - 1; i >= 0; i--) {
-      var enemy = units.enemies[i];
+    var enemyList = new List<Unit>(enemies);
+    enemyList.Reverse();
+
+    for (int i = enemyList.Count - 1; i >= 0; i--) {
+      var enemy = enemyList[i];
       if (!enemy) continue;
 
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
       yield return 0;
 
+      //debug
       Debug.Log(enemy);
-      yield return Timing.WaitForSeconds(1f);
+      yield return Timing.WaitForSeconds(0.5f);
+
+      //if telegraphing an attack, execute the attack and end the round
+
+      //else, move towards the player using A*
+      //if moved and in range of the player, begin telegraphing an attack
 
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       yield return 0;
