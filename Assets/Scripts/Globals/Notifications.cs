@@ -9,7 +9,11 @@ public static class Notifications {
   public const string TAB = "TAB_NOTIFICATION";
   public const string CONFIRM = "CONFIRM_NOTIFICATION";
   public const string CANCEL = "CANCEL_NOTIFICATION";
-  public const string PLAYER_TURN_START = "PLAYER_TURN_START_NOTIFICATION";
-  public const string PLAYER_TURN_END = "PLAYER_TURN_END_NOTIFICATION";
+  public const string PLAYER_PHASE_START = "PLAYER_PHASE_START_NOTIFICATION";
+  public const string PLAYER_PHASE_END = "PLAYER_PHASE_END_NOTIFICATION";
   public const string PLAYER_SPENT_AP = "PLAYER_SPENT_AP_NOTIFICATION";
+  public const string ENEMY_PHASE_START = "ENEMY_PHASE_START_NOTIFICATION";
+  public const string ENEMY_PHASE_END = "ENEMY_PHASE_END_NOTIFICATION";
+  public const string ENEMY_ROUND_START = "ENEMY_ROUND_START_NOTIFICATION";
+  public const string ENEMY_ROUND_END = "ENEMY_ROUND_END_NOTIFICATION";
 }

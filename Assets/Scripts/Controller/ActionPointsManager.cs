@@ -10,10 +10,10 @@ public class ActionPointsManager : MonoBehaviour {
   [SerializeField] private int _ap;
 
   void OnEnable() {
-    this.AddObserver(IncrementAP, Notifications.PLAYER_TURN_START);
+    this.AddObserver(IncrementAP, Notifications.PLAYER_PHASE_START);
   }
   void OnDisable() {
-    this.RemoveObserver(IncrementAP, Notifications.PLAYER_TURN_START);
+    this.RemoveObserver(IncrementAP, Notifications.PLAYER_PHASE_START);
   }
 
   void IncrementAP(object sender, object e) {
