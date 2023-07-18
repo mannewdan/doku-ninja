@@ -7,20 +7,20 @@ public class UnitManager : MonoBehaviour {
   [SerializeField] GameObject skellyBasicPrefab;
 
   public Point spawn;
-  public Unit player {
+  public UnitController player {
     get {
       if (_player == null) {
         GameObject newNinja = Instantiate(ninjaPrefab);
         newNinja.transform.SetParent(transform);
-        _player = newNinja.GetComponent<Unit>();
+        _player = newNinja.GetComponent<UnitController>();
         _player.pos = spawn;
       }
       return _player;
     }
   }
-  public List<Unit> enemies = new List<Unit>();
+  public List<UnitController> enemies = new List<UnitController>();
 
-  private Unit _player;
+  private UnitController _player;
 
   void Start() {
     player.pos = spawn;
@@ -51,7 +51,7 @@ public class UnitManager : MonoBehaviour {
   public void GatherData(ref MapData mapData) {
     mapData.spawn = spawn;
     mapData.enemies = new List<EnemyData>();
-    foreach (Unit unit in enemies) {
+    foreach (UnitController unit in enemies) {
       if (unit == null) continue;
       mapData.enemies.Add(new EnemyData() { pos = unit.pos });
     }
@@ -75,11 +75,11 @@ public class UnitManager : MonoBehaviour {
       }
     }
   }
-  public Unit NewEnemy(Point pos) {
+  public UnitController NewEnemy(Point pos) {
     GameObject newEnemy = Instantiate(skellyBasicPrefab);
     newEnemy.transform.SetParent(transform);
 
-    Unit enemy = newEnemy.GetComponent<Unit>();
+    UnitController enemy = newEnemy.GetComponent<UnitController>();
     enemy.pos = pos;
     enemies.Add(enemy);
     return enemy;

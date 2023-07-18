@@ -10,7 +10,7 @@ public class StageStateEnemyRounds : StageState {
   }
 
   IEnumerator<float> _Loop() {
-    var enemyList = new List<Unit>(enemies);
+    var enemyList = new List<UnitController>(enemies);
     enemyList.Reverse();
 
     for (int i = enemyList.Count - 1; i >= 0; i--) {
@@ -22,7 +22,9 @@ public class StageStateEnemyRounds : StageState {
 
       //debug
       Debug.Log(enemy);
-      yield return Timing.WaitForSeconds(0.5f);
+      yield return Timing.WaitForSeconds(0.15f);
+
+      enemy.QueueAttack();
 
       //if telegraphing an attack, execute the attack and end the round
 

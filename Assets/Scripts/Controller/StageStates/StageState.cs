@@ -8,8 +8,8 @@ public abstract class StageState : State {
   public Point pos { get { return owner.pos; } set { owner.pos = value; } }
   public Grid grid { get { return owner.grid; } }
   public UnitManager units { get { return owner.units; } }
-  public Unit player { get { return owner.player; } }
-  public List<Unit> enemies { get { return owner.enemies; } }
+  public UnitController player { get { return owner.player; } }
+  public List<UnitController> enemies { get { return owner.enemies; } }
   public ActionPointsManager apManager { get { return owner.apManager; } }
 
   protected virtual void Awake() {

@@ -24,13 +24,13 @@ public class StateMachineBoard : StateMachine, IPersistence {
   }
   public Grid grid;
   public UnitManager units;
-  public Unit player { get { return units.player; } }
-  public List<Unit> enemies { get { return units.enemies; } }
+  public UnitController player { get { return units.player; } }
+  public List<UnitController> enemies { get { return units.enemies; } }
   public string mapToLoad;
 
   public bool IsOccupied(Point p) {
     if (player.pos == p) return true;
-    foreach (Unit u in enemies) {
+    foreach (UnitController u in enemies) {
       if (u.pos == p) return true;
     }
     return false;
