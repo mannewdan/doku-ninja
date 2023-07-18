@@ -19,16 +19,16 @@ public class StageStatePlayerCard : StageState {
   }
 
   protected override void OnMove(object sender, object e) {
-    if (e is InfoEventArgs<Point> move) {
-      pos = BestPos(player.pos, move.info);
+    if (e is Point move) {
+      pos = BestPos(player.pos, move);
     }
   }
   protected override void OnNumber(object sender, object e) {
-    if (e is InfoEventArgs<int> number) {
-      if (val == number.info) {
+    if (e is int number) {
+      if (val == number) {
         owner.ChangeState<StageStatePlayerMove>();
       } else {
-        val = number.info;
+        val = number;
       }
     }
   }

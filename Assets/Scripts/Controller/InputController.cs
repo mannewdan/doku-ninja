@@ -43,23 +43,23 @@ public class InputController : MonoBehaviour {
     int yRepeat = d + u;
 
     if (x != 0) {
-      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(x, 0)));
+      this.PostNotification(Notifications.MOVE, new Point(x, 0));
     }
     if (y != 0) {
-      this.PostNotification(Notifications.MOVE, new InfoEventArgs<Point>(new Point(0, y)));
+      this.PostNotification(Notifications.MOVE, new Point(0, y));
     }
     if (xRepeat != 0) {
-      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(xRepeat, 0)));
+      this.PostNotification(Notifications.MOVE_REPEAT, new Point(xRepeat, 0));
     }
     if (yRepeat != 0) {
-      this.PostNotification(Notifications.MOVE_REPEAT, new InfoEventArgs<Point>(new Point(0, yRepeat)));
+      this.PostNotification(Notifications.MOVE_REPEAT, new Point(0, yRepeat));
     }
   }
   void UpdateNumber() {
     for (int i = 0; i <= 9; i++) {
       var action = controls.FindAction($"general/{i}");
       if (action != null && action.WasReleasedThisFrame()) {
-        this.PostNotification(Notifications.NUMBER, new InfoEventArgs<int>(i));
+        this.PostNotification(Notifications.NUMBER, i);
       }
     }
   }
@@ -75,9 +75,9 @@ public class InputController : MonoBehaviour {
       (tab != null && tab.WasReleasedThisFrame() && shiftMod != null && shiftMod.IsPressed());
 
     if (left) {
-      this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(-1));
+      this.PostNotification(Notifications.TAB, -1);
     } else if (right) {
-      this.PostNotification(Notifications.TAB, new InfoEventArgs<int>(1));
+      this.PostNotification(Notifications.TAB, 1);
     }
   }
   void UpdateCommand() {

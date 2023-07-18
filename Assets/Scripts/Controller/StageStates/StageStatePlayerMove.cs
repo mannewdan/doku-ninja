@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StageStatePlayerMove : StageState {
   protected override void OnMove(object sender, object e) {
-    if (e is InfoEventArgs<Point> move) {
-      var newPos = player.pos + move.info;
+    if (e is Point move) {
+      var newPos = player.pos + move;
 
       if (IsOccupied(newPos)) return;
       if (InBounds(newPos)) {
@@ -21,10 +21,8 @@ public class StageStatePlayerMove : StageState {
     }
   }
   protected override void OnNumber(object sender, object e) {
-    if (e is InfoEventArgs<int> a) {
-      int val = a.info;
-
-      owner.stateData = val;
+    if (e is int number) {
+      owner.stateData = number;
       owner.ChangeState<StageStatePlayerCard>();
     }
   }
