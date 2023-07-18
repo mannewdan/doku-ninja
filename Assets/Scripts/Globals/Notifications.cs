@@ -18,4 +18,5 @@ public static class Notifications {
   public const string ENEMY_ROUND_END = "ENEMY_ROUND_END_NOTIFICATION";
   public const string UNIT_MOVED = "UNIT_MOVED_NOTIFICATION";
   public const string UNIT_TELEGRAPHED = "UNIT_TELEGRAPHED_NOTIFICATION";
+  public const string UNIT_ATTACKED = "UNIT_ATTACKED_NOTIFICATION";
 }

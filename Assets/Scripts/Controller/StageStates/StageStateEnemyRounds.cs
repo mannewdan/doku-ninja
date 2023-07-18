@@ -24,12 +24,12 @@ public class StageStateEnemyRounds : StageState {
       Debug.Log(enemy);
       yield return Timing.WaitForSeconds(0.15f);
 
-      enemy.QueueAttack();
-
-      //if telegraphing an attack, execute the attack and end the round
-
-      //else, move towards the player using A*
-      //if moved and in range of the player, begin telegraphing an attack
+      if (enemy.isTelegraphing) {
+        enemy.ExecuteAttack();
+      } else {
+        //move
+        enemy.QueueAttack();
+      }
 
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       yield return 0;

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitRenderer : MonoBehaviour {
-  UnitController controller {
+  public UnitController controller {
     get { if (!_controller) _controller = GetComponent<UnitController>(); return _controller; }
   }
-  UnitController _controller;
-  Point pos { get { return controller.pos; } }
-  List<Point> targetedTiles { get { return controller.targetedTiles; } }
+  public Point pos { get { return controller.pos; } }
   public Telegraphs telegraphs { get { if (!_telegraphs) _telegraphs = transform.parent.parent.GetComponentInChildren<Telegraphs>(); return _telegraphs; } }
 
+  private UnitController _controller;
   private Telegraphs _telegraphs;
 
   void OnEnable() { AddObservers(); }
@@ -19,10 +18,12 @@ public class UnitRenderer : MonoBehaviour {
   void AddObservers() {
     this.AddObserver(Snap, Notifications.UNIT_MOVED, gameObject);
     this.AddObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
+    this.AddObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
   }
   void RemoveObservers() {
     this.RemoveObserver(Snap, Notifications.UNIT_MOVED, gameObject);
     this.RemoveObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
+    this.RemoveObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
   }
 
   public void Snap(object sender, object e) {
@@ -32,6 +33,13 @@ public class UnitRenderer : MonoBehaviour {
     if (e is List<Point> points) {
       foreach (Point p in points) {
         telegraphs.Add(p);
+      }
+    }
+  }
+  public void Attack(object sender, object e) {
+    if (e is List<Point> points) {
+      foreach (Point p in points) {
+        telegraphs.Remove(p);
       }
     }
   }
