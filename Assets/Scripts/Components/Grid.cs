@@ -78,5 +78,10 @@ public class Grid : MonoBehaviour {
     tiles.Add(t.pos, t);
     return t;
   }
+  public bool InBounds(Point p) {
+    if (p.x < 0 || p.x > width - 1) return false;
+    if (p.y < 0 || p.y > height - 1) return false;
+    return true;
+  }
 }
 

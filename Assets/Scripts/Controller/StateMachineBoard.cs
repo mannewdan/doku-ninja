@@ -28,34 +28,22 @@ public class StateMachineBoard : StateMachine, IPersistence {
   public List<UnitController> enemies { get { return units.enemies; } }
   public string mapToLoad;
 
-  public bool IsOccupied(Point p) {
-    if (player.pos == p) return true;
-    foreach (UnitController u in enemies) {
-      if (u.pos == p) return true;
-    }
-    return false;
-  }
-  public bool InBounds(Point p) {
-    if (p.x < 0 || p.x > grid.width - 1) return false;
-    if (p.y < 0 || p.y > grid.height - 1) return false;
-    return true;
-  }
   public Point BestPos(Point start, Point dir) {
     var newPos = start + dir;
     //desired pos
-    if (InBounds(newPos)) return newPos;
+    if (grid.InBounds(newPos)) return newPos;
 
     //adjacent pos
     var adjacent = new Point(dir.y, dir.x);
     newPos = start + adjacent;
-    if (InBounds(newPos)) return newPos;
+    if (grid.InBounds(newPos)) return newPos;
 
     newPos = start - adjacent;
-    if (InBounds(newPos)) return newPos;
+    if (grid.InBounds(newPos)) return newPos;
 
     //opposite pos
     newPos = start - dir;
-    if (InBounds(newPos)) return newPos;
+    if (grid.InBounds(newPos)) return newPos;
 
     return start;
   }

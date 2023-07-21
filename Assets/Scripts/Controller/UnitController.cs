@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 
 public class UnitController : MonoBehaviour {
+  const int PH_MOVES_PER_ROUND = 1; //pull this from some UnitData class eventually
+
   public new UnitRenderer renderer {
     get { if (!_renderer) _renderer = GetComponent<UnitRenderer>(); return _renderer; }
   }
@@ -17,26 +20,51 @@ public class UnitController : MonoBehaviour {
     }
   }
   public Point lastDirection { get { return _lastDir; } set { _lastDir = value; } }
-  public UnitManager units { get { if (!_units) _units = GetComponentInParent<UnitManager>(); return _units; } }
+  public UnitManager units;
+  public Grid grid;
   public bool isTelegraphing { get { return targetedTiles.Count > 0; } }
+  public Point playerPos { get { return units.player.pos; } }
 
-  private UnitManager _units;
   private UnitRenderer _renderer;
-  public List<Point> targetedTiles = new List<Point>();
   [SerializeField] private Point _pos;
   [SerializeField] private Point _lastDir = new Point(1, 0);
+  public List<Point> targetedTiles = new List<Point>();
+  public Pathfinder pathfinder;
 
-  public void ExecuteAttack() {
+  public IEnumerator<float> _ExecuteAttack() {
     gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
     targetedTiles.Clear();
+    yield break;
   }
-  public void QueueAttack() {
+  public IEnumerator<float> _QueueAttack() {
     targetedTiles.Clear();
+    targetedTiles.Add(playerPos);
+    gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
+    yield break;
+  }
+  public IEnumerator<float> _MoveToPlayer() {
+    pathfinder = new Pathfinder(grid, units);
+    pathfinder.FindPath(pos, playerPos);
 
-    var diff = units.player.pos - pos;
-    if (Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1) {
-      targetedTiles.Add(units.player.pos);
-      gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
+    for (int i = 0; i < PH_MOVES_PER_ROUND; i++) {
+      yield return Timing.WaitForSeconds(0.25f);
+      if (InRange(playerPos)) {
+        break;
+      } else {
+        if (pathfinder.NextStep(out Point p)) {
+          Debug.Log(p);
+          pos = p;
+        } else {
+          //couldn't find a path
+        }
+      }
     }
+
+    yield return Timing.WaitForSeconds(0.25f);
+    if (InRange(playerPos)) yield return Timing.WaitUntilDone(Timing.RunCoroutine(_QueueAttack()));
+  }
+  public bool InRange(Point target) {
+    var diff = target - pos;
+    return Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1;
   }
 }

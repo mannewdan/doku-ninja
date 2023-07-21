@@ -36,7 +36,7 @@ public abstract class StageState : State {
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
 
-  protected bool InBounds(Point p) { return owner.InBounds(p); }
-  protected bool IsOccupied(Point p) { return owner.IsOccupied(p); }
+  protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
+  protected bool IsOccupied(Point p) { return owner.units.IsOccupied(p); }
   protected Point BestPos(Point start, Point dir) { return owner.BestPos(start, dir); }
 }

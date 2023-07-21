@@ -39,5 +39,5 @@ public abstract class EditState : State {
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
 
-  protected bool InBounds(Point p) { return owner.InBounds(p); }
+  protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
 }

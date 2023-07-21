@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour {
-  [SerializeField] GameObject ninjaPrefab;
-  [SerializeField] GameObject skellyBasicPrefab;
+  [SerializeField] private GameObject ninjaPrefab;
+  [SerializeField] private GameObject skellyBasicPrefab;
+  [SerializeField] private Grid grid;
 
   public Point spawn;
   public UnitController player {
@@ -19,11 +20,35 @@ public class UnitManager : MonoBehaviour {
     }
   }
   public List<UnitController> enemies = new List<UnitController>();
-
+  public Dictionary<Point, UnitController> unitMap = new Dictionary<Point, UnitController>();
   private UnitController _player;
 
   void Start() {
     player.pos = spawn;
+  }
+  void OnEnable() { AddObservers(); }
+  void OnDisable() { RemoveObservers(); }
+  void OnDestroy() { RemoveObservers(); }
+  void AddObservers() {
+    this.AddObserver(UpdateMap, Notifications.UNIT_MOVED);
+    this.AddObserver(UpdateMap, Notifications.UNIT_DESTROYED);
+  }
+  void RemoveObservers() {
+    this.RemoveObserver(UpdateMap, Notifications.UNIT_MOVED);
+    this.RemoveObserver(UpdateMap, Notifications.UNIT_DESTROYED);
+  }
+
+  private void UpdateMap(object sender, object e) {
+    unitMap.Clear();
+    unitMap.Add(player.pos, player);
+    for (int i = enemies.Count - 1; i >= 0; i--) {
+      if (!enemies[i]) { enemies.RemoveAt(i); continue; }
+      if (unitMap.ContainsKey(enemies[i].pos)) {
+        Debug.LogError("Tile has two units occupying it!", enemies[i].gameObject);
+        continue;
+      }
+      unitMap.Add(enemies[i].pos, enemies[i]);
+    }
   }
 
   public void Load(MapData data) {
@@ -81,7 +106,16 @@ public class UnitManager : MonoBehaviour {
 
     UnitController enemy = newEnemy.GetComponent<UnitController>();
     enemy.pos = pos;
+    enemy.grid = grid;
+    enemy.units = this;
     enemies.Add(enemy);
     return enemy;
+  }
+  public bool IsOccupied(Point p) {
+    if (player.pos == p) return true;
+    foreach (UnitController u in enemies) {
+      if (u.pos == p) return true;
+    }
+    return false;
   }
 }

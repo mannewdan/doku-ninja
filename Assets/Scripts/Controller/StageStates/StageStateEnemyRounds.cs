@@ -25,10 +25,9 @@ public class StageStateEnemyRounds : StageState {
       yield return Timing.WaitForSeconds(0.15f);
 
       if (enemy.isTelegraphing) {
-        enemy.ExecuteAttack();
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
       } else {
-        //move
-        enemy.QueueAttack();
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer()));
       }
 
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
