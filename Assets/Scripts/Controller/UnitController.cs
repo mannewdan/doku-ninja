@@ -43,7 +43,7 @@ public class UnitController : MonoBehaviour {
     yield break;
   }
   public IEnumerator<float> _MoveToPlayer() {
-    pathfinder = new Pathfinder(grid, units);
+    if (pathfinder == null || !pathfinder.initialized) pathfinder = new Pathfinder(grid, units);
     pathfinder.FindPath(pos, playerPos);
 
     for (int i = 0; i < PH_MOVES_PER_ROUND; i++) {
@@ -51,11 +51,10 @@ public class UnitController : MonoBehaviour {
       if (InRange(playerPos)) {
         break;
       } else {
-        if (pathfinder.NextStep(out Point p)) {
-          Debug.Log(p);
+        if (pathfinder.NextStep(out Point p) && !units.IsOccupied(p)) {
           pos = p;
         } else {
-          //couldn't find a path
+          pos = pathfinder.SmartStep(pos, playerPos);
         }
       }
     }

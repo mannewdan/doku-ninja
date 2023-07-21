@@ -59,4 +59,13 @@ public struct Point {
     if (oneAxisOnly && p.x != 0 && p.y != 0) p.y = 0;
     return p;
   }
+  public float Dist(Point other, bool allowDiagonals = false) {
+    var xDist = Mathf.Abs(other.x - x);
+    var yDist = Mathf.Abs(other.y - y);
+    if (allowDiagonals) {
+      var diff = Mathf.Abs(xDist - yDist);
+      var min = Mathf.Min(xDist, yDist);
+      return min * 1.4f + diff;
+    } else return xDist + yDist;
+  }
 }
