@@ -3,20 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DigitalRuby.Tween;
 
 public class UIJuicyText : MonoBehaviour {
-
   //essentials
   TMP_Text mesh;
 
   void Awake() {
     if (mesh != null) return;
-
     mesh = GetComponentInChildren<TMP_Text>(true);
-  }
-  void Update() {
-
   }
 
   //commands
@@ -25,10 +19,9 @@ public class UIJuicyText : MonoBehaviour {
       Awake();
       if (mesh == null) return;
     }
-
     mesh.text = text;
   }
   public void SetColor(Color color, float duration = 0) {
-    gameObject.Tween(GetInstanceID() + "color", mesh.color, color, duration, TweenScaleFunctions.QuadraticEaseOut, (t) => { mesh.color = t.CurrentValue; });
+    //gameObject.Tween(GetInstanceID() + "color", mesh.color, color, duration, TweenScaleFunctions.QuadraticEaseOut, (t) => { mesh.color = t.CurrentValue; });
   }
 }

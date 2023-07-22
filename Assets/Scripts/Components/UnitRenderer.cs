@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tweens;
 
 public class UnitRenderer : MonoBehaviour {
   public UnitController controller {
@@ -27,7 +28,7 @@ public class UnitRenderer : MonoBehaviour {
   }
 
   public void Snap(object sender, object e) {
-    transform.localPosition = new Vector3(pos.x, pos.y);
+    gameObject.TweenPosition(new Vector3(pos.x, pos.y), 0.15f).SetEaseCubicOut();
   }
   public void Telegraph(object sender, object e) {
     if (e is List<Point> points) {
