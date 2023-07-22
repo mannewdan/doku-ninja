@@ -25,6 +25,7 @@ public class UnitManager : MonoBehaviour {
 
   void Start() {
     player.pos = spawn;
+    player.renderer.Snap();
   }
   void OnEnable() { AddObservers(); }
   void OnDisable() { RemoveObservers(); }
@@ -85,6 +86,7 @@ public class UnitManager : MonoBehaviour {
     RemoveEnemy(pos);
     spawn = pos;
     player.pos = spawn;
+    player.renderer.Snap();
   }
   public void PlaceEnemy(Point pos) {
     if (spawn == pos) return;
@@ -106,6 +108,7 @@ public class UnitManager : MonoBehaviour {
 
     UnitController enemy = newEnemy.GetComponent<UnitController>();
     enemy.pos = pos;
+    enemy.renderer.Snap();
     enemy.grid = grid;
     enemy.units = this;
     enemies.Add(enemy);

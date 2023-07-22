@@ -17,27 +17,30 @@ public class UnitRenderer : MonoBehaviour {
   void OnDisable() { RemoveObservers(); }
   void OnDestroy() { RemoveObservers(); }
   void AddObservers() {
-    this.AddObserver(Snap, Notifications.UNIT_MOVED, gameObject);
+    this.AddObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
     this.AddObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
     this.AddObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
   }
   void RemoveObservers() {
-    this.RemoveObserver(Snap, Notifications.UNIT_MOVED, gameObject);
+    this.RemoveObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
     this.RemoveObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
     this.RemoveObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
   }
 
-  public void Snap(object sender, object e) {
-    gameObject.TweenPosition(new Vector3(pos.x, pos.y), 0.15f).SetEaseCubicOut();
+  public void Snap() {
+    transform.localPosition = new Vector3(pos.x, pos.y);
   }
-  public void Telegraph(object sender, object e) {
+  private void SmoothMove(object sender, object e) {
+    var handle = gameObject.TweenPosition(new Vector3(pos.x, pos.y), 0.15f).SetEaseCubicOut();
+  }
+  private void Telegraph(object sender, object e) {
     if (e is List<Point> points) {
       foreach (Point p in points) {
         telegraphs.Add(p);
       }
     }
   }
-  public void Attack(object sender, object e) {
+  private void Attack(object sender, object e) {
     if (e is List<Point> points) {
       foreach (Point p in points) {
         telegraphs.Remove(p);
