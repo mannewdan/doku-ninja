@@ -17,12 +17,13 @@ public class StageStateEnemyMove : StageState {
       var enemy = enemyList[i];
       if (!enemy) continue;
 
+      enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
       yield return Timing.WaitForSeconds(0.15f);
-
       yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer()));
-
+      yield return Timing.WaitForSeconds(0.15f);
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
+      enemy.isActive = false;
       yield return 0;
     }
 

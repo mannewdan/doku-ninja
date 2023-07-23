@@ -19,16 +19,26 @@ public class UnitController : MonoBehaviour {
       }
     }
   }
+  public bool isActive {
+    get { return _isActive; }
+    set {
+      if (_isActive != value) {
+        _isActive = value;
+        gameObject.PostNotification(Notifications.UNIT_ACTIVE_CHANGED, value);
+      }
+    }
+  }
   public Point lastDirection { get { return _lastDir; } set { _lastDir = value; } }
-  public UnitManager units;
-  public Grid grid;
   public bool isTelegraphing { get { return targetedTiles.Count > 0; } }
   public Point playerPos { get { return units.player.pos; } }
 
   private UnitRenderer _renderer;
   [SerializeField] private Point _pos;
   [SerializeField] private Point _lastDir = new Point(1, 0);
+  [SerializeField] private bool _isActive;
   public List<Point> targetedTiles = new List<Point>();
+  public Grid grid;
+  public UnitManager units;
   public Pathfinder pathfinder;
 
   public IEnumerator<float> _ExecuteAttack() {

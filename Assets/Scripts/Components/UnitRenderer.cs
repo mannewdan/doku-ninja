@@ -13,6 +13,19 @@ public class UnitRenderer : MonoBehaviour {
   private UnitController _controller;
   private Telegraphs _telegraphs;
 
+  private Transform _marker;
+  public Transform marker {
+    get {
+      if (_marker == null) {
+        GameObject instance = Instantiate(controller.units.activeIndicatorPrefab) as GameObject;
+        instance.transform.SetParent(transform);
+        instance.transform.localPosition = new Vector3(0, 0, 0.1f);
+        _marker = instance.transform;
+      }
+      return _marker;
+    }
+  }
+
   void OnEnable() { AddObservers(); }
   void OnDisable() { RemoveObservers(); }
   void OnDestroy() { RemoveObservers(); }
@@ -20,11 +33,13 @@ public class UnitRenderer : MonoBehaviour {
     this.AddObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
     this.AddObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
     this.AddObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
+    this.AddObserver(UpdateActiveIndicator, Notifications.UNIT_ACTIVE_CHANGED, gameObject);
   }
   void RemoveObservers() {
     this.RemoveObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
     this.RemoveObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
     this.RemoveObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
+    this.RemoveObserver(UpdateActiveIndicator, Notifications.UNIT_ACTIVE_CHANGED, gameObject);
   }
 
   public void Snap() {
@@ -45,6 +60,11 @@ public class UnitRenderer : MonoBehaviour {
       foreach (Point p in points) {
         telegraphs.Remove(p);
       }
+    }
+  }
+  private void UpdateActiveIndicator(object sender, object e) {
+    if (e is bool value) {
+      marker.gameObject.SetActive(value);
     }
   }
 }

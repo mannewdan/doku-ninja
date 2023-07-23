@@ -5,10 +5,13 @@ using MEC;
 
 public class StageStatePlayerEnd : StageState {
   public override void Enter() {
-    Debug.Log("End Player Phase");
     base.Enter();
     this.PostNotification(Notifications.PLAYER_PHASE_END);
     Timing.RunCoroutine(_End());
+  }
+  public override void Exit() {
+    base.Exit();
+    player.isActive = false;
   }
 
   IEnumerator<float> _End() {

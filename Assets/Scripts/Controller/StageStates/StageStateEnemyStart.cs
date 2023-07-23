@@ -5,7 +5,6 @@ using MEC;
 
 public class StageStateEnemyStart : StageState {
   public override void Enter() {
-    Debug.Log("Start Enemy Phase");
     base.Enter();
     this.PostNotification(Notifications.ENEMY_PHASE_START);
     Timing.RunCoroutine(_Start());

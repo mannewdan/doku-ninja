@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour {
+  public GameObject activeIndicatorPrefab;
   [SerializeField] private GameObject ninjaPrefab;
   [SerializeField] private GameObject skellyBasicPrefab;
   [SerializeField] private Grid grid;
@@ -15,6 +16,8 @@ public class UnitManager : MonoBehaviour {
         newNinja.transform.SetParent(transform);
         _player = newNinja.GetComponent<UnitController>();
         _player.pos = spawn;
+        _player.units = this;
+        _player.grid = grid;
       }
       return _player;
     }
