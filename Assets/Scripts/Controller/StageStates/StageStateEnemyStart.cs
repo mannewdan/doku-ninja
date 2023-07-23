@@ -13,6 +13,6 @@ public class StageStateEnemyStart : StageState {
 
   IEnumerator<float> _Start() {
     yield return 0;
-    owner.ChangeState<StageStateEnemyRounds>();
+    owner.ChangeState<StageStateEnemyAttack>();
   }
 }

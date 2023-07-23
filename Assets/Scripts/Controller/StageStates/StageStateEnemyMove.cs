@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
-public class StageStateEnemyRounds : StageState {
+public class StageStateEnemyMove : StageState {
   public override void Enter() {
     base.Enter();
     Timing.RunCoroutine(_Loop());
@@ -18,17 +18,9 @@ public class StageStateEnemyRounds : StageState {
       if (!enemy) continue;
 
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
-      yield return 0;
-
-      //debug
-      Debug.Log(enemy);
       yield return Timing.WaitForSeconds(0.15f);
 
-      if (enemy.isTelegraphing) {
-        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
-      } else {
-        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer()));
-      }
+      yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer()));
 
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       yield return 0;
