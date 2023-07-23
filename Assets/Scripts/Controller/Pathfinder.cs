@@ -170,11 +170,21 @@ public class Pathfinder {
     }
 
     if (closerPoints.Count > 0) {
-      return closerPoints[Random.Range(0, closerPoints.Count)];
-    } else if (fartherPoints.Count > 0 && Random.Range(0f, 1f) < 0.25f) {
+      var random = Random.Range(0, closerPoints.Count);
+      var longestAxis = Mathf.Max(Mathf.Abs(closerPoints[random].x - end.x), Mathf.Abs(closerPoints[random].y - end.y));
+      var longestAxisPoint = closerPoints[random];
+      for (int i = 0; i < closerPoints.Count; i++) {
+        //prefer traveling along the longer axis (achieving a shorter 'maxAxis')
+        var maxAxis = Mathf.Max(Mathf.Abs(closerPoints[i].x - end.x), Mathf.Abs(closerPoints[i].y - end.y));
+        if (maxAxis < longestAxis) {
+          longestAxis = maxAxis;
+          longestAxisPoint = closerPoints[i];
+        }
+      }
+      return longestAxisPoint;
+    } else if (fartherPoints.Count > 0 && Random.Range(0f, 1f) < 0.33f) {
       return fartherPoints[Random.Range(0, fartherPoints.Count)];
     }
-
     return p;
   }
 }
