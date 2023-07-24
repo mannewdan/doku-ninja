@@ -12,6 +12,8 @@ public static class Notifications {
   public const string PLAYER_PHASE_START = "PLAYER_PHASE_START_NOTIFICATION";
   public const string PLAYER_PHASE_END = "PLAYER_PHASE_END_NOTIFICATION";
   public const string PLAYER_SPENT_AP = "PLAYER_SPENT_AP_NOTIFICATION";
+  public const string PLAYER_HARMED = "PLAYER_HARMED_NOTIFICATION";
+  public const string PLAYER_DEAD = "PLAYER_DEAD_NOTIFICATION";
   public const string ENEMY_PHASE_START = "ENEMY_PHASE_START_NOTIFICATION";
   public const string ENEMY_PHASE_END = "ENEMY_PHASE_END_NOTIFICATION";
   public const string ENEMY_ROUND_START = "ENEMY_ROUND_START_NOTIFICATION";

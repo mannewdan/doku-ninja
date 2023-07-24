@@ -19,15 +19,28 @@ public class StageStateEnemyAttack : StageState {
 
       enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
-      yield return Timing.WaitForSeconds(0.5f);
-      yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
-      yield return Timing.WaitForSeconds(0.5f);
+
+      if (!player.isAlive) {
+        enemy.CancelAttack();
+        yield return Timing.WaitForSeconds(0.25f);
+      } else {
+        yield return Timing.WaitForSeconds(0.5f);
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
+        yield return Timing.WaitForSeconds(0.25f);
+      }
+
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       enemy.isActive = false;
+
       yield return 0;
     }
 
     yield return 0;
-    owner.ChangeState<StageStateEnemyMove>();
+
+    if (player.isAlive) {
+      owner.ChangeState<StageStateEnemyMove>();
+    } else {
+      owner.ChangeState<StageStatePlayerDead>();
+    }
   }
 }

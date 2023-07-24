@@ -47,6 +47,12 @@ public class UnitController : MonoBehaviour {
 
   public IEnumerator<float> _ExecuteAttack() {
     gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
+    foreach (Point p in targetedTiles) {
+      if (p == playerPos) {
+        units.player.Harm(10);
+        gameObject.PostNotification(Notifications.PLAYER_HARMED, this);
+      }
+    }
     targetedTiles.Clear();
     yield break;
   }
@@ -79,6 +85,10 @@ public class UnitController : MonoBehaviour {
   public bool InRange(Point target) {
     var diff = target - pos;
     return Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1;
+  }
+  public void CancelAttack() {
+    gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
+    targetedTiles.Clear();
   }
   public void Harm(int amount) {
     if (amount <= 0) return;
