@@ -15,7 +15,7 @@ public class StageStateEnemyMove : StageState {
 
     for (int i = enemyList.Count - 1; i >= 0; i--) {
       var enemy = enemyList[i];
-      if (!enemy) continue;
+      if (!enemy || !enemy.isAlive) continue;
 
       enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);

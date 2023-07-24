@@ -7,17 +7,14 @@ public class UnitManager : MonoBehaviour {
   [SerializeField] private GameObject ninjaPrefab;
   [SerializeField] private GameObject skellyBasicPrefab;
   [SerializeField] private Grid grid;
+  [SerializeField] private Telegraphs telegraphs;
 
   public Point spawn;
   public UnitController player {
     get {
       if (_player == null) {
-        GameObject newNinja = Instantiate(ninjaPrefab);
-        newNinja.transform.SetParent(transform);
-        _player = newNinja.GetComponent<UnitController>();
-        _player.pos = spawn;
-        _player.units = this;
-        _player.grid = grid;
+        _player = NewUnit(spawn, ninjaPrefab);
+        _player.isPlayer = true;
       }
       return _player;
     }
@@ -46,7 +43,7 @@ public class UnitManager : MonoBehaviour {
     unitMap.Clear();
     unitMap.Add(player.pos, player);
     for (int i = enemies.Count - 1; i >= 0; i--) {
-      if (!enemies[i]) { enemies.RemoveAt(i); continue; }
+      if (!enemies[i] || !enemies[i].isAlive) { enemies.RemoveAt(i); continue; }
       if (unitMap.ContainsKey(enemies[i].pos)) {
         Debug.LogError("Tile has two units occupying it!", enemies[i].gameObject);
         continue;
@@ -54,7 +51,6 @@ public class UnitManager : MonoBehaviour {
       unitMap.Add(enemies[i].pos, enemies[i]);
     }
   }
-
   public void Load(MapData data) {
     Clear();
 
@@ -63,7 +59,8 @@ public class UnitManager : MonoBehaviour {
 
     for (int i = 0; i < data.enemies.Count; i++) {
       EnemyData ed = data.enemies[i];
-      NewEnemy(ed.pos);
+      UnitController enemy = NewUnit(ed.pos, skellyBasicPrefab);
+      enemies.Add(enemy);
     }
   }
   public void Clear() {
@@ -94,7 +91,9 @@ public class UnitManager : MonoBehaviour {
   public void PlaceEnemy(Point pos) {
     if (spawn == pos) return;
     RemoveEnemy(pos);
-    NewEnemy(pos);
+
+    UnitController enemy = NewUnit(pos, skellyBasicPrefab);
+    enemies.Add(enemy);
   }
   public void RemoveEnemy(Point pos) {
     for (int i = enemies.Count - 1; i >= 0; i--) {
@@ -105,23 +104,24 @@ public class UnitManager : MonoBehaviour {
       }
     }
   }
-  public UnitController NewEnemy(Point pos) {
-    GameObject newEnemy = Instantiate(skellyBasicPrefab);
-    newEnemy.transform.SetParent(transform);
-
-    UnitController enemy = newEnemy.GetComponent<UnitController>();
-    enemy.pos = pos;
-    enemy.renderer.Snap();
-    enemy.grid = grid;
-    enemy.units = this;
-    enemies.Add(enemy);
-    return enemy;
-  }
   public bool IsOccupied(Point p) {
     if (player.pos == p) return true;
     foreach (UnitController u in enemies) {
       if (u.pos == p) return true;
     }
     return false;
+  }
+  public UnitController NewUnit(Point pos, GameObject prefab) {
+    GameObject newUnit = Instantiate(prefab);
+    newUnit.transform.SetParent(transform);
+
+    UnitController unit = newUnit.GetComponent<UnitController>();
+    unit.pos = pos;
+    unit.grid = grid;
+    unit.units = this;
+    unit.renderer.Snap();
+    unit.renderer.telegraphs = telegraphs;
+
+    return unit;
   }
 }

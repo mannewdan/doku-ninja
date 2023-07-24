@@ -15,13 +15,13 @@ public class StageStateEnemyAttack : StageState {
 
     for (int i = enemyList.Count - 1; i >= 0; i--) {
       var enemy = enemyList[i];
-      if (!enemy || !enemy.isTelegraphing) continue;
+      if (!enemy || !enemy.isAlive || !enemy.isTelegraphing) continue;
 
       enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
-      yield return Timing.WaitForSeconds(0.75f);
+      yield return Timing.WaitForSeconds(0.5f);
       yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
-      yield return Timing.WaitForSeconds(0.75f);
+      yield return Timing.WaitForSeconds(0.5f);
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       enemy.isActive = false;
       yield return 0;

@@ -33,13 +33,16 @@ public class StageStatePlayerCard : StageState {
     }
   }
   protected override void OnConfirm(object sender, object e) {
-    var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
-    if (tile) {
-      if (apManager.SpendAP(1)) {
+    if (apManager.SpendAP(1)) {
+      var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
+      var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
+      if (unit) {
+        unit.Harm(val);
+      } else if (tile) {
         tile.currentDigit = val;
+      } else {
+        Debug.LogError("Couldn't find anything at position: " + pos.ToString());
       }
-    } else {
-      Debug.Log("Couldn't find a tile at position: " + pos.ToString());
     }
   }
   protected override void OnSpentAP(object sender, object e) {

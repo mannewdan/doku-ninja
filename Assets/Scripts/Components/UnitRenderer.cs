@@ -7,13 +7,6 @@ public class UnitRenderer : MonoBehaviour {
   public UnitController controller {
     get { if (!_controller) _controller = GetComponent<UnitController>(); return _controller; }
   }
-  public Point pos { get { return controller.pos; } }
-  public Telegraphs telegraphs { get { if (!_telegraphs) _telegraphs = transform.parent.parent.GetComponentInChildren<Telegraphs>(); return _telegraphs; } }
-
-  private UnitController _controller;
-  private Telegraphs _telegraphs;
-
-  private Transform _marker;
   public Transform marker {
     get {
       if (_marker == null) {
@@ -25,21 +18,30 @@ public class UnitRenderer : MonoBehaviour {
       return _marker;
     }
   }
+  public Point pos { get { return controller.pos; } }
+
+  private UnitController _controller;
+  private Transform _marker;
+  public Telegraphs telegraphs;
 
   void OnEnable() { AddObservers(); }
   void OnDisable() { RemoveObservers(); }
   void OnDestroy() { RemoveObservers(); }
   void AddObservers() {
     this.AddObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
-    this.AddObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
-    this.AddObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
+    this.AddObserver(AddTelegraphs, Notifications.UNIT_TELEGRAPHED, gameObject);
+    this.AddObserver(RemoveTelegraphs, Notifications.UNIT_ATTACKED, gameObject);
+    this.AddObserver(RemoveTelegraphs, Notifications.UNIT_CANCELED, gameObject);
     this.AddObserver(UpdateActiveIndicator, Notifications.UNIT_ACTIVE_CHANGED, gameObject);
+    this.AddObserver(BeDestroyed, Notifications.UNIT_DESTROYED, gameObject);
   }
   void RemoveObservers() {
     this.RemoveObserver(SmoothMove, Notifications.UNIT_MOVED, gameObject);
-    this.RemoveObserver(Telegraph, Notifications.UNIT_TELEGRAPHED, gameObject);
-    this.RemoveObserver(Attack, Notifications.UNIT_ATTACKED, gameObject);
+    this.RemoveObserver(AddTelegraphs, Notifications.UNIT_TELEGRAPHED, gameObject);
+    this.RemoveObserver(RemoveTelegraphs, Notifications.UNIT_ATTACKED, gameObject);
+    this.RemoveObserver(RemoveTelegraphs, Notifications.UNIT_CANCELED, gameObject);
     this.RemoveObserver(UpdateActiveIndicator, Notifications.UNIT_ACTIVE_CHANGED, gameObject);
+    this.RemoveObserver(BeDestroyed, Notifications.UNIT_DESTROYED, gameObject);
   }
 
   public void Snap() {
@@ -48,14 +50,14 @@ public class UnitRenderer : MonoBehaviour {
   private void SmoothMove(object sender, object e) {
     var handle = gameObject.TweenPosition(new Vector3(pos.x, pos.y), 0.15f).SetEaseCubicOut();
   }
-  private void Telegraph(object sender, object e) {
+  private void AddTelegraphs(object sender, object e) {
     if (e is List<Point> points) {
       foreach (Point p in points) {
         telegraphs.Add(p);
       }
     }
   }
-  private void Attack(object sender, object e) {
+  private void RemoveTelegraphs(object sender, object e) {
     if (e is List<Point> points) {
       foreach (Point p in points) {
         telegraphs.Remove(p);
@@ -66,5 +68,13 @@ public class UnitRenderer : MonoBehaviour {
     if (e is bool value) {
       marker.gameObject.SetActive(value);
     }
+  }
+  private void BeDestroyed(object sender, object e) {
+    gameObject.TweenLocalScale(Vector3.zero, 0.35f).SetEaseCubicOut().SetOnComplete(() => {
+      gameObject.SetActive(false);
+      if (!controller.isPlayer) {
+        Destroy(gameObject);
+      }
+    });
   }
 }

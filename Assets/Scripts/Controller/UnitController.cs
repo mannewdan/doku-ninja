@@ -29,17 +29,21 @@ public class UnitController : MonoBehaviour {
     }
   }
   public Point lastDirection { get { return _lastDir; } set { _lastDir = value; } }
-  public bool isTelegraphing { get { return targetedTiles.Count > 0; } }
   public Point playerPos { get { return units.player.pos; } }
+  public bool isTelegraphing { get { return targetedTiles.Count > 0; } }
+  public bool isAlive { get { return _hp > 0; } }
+  public int hp { get { return _hp; } }
 
   private UnitRenderer _renderer;
   [SerializeField] private Point _pos;
   [SerializeField] private Point _lastDir = new Point(1, 0);
   [SerializeField] private bool _isActive;
+  [SerializeField] private int _hp = 2;
   public List<Point> targetedTiles = new List<Point>();
   public Grid grid;
   public UnitManager units;
   public Pathfinder pathfinder;
+  public bool isPlayer;
 
   public IEnumerator<float> _ExecuteAttack() {
     gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
@@ -75,5 +79,17 @@ public class UnitController : MonoBehaviour {
   public bool InRange(Point target) {
     var diff = target - pos;
     return Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1;
+  }
+  public void Harm(int amount) {
+    if (amount <= 0) return;
+
+    _hp -= amount;
+    this.PostNotification(Notifications.UNIT_DAMAGED, amount);
+
+    if (_hp <= 0) {
+      _hp = 0;
+      gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
+      gameObject.PostNotification(Notifications.UNIT_DESTROYED, this);
+    }
   }
 }
