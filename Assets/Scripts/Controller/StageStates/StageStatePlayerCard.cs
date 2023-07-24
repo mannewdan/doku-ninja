@@ -21,6 +21,7 @@ public class StageStatePlayerCard : StageState {
   protected override void OnMove(object sender, object e) {
     if (e is Point move) {
       pos = BestPos(player.pos, move);
+      player.lastDirection = (pos - player.pos).Normalized(true);
     }
   }
   protected override void OnNumber(object sender, object e) {
