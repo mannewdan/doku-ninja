@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StageController : StateMachineBoard {
   public ActionPointsManager apManager;
+  public DeckController deck;
 
   void Start() {
     Load(mapToLoad);

@@ -11,6 +11,7 @@ public abstract class StageState : State {
   public UnitController player { get { return owner.player; } }
   public List<UnitController> enemies { get { return owner.enemies; } }
   public ActionPointsManager apManager { get { return owner.apManager; } }
+  public DeckController deck { get { return owner.deck; } }
 
   protected virtual void Awake() {
     owner = GetComponent<StageController>();
