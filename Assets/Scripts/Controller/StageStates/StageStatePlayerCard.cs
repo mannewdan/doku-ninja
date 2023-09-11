@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageStatePlayerCard : StageState {
-  private int val;
+  private Card card;
 
   public override void Enter() {
     base.Enter();
     marker.gameObject.SetActive(true);
     pos = BestPos(player.pos, player.lastDirection);
-    if (owner.stateData is int val) {
-      this.val = val;
+    if (owner.stateData is Card card) {
+      this.card = card;
     }
   }
   public override void Exit() {
@@ -26,24 +26,35 @@ public class StageStatePlayerCard : StageState {
   }
   protected override void OnNumber(object sender, object e) {
     if (e is int number) {
-      if (val == number) {
+      Card newCard = deck.SelectCard(number);
+      if (card == newCard) {
         owner.ChangeState<StageStatePlayerMove>();
       } else {
-        val = number;
+        card = newCard;
       }
     }
   }
   protected override void OnConfirm(object sender, object e) {
+    if (card == null) {
+      Debug.Log("No card is selected!");
+      owner.ChangeState<StageStatePlayerMove>();
+      return;
+    }
+
+    //check if selection is valid
+
     if (apManager.SpendAP(1)) {
       var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
       var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (unit) {
-        unit.Harm(val);
+        unit.Harm(card.data.value);
       } else if (tile) {
-        tile.currentDigit = val;
+        tile.currentDigit = card.data.value;
       } else {
         Debug.LogError("Couldn't find anything at position: " + pos.ToString());
       }
+
+      deck.RemoveCard(card);
     }
   }
   protected override void OnSpentAP(object sender, object e) {

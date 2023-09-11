@@ -12,6 +12,10 @@ public class StageStatePlayerStart : StageState {
   }
 
   IEnumerator<float> _Start() {
+    if (deck.DrawCard()) {
+      yield return Timing.WaitForSeconds(1.5f);
+    }
+
     yield return 0;
     owner.ChangeState<StageStatePlayerMove>();
   }

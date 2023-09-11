@@ -22,8 +22,13 @@ public class StageStatePlayerMove : StageState {
   }
   protected override void OnNumber(object sender, object e) {
     if (e is int number) {
-      owner.stateData = number;
-      owner.ChangeState<StageStatePlayerCard>();
+      Card card = deck.SelectCard(number);
+      if (card) {
+        owner.stateData = card;
+        owner.ChangeState<StageStatePlayerCard>();
+      } else {
+        Debug.Log("Number input does not correspond to a card in the hand.");
+      }
     }
   }
 }
