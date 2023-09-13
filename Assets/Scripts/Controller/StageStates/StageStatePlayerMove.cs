@@ -26,8 +26,6 @@ public class StageStatePlayerMove : StageState {
       if (card) {
         owner.stateData = card;
         owner.ChangeState<StageStatePlayerCard>();
-      } else {
-        Debug.Log("Number input does not correspond to a card in the hand.");
       }
     }
   }

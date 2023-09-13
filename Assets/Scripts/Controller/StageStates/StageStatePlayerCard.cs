@@ -27,7 +27,9 @@ public class StageStatePlayerCard : StageState {
   protected override void OnNumber(object sender, object e) {
     if (e is int number) {
       Card newCard = deck.SelectCard(number);
-      if (card == newCard) {
+      if (newCard == null) {
+        return;
+      } else if (card == newCard) {
         owner.ChangeState<StageStatePlayerMove>();
       } else {
         card = newCard;

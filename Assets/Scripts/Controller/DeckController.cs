@@ -6,6 +6,8 @@ public class DeckController : MonoBehaviour {
   const int MAX_CARDS_IN_HAND = 3;
 
   [SerializeField] GameObject cardPrefab;
+  [SerializeField] Transform handT;
+  [SerializeField] Transform deadT;
 
   public List<Card> hand = new List<Card>();
   public List<Card> deck = new List<Card>();
@@ -13,8 +15,10 @@ public class DeckController : MonoBehaviour {
 
   void Start() {
     //initialize deck
-    for (int i = 0; i < 15; i++) {
-      deck.Add(NewCard());
+    for (int duplicates = 0; duplicates < 2; duplicates++) {
+      for (int i = 0; i < 6; i++) {
+        deck.Add(NewCard(new CardData() { value = i + 1, type = CardType.Default }));
+      }
     }
 
     ShuffleDeck();
@@ -36,6 +40,7 @@ public class DeckController : MonoBehaviour {
 
     var card = deck[0];
     hand.Add(card);
+    card.Move(handT, true);
     deck.RemoveAt(0);
     return true;
   }
@@ -44,6 +49,7 @@ public class DeckController : MonoBehaviour {
   }
   public void ShuffleGraveyard() {
     deck.AddRange(dead);
+    dead.ForEach(c => c.Move(transform));
     dead.Clear();
     ShuffleDeck();
   }
@@ -61,20 +67,20 @@ public class DeckController : MonoBehaviour {
     }
     hand.Remove(card);
     dead.Add(card);
+    card.Move(deadT);
     return true;
   }
 
-  Card NewCard() {
+  Card NewCard(CardData data) {
     GameObject newCard = Instantiate(cardPrefab);
     newCard.transform.SetParent(transform);
 
     Card card = newCard.GetComponent<Card>();
-
     card.transform.localPosition = Vector3.zero;
     card.transform.localEulerAngles = Vector3.zero;
     card.transform.localScale = Vector3.one;
-
-    card.data = new CardData() { value = Random.Range(1, 7), type = CardType.Default };
+    card.data = data;
+    card.Move(transform);
 
     return card;
   }
