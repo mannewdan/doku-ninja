@@ -37,6 +37,18 @@ public class Panel : MonoBehaviour {
   void Start() {
     if (CurrentPosition == null && positionList.Count > 0)
       SetPosition(positionList[0], false);
+
+    this.AddObserver(OnResize, Notifications.RESIZE);
+  }
+  void OnDisable() {
+    this.RemoveObserver(OnResize, Notifications.RESIZE);
+  }
+  void OnDestroy() {
+    this.RemoveObserver(OnResize, Notifications.RESIZE);
+  }
+
+  void OnResize(object sender, object e) {
+    anchor.SnapToAnchorPosition(CurrentPosition.anchor, CurrentPosition.parentAnchor, CurrentPosition.offset);
   }
 
   public Position this[string name] { get { return positionMap.ContainsKey(name) ? positionMap[name] : null; } }

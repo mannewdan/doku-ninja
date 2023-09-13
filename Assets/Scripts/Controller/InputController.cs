@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour {
   //fields 
+  Vector2 _screenSize;
   Controls _controls;
   Repeater _up;
   Repeater _down;
@@ -26,10 +27,17 @@ public class InputController : MonoBehaviour {
   void OnEnable() { controls.Enable(); }
   void OnDisable() { controls.Disable(); }
   void Update() {
+    UpdateScreen();
     UpdateMove();
     UpdateNumber();
     UpdateTab();
     UpdateCommand();
+  }
+  void UpdateScreen() {
+    if (_screenSize.x != Screen.width || _screenSize.y != Screen.height) {
+      _screenSize = new Vector2(Screen.width, Screen.height);
+      this.PostNotification(Notifications.RESIZE, _screenSize);
+    }
   }
   void UpdateMove() {
     int l = left.Update(out bool leftFirstPress) ? -1 : 0;
