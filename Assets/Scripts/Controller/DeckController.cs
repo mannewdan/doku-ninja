@@ -29,14 +29,8 @@ public class DeckController : MonoBehaviour {
   }
 
   public bool DrawCard() {
-    if (deck.Count == 0) {
-      Debug.Log("Did not draw a card -- deck is empty.");
-      return false;
-    }
-    if (hand.Count >= MAX_CARDS_IN_HAND) {
-      Debug.Log("Did not draw a card -- hand is full.");
-      return false;
-    }
+    if (deck.Count == 0) return false;
+    if (hand.Count >= MAX_CARDS_IN_HAND) return false;
 
     var card = deck[0];
     hand.Add(card);
