@@ -107,8 +107,8 @@ class Repeater {
 
   float _next;
   public bool _hold;
-  string _buttonID;
-  Controls _controls;
+  readonly string _buttonID;
+  readonly Controls _controls;
 
   public Repeater(Controls controls, System.Guid buttonID) {
     _controls = controls;

@@ -42,6 +42,7 @@ public class DeckController : MonoBehaviour {
     hand.Add(card);
     card.Move(handT, true);
     deck.RemoveAt(0);
+    this.PostNotification(Notifications.CARD_DRAW);
     return true;
   }
   public void ShuffleDeck() {
@@ -68,6 +69,7 @@ public class DeckController : MonoBehaviour {
     hand.Remove(card);
     dead.Add(card);
     card.Move(deadT);
+    this.PostNotification(Notifications.CARD_DISCARD);
     return true;
   }
 
@@ -79,6 +81,8 @@ public class DeckController : MonoBehaviour {
     card.transform.localPosition = Vector3.zero;
     card.transform.localEulerAngles = Vector3.zero;
     card.transform.localScale = Vector3.one;
+
+    card.deck = this;
     card.data = data;
     card.Move(transform);
 
