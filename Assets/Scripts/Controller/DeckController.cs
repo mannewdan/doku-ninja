@@ -40,7 +40,7 @@ public class DeckController : MonoBehaviour {
 
     var card = deck[0];
     hand.Add(card);
-    card.Move(handT, true);
+    card.Move(handT);
     deck.RemoveAt(0);
     this.PostNotification(Notifications.CARD_DRAW);
     return true;

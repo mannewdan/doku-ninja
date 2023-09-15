@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Tweens;
 
 public class Card : MonoBehaviour {
   const float HAND_SPACING = 0.1f; //as a percentage of card width
@@ -37,13 +38,13 @@ public class Card : MonoBehaviour {
     if (deck.hand.Contains(this)) {
       var i = deck.hand.IndexOf(this);
       var c = deck.hand.Count;
-
       var left = _rect.rect.width * 0.5f - (c * _rect.rect.width * 0.5f) - ((c - 1) * _rect.rect.width * HAND_SPACING * 0.5f);
-      transform.localPosition = new Vector3(left + i * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
+      var pos = new Vector3(left + i * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
+      gameObject.TweenLocalPosition(pos, 0.25f).SetEaseCubicOut();
     }
   }
-  public void Move(Transform location, bool spread = false) {
+  public void Move(Transform location) {
     transform.SetParent(location, true);
-    transform.localPosition = Vector3.zero;
+    gameObject.TweenLocalPosition(Vector3.zero, 0.25f).SetEaseCubicOut();
   }
 }
