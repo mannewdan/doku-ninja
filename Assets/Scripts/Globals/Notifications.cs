@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class Notifications {
+  public const string DEBUG = "DEBUG_NOTIFICATION";
   public const string RESIZE = "RESIZE_NOTIFICATION";
   public const string MOVE = "MOVE_NOTIFICATION";
   public const string MOVE_REPEAT = "MOVE_MULTI_NOTIFICATION";

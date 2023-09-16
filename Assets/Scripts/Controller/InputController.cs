@@ -91,12 +91,16 @@ public class InputController : MonoBehaviour {
   void UpdateCommand() {
     var confirm = controls.FindAction(controls.general.Confirm.id.ToString());
     var cancel = controls.FindAction(controls.general.Cancel.id.ToString());
+    var debug = controls.FindAction(controls.general.Debug.id.ToString());
 
     if (confirm != null && confirm.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CONFIRM, null);
     }
     if (cancel != null && cancel.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CANCEL, null);
+    }
+    if (debug != null && debug.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.DEBUG, null);
     }
   }
 }
