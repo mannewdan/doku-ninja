@@ -80,7 +80,7 @@ public class UnitController : MonoBehaviour {
     }
 
     yield return Timing.WaitForSeconds(0.25f);
-    if (InRange(playerPos)) yield return Timing.WaitUntilDone(Timing.RunCoroutine(_QueueAttack()));
+    if (InRange(playerPos)) yield return Timing.WaitUntilDone(Timing.RunCoroutine(_QueueAttack().CancelWith(gameObject)));
   }
   public bool InRange(Point target) {
     var diff = target - pos;

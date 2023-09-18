@@ -6,7 +6,7 @@ using MEC;
 public class EditStateInit : EditState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Init());
+    Timing.RunCoroutine(_Init().CancelWith(owner.gameObject));
   }
 
   IEnumerator<float> _Init() {

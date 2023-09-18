@@ -7,7 +7,7 @@ public class StageStateEnemyStart : StageState {
   public override void Enter() {
     base.Enter();
     this.PostNotification(Notifications.ENEMY_PHASE_START);
-    Timing.RunCoroutine(_Start());
+    Timing.RunCoroutine(_Start().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Start() {

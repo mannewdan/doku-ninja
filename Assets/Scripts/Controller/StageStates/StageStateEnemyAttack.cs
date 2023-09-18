@@ -6,7 +6,7 @@ using MEC;
 public class StageStateEnemyAttack : StageState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Loop());
+    Timing.RunCoroutine(_Loop().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Loop() {
@@ -25,7 +25,7 @@ public class StageStateEnemyAttack : StageState {
         yield return Timing.WaitForSeconds(0.25f);
       } else {
         yield return Timing.WaitForSeconds(0.5f);
-        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack()));
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack().CancelWith(enemy.gameObject)));
         yield return Timing.WaitForSeconds(0.25f);
       }
 

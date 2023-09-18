@@ -6,7 +6,7 @@ using MEC;
 public class StageStateEnemyMove : StageState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Loop());
+    Timing.RunCoroutine(_Loop().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Loop() {
@@ -20,7 +20,7 @@ public class StageStateEnemyMove : StageState {
       enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
       yield return Timing.WaitForSeconds(0.15f);
-      yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer()));
+      yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer().CancelWith(enemy.gameObject)));
       yield return Timing.WaitForSeconds(0.15f);
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       enemy.isActive = false;
