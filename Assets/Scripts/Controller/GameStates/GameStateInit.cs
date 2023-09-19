@@ -11,6 +11,7 @@ public class GameStateInit : GameState {
 
   IEnumerator<float> _Init() {
     yield return 0;
-    owner.ChangeState<GameStateStart>();
+    //  owner.ChangeState<GameStateStart>();
+    owner.ChangeState<GameStateStage>();
   }
 }

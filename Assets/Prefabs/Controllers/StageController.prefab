@@ -300,7 +300,7 @@ Transform:
   - {fileID: 447017824217479197}
   - {fileID: 7303549242221554417}
   - {fileID: 9062331330185993948}
-  - {fileID: 2925181466379935987}
+  - {fileID: 2170402707924092931}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -320,7 +320,7 @@ MonoBehaviour:
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 5271101477277584338}
   units: {fileID: 4360237997447778221}
-  mapToLoad: default
+  mapToLoad: e600969a-d961-419d-a96c-2e8bd0f6be49
   apManager: {fileID: 5761275678738454037}
   deck: {fileID: 6159024311251817071}
 --- !u!114 &5761275678738454037
@@ -534,7 +534,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
---- !u!114 &2346536512432399897 stripped
+--- !u!114 &1591484044371627753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1035428606598173440, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
   m_PrefabInstance: {fileID: 1749792055400783337}
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764bdd72d6fe2a645a84a127a0b2e0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2925181466379935987 stripped
+--- !u!4 &2170402707924092931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 456644058197677546, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
   m_PrefabInstance: {fileID: 1749792055400783337}
@@ -565,7 +565,7 @@ PrefabInstance:
     - target: {fileID: 1318616846265662132, guid: 1b2a1680e98224540ab4018d5bd48a9b, type: 3}
       propertyPath: telegraphs
       value: 
-      objectReference: {fileID: 2346536512432399897}
+      objectReference: {fileID: 1591484044371627753}
     - target: {fileID: 1318616846265662132, guid: 1b2a1680e98224540ab4018d5bd48a9b, type: 3}
       propertyPath: activeIndicatorPrefab
       value: 

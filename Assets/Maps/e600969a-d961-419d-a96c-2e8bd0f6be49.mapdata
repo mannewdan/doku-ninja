@@ -1,0 +1,356 @@
+{
+  "width": 6,
+  "height": 6,
+  "spawn": {
+    "x": 0,
+    "y": 2
+  },
+  "tiles": [
+    {
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "given": 1,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 1
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 3
+      },
+      "given": 0,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 4
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 5
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 0
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 2
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 3
+      },
+      "given": 0,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 4
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 5
+      },
+      "given": 1,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 0
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 1
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 2
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 3
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 4
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 5
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 2
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 3
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 4
+      },
+      "given": 0,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 5
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 0
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "given": 0,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 2
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 3
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 4
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 5
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 0
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 1
+      },
+      "given": 0,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 2
+      },
+      "given": 1,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 3
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 4
+      },
+      "given": 0,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 5
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    }
+  ],
+  "enemies": [
+    {
+      "pos": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 4
+      }
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 3
+      }
+    }
+  ],
+  "id": "e600969a-d961-419d-a96c-2e8bd0f6be49",
+  "fileName": "e600969a-d961-419d-a96c-2e8bd0f6be49"
+}
