@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class Grid : MonoBehaviour {
@@ -82,6 +83,13 @@ public class Grid : MonoBehaviour {
     if (p.x < 0 || p.x > width - 1) return false;
     if (p.y < 0 || p.y > height - 1) return false;
     return true;
+  }
+  public int BoxNumber(int x, int y) {
+    int boxWidth = width < 6 ? 2 : 3;
+    int boxHeight = width < 9 ? 2 : 3;
+    int h = x / boxWidth;
+    int v = y / boxHeight;
+    return v * boxHeight + h + 1;
   }
 }
 
