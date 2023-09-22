@@ -10,6 +10,18 @@ public class Grid : MonoBehaviour {
   public int width;
   public int height;
 
+  public class Conflict {
+    public Tile tile;
+    public bool row, column, box;
+    public Conflict(Tile tile, bool row, bool column, bool box) {
+      this.tile = tile;
+      this.row = row;
+      this.column = column;
+      this.box = box;
+    }
+  }
+
+  //commands
   public void Load(MapData data) {
     width = data.width;
     height = data.height;
@@ -53,7 +65,40 @@ public class Grid : MonoBehaviour {
       if (d != null) mapData.tiles.Add(d);
     }
   }
+  public bool ValidateBoard(Tile lastTileEdited) {
+    bool allSolved = true;
+    List<Conflict> conflicts = new List<Conflict>();
+    bool lastTileRow = false, lastTileColumn = false, lastTileBox = false;
+    foreach (KeyValuePair<Point, Tile> tileEntry in tiles) {
+      Tile tile = tileEntry.Value;
+      if (tile.currentDigit != tile.solutionDigit) allSolved = false;
+      if (tile.pos == lastTileEdited.pos) continue;
+      if (tile.currentDigit != lastTileEdited.currentDigit) continue;
 
+      bool row = false, column = false, box = false;
+      if (tile.data.pos.y == lastTileEdited.data.pos.y) { row = true; lastTileRow = true; }
+      if (tile.data.pos.x == lastTileEdited.data.pos.x) { column = true; lastTileColumn = true; }
+      if (BoxNumber(tile.data.pos.x, tile.data.pos.y) == BoxNumber(lastTileEdited.pos.x, lastTileEdited.pos.y)) {
+        box = true; lastTileBox = true;
+      }
+
+      if (row || column || box) {
+        conflicts.Add(new Conflict(tile, row, column, box));
+      }
+    }
+    if (lastTileRow || lastTileColumn || lastTileBox) {
+      conflicts.Add(new Conflict(lastTileEdited, lastTileRow, lastTileColumn, lastTileBox));
+    }
+
+    foreach (Conflict c in conflicts) {
+      //handle conflicts
+      Debug.Log(c.tile.pos + " " + c.row + " " + c.column + " " + c.box);
+    }
+
+    return allSolved;
+  }
+
+  //construction
   void GenerateGrid() {
     for (int x = 0; x < width; x++) {
       for (int y = 0; y < height; y++) {
@@ -70,7 +115,6 @@ public class Grid : MonoBehaviour {
       }
     }
   }
-
   Tile NewTile(TileData data) {
     GameObject newTile = Instantiate(tilePrefab) as GameObject;
     newTile.transform.SetParent(transform);
@@ -79,6 +123,8 @@ public class Grid : MonoBehaviour {
     tiles.Add(t.pos, t);
     return t;
   }
+
+  //queries
   public bool InBounds(Point p) {
     if (p.x < 0 || p.x > width - 1) return false;
     if (p.y < 0 || p.y > height - 1) return false;

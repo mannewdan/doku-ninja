@@ -52,6 +52,9 @@ public class StageStatePlayerCard : StageState {
         unit.Harm(card.data.value);
       } else if (tile) {
         tile.currentDigit = card.data.value;
+        if (grid.ValidateBoard(tile)) {
+          Debug.Log("Player won");
+        }
       } else {
         Debug.LogError("Couldn't find anything at position: " + pos.ToString());
       }
