@@ -320,7 +320,7 @@ MonoBehaviour:
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 5271101477277584338}
   units: {fileID: 4360237997447778221}
-  mapToLoad: e600969a-d961-419d-a96c-2e8bd0f6be49
+  mapToLoad: lil map
   apManager: {fileID: 5761275678738454037}
   deck: {fileID: 6159024311251817071}
 --- !u!114 &5761275678738454037

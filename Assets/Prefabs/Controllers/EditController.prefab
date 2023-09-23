@@ -52,7 +52,7 @@ MonoBehaviour:
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 5271654228726105987}
   units: {fileID: 239250440765562853}
-  mapToLoad: default
+  mapToLoad: lil map
   _mapData:
     id: e600969a-d961-419d-a96c-2e8bd0f6be49
     width: 6
