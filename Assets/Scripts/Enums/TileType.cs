@@ -2,4 +2,4 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { Cliff, Ground }
+public enum TileType { Cliff, Ground, Wall }

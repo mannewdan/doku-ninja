@@ -34,6 +34,11 @@ public class Grid : MonoBehaviour {
         Debug.Log("Failed to load tile at pos: " + t.pos + " because a tile does not exist at that position");
       }
     }
+    foreach (TileData t in data.tiles) {
+      if (tiles.ContainsKey(t.pos)) {
+        tiles[t.pos].RenderWall();
+      }
+    }
   }
   public void BuildMap() {
     GenerateGrid();

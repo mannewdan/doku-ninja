@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour {
   [SerializeField] private TileRenderer tileRenderer;
+  [SerializeField] private TileRenderer wallRenderer;
   [SerializeField] private Digit digit;
 
   public Grid grid;
@@ -18,6 +19,7 @@ public class Tile : MonoBehaviour {
         case TileStatus.Wall: digitDisplayMode = DigitDisplayMode.Wall; break;
         default: digitDisplayMode = DigitDisplayMode.Default; break;
       }
+      RenderWall();
     }
   }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
@@ -53,12 +55,16 @@ public class Tile : MonoBehaviour {
 
     if (data.type == TileType.Cliff) {
       Destroy(digit.gameObject);
+      Destroy(wallRenderer.gameObject);
     } else {
       Evaluate(true);
     }
   }
   public void RenderTile() {
     tileRenderer.SetMaterialAndUVs();
+  }
+  public void RenderWall() {
+    if (wallRenderer) wallRenderer.SetMaterialAndUVs();
   }
   void Snap() {
     transform.localPosition = center;

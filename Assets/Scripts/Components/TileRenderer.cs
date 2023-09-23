@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileRenderer : MonoBehaviour {
+  static readonly List<byte> eightBitValues = new List<byte> { 0, 1, 2, 4, 5, 8, 9, 10, 16, 17, 18, 20, 21, 32, 33, 34, 36, 37, 40, 41, 42, 64, 65, 66, 68, 69, 72, 73, 74, 80, 81, 82, 84, 85, 128, 130, 132, 136, 138, 144, 146, 148, 160, 162, 164, 168, 170 };
+  public enum RenderType { Tile, Wall }
+
   [SerializeField] Material cliffMat;
   [SerializeField] Material groundMat;
-
+  [SerializeField] Material wallMat;
+  [SerializeField] RenderType renderType;
   private Tile owner;
-  public TileType type { get { return owner.data.type; } }
+  public TileType type { get { return renderType == RenderType.Wall ? TileType.Wall : owner.data.type; } }
   public Point pos { get { return owner.pos; } }
   public Grid grid { get { return owner.grid; } }
 
   protected void Awake() {
     owner = GetComponent<Tile>();
+    if (!owner) owner = GetComponentInParent<Tile>();
   }
   public void SetMaterialAndUVs() {
     MeshRenderer mRenderer = GetComponent<MeshRenderer>();
@@ -23,22 +28,40 @@ public class TileRenderer : MonoBehaviour {
       case TileType.Ground:
         mRenderer.sharedMaterial = groundMat;
         break;
+      case TileType.Wall:
+        mRenderer.sharedMaterial = wallMat;
+        break;
     }
 
     Point pWest = new Point(pos.x - 1, pos.y);
     Point pSouth = new Point(pos.x, pos.y - 1);
     Point pEast = new Point(pos.x + 1, pos.y);
     Point pNorth = new Point(pos.x, pos.y + 1);
+    Point pSouthwest = new Point(pos.x - 1, pos.y - 1);
+    Point pSoutheast = new Point(pos.x + 1, pos.y - 1);
+    Point pNorthwest = new Point(pos.x - 1, pos.y + 1);
+    Point pNortheast = new Point(pos.x + 1, pos.y + 1);
     //investigate surroundings (-1 = void, 0 = same type, 1 = different type)
     int west = !grid.tiles.ContainsKey(pWest) ? -1 : grid.tiles[pWest].data.type == type ? 0 : 1;
     int south = !grid.tiles.ContainsKey(pSouth) ? -1 : grid.tiles[pSouth].data.type == type ? 0 : 1;
     int east = !grid.tiles.ContainsKey(pEast) ? -1 : grid.tiles[pEast].data.type == type ? 0 : 1;
     int north = !grid.tiles.ContainsKey(pNorth) ? -1 : grid.tiles[pNorth].data.type == type ? 0 : 1;
-
     Vector3 coordinates;
     switch (type) {
       case TileType.Cliff: coordinates = CliffCoords(west, south, east, north); break;
       case TileType.Ground: coordinates = GroundCoords(west, south, east, north); break;
+      case TileType.Wall:
+        if (owner.status != TileStatus.Wall) { coordinates = new Vector2(7, 7); break; }
+
+        west = !grid.tiles.ContainsKey(pWest) ? -1 : grid.tiles[pWest].status == TileStatus.Wall ? 0 : 1;
+        south = !grid.tiles.ContainsKey(pSouth) ? -1 : grid.tiles[pSouth].status == TileStatus.Wall ? 0 : 1;
+        east = !grid.tiles.ContainsKey(pEast) ? -1 : grid.tiles[pEast].status == TileStatus.Wall ? 0 : 1;
+        north = !grid.tiles.ContainsKey(pNorth) ? -1 : grid.tiles[pNorth].status == TileStatus.Wall ? 0 : 1;
+        int southwest = !grid.tiles.ContainsKey(pSouthwest) ? -1 : grid.tiles[pSouthwest].status == TileStatus.Wall ? 0 : 1;
+        int southeast = !grid.tiles.ContainsKey(pSoutheast) ? -1 : grid.tiles[pSoutheast].status == TileStatus.Wall ? 0 : 1;
+        int northwest = !grid.tiles.ContainsKey(pNorthwest) ? -1 : grid.tiles[pNorthwest].status == TileStatus.Wall ? 0 : 1;
+        int northeast = !grid.tiles.ContainsKey(pNortheast) ? -1 : grid.tiles[pNortheast].status == TileStatus.Wall ? 0 : 1;
+        coordinates = WallCoords(west, south, east, north, southwest, southeast, northwest, northeast); break;
       default: coordinates = Vector2.zero; break;
     }
 
@@ -102,5 +125,21 @@ public class TileRenderer : MonoBehaviour {
 
     //center
     return new Vector2(1, 1);
+  }
+  Vector2 WallCoords(int w, int s, int e, int n, int sw, int se, int nw, int ne) {
+    byte value = 0;
+    if (n != 0) value += 128;
+    if (ne != 0 && n == 0 && e == 0) value += 64;
+    if (e != 0) value += 32;
+    if (se != 0 && s == 0 && e == 0) value += 16;
+    if (s != 0) value += 8;
+    if (sw != 0 && s == 0 && w == 0) value += 4;
+    if (w != 0) value += 2;
+    if (nw != 0 && n == 0 && w == 0) value += 1;
+
+    int coordIndex = eightBitValues.IndexOf(value);
+    if (coordIndex >= 0) {
+      return new Vector2(coordIndex % 8, coordIndex / 8);
+    } else return new Vector2(7, 7);
   }
 }
