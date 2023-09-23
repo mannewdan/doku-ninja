@@ -91,8 +91,7 @@ public class Grid : MonoBehaviour {
     }
 
     foreach (Conflict c in conflicts) {
-      //handle conflicts
-      Debug.Log(c.tile.pos + " " + c.row + " " + c.column + " " + c.box);
+      c.tile.Evaluate();
     }
 
     return allSolved;

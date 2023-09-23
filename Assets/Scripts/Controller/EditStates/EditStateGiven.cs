@@ -24,7 +24,7 @@ public class EditStateGiven : EditStateDraw {
   public override void Enter() {
     base.Enter();
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.SetDisplayMode(DigitDisplayMode.Current);
+      tile.Value.digitDisplayMode = DigitDisplayMode.Default;
     }
   }
 }

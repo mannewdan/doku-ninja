@@ -4,9 +4,11 @@ using UnityEngine;
 using TMPro;
 
 public class Digit : MonoBehaviour {
-  [SerializeField] Color textColorCurrent;
+  [SerializeField] Color textColorDefault;
   [SerializeField] Color textColorSolution;
   [SerializeField] Color textColorFaded;
+  [SerializeField] Color textColorConfirmed;
+  [SerializeField] Color textColorWall;
 
   private Tile owner;
   private TextMeshPro text;
@@ -27,7 +29,7 @@ public class Digit : MonoBehaviour {
     if (!text) return;
 
     var target = currentDigit;
-    var color = textColorCurrent;
+    var color = textColorDefault;
     switch (displayMode) {
       case DigitDisplayMode.Solution:
         target = solutionDigit;
@@ -35,6 +37,12 @@ public class Digit : MonoBehaviour {
         break;
       case DigitDisplayMode.Faded:
         color = textColorFaded;
+        break;
+      case DigitDisplayMode.Confirmed:
+        color = textColorConfirmed;
+        break;
+      case DigitDisplayMode.Wall:
+        color = textColorWall;
         break;
     }
 

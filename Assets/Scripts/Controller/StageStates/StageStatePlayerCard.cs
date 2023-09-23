@@ -43,11 +43,13 @@ public class StageStatePlayerCard : StageState {
       return;
     }
 
-    //check if selection is valid
+    //selection must be valid
+    var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
+    var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
+    if (!tile) return;
+    if (!unit && tile.status == TileStatus.Confirmed) return;
 
     if (apManager.SpendAP(1)) {
-      var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
-      var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (unit) {
         unit.Harm(card.data.value);
       } else if (tile) {

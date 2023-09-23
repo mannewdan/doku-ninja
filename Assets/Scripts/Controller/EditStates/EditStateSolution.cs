@@ -24,13 +24,13 @@ public class EditStateSolution : EditStateDraw {
   public override void Enter() {
     base.Enter();
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.SetDisplayMode(DigitDisplayMode.Solution);
+      tile.Value.digitDisplayMode = DigitDisplayMode.Solution;
     }
   }
   public override void Exit() {
     base.Exit();
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.SetDisplayMode(DigitDisplayMode.Current);
+      tile.Value.digitDisplayMode = DigitDisplayMode.Default;
     }
   }
 }
