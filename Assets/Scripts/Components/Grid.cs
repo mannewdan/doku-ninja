@@ -135,6 +135,10 @@ public class Grid : MonoBehaviour {
     if (p.y < 0 || p.y > height - 1) return false;
     return true;
   }
+  public bool IsWalkable(Point p) {
+    Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;
+    return tile && tile.IsWalkable();
+  }
   public int BoxNumber(int x, int y) {
     int boxWidth = width < 6 ? 2 : 3;
     int boxHeight = width < 9 ? 2 : 3;

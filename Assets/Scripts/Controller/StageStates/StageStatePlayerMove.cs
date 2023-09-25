@@ -8,6 +8,7 @@ public class StageStatePlayerMove : StageState {
       var newPos = player.pos + move;
 
       if (IsOccupied(newPos)) return;
+      if (!IsWalkable(newPos)) return;
       if (InBounds(newPos)) {
         if (apManager.SpendAP(1)) {
           player.pos = newPos;

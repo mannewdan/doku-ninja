@@ -59,8 +59,10 @@ public class Pathfinder {
 
     if (fullPath.Count - noclipPath.Count >= 2) {
       bestPath = noclipPath;
-    } else {
+    } else if (fullPath.Count > 0) {
       bestPath = fullPath;
+    } else {
+      bestPath = noclipPath;
     }
   }
   public List<Node> FindPath(Point start, Point end, bool avoidUnits) {
@@ -105,28 +107,28 @@ public class Pathfinder {
 
       //add neighbors
       Point n = new Point(current.point.x, current.point.y + 1);
-      if (grid.InBounds(n) &&
+      if (grid.InBounds(n) && grid.IsWalkable(n) &&
       (!avoidUnits || (avoidUnits && !units.IsOccupied(n))) &&
       !openList.Exists(node => node.point == n) &&
       !closedList.Exists(node => node.point == n)) {
         openList.Add(new Node(current, 0, 1, endNode));
       }
       Point s = new Point(current.point.x, current.point.y - 1);
-      if (grid.InBounds(s) &&
+      if (grid.InBounds(s) && grid.IsWalkable(s) &&
       (!avoidUnits || (avoidUnits && !units.IsOccupied(s))) &&
       !openList.Exists(node => node.point == s) &&
       !closedList.Exists(node => node.point == s)) {
         openList.Add(new Node(current, 0, -1, endNode));
       }
       Point e = new Point(current.point.x + 1, current.point.y);
-      if (grid.InBounds(e) &&
+      if (grid.InBounds(e) && grid.IsWalkable(e) &&
       (!avoidUnits || (avoidUnits && !units.IsOccupied(e))) &&
       !openList.Exists(node => node.point == e) &&
       !closedList.Exists(node => node.point == e)) {
         openList.Add(new Node(current, 1, 0, endNode));
       }
       Point w = new Point(current.point.x - 1, current.point.y);
-      if (grid.InBounds(w) &&
+      if (grid.InBounds(w) && grid.IsWalkable(w) &&
       (!avoidUnits || (avoidUnits && !units.IsOccupied(w))) &&
       !openList.Exists(node => node.point == w) &&
       !closedList.Exists(node => node.point == w)) {
@@ -160,7 +162,7 @@ public class Pathfinder {
       new Point(start.x - 1, start.y) };
 
     foreach (Point a in pointsToConsider) {
-      if (!grid.InBounds(a) || units.IsOccupied(a)) continue;
+      if (!grid.InBounds(a) || !grid.IsWalkable(a) || units.IsOccupied(a)) continue;
 
       if (a.Dist(end) < dist) {
         closerPoints.Add(a);

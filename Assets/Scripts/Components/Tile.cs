@@ -103,4 +103,7 @@ public class Tile : MonoBehaviour {
 
     return neighbors;
   }
+  public bool IsWalkable() {
+    return status != TileStatus.Wall;
+  }
 }

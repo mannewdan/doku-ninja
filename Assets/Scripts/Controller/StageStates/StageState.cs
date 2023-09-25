@@ -39,5 +39,9 @@ public abstract class StageState : State {
 
   protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
   protected bool IsOccupied(Point p) { return owner.units.IsOccupied(p); }
+  protected bool IsWalkable(Point p) {
+    var tile = owner.grid.tiles.ContainsKey(p) ? owner.grid.tiles[p] : null;
+    return tile && tile.IsWalkable();
+  }
   protected Point BestPos(Point start, Point dir) { return owner.BestPos(start, dir); }
 }
