@@ -19,7 +19,7 @@ public class TileRenderer : MonoBehaviour {
     owner = GetComponent<Tile>();
     if (!owner) owner = GetComponentInParent<Tile>();
   }
-  public void SetMaterialAndUVs() {
+  public void Render() {
     MeshRenderer mRenderer = GetComponent<MeshRenderer>();
     switch (type) {
       case TileType.Cliff:

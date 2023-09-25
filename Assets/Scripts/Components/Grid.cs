@@ -70,33 +70,34 @@ public class Grid : MonoBehaviour {
       if (d != null) mapData.tiles.Add(d);
     }
   }
-  public bool ValidateBoard(Tile lastTileEdited) {
+  public bool ValidateBoard(Tile latestTileEdited) {
     bool allSolved = true;
     List<Conflict> conflicts = new List<Conflict>();
-    bool lastTileRow = false, lastTileColumn = false, lastTileBox = false;
+    bool latestTileRow = false, latestTileColumn = false, latestTileBox = false;
     foreach (KeyValuePair<Point, Tile> tileEntry in tiles) {
       Tile tile = tileEntry.Value;
       if (tile.currentDigit != tile.solutionDigit) allSolved = false;
-      if (tile.pos == lastTileEdited.pos) continue;
-      if (tile.currentDigit != lastTileEdited.currentDigit) continue;
+      if (tile.pos == latestTileEdited.pos) continue;
+      if (tile.currentDigit != latestTileEdited.currentDigit) continue;
 
       bool row = false, column = false, box = false;
-      if (tile.data.pos.y == lastTileEdited.data.pos.y) { row = true; lastTileRow = true; }
-      if (tile.data.pos.x == lastTileEdited.data.pos.x) { column = true; lastTileColumn = true; }
-      if (BoxNumber(tile.data.pos.x, tile.data.pos.y) == BoxNumber(lastTileEdited.pos.x, lastTileEdited.pos.y)) {
-        box = true; lastTileBox = true;
+      if (tile.data.pos.y == latestTileEdited.data.pos.y) { row = true; latestTileRow = true; }
+      if (tile.data.pos.x == latestTileEdited.data.pos.x) { column = true; latestTileColumn = true; }
+      if (BoxNumber(tile.data.pos.x, tile.data.pos.y) == BoxNumber(latestTileEdited.pos.x, latestTileEdited.pos.y)) {
+        box = true; latestTileBox = true;
       }
 
       if (row || column || box) {
         conflicts.Add(new Conflict(tile, row, column, box));
       }
     }
-    if (lastTileRow || lastTileColumn || lastTileBox) {
-      conflicts.Add(new Conflict(lastTileEdited, lastTileRow, lastTileColumn, lastTileBox));
-    }
 
     foreach (Conflict c in conflicts) {
       c.tile.Evaluate();
+    }
+
+    if (latestTileRow || latestTileColumn || latestTileBox || latestTileEdited.status == TileStatus.Wall) {
+      latestTileEdited.Evaluate();
     }
 
     return allSolved;

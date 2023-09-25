@@ -13,13 +13,21 @@ public class Tile : MonoBehaviour {
   public TileStatus status {
     get { return _status; }
     set {
+      bool updateWalls = (_status == TileStatus.Wall || value == TileStatus.Wall) && _status != value;
       _status = value;
       switch (_status) {
         case TileStatus.Confirmed: digitDisplayMode = DigitDisplayMode.Confirmed; break;
         case TileStatus.Wall: digitDisplayMode = DigitDisplayMode.Wall; break;
         default: digitDisplayMode = DigitDisplayMode.Default; break;
       }
-      RenderWall();
+
+      if (updateWalls) {
+        RenderWall();
+        var neighbors = GetNeighbors();
+        neighbors.ForEach((Tile t) => {
+          if (t.status == TileStatus.Wall) t.RenderWall();
+        });
+      }
     }
   }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
@@ -34,6 +42,7 @@ public class Tile : MonoBehaviour {
   }
   public DigitDisplayMode digitDisplayMode { get { return digit.displayMode; } set { digit.displayMode = value; } }
   private int _currentDigit;
+  [SerializeField]
   private TileStatus _status;
 
   public void Evaluate(bool allowConfirmation = false) {
@@ -61,10 +70,10 @@ public class Tile : MonoBehaviour {
     }
   }
   public void RenderTile() {
-    tileRenderer.SetMaterialAndUVs();
+    tileRenderer.Render();
   }
   public void RenderWall() {
-    if (wallRenderer) wallRenderer.SetMaterialAndUVs();
+    if (wallRenderer) wallRenderer.Render();
   }
   void Snap() {
     transform.localPosition = center;
@@ -74,5 +83,24 @@ public class Tile : MonoBehaviour {
     if (data.type == TileType.Cliff) return null;
     data.given = currentDigit;
     return data;
+  }
+  public List<Tile> GetNeighbors() {
+    List<Point> pointsToCheck = new List<Point>() {
+       new Point(pos.x - 1, pos.y - 1),
+       new Point(pos.x - 1, pos.y),
+       new Point(pos.x - 1, pos.y + 1),
+       new Point(pos.x, pos.y - 1),
+       new Point(pos.x, pos.y + 1),
+       new Point(pos.x + 1, pos.y - 1),
+       new Point(pos.x + 1, pos.y),
+       new Point(pos.x + 1, pos.y + 1)
+    };
+
+    List<Tile> neighbors = new List<Tile>();
+    foreach (Point p in pointsToCheck) {
+      if (grid.tiles.ContainsKey(p)) neighbors.Add(grid.tiles[p]);
+    }
+
+    return neighbors;
   }
 }
