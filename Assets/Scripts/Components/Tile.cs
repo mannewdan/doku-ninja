@@ -45,6 +45,7 @@ public class Tile : MonoBehaviour {
   [SerializeField]
   private TileStatus _status;
 
+  //commands
   public void Evaluate(bool allowConfirmation = false) {
     if (status == TileStatus.Confirmed) return;
 
@@ -55,6 +56,16 @@ public class Tile : MonoBehaviour {
     } else {
       status = TileStatus.Undecided;
     }
+  }
+  public void DamageWall(int value) {
+    if (status != TileStatus.Wall) {
+      Debug.Log("Tried to damage a wall, but that tile isn't a wall");
+      return;
+    }
+
+    var newVal = currentDigit - value;
+    currentDigit = Mathf.Max(0, newVal);
+    Evaluate(true);
   }
   public void Load(TileData data, Grid grid) {
     this.data = data;
@@ -79,6 +90,8 @@ public class Tile : MonoBehaviour {
     transform.localPosition = center;
     transform.localScale = new Vector3(1, 1, 1);
   }
+
+  //queries
   public TileData GatherData() {
     if (data.type == TileType.Cliff) return null;
     data.given = currentDigit;

@@ -48,17 +48,22 @@ public class StageStatePlayerCard : StageState {
     var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
     if (!tile) return;
     if (!unit && tile.status == TileStatus.Confirmed) return;
-
     if (apManager.SpendAP(1)) {
+      bool doValidation = false;
       if (unit) {
         unit.Harm(card.data.value);
+      } else if (tile.status == TileStatus.Wall) {
+        doValidation = true;
+        tile.DamageWall(card.data.value);
       } else if (tile) {
+        doValidation = true;
         tile.currentDigit = card.data.value;
-        if (grid.ValidateBoard(tile)) {
-          Debug.Log("Player won");
-        }
       } else {
         Debug.LogError("Couldn't find anything at position: " + pos.ToString());
+      }
+
+      if (doValidation && grid.ValidateBoard(tile)) {
+        Debug.Log("Player won");
       }
 
       deck.RemoveCard(card);
