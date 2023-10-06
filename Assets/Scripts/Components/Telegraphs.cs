@@ -12,28 +12,33 @@ public class TelegraphInfo {
 }
 public class Telegraphs : MonoBehaviour {
   [SerializeField] GameObject telegraphPrefab;
+  [SerializeField] private UnitManager units;
   private readonly Dictionary<Point, Data> telegraphs = new Dictionary<Point, Data>();
+  private UnitController player { get { return units.player; } }
 
   class Data {
     public GameObject telegraphObject = null;
     public List<UnitController> units = new List<UnitController>();
   }
-
   void Start() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnEnable() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnDestroy() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnDisable() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
 
   void AddTelegraph(object sender, object e) {
@@ -66,6 +71,11 @@ public class Telegraphs : MonoBehaviour {
 
         if (telegraphs[pos].units.Count == 0) telegraphs[pos].telegraphObject.SetActive(false);
       }
+    }
+  }
+  void HideSafeTelegraphs(object sender, object e) {
+    foreach (KeyValuePair<Point, Data> t in telegraphs) {
+      if (t.Key != player.pos) t.Value.telegraphObject.SetActive(false);
     }
   }
 }
