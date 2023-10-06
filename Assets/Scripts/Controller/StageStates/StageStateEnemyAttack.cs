@@ -15,24 +15,20 @@ public class StageStateEnemyAttack : StageState {
 
     for (int i = enemyList.Count - 1; i >= 0; i--) {
       var enemy = enemyList[i];
-      if (!enemy || !enemy.isAlive || !enemy.isTelegraphing) continue;
+      if (!enemy || !enemy.isAlive) continue;
 
-      enemy.isActive = true;
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
 
-      if (!player.isAlive) {
-        enemy.CancelAttack();
-        yield return Timing.WaitForSeconds(0.25f);
-      } else {
+      if (enemy.targetedTiles.Contains(player.pos)) {
+        enemy.isActive = true;
         yield return Timing.WaitForSeconds(0.5f);
         yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._ExecuteAttack().CancelWith(enemy.gameObject)));
         yield return Timing.WaitForSeconds(0.25f);
+        enemy.isActive = false;
       }
 
+      enemy.ClearAttack();
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
-      enemy.isActive = false;
-
-      yield return 0;
     }
 
     yield return 0;

@@ -21,7 +21,10 @@ public class StageStateEnemyMove : StageState {
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
       yield return Timing.WaitForSeconds(0.15f);
       yield return Timing.WaitUntilDone(Timing.RunCoroutine(enemy._MoveToPlayer().CancelWith(enemy.gameObject)));
+      yield return Timing.WaitForSeconds(0.35f);
+      enemy.TargetTiles();
       yield return Timing.WaitForSeconds(0.15f);
+
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
       enemy.isActive = false;
       yield return 0;

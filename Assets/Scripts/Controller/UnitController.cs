@@ -30,7 +30,6 @@ public class UnitController : MonoBehaviour {
   }
   public Point lastDirection { get { return _lastDir; } set { _lastDir = value; } }
   public Point playerPos { get { return units.player.pos; } }
-  public bool isTelegraphing { get { return targetedTiles.Count > 0; } }
   public bool isAlive { get { return _hp > 0; } }
   public int hp { get { return _hp; } }
 
@@ -45,6 +44,7 @@ public class UnitController : MonoBehaviour {
   public Pathfinder pathfinder;
   public bool isPlayer;
 
+  //commands
   public IEnumerator<float> _ExecuteAttack() {
     gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
     foreach (Point p in targetedTiles) {
@@ -79,14 +79,18 @@ public class UnitController : MonoBehaviour {
       }
     }
 
-    yield return Timing.WaitForSeconds(0.25f);
-    if (InRange(playerPos)) yield return Timing.WaitUntilDone(Timing.RunCoroutine(_QueueAttack().CancelWith(gameObject)));
+    yield break;
   }
-  public bool InRange(Point target) {
-    var diff = target - pos;
-    return Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1;
+  public void TargetTiles() {
+    targetedTiles.Clear();
+    Point n = new Point(pos.x, pos.y + 1), e = new Point(pos.x + 1, pos.y), s = new Point(pos.x, pos.y - 1), w = new Point(pos.x - 1, pos.y);
+    if (grid.InBounds(n)) targetedTiles.Add(n);
+    if (grid.InBounds(e)) targetedTiles.Add(e);
+    if (grid.InBounds(s)) targetedTiles.Add(s);
+    if (grid.InBounds(w)) targetedTiles.Add(w);
+    gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
   }
-  public void CancelAttack() {
+  public void ClearAttack() {
     gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
     targetedTiles.Clear();
   }
@@ -101,5 +105,11 @@ public class UnitController : MonoBehaviour {
       gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
       gameObject.PostNotification(Notifications.UNIT_DESTROYED, this);
     }
+  }
+
+  //queries
+  public bool InRange(Point target) {
+    var diff = target - pos;
+    return Mathf.Abs(diff.x) + Mathf.Abs(diff.y) <= 1;
   }
 }
