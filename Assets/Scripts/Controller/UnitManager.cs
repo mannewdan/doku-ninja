@@ -120,7 +120,6 @@ public class UnitManager : MonoBehaviour {
     unit.grid = grid;
     unit.units = this;
     unit.renderer.Snap();
-    unit.renderer.telegraphs = telegraphs;
 
     return unit;
   }

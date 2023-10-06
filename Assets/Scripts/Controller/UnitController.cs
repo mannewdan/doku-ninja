@@ -59,20 +59,13 @@ public class UnitController : MonoBehaviour {
 
   //commands
   public IEnumerator<float> _ExecuteAttack() {
-    gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
     foreach (Point p in targetedTiles) {
       if (p == playerPos) {
         units.player.Harm(10);
         gameObject.PostNotification(Notifications.PLAYER_HARMED, this);
       }
     }
-    targetedTiles.Clear();
-    yield break;
-  }
-  public IEnumerator<float> _QueueAttack() {
-    targetedTiles.Clear();
-    targetedTiles.Add(playerPos);
-    gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
+    ClearAttack();
     yield break;
   }
   public IEnumerator<float> _MoveToPlayer() {
@@ -96,18 +89,24 @@ public class UnitController : MonoBehaviour {
   }
   public void TargetTiles(object sender = null, object data = null) {
     if (isPlayer) return;
+
     ClearAttack();
     Point n = new Point(pos.x, pos.y + 1), e = new Point(pos.x + 1, pos.y), s = new Point(pos.x, pos.y - 1), w = new Point(pos.x - 1, pos.y);
     if (grid.InBounds(n) && grid.tiles[n].IsWalkable()) targetedTiles.Add(n);
     if (grid.InBounds(e) && grid.tiles[e].IsWalkable()) targetedTiles.Add(e);
     if (grid.InBounds(s) && grid.tiles[s].IsWalkable()) targetedTiles.Add(s);
     if (grid.InBounds(w) && grid.tiles[w].IsWalkable()) targetedTiles.Add(w);
-    gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
+
+    if (targetedTiles.Count > 0) {
+      gameObject.PostNotification(Notifications.UNIT_ADD_TARGET, new TelegraphInfo(this, targetedTiles));
+    }
   }
   public void ClearAttack() {
     if (isPlayer) return;
-    gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
-    targetedTiles.Clear();
+    if (targetedTiles.Count > 0) {
+      gameObject.PostNotification(Notifications.UNIT_REMOVE_TARGET, new TelegraphInfo(this, targetedTiles));
+      targetedTiles.Clear();
+    }
   }
   public void Harm(int amount) {
     if (amount <= 0) return;
@@ -117,7 +116,7 @@ public class UnitController : MonoBehaviour {
 
     if (_hp <= 0) {
       _hp = 0;
-      gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
+      ClearAttack();
       gameObject.PostNotification(Notifications.UNIT_DESTROYED, this);
     }
   }
