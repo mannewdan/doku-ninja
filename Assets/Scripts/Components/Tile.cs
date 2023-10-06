@@ -22,6 +22,7 @@ public class Tile : MonoBehaviour {
       }
 
       if (updateWalls) {
+        this.PostNotification(Notifications.TILE_WALL_CHANGED, pos);
         RenderWall();
         var neighbors = GetNeighbors();
         neighbors.ForEach((Tile t) => {

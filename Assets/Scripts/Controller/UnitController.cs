@@ -44,6 +44,19 @@ public class UnitController : MonoBehaviour {
   public Pathfinder pathfinder;
   public bool isPlayer;
 
+  void Start() {
+    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+  }
+  void OnEnable() {
+    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+  }
+  void OnDestroy() {
+    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+  }
+  void OnDisable() {
+    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+  }
+
   //commands
   public IEnumerator<float> _ExecuteAttack() {
     gameObject.PostNotification(Notifications.UNIT_ATTACKED, targetedTiles);
@@ -81,8 +94,9 @@ public class UnitController : MonoBehaviour {
 
     yield break;
   }
-  public void TargetTiles() {
-    targetedTiles.Clear();
+  public void TargetTiles(object sender = null, object data = null) {
+    if (isPlayer) return;
+    ClearAttack();
     Point n = new Point(pos.x, pos.y + 1), e = new Point(pos.x + 1, pos.y), s = new Point(pos.x, pos.y - 1), w = new Point(pos.x - 1, pos.y);
     if (grid.InBounds(n) && grid.tiles[n].IsWalkable()) targetedTiles.Add(n);
     if (grid.InBounds(e) && grid.tiles[e].IsWalkable()) targetedTiles.Add(e);
@@ -91,6 +105,7 @@ public class UnitController : MonoBehaviour {
     gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
   }
   public void ClearAttack() {
+    if (isPlayer) return;
     gameObject.PostNotification(Notifications.UNIT_CANCELED, targetedTiles);
     targetedTiles.Clear();
   }
