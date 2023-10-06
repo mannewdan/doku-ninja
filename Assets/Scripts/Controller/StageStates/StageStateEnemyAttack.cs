@@ -31,7 +31,7 @@ public class StageStateEnemyAttack : StageState {
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
     }
 
-    yield return 0;
+    yield return Timing.WaitForSeconds(0.35f);
 
     if (player.isAlive) {
       owner.ChangeState<StageStateEnemyMove>();

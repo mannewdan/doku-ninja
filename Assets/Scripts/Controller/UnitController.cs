@@ -84,10 +84,10 @@ public class UnitController : MonoBehaviour {
   public void TargetTiles() {
     targetedTiles.Clear();
     Point n = new Point(pos.x, pos.y + 1), e = new Point(pos.x + 1, pos.y), s = new Point(pos.x, pos.y - 1), w = new Point(pos.x - 1, pos.y);
-    if (grid.InBounds(n)) targetedTiles.Add(n);
-    if (grid.InBounds(e)) targetedTiles.Add(e);
-    if (grid.InBounds(s)) targetedTiles.Add(s);
-    if (grid.InBounds(w)) targetedTiles.Add(w);
+    if (grid.InBounds(n) && grid.tiles[n].IsWalkable()) targetedTiles.Add(n);
+    if (grid.InBounds(e) && grid.tiles[e].IsWalkable()) targetedTiles.Add(e);
+    if (grid.InBounds(s) && grid.tiles[s].IsWalkable()) targetedTiles.Add(s);
+    if (grid.InBounds(w) && grid.tiles[w].IsWalkable()) targetedTiles.Add(w);
     gameObject.PostNotification(Notifications.UNIT_TELEGRAPHED, targetedTiles);
   }
   public void ClearAttack() {

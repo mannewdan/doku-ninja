@@ -20,7 +20,7 @@ public class StageStatePlayerEnd : StageState {
       yield return Timing.WaitForSeconds(0.25f);
     }
 
-    yield return 0;
+    yield return Timing.WaitForSeconds(0.25f);
     owner.ChangeState<StageStateEnemyStart>();
   }
 }
