@@ -30,7 +30,7 @@ public class StageStateEnemyMove : StageState {
       yield return 0;
     }
 
-    yield return 0;
+    yield return enemyList.Count > 0 ? Timing.WaitForSeconds(0.25f) : 0;
     owner.ChangeState<StageStateEnemyEnd>();
   }
 }

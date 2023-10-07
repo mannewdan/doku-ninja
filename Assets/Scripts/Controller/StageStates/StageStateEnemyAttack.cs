@@ -18,7 +18,6 @@ public class StageStateEnemyAttack : StageState {
       if (!enemy || !enemy.isAlive) continue;
 
       this.PostNotification(Notifications.ENEMY_ROUND_START, enemy);
-
       if (enemy.targetedTiles.Contains(player.pos)) {
         enemy.isActive = true;
         yield return Timing.WaitForSeconds(0.5f);
@@ -26,13 +25,11 @@ public class StageStateEnemyAttack : StageState {
         yield return Timing.WaitForSeconds(0.25f);
         enemy.isActive = false;
       }
-
       enemy.ClearAttack();
       this.PostNotification(Notifications.ENEMY_ROUND_END, enemy);
     }
 
-    yield return Timing.WaitForSeconds(0.35f);
-
+    yield return enemyList.Count > 0 ? Timing.WaitForSeconds(0.25f) : 0;
     if (player.isAlive) {
       owner.ChangeState<StageStateEnemyMove>();
     } else {
