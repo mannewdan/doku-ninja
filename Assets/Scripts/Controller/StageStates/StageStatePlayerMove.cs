@@ -30,4 +30,7 @@ public class StageStatePlayerMove : StageState {
       }
     }
   }
+  protected override void OnConfirm(object sender, object e) {
+    owner.ChangeState<StageStatePlayerEnd>();
+  }
 }
