@@ -38,12 +38,11 @@ public class Panel : MonoBehaviour {
     if (CurrentPosition == null && positionList.Count > 0)
       SetPosition(positionList[0], false);
 
+  }
+  void OnEnable() {
     this.AddObserver(OnResize, Notifications.RESIZE);
   }
   void OnDisable() {
-    this.RemoveObserver(OnResize, Notifications.RESIZE);
-  }
-  void OnDestroy() {
     this.RemoveObserver(OnResize, Notifications.RESIZE);
   }
 

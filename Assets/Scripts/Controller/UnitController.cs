@@ -44,14 +44,8 @@ public class UnitController : MonoBehaviour {
   public Pathfinder pathfinder;
   public bool isPlayer;
 
-  void Start() {
-    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
-  }
   void OnEnable() {
     this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
-  }
-  void OnDestroy() {
-    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
   }
   void OnDisable() {
     this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);

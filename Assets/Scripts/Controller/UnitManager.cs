@@ -27,14 +27,11 @@ public class UnitManager : MonoBehaviour {
     player.pos = spawn;
     player.renderer.Snap();
   }
-  void OnEnable() { AddObservers(); }
-  void OnDisable() { RemoveObservers(); }
-  void OnDestroy() { RemoveObservers(); }
-  void AddObservers() {
+  void OnEnable() {
     this.AddObserver(UpdateMap, Notifications.UNIT_MOVED);
     this.AddObserver(UpdateMap, Notifications.UNIT_DESTROYED);
   }
-  void RemoveObservers() {
+  void OnDisable() {
     this.RemoveObserver(UpdateMap, Notifications.UNIT_MOVED);
     this.RemoveObserver(UpdateMap, Notifications.UNIT_DESTROYED);
   }

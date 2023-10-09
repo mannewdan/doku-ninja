@@ -4,18 +4,18 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour {
   public virtual void Enter() {
-    AddListeners();
+    AddObservers();
   }
   public virtual void Exit() {
-    RemoveListeners();
+    RemoveObservers();
   }
   protected virtual void OnDestroy() {
-    RemoveListeners();
+    RemoveObservers();
   }
-  protected virtual void AddListeners() {
+  protected virtual void AddObservers() {
 
   }
-  protected virtual void RemoveListeners() {
+  protected virtual void RemoveObservers() {
 
   }
 }

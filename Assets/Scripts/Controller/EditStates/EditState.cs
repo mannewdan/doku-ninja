@@ -15,7 +15,7 @@ public abstract class EditState : State {
     owner = GetComponent<EditController>();
   }
 
-  protected override void AddListeners() {
+  protected override void AddObservers() {
     this.AddObserver(OnMove, Notifications.MOVE);
     this.AddObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.AddObserver(OnNumber, Notifications.NUMBER);
@@ -23,7 +23,7 @@ public abstract class EditState : State {
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnCancel, Notifications.CANCEL);
   }
-  protected override void RemoveListeners() {
+  protected override void RemoveObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
     this.RemoveObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);

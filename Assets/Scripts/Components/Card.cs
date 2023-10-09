@@ -22,14 +22,12 @@ public class Card : MonoBehaviour {
 
   void Awake() {
     _rect = transform as RectTransform;
+  }
+  void OnEnable() {
     this.AddObserver(UpdatePosition, Notifications.CARD_DRAW);
     this.AddObserver(UpdatePosition, Notifications.CARD_DISCARD);
   }
   void OnDisable() {
-    this.RemoveObserver(UpdatePosition, Notifications.CARD_DRAW);
-    this.RemoveObserver(UpdatePosition, Notifications.CARD_DISCARD);
-  }
-  void OnDestroy() {
     this.RemoveObserver(UpdatePosition, Notifications.CARD_DRAW);
     this.RemoveObserver(UpdatePosition, Notifications.CARD_DISCARD);
   }

@@ -20,20 +20,10 @@ public class Telegraphs : MonoBehaviour {
     public GameObject telegraphObject = null;
     public List<UnitController> units = new List<UnitController>();
   }
-  void Start() {
-    this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
-    this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
-    this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
-  }
   void OnEnable() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
     this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
-  }
-  void OnDestroy() {
-    this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
-    this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
-    this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnDisable() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);

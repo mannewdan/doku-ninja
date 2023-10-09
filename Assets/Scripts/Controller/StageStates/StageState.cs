@@ -16,14 +16,14 @@ public abstract class StageState : State {
   protected virtual void Awake() {
     owner = GetComponent<StageController>();
   }
-  protected override void AddListeners() {
+  protected override void AddObservers() {
     this.AddObserver(OnMove, Notifications.MOVE);
     this.AddObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnCancel, Notifications.CANCEL);
   }
-  protected override void RemoveListeners() {
+  protected override void RemoveObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
     this.RemoveObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);

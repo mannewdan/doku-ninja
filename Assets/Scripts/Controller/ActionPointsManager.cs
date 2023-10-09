@@ -25,16 +25,16 @@ public class ActionPointsManager : MonoBehaviour {
   [SerializeField] private int _ap;
   [SerializeField] private int _maxAPBonus;
 
+  void Start() {
+    for (int i = 0; i < maxAP; i++) {
+      BuildIndicator();
+    }
+  }
   void OnEnable() {
     this.AddObserver(IncrementAP, Notifications.PLAYER_PHASE_START);
   }
   void OnDisable() {
     this.RemoveObserver(IncrementAP, Notifications.PLAYER_PHASE_START);
-  }
-  void Start() {
-    for (int i = 0; i < maxAP; i++) {
-      BuildIndicator();
-    }
   }
 
   //commands
