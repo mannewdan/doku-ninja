@@ -26,7 +26,7 @@ Material:
     - _Alpha:
         m_Texture: {fileID: 2800000, guid: 3f93936da3982f64f8d7d02624a99208, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
-        m_Offset: {x: 0.25, y: 0}
+        m_Offset: {x: 0.5, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,7 +70,7 @@ Material:
     - _Texture:
         m_Texture: {fileID: 2800000, guid: 2f282bff220fa6745bc36f9c7cb32731, type: 3}
         m_Scale: {x: 0.25, y: 0.25}
-        m_Offset: {x: 0.25, y: 0}
+        m_Offset: {x: 0.5, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
