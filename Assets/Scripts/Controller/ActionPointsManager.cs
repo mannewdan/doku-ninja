@@ -64,4 +64,9 @@ public class ActionPointsManager : MonoBehaviour {
     indicator.Initialize(this);
     this.PostNotification(Notifications.PLAYER_CHANGED_AP_MAX);
   }
+
+  //queries
+  public bool HasAP(int amount) {
+    return _ap >= amount;
+  }
 }

@@ -327,9 +327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointIndicatorPrefab: {fileID: 3120900517826240543, guid: 40c6016867e389e48a59b31f8116557f, type: 3}
-  indicatorActiveColor: {r: 0.8101961, g: 1, b: 0.56, a: 1}
-  indicatorInactiveColor: {r: 0.25919202, g: 0.2900344, b: 0.36200002, a: 1}
   _ap: 0
+  _maxAPBonus: 0
 --- !u!114 &514704301016471421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +345,7 @@ MonoBehaviour:
   - name: Show
     anchor: 7
     parentAnchor: 7
-    offset: {x: 0, y: 120}
+    offset: {x: 0, y: 150}
   - name: Hide
     anchor: 1
     parentAnchor: 7
@@ -472,7 +471,7 @@ MonoBehaviour:
   - name: Show
     anchor: 7
     parentAnchor: 7
-    offset: {x: 0, y: 20}
+    offset: {x: 0, y: 25}
   - name: Hide
     anchor: 1
     parentAnchor: 7

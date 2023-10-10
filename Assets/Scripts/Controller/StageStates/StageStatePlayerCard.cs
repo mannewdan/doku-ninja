@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageStatePlayerCard : StageState {
-  private Card card;
+  private Card card {
+    get { return _card; }
+    set {
+      if (_card) _card.active = false;
+      _card = value;
+      if (_card) _card.active = true;
+    }
+  }
+  private Card _card;
 
   public override void Enter() {
     base.Enter();
@@ -16,6 +24,7 @@ public class StageStatePlayerCard : StageState {
   public override void Exit() {
     base.Exit();
     marker.gameObject.SetActive(false);
+    card = null;
   }
 
   protected override void OnMove(object sender, object e) {
@@ -48,8 +57,9 @@ public class StageStatePlayerCard : StageState {
     var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
     if (!tile) return;
     if (!unit && tile.status == TileStatus.Confirmed) return;
-    if (apManager.SpendAP(1)) {
+    if (apManager.HasAP(1)) {
       bool doValidation = false;
+      bool doSpendAP = true;
       if (unit) {
         unit.Harm(card.data.value);
       } else if (tile.status == TileStatus.Wall) {
@@ -60,6 +70,7 @@ public class StageStatePlayerCard : StageState {
         tile.currentDigit = card.data.value;
       } else {
         Debug.LogError("Couldn't find anything at position: " + pos.ToString());
+        doSpendAP = false;
       }
 
       if (doValidation && grid.ValidateBoard(tile)) {
@@ -67,6 +78,7 @@ public class StageStatePlayerCard : StageState {
       }
 
       deck.RemoveCard(card);
+      if (doSpendAP) apManager.SpendAP(1);
     }
   }
   protected override void OnSpentAP(object sender, object e) {
