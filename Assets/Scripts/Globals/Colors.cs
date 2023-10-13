@@ -6,24 +6,16 @@ public class Colors : MonoBehaviour {
   static Colors instance;
 
   [System.Serializable]
-  public class ColorsUI {
-    public Color white;
-    public Color lightGray;
-    public Color lightGrayHighlighted;
-    public Color blue;
-    public Color darkBlue;
-  }
-  [System.Serializable]
-  public class ColorsText {
-    public Color white;
-    public Color lightGray;
-    public Color blue;
+  public class ColorsCards {
+    public Color sai;
+    public Color kunai;
+    public Color shuriken;
+    public Color bombBox;
+    public Color bombStar;
   }
 
   [SerializeField]
-  ColorsUI ui; public static ColorsUI UI { get { return instance.ui; } set { } }
-  [SerializeField]
-  ColorsText text; public static ColorsText Text { get { return instance.text; } set { } }
+  ColorsCards cards; public static ColorsCards Cards { get { return instance.cards; } }
 
   void Awake() {
     instance = this;

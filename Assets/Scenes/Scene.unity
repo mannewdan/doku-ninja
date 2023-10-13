@@ -250,16 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a13831f81fc8923438c17df86e7f6f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui:
-    white: {r: 1, g: 1, b: 1, a: 1}
-    lightGray: {r: 0.82239133, g: 0.86878264, b: 0.97, a: 1}
-    lightGrayHighlighted: {r: 0.745, g: 0.82527775, b: 1, a: 1}
-    blue: {r: 0.576, g: 0.71012247, b: 1, a: 1}
-    darkBlue: {r: 0.36, g: 0.436, b: 0.6, a: 1}
-  text:
-    white: {r: 1, g: 1, b: 1, a: 1}
-    lightGray: {r: 0.82239133, g: 0.86878264, b: 0.97, a: 1}
-    blue: {r: 0.576, g: 0.71012247, b: 1, a: 1}
+  cards:
+    sai: {r: 0.69803923, g: 0.49984595, b: 0.3839216, a: 1}
+    kunai: {r: 0.562449, g: 0.65, b: 0.45499998, a: 1}
+    shuriken: {r: 0.3882353, g: 0.60678005, b: 0.6509804, a: 1}
+    bombBox: {r: 1, g: 0.52156866, b: 0.40000004, a: 1}
+    bombStar: {r: 1, g: 0.8352942, b: 0.5019608, a: 1}
 --- !u!1 &506255710
 GameObject:
   m_ObjectHideFlags: 0

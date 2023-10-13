@@ -15,9 +15,9 @@ public class DeckController : MonoBehaviour {
 
   void Start() {
     //initialize deck
-    for (int duplicates = 0; duplicates < 2; duplicates++) {
+    for (int t = 0; t < System.Enum.GetValues(typeof(CardType)).Length; t++) {
       for (int i = 0; i < 4; i++) {
-        deck.Add(NewCard(new CardData() { value = i + 1, type = CardType.Default }));
+        deck.Add(NewCard(new CardData(i + 1, (CardType)t)));
       }
     }
 

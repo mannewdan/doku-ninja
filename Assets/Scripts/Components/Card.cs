@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Tweens;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour {
   const float HAND_SPACING = 0.1f; //as a percentage of card width
@@ -13,6 +14,9 @@ public class Card : MonoBehaviour {
     set {
       _data = value;
       digit.text = _data.value.ToString();
+      icon.material.SetTextureOffset("_Texture", _data.texCoords * 0.25f);
+      icon.material.SetTextureOffset("_Alpha", _data.texCoords * 0.25f);
+      border.color = _data.color;
     }
   }
   public Vector3 pos {
@@ -33,6 +37,8 @@ public class Card : MonoBehaviour {
   }
   public DeckController deck;
   public TextMeshProUGUI digit;
+  public Image icon;
+  public Image border;
   public bool active {
     get { return _active; }
     set {
@@ -51,6 +57,9 @@ public class Card : MonoBehaviour {
 
   void Awake() {
     _rect = transform as RectTransform;
+
+    var mat = icon.material;
+    icon.material = new Material(mat);
   }
   void OnEnable() {
     this.AddObserver(UpdatePosition, Notifications.CARD_DRAW);
