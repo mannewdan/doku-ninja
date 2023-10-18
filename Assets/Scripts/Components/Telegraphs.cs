@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TelegraphInfo {
-  public UnitController unit;
+  public GameObject sender;
   public List<Point> targetedTiles;
-  public TelegraphInfo(UnitController unit, List<Point> targetedTiles) {
-    this.unit = unit;
+  public TelegraphInfo(GameObject sender, List<Point> targetedTiles) {
+    this.sender = sender;
     this.targetedTiles = targetedTiles;
   }
 }
 public class Telegraphs : MonoBehaviour {
   [SerializeField] GameObject telegraphPrefab;
+  [SerializeField] Material telegraphMat;
+  [SerializeField] Material highlightMat;
   [SerializeField] private UnitManager units;
-  private readonly Dictionary<Point, Data> telegraphs = new Dictionary<Point, Data>();
+  private readonly Dictionary<Point, Data> enemyTelegraphs = new Dictionary<Point, Data>();
+  private readonly Dictionary<Point, Data> playerHighlights = new Dictionary<Point, Data>();
   private UnitController player { get { return units.player; } }
 
   class Data {
     public GameObject telegraphObject = null;
-    public List<UnitController> units = new List<UnitController>();
+    public List<GameObject> senders = new List<GameObject>();
   }
   void OnEnable() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
@@ -37,38 +40,48 @@ public class Telegraphs : MonoBehaviour {
 
   void AddTelegraph(object sender, object e) {
     if (e is TelegraphInfo tInfo) {
+      var isPlayer = tInfo.sender == player.gameObject;
+      var dictionary = isPlayer ? playerHighlights : enemyTelegraphs;
+
       foreach (Point pos in tInfo.targetedTiles) {
-        if (!telegraphs.ContainsKey(pos)) {
-          telegraphs.Add(pos, new Data());
+        if (!dictionary.ContainsKey(pos)) {
+          dictionary.Add(pos, new Data());
           GameObject newTelegraph = Instantiate(telegraphPrefab);
           newTelegraph.transform.SetParent(transform);
-          newTelegraph.transform.localPosition = new Vector3(pos.x, pos.y);
-          telegraphs[pos].telegraphObject = newTelegraph;
+          newTelegraph.transform.localPosition = new Vector3(pos.x, pos.y, isPlayer ? -1 : 0);
+          dictionary[pos].telegraphObject = newTelegraph;
+
+          Material mat = isPlayer ? highlightMat : telegraphMat;
+          foreach (MeshRenderer mRenderer in newTelegraph.GetComponentsInChildren<MeshRenderer>()) {
+            mRenderer.sharedMaterial = mat;
+          }
         } else {
-          telegraphs[pos].telegraphObject.SetActive(true);
+          dictionary[pos].telegraphObject.SetActive(true);
         }
 
-        if (!telegraphs[pos].units.Contains(tInfo.unit)) telegraphs[pos].units.Add(tInfo.unit);
+        if (!dictionary[pos].senders.Contains(tInfo.sender)) dictionary[pos].senders.Add(tInfo.sender);
       }
     }
   }
   void RemoveTelegraph(object sender, object e) {
     if (e is TelegraphInfo tInfo) {
-      foreach (Point pos in tInfo.targetedTiles) {
-        if (!telegraphs.ContainsKey(pos)) continue;
-        if (telegraphs[pos].units.Contains(tInfo.unit)) telegraphs[pos].units.Remove(tInfo.unit);
+      var dictionary = tInfo.sender == player.gameObject ? playerHighlights : enemyTelegraphs;
 
-        for (int i = telegraphs[pos].units.Count - 1; i >= 0; i--) {
-          UnitController unit = telegraphs[pos].units[i];
-          if (unit == null || !unit.isAlive) telegraphs[pos].units.Remove(unit);
+      foreach (Point pos in tInfo.targetedTiles) {
+        if (!dictionary.ContainsKey(pos)) continue;
+        if (dictionary[pos].senders.Contains(tInfo.sender)) dictionary[pos].senders.Remove(tInfo.sender);
+
+        for (int i = dictionary[pos].senders.Count - 1; i >= 0; i--) {
+          UnitController unit = dictionary[pos].senders[i]?.GetComponent<UnitController>();
+          if (unit == null || !unit.isAlive) dictionary[pos].senders.Remove(unit.gameObject);
         }
 
-        if (telegraphs[pos].units.Count == 0) telegraphs[pos].telegraphObject.SetActive(false);
+        if (dictionary[pos].senders.Count == 0) dictionary[pos].telegraphObject.SetActive(false);
       }
     }
   }
   void HideSafeTelegraphs(object sender, object e) {
-    foreach (KeyValuePair<Point, Data> t in telegraphs) {
+    foreach (KeyValuePair<Point, Data> t in enemyTelegraphs) {
       if (t.Key != player.pos) t.Value.telegraphObject.SetActive(false);
     }
   }

@@ -8,12 +8,12 @@ public class StageStatePlayerCard : StageState {
     set {
       if (_card && _card.active) {
         _card.active = false;
-        this.PostNotification(Notifications.CARD_INACTIVE, new TelegraphInfo(player, _card.TargetableTiles(player.pos)));
+        this.PostNotification(Notifications.CARD_INACTIVE, new TelegraphInfo(player.gameObject, _card.TargetableTiles(player.pos)));
       }
       _card = value;
       if (_card && !_card.active) {
         _card.active = true;
-        this.PostNotification(Notifications.CARD_ACTIVE, new TelegraphInfo(player, _card.TargetableTiles(player.pos)));
+        this.PostNotification(Notifications.CARD_ACTIVE, new TelegraphInfo(player.gameObject, _card.TargetableTiles(player.pos)));
       }
     }
   }

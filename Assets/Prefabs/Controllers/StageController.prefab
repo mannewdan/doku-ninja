@@ -603,6 +603,14 @@ PrefabInstance:
       propertyPath: units
       value: 
       objectReference: {fileID: 4360237997447778221}
+    - target: {fileID: 1035428606598173440, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
+      propertyPath: highlightMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 6417a9810da3c9547b7a514ec607b4b7, type: 2}
+    - target: {fileID: 1035428606598173440, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
+      propertyPath: telegraphMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ce2b3ac33213334db55131ee9ad8726, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

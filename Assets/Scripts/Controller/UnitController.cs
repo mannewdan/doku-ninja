@@ -92,13 +92,13 @@ public class UnitController : MonoBehaviour {
     if (grid.InBounds(w) && grid.tiles[w].IsWalkable()) targetedTiles.Add(w);
 
     if (targetedTiles.Count > 0) {
-      gameObject.PostNotification(Notifications.UNIT_ADD_TARGET, new TelegraphInfo(this, targetedTiles));
+      gameObject.PostNotification(Notifications.UNIT_ADD_TARGET, new TelegraphInfo(gameObject, targetedTiles));
     }
   }
   public void ClearAttack() {
     if (isPlayer) return;
     if (targetedTiles.Count > 0) {
-      gameObject.PostNotification(Notifications.UNIT_REMOVE_TARGET, new TelegraphInfo(this, targetedTiles));
+      gameObject.PostNotification(Notifications.UNIT_REMOVE_TARGET, new TelegraphInfo(gameObject, targetedTiles));
       targetedTiles.Clear();
     }
   }

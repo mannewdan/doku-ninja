@@ -87,6 +87,14 @@ public class Card : MonoBehaviour {
     List<Point> candidates;
 
     switch (data.type) {
+      case CardType.Kunai:
+        candidates = new List<Point>() {
+          new Point(origin.x - 1, origin.y - 1),
+          new Point(origin.x + 1, origin.y - 1),
+          new Point(origin.x - 1, origin.y + 1),
+          new Point(origin.x + 1, origin.y + 1)
+        };
+        break;
       default:
         candidates = new List<Point>() {
           new Point(origin.x - 1, origin.y),
