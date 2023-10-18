@@ -82,4 +82,25 @@ public class Card : MonoBehaviour {
     transform.SetParent(location, true);
     pos = Vector3.zero;
   }
+  public List<Point> TargetableTiles(Point origin) {
+    List<Point> points = new List<Point>();
+    List<Point> candidates;
+
+    switch (data.type) {
+      default:
+        candidates = new List<Point>() {
+          new Point(origin.x - 1, origin.y),
+          new Point(origin.x, origin.y - 1),
+          new Point(origin.x + 1, origin.y),
+          new Point(origin.x, origin.y + 1)
+        };
+        break;
+    }
+
+    foreach (Point p in candidates) {
+      if (deck.grid.InBounds(p)) points.Add(p);
+    }
+
+    return points;
+  }
 }

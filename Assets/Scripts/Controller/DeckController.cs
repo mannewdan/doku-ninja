@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeckController : MonoBehaviour {
   const int MAX_CARDS_IN_HAND = 3;
 
+  public Grid grid;
   [SerializeField] GameObject cardPrefab;
   [SerializeField] Transform handT;
   [SerializeField] Transform deadT;

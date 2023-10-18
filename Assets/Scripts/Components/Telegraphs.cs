@@ -22,12 +22,16 @@ public class Telegraphs : MonoBehaviour {
   }
   void OnEnable() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
+    this.AddObserver(AddTelegraph, Notifications.CARD_ACTIVE);
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.AddObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnDisable() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
+    this.RemoveObserver(AddTelegraph, Notifications.CARD_ACTIVE);
     this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.RemoveObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
 
