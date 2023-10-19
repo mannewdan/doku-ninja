@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 5271101477277584338}
+  units: {fileID: 4360237997447778221}
   cardPrefab: {fileID: 3952157412623938672, guid: fee4d9fc67c98534585c395c921e5f65, type: 3}
   handT: {fileID: 4103438020727845852}
   deadT: {fileID: 2760541796624577038}

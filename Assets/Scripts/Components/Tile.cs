@@ -120,4 +120,7 @@ public class Tile : MonoBehaviour {
   public bool IsWalkable() {
     return status != TileStatus.Wall;
   }
+  public bool BlocksVisibility() {
+    return status == TileStatus.Wall;
+  }
 }

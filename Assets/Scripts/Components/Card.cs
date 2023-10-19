@@ -87,13 +87,43 @@ public class Card : MonoBehaviour {
     List<Point> candidates;
 
     switch (data.type) {
+      case CardType.Shuriken:
+        candidates = new List<Point>();
+        if (!BlocksVisibility(new Point(origin.x - 1, origin.y))) {
+          for (int x = origin.x - 2; x >= 0; x--) {
+            if (TryAddTile(new Point(x, origin.y), candidates)) break;
+          }
+        }
+        if (!BlocksVisibility(new Point(origin.x + 1, origin.y))) {
+          for (int x = origin.x + 2; x < deck.grid.width; x++) {
+            if (TryAddTile(new Point(x, origin.y), candidates)) break;
+          }
+        }
+        if (!BlocksVisibility(new Point(origin.x, origin.y - 1))) {
+          for (int y = origin.y - 2; y >= 0; y--) {
+            if (TryAddTile(new Point(origin.x, y), candidates)) break;
+          }
+        }
+        if (!BlocksVisibility(new Point(origin.x, origin.y + 1))) {
+          for (int y = origin.y + 2; y < deck.grid.height; y++) {
+            if (TryAddTile(new Point(origin.x, y), candidates)) break;
+          }
+        }
+        break;
       case CardType.Kunai:
-        candidates = new List<Point>() {
-          new Point(origin.x - 1, origin.y - 1),
-          new Point(origin.x + 1, origin.y - 1),
-          new Point(origin.x - 1, origin.y + 1),
-          new Point(origin.x + 1, origin.y + 1)
-        };
+        candidates = new List<Point>();
+        for (Point p = new Point(origin.x - 1, origin.y - 1); deck.grid.InBounds(p); p += new Point(-1, -1)) {
+          if (TryAddTile(p, candidates)) break;
+        }
+        for (Point p = new Point(origin.x + 1, origin.y - 1); deck.grid.InBounds(p); p += new Point(1, -1)) {
+          if (TryAddTile(p, candidates)) break;
+        }
+        for (Point p = new Point(origin.x - 1, origin.y + 1); deck.grid.InBounds(p); p += new Point(-1, 1)) {
+          if (TryAddTile(p, candidates)) break;
+        }
+        for (Point p = new Point(origin.x + 1, origin.y + 1); deck.grid.InBounds(p); p += new Point(1, 1)) {
+          if (TryAddTile(p, candidates)) break;
+        }
         break;
       default:
         candidates = new List<Point>() {
@@ -110,5 +140,12 @@ public class Card : MonoBehaviour {
     }
 
     return points;
+  }
+  bool TryAddTile(Point p, List<Point> candidates) {
+    if (deck.grid.InBounds(p)) candidates.Add(p);
+    return BlocksVisibility(p);
+  }
+  bool BlocksVisibility(Point p) {
+    return deck.grid.InBounds(p) && (deck.grid.BlocksVisibility(p) || deck.units.IsOccupied(p));
   }
 }

@@ -6,6 +6,7 @@ public class DeckController : MonoBehaviour {
   const int MAX_CARDS_IN_HAND = 3;
 
   public Grid grid;
+  public UnitManager units;
   [SerializeField] GameObject cardPrefab;
   [SerializeField] Transform handT;
   [SerializeField] Transform deadT;

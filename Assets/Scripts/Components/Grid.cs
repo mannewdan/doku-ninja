@@ -139,6 +139,10 @@ public class Grid : MonoBehaviour {
     Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;
     return tile && tile.IsWalkable();
   }
+  public bool BlocksVisibility(Point p) {
+    Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;
+    return tile && tile.BlocksVisibility();
+  }
   public int BoxNumber(int x, int y) {
     int boxWidth = width < 6 ? 2 : 3;
     int boxHeight = width < 9 ? 2 : 3;
