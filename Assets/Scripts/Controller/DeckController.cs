@@ -14,12 +14,30 @@ public class DeckController : MonoBehaviour {
   public List<Card> deck = new List<Card>();
   public List<Card> dead = new List<Card>();
 
-  void Start() {
-    //initialize deck
-    for (int t = 0; t < System.Enum.GetValues(typeof(CardType)).Length; t++) {
-      for (int i = 0; i < 4; i++) {
-        deck.Add(NewCard(new CardData(i + 1, (CardType)t)));
-      }
+  public void BuildDeck() {
+    dead.Clear();
+    hand.Clear();
+    deck.Clear();
+
+    for (int i = 2; i <= 6; i += 2) {
+      if (i > grid.width) break;
+      deck.Add(NewCard(new CardData(i, CardType.Sai)));
+      deck.Add(NewCard(new CardData(i, CardType.Sai)));
+    }
+    for (int i = 1; i <= 5; i += 2) {
+      if (i > grid.width) break;
+      deck.Add(NewCard(new CardData(i, CardType.Kunai)));
+      deck.Add(NewCard(new CardData(i, CardType.Kunai)));
+    }
+    for (int i = 1; i <= 3; i++) {
+      if (i > grid.width) break;
+      deck.Add(NewCard(new CardData(i, CardType.Shuriken)));
+      deck.Add(NewCard(new CardData(i, CardType.Shuriken)));
+    }
+    for (int i = 4; i <= 6; i++) {
+      if (i > grid.width) break;
+      deck.Add(NewCard(new CardData(i, CardType.BoxBomb)));
+      deck.Add(NewCard(new CardData(i, CardType.StarBomb)));
     }
 
     ShuffleDeck();
@@ -28,7 +46,6 @@ public class DeckController : MonoBehaviour {
       DrawCard();
     }
   }
-
   public bool DrawCard() {
     if (deck.Count == 0) return false;
     if (hand.Count >= MAX_CARDS_IN_HAND) return false;
