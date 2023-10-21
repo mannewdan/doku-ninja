@@ -43,5 +43,45 @@ public abstract class StageState : State {
     var tile = owner.grid.tiles.ContainsKey(p) ? owner.grid.tiles[p] : null;
     return tile && tile.IsWalkable();
   }
-  protected Point BestPos(Point start, Point dir) { return owner.BestPos(start, dir); }
+  protected Point BestPos(Point start, Point dir, List<Point> validPoints) {
+    var newPos = start + dir;
+
+    //best is the first tile in the same row/column in the target direction
+    while (grid.InBounds(newPos)) {
+      if (validPoints.Contains(newPos)) return newPos;
+      newPos += dir;
+    }
+
+    //next best is the closest tile in the target direction
+    int closestDistance = int.MaxValue;
+    foreach (Point p in validPoints) {
+      if (dir.x > 0 && p.x <= start.x) continue;
+      if (dir.y > 0 && p.y <= start.y) continue;
+      if (dir.x < 0 && p.x >= start.x) continue;
+      if (dir.y < 0 && p.y >= start.y) continue;
+      var dist = Mathf.Abs(start.x - p.x) + Mathf.Abs(start.y - p.y);
+      if (dist < closestDistance) {
+        closestDistance = dist;
+        newPos = p;
+      }
+    }
+    if (closestDistance < int.MaxValue) return newPos;
+
+    //last best is the closest tile in the opposite direction, but only if there are no tiles in the target direction
+    closestDistance = int.MaxValue;
+    foreach (Point p in validPoints) {
+      if (dir.x > 0 && p.x > start.x) { closestDistance = int.MaxValue; break; };
+      if (dir.y > 0 && p.y > start.y) { closestDistance = int.MaxValue; break; };
+      if (dir.x < 0 && p.x < start.x) { closestDistance = int.MaxValue; break; };
+      if (dir.y < 0 && p.y < start.y) { closestDistance = int.MaxValue; break; };
+      var dist = Mathf.Abs(start.x - p.x) + Mathf.Abs(start.y - p.y);
+      if (dist < closestDistance) {
+        closestDistance = dist;
+        newPos = p;
+      }
+    }
+    if (closestDistance < int.MaxValue) return newPos;
+
+    return start;
+  }
 }

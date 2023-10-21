@@ -8,21 +8,23 @@ public class StageStatePlayerCard : StageState {
     set {
       if (_card && _card.active) {
         _card.active = false;
-        this.PostNotification(Notifications.CARD_INACTIVE, new TelegraphInfo(player.gameObject, _card.TargetableTiles(player.pos)));
+        this.PostNotification(Notifications.CARD_INACTIVE, new TelegraphInfo(player.gameObject, _targetableTiles));
       }
       _card = value;
       if (_card && !_card.active) {
         _card.active = true;
-        this.PostNotification(Notifications.CARD_ACTIVE, new TelegraphInfo(player.gameObject, _card.TargetableTiles(player.pos)));
+        _targetableTiles = _card.TargetableTiles(player.pos);
+        pos = BestPos(player.pos, player.lastDirection, _targetableTiles);
+        this.PostNotification(Notifications.CARD_ACTIVE, new TelegraphInfo(player.gameObject, _targetableTiles));
       }
     }
   }
   private Card _card;
+  private List<Point> _targetableTiles;
 
   public override void Enter() {
     base.Enter();
     marker.gameObject.SetActive(true);
-    pos = BestPos(player.pos, player.lastDirection);
     if (owner.stateData is Card card) {
       this.card = card;
     }
@@ -35,7 +37,7 @@ public class StageStatePlayerCard : StageState {
 
   protected override void OnMove(object sender, object e) {
     if (e is Point move) {
-      pos = BestPos(player.pos, move);
+      pos = BestPos(pos, move, _targetableTiles);
       player.lastDirection = (pos - player.pos).Normalized(true);
     }
   }

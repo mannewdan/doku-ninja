@@ -27,24 +27,4 @@ public class StateMachineBoard : StateMachine, IPersistence {
   public UnitController player { get { return units.player; } }
   public List<UnitController> enemies { get { return units.enemies; } }
   public string mapToLoad;
-
-  public Point BestPos(Point start, Point dir) {
-    var newPos = start + dir;
-    //desired pos
-    if (grid.InBounds(newPos)) return newPos;
-
-    //adjacent pos
-    var adjacent = new Point(dir.y, dir.x);
-    newPos = start + adjacent;
-    if (grid.InBounds(newPos)) return newPos;
-
-    newPos = start - adjacent;
-    if (grid.InBounds(newPos)) return newPos;
-
-    //opposite pos
-    newPos = start - dir;
-    if (grid.InBounds(newPos)) return newPos;
-
-    return start;
-  }
 }
