@@ -99,4 +99,10 @@ public class StageStatePlayerCard : StageState {
   protected override void OnCancel(object sender, object e) {
     owner.ChangeState<StageStatePlayerMove>();
   }
+  protected override void OnDiscard(object sender, object e) {
+    if (card) {
+      deck.RemoveCard(card);
+      owner.ChangeState<StageStatePlayerMove>();
+    }
+  }
 }

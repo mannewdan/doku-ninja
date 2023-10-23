@@ -22,6 +22,7 @@ public abstract class StageState : State {
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnCancel, Notifications.CANCEL);
+    this.AddObserver(OnDiscard, Notifications.DISCARD);
   }
   protected override void RemoveObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
@@ -29,6 +30,7 @@ public abstract class StageState : State {
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
     this.RemoveObserver(OnConfirm, Notifications.CONFIRM);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
+    this.RemoveObserver(OnDiscard, Notifications.DISCARD);
   }
 
   protected virtual void OnMove(object sender, object e) { }
@@ -36,6 +38,7 @@ public abstract class StageState : State {
   protected virtual void OnNumber(object sender, object e) { }
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
+  protected virtual void OnDiscard(object sender, object e) { }
 
   protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
   protected bool IsOccupied(Point p) { return owner.units.IsOccupied(p); }
