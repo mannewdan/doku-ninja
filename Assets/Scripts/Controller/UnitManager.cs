@@ -36,7 +36,7 @@ public class UnitManager : MonoBehaviour {
     this.RemoveObserver(UpdateMap, Notifications.UNIT_DESTROYED);
   }
 
-  private void UpdateMap(object sender, object e) {
+  private void UpdateMap(object sender = null, object e = null) {
     unitMap.Clear();
     unitMap.Add(player.pos, player);
     for (int i = enemies.Count - 1; i >= 0; i--) {
@@ -59,6 +59,8 @@ public class UnitManager : MonoBehaviour {
       UnitController enemy = NewUnit(ed.pos, skellyBasicPrefab);
       enemies.Add(enemy);
     }
+
+    UpdateMap();
   }
   public void Clear() {
     spawn = new Point(0, 0);
@@ -91,6 +93,7 @@ public class UnitManager : MonoBehaviour {
 
     UnitController enemy = NewUnit(pos, skellyBasicPrefab);
     enemies.Add(enemy);
+    UpdateMap();
   }
   public void RemoveEnemy(Point pos) {
     for (int i = enemies.Count - 1; i >= 0; i--) {
