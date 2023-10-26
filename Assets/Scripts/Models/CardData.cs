@@ -8,6 +8,7 @@ public class CardData {
   public Color color;
   public CardType type;
   public Vector2 texCoords;
+  public bool isBomb;
 
   public CardData(int value, CardType type) {
     this.value = value;
@@ -29,10 +30,12 @@ public class CardData {
       case CardType.BoxBomb:
         texCoords = new Vector2(0, 1);
         color = Colors.Cards.bombBox;
+        isBomb = true;
         break;
       case CardType.StarBomb:
         texCoords = new Vector2(1, 1);
         color = Colors.Cards.bombStar;
+        isBomb = true;
         break;
     }
   }

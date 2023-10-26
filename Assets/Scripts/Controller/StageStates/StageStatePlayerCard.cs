@@ -21,6 +21,17 @@ public class StageStatePlayerCard : StageState {
   }
   private Card _card;
   private List<Point> _targetableTiles;
+  public override Point pos {
+    get => base.pos;
+    set {
+      base.pos = value;
+      if (base.pos == player.pos) {
+        marker.gameObject.SetActive(false);
+      } else {
+        marker.gameObject.SetActive(true);
+      }
+    }
+  }
 
   public override void Enter() {
     base.Enter();
@@ -65,6 +76,8 @@ public class StageStatePlayerCard : StageState {
     var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
     if (!tile) return;
     if (!unit && tile.status == TileStatus.Confirmed) return;
+    if (card.data.isBomb && (unit || tile.status == TileStatus.Wall)) return;
+    if (pos == player.pos) return;
     if (apManager.HasAP(1)) {
       bool doValidation = false;
       bool doSpendAP = true;

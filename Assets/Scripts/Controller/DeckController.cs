@@ -37,8 +37,10 @@ public class DeckController : MonoBehaviour {
     }
     for (int i = 4; i <= 6; i++) {
       if (i > grid.width) break;
-      deck.Add(NewCard(new CardData(i, CardType.BoxBomb)));
-      deck.Add(NewCard(new CardData(i, CardType.StarBomb)));
+      for (int q = 0; q < (grid.width == 4 ? 3 : 1); q++) {
+        deck.Add(NewCard(new CardData(i, CardType.BoxBomb)));
+        deck.Add(NewCard(new CardData(i, CardType.StarBomb)));
+      }
     }
 
     ShuffleDeck();

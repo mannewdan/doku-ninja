@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class StageState : State {
   protected StageController owner;
   public Transform marker { get { return owner.marker; } }
-  public Point pos { get { return owner.pos; } set { owner.pos = value; } }
+  public virtual Point pos { get { return owner.pos; } set { owner.pos = value; } }
   public Grid grid { get { return owner.grid; } }
   public UnitManager units { get { return owner.units; } }
   public UnitController player { get { return owner.player; } }
@@ -47,12 +47,18 @@ public abstract class StageState : State {
     return tile && tile.IsWalkable();
   }
   protected Point BestPos(Point start, Point dir, List<Point> validPoints) {
+    if (dir.x == 0 && dir.y == 0) dir = new Point(1, 0);
     var newPos = start + dir;
 
     //best is the first tile in the same row/column in the target direction
+    int failsafe = 0;
     while (grid.InBounds(newPos)) {
       if (validPoints.Contains(newPos)) return newPos;
       newPos += dir;
+      failsafe++; if (failsafe > 1000) {
+        Debug.Log("A loop continued for longer than expected");
+        break;
+      }
     }
 
     //next best is the closest tile in the target direction
