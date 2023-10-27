@@ -15,6 +15,8 @@ public class StageStatePlayerEnd : StageState {
   }
 
   IEnumerator<float> _End() {
+    grid.Countdown();
+
     if (deck.deck.Count == 0) {
       deck.ShuffleGraveyard();
       yield return Timing.WaitForSeconds(0.25f);

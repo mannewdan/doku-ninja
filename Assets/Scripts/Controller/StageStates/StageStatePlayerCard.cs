@@ -86,12 +86,14 @@ public class StageStatePlayerCard : StageState {
       } else if (tile.status == TileStatus.Wall) {
         doValidation = true;
         tile.DamageWall(card.data.value);
-      } else if (tile) {
+      } else if (card.data.isBomb) {
+        tile.currentDigit = card.data.value;
+        tile.status = card.data.type == CardType.BoxBomb ? TileStatus.BoxBomb :
+          card.data.type == CardType.StarBomb ? TileStatus.StarBomb :
+          TileStatus.BoxBomb;
+      } else {
         doValidation = true;
         tile.currentDigit = card.data.value;
-      } else {
-        Debug.LogError("Couldn't find anything at position: " + pos.ToString());
-        doSpendAP = false;
       }
 
       if (doValidation && grid.ValidateBoard(tile)) {

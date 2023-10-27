@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tweens;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour {
   [SerializeField] private TileRenderer tileRenderer;
   [SerializeField] private TileRenderer wallRenderer;
+  [SerializeField] private TileEntity tileEntity;
   [SerializeField] private Digit digit;
 
   public Grid grid;
@@ -14,10 +15,17 @@ public class Tile : MonoBehaviour {
     get { return _status; }
     set {
       bool updateWalls = (_status == TileStatus.Wall || value == TileStatus.Wall) && _status != value;
+      bool wasBomb = _status == TileStatus.BoxBomb || _status == TileStatus.StarBomb;
+
       _status = value;
       switch (_status) {
         case TileStatus.Confirmed: digitDisplayMode = DigitDisplayMode.Confirmed; break;
         case TileStatus.Wall: digitDisplayMode = DigitDisplayMode.Wall; break;
+        case TileStatus.BoxBomb:
+        case TileStatus.StarBomb:
+          digitDisplayMode = DigitDisplayMode.Bomb;
+          if (!wasBomb) countdown = 2;
+          break;
         default: digitDisplayMode = DigitDisplayMode.Default; break;
       }
 
@@ -29,13 +37,28 @@ public class Tile : MonoBehaviour {
           if (t.status == TileStatus.Wall) t.RenderWall();
         });
       }
+      if (wasBomb != (_status == TileStatus.BoxBomb || _status == TileStatus.StarBomb)) {
+        RenderEntity();
+      }
+    }
+  }
+  public int countdown {
+    get { return _countdown; }
+    set {
+      var updateEntity = _countdown > 0 || value > 0;
+      _countdown = value;
+      if (_countdown == 0) Evaluate(true, false, true);
+      if (updateEntity) {
+        RenderEntity();
+        RenderDigit();
+      }
     }
   }
   public Point pos { get { return data.pos; } set { data.pos = value; } }
   public Vector2 center { get { return new Vector3(pos.x, pos.y); } }
   public int solutionDigit {
     get { return data.solution; }
-    set { data.solution = value; digit.UpdateDigit(); }
+    set { data.solution = value; RenderDigit(); }
   }
   public int currentDigit {
     get { return _currentDigit; }
@@ -43,19 +66,20 @@ public class Tile : MonoBehaviour {
   }
   public DigitDisplayMode digitDisplayMode { get { return digit.displayMode; } set { digit.displayMode = value; } }
   private int _currentDigit;
-  [SerializeField]
-  private TileStatus _status;
+  [SerializeField] private TileStatus _status;
+  [SerializeField] private int _countdown;
 
   //commands
-  public void Evaluate(bool allowConfirmation = false) {
+  public void Evaluate(bool allowConfirmation = false, bool allowWalling = true, bool clearOnUndecided = false) {
     if (status == TileStatus.Confirmed) return;
 
-    if (currentDigit != 0 && currentDigit != solutionDigit) {
+    if (allowWalling && currentDigit != 0 && currentDigit != solutionDigit) {
       status = TileStatus.Wall;
     } else if (allowConfirmation && currentDigit != 0 && currentDigit == solutionDigit) {
       status = TileStatus.Confirmed;
     } else {
       status = TileStatus.Undecided;
+      if (clearOnUndecided) currentDigit = 0;
     }
   }
   public void DamageWall(int value) {
@@ -86,6 +110,12 @@ public class Tile : MonoBehaviour {
   }
   public void RenderWall() {
     if (wallRenderer) wallRenderer.Render();
+  }
+  public void RenderEntity() {
+    if (tileEntity) tileEntity.Render();
+  }
+  public void RenderDigit() {
+    digit.UpdateDigit();
   }
   void Snap() {
     transform.localPosition = center;
