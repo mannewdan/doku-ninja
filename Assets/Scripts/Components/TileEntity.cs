@@ -3,18 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileEntity : MonoBehaviour {
+  private const float SPARK_ROTATE_SPEED = 60.0f;
+
   [SerializeField] private GameObject spark;
 
   public enum RenderType { Tile, Wall }
 
   [SerializeField] RenderType renderType;
   private Tile owner;
+  private bool showSpark;
+
   protected void Awake() {
     owner = GetComponent<Tile>();
     if (!owner) owner = GetComponentInParent<Tile>();
   }
   protected void Start() {
     Render();
+  }
+  protected void Update() {
+    if (showSpark) {
+      spark.transform.localEulerAngles = Vector3.forward * Time.time * SPARK_ROTATE_SPEED;
+      transform.localScale = Vector3.one * (1.0f + 0.035f * Mathf.Sin(Time.time * 8.0f));
+    }
   }
   public void Render() {
     var coordinates = new Vector2(3, 3);
@@ -39,6 +49,8 @@ public class TileEntity : MonoBehaviour {
     Mesh mesh = mFilter.mesh;
     mesh.uv = uvs.ToArray();
 
-    spark.gameObject.SetActive(false);
+    showSpark = owner.countdown == 1;
+    spark.gameObject.SetActive(showSpark);
+    transform.localScale = Vector3.one;
   }
 }
