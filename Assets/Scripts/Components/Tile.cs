@@ -65,13 +65,17 @@ public class Tile : MonoBehaviour {
     set { _currentDigit = value; digitDisplayMode = DigitDisplayMode.Default; }
   }
   public DigitDisplayMode digitDisplayMode { get { return digit.displayMode; } set { digit.displayMode = value; } }
-  private int _currentDigit;
+  [SerializeField] private int _currentDigit;
   [SerializeField] private TileStatus _status;
   [SerializeField] private int _countdown;
 
   //commands
   public void Evaluate(bool allowConfirmation = false, bool allowWalling = true, bool clearOnUndecided = false) {
     if (status == TileStatus.Confirmed) return;
+    if (IsBomb() && currentDigit > 0 && countdown > 0) {
+      digitDisplayMode = DigitDisplayMode.Bomb;
+      return;
+    }
 
     if (allowWalling && currentDigit != 0 && currentDigit != solutionDigit) {
       status = TileStatus.Wall;
@@ -82,15 +86,10 @@ public class Tile : MonoBehaviour {
       if (clearOnUndecided) currentDigit = 0;
     }
   }
-  public void DamageWall(int value) {
-    if (status != TileStatus.Wall) {
-      Debug.Log("Tried to damage a wall, but that tile isn't a wall");
-      return;
-    }
-
+  public void DamageTile(int value, bool allowConfirmation = false, bool allowWalling = true) {
     var newVal = currentDigit - value;
     currentDigit = Mathf.Max(0, newVal);
-    Evaluate(true);
+    Evaluate(allowConfirmation, allowWalling);
   }
   public void Load(TileData data, Grid grid) {
     this.data = data;
@@ -155,5 +154,8 @@ public class Tile : MonoBehaviour {
   }
   public bool IsBomb() {
     return status == TileStatus.BoxBomb || status == TileStatus.StarBomb;
+  }
+  public bool IsEmpty() {
+    return status == TileStatus.Undecided && currentDigit <= 0;
   }
 }

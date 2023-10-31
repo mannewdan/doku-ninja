@@ -75,17 +75,19 @@ public class StageStatePlayerCard : StageState {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
     if (!tile) return;
-    if (!unit && tile.status == TileStatus.Confirmed) return;
-    if (card.data.isBomb && (unit || tile.status == TileStatus.Wall)) return;
-    if (pos == player.pos) return;
+    if (pos == player.pos) return; //cards can't be placed on the player
+    if (!unit && tile.status == TileStatus.Confirmed) return; //cards can't interact with confirmed digits
+    if (card.data.isBomb && (unit || !tile.IsEmpty())) return; //bombs can only be placed on empty tiles
     if (apManager.HasAP(1)) {
       bool doValidation = false;
       bool doSpendAP = true;
       if (unit) {
         unit.Harm(card.data.value);
-      } else if (tile.status == TileStatus.Wall) {
+      } else if (tile.status == TileStatus.Wall || tile.IsBomb()) {
         doValidation = true;
-        tile.DamageWall(card.data.value);
+        bool allowConfirmation = tile.status == TileStatus.Wall;
+        bool allowWalling = tile.status == TileStatus.Wall;
+        tile.DamageTile(card.data.value, allowConfirmation, allowWalling);
       } else if (card.data.isBomb) {
         tile.currentDigit = card.data.value;
         tile.status = card.data.type == CardType.BoxBomb ? TileStatus.BoxBomb :

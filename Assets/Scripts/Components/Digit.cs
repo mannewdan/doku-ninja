@@ -21,7 +21,7 @@ public class Digit : MonoBehaviour {
     get { return _displayMode; }
     set { _displayMode = value; UpdateDigit(); }
   }
-  private DigitDisplayMode _displayMode;
+  [SerializeField] private DigitDisplayMode _displayMode;
   private float _initialFontSize;
 
   protected void Awake() {
