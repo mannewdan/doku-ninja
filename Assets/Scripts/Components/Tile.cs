@@ -15,7 +15,7 @@ public class Tile : MonoBehaviour {
     get { return _status; }
     set {
       bool updateWalls = (_status == TileStatus.Wall || value == TileStatus.Wall) && _status != value;
-      bool wasBomb = _status == TileStatus.BoxBomb || _status == TileStatus.StarBomb;
+      bool wasBomb = IsBomb();
 
       _status = value;
       switch (_status) {
@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour {
           if (t.status == TileStatus.Wall) t.RenderWall();
         });
       }
-      if (wasBomb != (_status == TileStatus.BoxBomb || _status == TileStatus.StarBomb)) {
+      if (wasBomb != IsBomb()) {
         RenderEntity();
       }
     }
@@ -148,9 +148,12 @@ public class Tile : MonoBehaviour {
     return neighbors;
   }
   public bool IsWalkable() {
-    return status != TileStatus.Wall;
+    return status != TileStatus.Wall && !IsBomb();
   }
   public bool BlocksVisibility() {
     return status == TileStatus.Wall;
+  }
+  public bool IsBomb() {
+    return status == TileStatus.BoxBomb || status == TileStatus.StarBomb;
   }
 }
