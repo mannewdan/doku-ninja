@@ -45,9 +45,22 @@ public class Tile : MonoBehaviour {
   public int countdown {
     get { return _countdown; }
     set {
+      if (_countdown == value) return;
+
       var updateEntity = _countdown > 0 || value > 0;
       _countdown = value;
-      if (_countdown == 0) Evaluate(true, false, true);
+      switch (_countdown) {
+        case 0:
+          if (currentDigit > 0) {
+            this.PostNotification(Notifications.BOMB_EXPLODED, currentDigit);
+          }
+          Evaluate(true, false, true);
+          break;
+        case 1:
+          this.PostNotification(Notifications.BOMB_PRIMED);
+          break;
+      }
+
       if (updateEntity) {
         RenderEntity();
         RenderDigit();
@@ -75,6 +88,10 @@ public class Tile : MonoBehaviour {
     if (IsBomb() && currentDigit > 0 && countdown > 0) {
       digitDisplayMode = DigitDisplayMode.Bomb;
       return;
+    }
+    if (IsBomb() && currentDigit == 0) {
+      this.PostNotification(Notifications.BOMB_REMOVED);
+      countdown = 0;
     }
 
     if (allowWalling && currentDigit != 0 && currentDigit != solutionDigit) {

@@ -5,17 +5,21 @@ using UnityEngine;
 public class TelegraphInfo {
   public GameObject sender;
   public List<Point> targetedTiles;
-  public TelegraphInfo(GameObject sender, List<Point> targetedTiles) {
+  public bool isBomb;
+  public TelegraphInfo(GameObject sender, List<Point> targetedTiles, bool isBomb = false) {
     this.sender = sender;
     this.targetedTiles = targetedTiles;
+    this.isBomb = isBomb;
   }
 }
 public class Telegraphs : MonoBehaviour {
   [SerializeField] GameObject telegraphPrefab;
-  [SerializeField] Material telegraphMat;
+  [SerializeField] Material enemyTelegraphMat;
+  [SerializeField] Material bombTelegraphMat;
   [SerializeField] Material highlightMat;
   [SerializeField] private UnitManager units;
   private readonly Dictionary<Point, Data> enemyTelegraphs = new Dictionary<Point, Data>();
+  private readonly Dictionary<Point, Data> bombTelegraphs = new Dictionary<Point, Data>();
   private readonly Dictionary<Point, Data> playerHighlights = new Dictionary<Point, Data>();
   private UnitController player { get { return units.player; } }
 
@@ -25,15 +29,21 @@ public class Telegraphs : MonoBehaviour {
   }
   void OnEnable() {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
+    this.AddObserver(AddTelegraph, Notifications.BOMB_ADD_TARGET);
     this.AddObserver(AddTelegraph, Notifications.CARD_ACTIVE);
+
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.AddObserver(RemoveTelegraph, Notifications.BOMB_REMOVE_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
   void OnDisable() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
+    this.RemoveObserver(AddTelegraph, Notifications.BOMB_ADD_TARGET);
     this.RemoveObserver(AddTelegraph, Notifications.CARD_ACTIVE);
+
     this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
+    this.RemoveObserver(RemoveTelegraph, Notifications.BOMB_REMOVE_TARGET);
     this.RemoveObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
   }
@@ -41,7 +51,18 @@ public class Telegraphs : MonoBehaviour {
   void AddTelegraph(object sender, object e) {
     if (e is TelegraphInfo tInfo) {
       var isPlayer = tInfo.sender == player.gameObject;
-      var dictionary = isPlayer ? playerHighlights : enemyTelegraphs;
+
+      var dictionary = playerHighlights;
+      var mat = highlightMat;
+      var scale = 1.0f;
+      if (tInfo.isBomb) {
+        dictionary = bombTelegraphs;
+        mat = bombTelegraphMat;
+        scale = 0.85f;
+      } else if (!isPlayer) {
+        dictionary = enemyTelegraphs;
+        mat = enemyTelegraphMat;
+      }
 
       foreach (Point pos in tInfo.targetedTiles) {
         if (!dictionary.ContainsKey(pos)) {
@@ -49,9 +70,9 @@ public class Telegraphs : MonoBehaviour {
           GameObject newTelegraph = Instantiate(telegraphPrefab);
           newTelegraph.transform.SetParent(transform);
           newTelegraph.transform.localPosition = new Vector3(pos.x, pos.y, isPlayer ? -1 : 0);
+          newTelegraph.transform.localScale = Vector3.one * scale;
           dictionary[pos].telegraphObject = newTelegraph;
 
-          Material mat = isPlayer ? highlightMat : telegraphMat;
           foreach (MeshRenderer mRenderer in newTelegraph.GetComponentsInChildren<MeshRenderer>()) {
             mRenderer.sharedMaterial = mat;
           }
@@ -65,7 +86,7 @@ public class Telegraphs : MonoBehaviour {
   }
   void RemoveTelegraph(object sender, object e) {
     if (e is TelegraphInfo tInfo) {
-      var dictionary = tInfo.sender == player.gameObject ? playerHighlights : enemyTelegraphs;
+      var dictionary = tInfo.sender == player.gameObject ? playerHighlights : tInfo.isBomb ? bombTelegraphs : enemyTelegraphs;
 
       foreach (Point pos in tInfo.targetedTiles) {
         if (!dictionary.ContainsKey(pos)) continue;

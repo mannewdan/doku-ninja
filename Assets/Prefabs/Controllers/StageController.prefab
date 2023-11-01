@@ -612,6 +612,14 @@ PrefabInstance:
       propertyPath: telegraphMat
       value: 
       objectReference: {fileID: 2100000, guid: 1ce2b3ac33213334db55131ee9ad8726, type: 2}
+    - target: {fileID: 1035428606598173440, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
+      propertyPath: bombTelegraphMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 71c2aab79901152449875b0fd7513eff, type: 2}
+    - target: {fileID: 1035428606598173440, guid: af18b69c80bed924e83e7c094aec3324, type: 3}
+      propertyPath: enemyTelegraphMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ce2b3ac33213334db55131ee9ad8726, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

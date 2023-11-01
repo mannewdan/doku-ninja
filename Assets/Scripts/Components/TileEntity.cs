@@ -7,11 +7,22 @@ public class TileEntity : MonoBehaviour {
 
   [SerializeField] private GameObject spark;
 
-  public enum RenderType { Tile, Wall }
-
-  [SerializeField] RenderType renderType;
   private Tile owner;
   private bool showSpark;
+  private readonly List<Point> targetedTiles = new List<Point>();
+
+  void OnEnable() {
+    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.AddObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
+    this.AddObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
+    this.AddObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
+  }
+  void OnDisable() {
+    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.RemoveObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
+    this.RemoveObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
+    this.RemoveObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
+  }
 
   protected void Awake() {
     owner = GetComponent<Tile>();
@@ -52,5 +63,27 @@ public class TileEntity : MonoBehaviour {
     showSpark = owner.countdown == 1;
     spark.gameObject.SetActive(showSpark);
     transform.localScale = Vector3.one;
+  }
+  public void DamageTargets(object sender = null, object data = null) {
+    if (data is int val) {
+      Debug.Log("Damage for " + val);
+    }
+
+    ClearTargets();
+  }
+  public void TargetTiles(object sender = null, object data = null) {
+    ClearTargets();
+
+    if (owner.IsBomb()) targetedTiles.Add(owner.pos);
+
+    if (targetedTiles.Count > 0) {
+      gameObject.PostNotification(Notifications.BOMB_ADD_TARGET, new TelegraphInfo(gameObject, targetedTiles, true));
+    }
+  }
+  public void ClearTargets(object sender = null, object data = null) {
+    if (targetedTiles.Count > 0) {
+      gameObject.PostNotification(Notifications.BOMB_REMOVE_TARGET, new TelegraphInfo(gameObject, targetedTiles, true));
+      targetedTiles.Clear();
+    }
   }
 }
