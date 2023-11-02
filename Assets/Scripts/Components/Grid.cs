@@ -103,11 +103,6 @@ public class Grid : MonoBehaviour {
 
     return allSolved;
   }
-  public void Countdown() {
-    foreach (KeyValuePair<Point, Tile> entry in tiles) {
-      if (entry.Value.countdown > 0) entry.Value.countdown--;
-    }
-  }
 
   //construction
   void GenerateGrid() {
