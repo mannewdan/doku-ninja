@@ -74,7 +74,44 @@ public class TileEntity : MonoBehaviour {
   public void TargetTiles(object sender = null, object data = null) {
     ClearTargets();
 
-    if (owner.IsBomb()) targetedTiles.Add(owner.pos);
+    if (!owner.IsBomb()) return;
+
+    var pos = owner.pos;
+    targetedTiles.Add(pos);
+    List<Point> candidates = new List<Point>();
+    switch (owner.status) {
+      case TileStatus.BoxBomb:
+        //n, e, s, w, nw, ne, sw, se
+        candidates.AddRange(new List<Point>() {
+          new Point(pos.x, pos.y + 1),
+          new Point(pos.x + 1, pos.y),
+          new Point(pos.x, pos.y - 1),
+          new Point(pos.x - 1, pos.y),
+          new Point(pos.x - 1, pos.y + 1),
+          new Point(pos.x + 1, pos.y + 1),
+          new Point(pos.x - 1, pos.y - 1),
+          new Point(pos.x + 1, pos.y - 1)
+        });
+        break;
+      case TileStatus.StarBomb:
+        for (int x = pos.x - 1; x >= 0; x--) {
+          if (TryAddTile(new Point(x, pos.y), candidates)) break;
+        }
+        for (int x = pos.x + 1; x < owner.grid.width; x++) {
+          if (TryAddTile(new Point(x, pos.y), candidates)) break;
+        }
+        for (int y = pos.y - 1; y >= 0; y--) {
+          if (TryAddTile(new Point(pos.x, y), candidates)) break;
+        }
+        for (int y = pos.y + 1; y < owner.grid.height; y++) {
+          if (TryAddTile(new Point(pos.x, y), candidates)) break;
+        }
+        break;
+    }
+
+    foreach (Point p in candidates) {
+      if (owner.grid.InBounds(p)) targetedTiles.Add(p);
+    }
 
     if (targetedTiles.Count > 0) {
       gameObject.PostNotification(Notifications.BOMB_ADD_TARGET, new TelegraphInfo(gameObject, targetedTiles, true));
@@ -85,5 +122,11 @@ public class TileEntity : MonoBehaviour {
       gameObject.PostNotification(Notifications.BOMB_REMOVE_TARGET, new TelegraphInfo(gameObject, targetedTiles, true));
       targetedTiles.Clear();
     }
+  }
+  bool TryAddTile(Point p, List<Point> candidates) {
+    if (owner.grid.InBounds(p)) {
+      candidates.Add(p);
+      return owner.grid.BlocksVisibility(p);
+    } else return false;
   }
 }

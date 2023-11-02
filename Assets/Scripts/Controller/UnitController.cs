@@ -86,10 +86,10 @@ public class UnitController : MonoBehaviour {
 
     ClearAttack();
     Point n = new Point(pos.x, pos.y + 1), e = new Point(pos.x + 1, pos.y), s = new Point(pos.x, pos.y - 1), w = new Point(pos.x - 1, pos.y);
-    if (grid.InBounds(n) && grid.tiles[n].IsWalkable()) targetedTiles.Add(n);
-    if (grid.InBounds(e) && grid.tiles[e].IsWalkable()) targetedTiles.Add(e);
-    if (grid.InBounds(s) && grid.tiles[s].IsWalkable()) targetedTiles.Add(s);
-    if (grid.InBounds(w) && grid.tiles[w].IsWalkable()) targetedTiles.Add(w);
+    if (grid.InBounds(n) && !grid.tiles[n].BlocksVisibility()) targetedTiles.Add(n);
+    if (grid.InBounds(e) && !grid.tiles[e].BlocksVisibility()) targetedTiles.Add(e);
+    if (grid.InBounds(s) && !grid.tiles[s].BlocksVisibility()) targetedTiles.Add(s);
+    if (grid.InBounds(w) && !grid.tiles[w].BlocksVisibility()) targetedTiles.Add(w);
 
     if (targetedTiles.Count > 0) {
       gameObject.PostNotification(Notifications.UNIT_ADD_TARGET, new TelegraphInfo(gameObject, targetedTiles));
