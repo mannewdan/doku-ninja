@@ -6,6 +6,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour {
   [SerializeField] GameObject tilePrefab;
 
+  public UnitManager units;
   public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
   public int width;
   public int height;

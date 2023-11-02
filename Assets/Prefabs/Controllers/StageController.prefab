@@ -739,6 +739,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5000538926753824639}
     m_Modifications:
     - target: {fileID: 3724566711396785295, guid: 94fd54c5014aa7243abf62c2a638fd4f, type: 3}
+      propertyPath: units
+      value: 
+      objectReference: {fileID: 4360237997447778221}
+    - target: {fileID: 3724566711396785295, guid: 94fd54c5014aa7243abf62c2a638fd4f, type: 3}
       propertyPath: gridData.id
       value: 
       objectReference: {fileID: 0}

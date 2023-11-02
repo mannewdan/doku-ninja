@@ -12,7 +12,9 @@ public class TileEntity : MonoBehaviour {
   private readonly List<Point> targetedTiles = new List<Point>();
   private Point pos { get { return owner.pos; } }
   private Grid grid { get { return owner.grid; } }
+  private UnitManager units { get { return grid.units; } }
   private int countdown { get { return owner.countdown; } }
+  private int currentDigit { get { return owner.currentDigit; } }
   private TileStatus status { get { return owner.status; } }
 
   void OnEnable() {
@@ -69,8 +71,21 @@ public class TileEntity : MonoBehaviour {
     transform.localScale = Vector3.one;
   }
   public void DamageTargets(object sender = null, object data = null) {
-    if (data is int val) {
-      Debug.Log("Damage for " + val);
+    foreach (Point p in new List<Point>(targetedTiles)) {
+      if (p == pos) continue;
+
+      var tile = grid.tiles.ContainsKey(p) ? grid.tiles[p] : null;
+      var unit = units.unitMap.ContainsKey(p) ? units.unitMap[p] : null;
+      if (!tile) continue;
+      if (unit) {
+        unit.Harm(currentDigit);
+      } else if (tile.status == TileStatus.Wall) {
+        tile.DamageTile(currentDigit, true, true);
+      } else if (tile.IsBomb()) {
+        while (tile.countdown > 0) {
+          tile.countdown--;
+        }
+      }
     }
 
     ClearTargets();

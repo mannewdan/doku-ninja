@@ -15,6 +15,8 @@ public class StageStatePlayerEnd : StageState {
   }
 
   IEnumerator<float> _End() {
+    yield return 0;
+
     grid.Countdown();
 
     if (deck.deck.Count == 0) {
