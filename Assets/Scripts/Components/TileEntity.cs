@@ -10,6 +10,10 @@ public class TileEntity : MonoBehaviour {
   private Tile owner;
   private bool showSpark;
   private readonly List<Point> targetedTiles = new List<Point>();
+  private Point pos { get { return owner.pos; } }
+  private Grid grid { get { return owner.grid; } }
+  private int countdown { get { return owner.countdown; } }
+  private TileStatus status { get { return owner.status; } }
 
   void OnEnable() {
     this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
@@ -40,12 +44,12 @@ public class TileEntity : MonoBehaviour {
   public void Render() {
     var coordinates = new Vector2(3, 3);
 
-    switch (owner.status) {
+    switch (status) {
       case TileStatus.BoxBomb:
-        coordinates = new Vector2(0, owner.countdown == 2 ? 1 : 2);
+        coordinates = new Vector2(0, countdown == 2 ? 1 : 2);
         break;
       case TileStatus.StarBomb:
-        coordinates = new Vector2(1, owner.countdown == 2 ? 1 : 2);
+        coordinates = new Vector2(1, countdown == 2 ? 1 : 2);
         break;
     }
 
@@ -60,7 +64,7 @@ public class TileEntity : MonoBehaviour {
     Mesh mesh = mFilter.mesh;
     mesh.uv = uvs.ToArray();
 
-    showSpark = owner.countdown == 1;
+    showSpark = countdown == 1;
     spark.gameObject.SetActive(showSpark);
     transform.localScale = Vector3.one;
   }
@@ -76,10 +80,9 @@ public class TileEntity : MonoBehaviour {
 
     if (!owner.IsBomb()) return;
 
-    var pos = owner.pos;
     targetedTiles.Add(pos);
     List<Point> candidates = new List<Point>();
-    switch (owner.status) {
+    switch (status) {
       case TileStatus.BoxBomb:
         //n, e, s, w, nw, ne, sw, se
         candidates.AddRange(new List<Point>() {
@@ -97,20 +100,20 @@ public class TileEntity : MonoBehaviour {
         for (int x = pos.x - 1; x >= 0; x--) {
           if (TryAddTile(new Point(x, pos.y), candidates)) break;
         }
-        for (int x = pos.x + 1; x < owner.grid.width; x++) {
+        for (int x = pos.x + 1; x < grid.width; x++) {
           if (TryAddTile(new Point(x, pos.y), candidates)) break;
         }
         for (int y = pos.y - 1; y >= 0; y--) {
           if (TryAddTile(new Point(pos.x, y), candidates)) break;
         }
-        for (int y = pos.y + 1; y < owner.grid.height; y++) {
+        for (int y = pos.y + 1; y < grid.height; y++) {
           if (TryAddTile(new Point(pos.x, y), candidates)) break;
         }
         break;
     }
 
     foreach (Point p in candidates) {
-      if (owner.grid.InBounds(p)) targetedTiles.Add(p);
+      if (grid.InBounds(p)) targetedTiles.Add(p);
     }
 
     if (targetedTiles.Count > 0) {
@@ -124,9 +127,9 @@ public class TileEntity : MonoBehaviour {
     }
   }
   bool TryAddTile(Point p, List<Point> candidates) {
-    if (owner.grid.InBounds(p)) {
+    if (grid.InBounds(p)) {
       candidates.Add(p);
-      return owner.grid.BlocksVisibility(p);
+      return grid.BlocksVisibility(p);
     } else return false;
   }
 }
