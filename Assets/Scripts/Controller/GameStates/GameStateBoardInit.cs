@@ -4,16 +4,9 @@ using MEC;
 using UnityEngine;
 
 public class GameStateStageInit : GameState {
-  StageController controller;
-
   public override void Enter() {
     base.Enter();
     Timing.RunCoroutine(_Start().CancelWith(gameObject));
-  }
-
-  protected override void OnDebug(object sender, object e) {
-    Destroy(controller.gameObject);
-    owner.ChangeState<GameStateStart>();
   }
 
   IEnumerator<float> _Start() {
@@ -22,7 +15,7 @@ public class GameStateStageInit : GameState {
     stageController.transform.localPosition = Vector3.zero;
     stageController.transform.localEulerAngles = Vector3.zero;
     stageController.transform.localScale = Vector3.one;
-    controller = stageController.GetComponent<StageController>();
+    owner.currentBoard = stageController.GetComponent<StageController>();
 
     yield return 0;
     owner.ChangeState<GameStateStageRunning>();

@@ -7,9 +7,17 @@ public class GameStateStagePaused : GameState {
 
   public override void Enter() {
     base.Enter();
+    if (owner.currentBoard) owner.currentBoard.paused = true;
+  }
+  public override void Exit() {
+    base.Exit();
+    if (owner.currentBoard) owner.currentBoard.paused = false;
   }
 
   protected override void OnCancel(object sender, object e) {
+    Timing.RunCoroutine(_Cancel().CancelWith(gameObject));
+  }
+  protected override void OnStart(object sender, object e) {
     Timing.RunCoroutine(_Cancel().CancelWith(gameObject));
   }
 

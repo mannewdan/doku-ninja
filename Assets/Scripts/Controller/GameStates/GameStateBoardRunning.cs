@@ -10,6 +10,8 @@ public class GameStateStageRunning : GameState {
   }
 
   protected override void OnStart(object sender, object e) {
+    if (!owner.currentBoard || !owner.currentBoard.currentState.IsPausable()) return;
+
     Timing.RunCoroutine(_Start().CancelWith(gameObject));
   }
 

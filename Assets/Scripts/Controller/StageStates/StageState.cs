@@ -16,7 +16,7 @@ public abstract class StageState : State {
   protected virtual void Awake() {
     owner = GetComponent<StageController>();
   }
-  protected override void AddObservers() {
+  protected override void AddInputObservers() {
     this.AddObserver(OnMove, Notifications.MOVE);
     this.AddObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.AddObserver(OnNumber, Notifications.NUMBER);
@@ -24,7 +24,7 @@ public abstract class StageState : State {
     this.AddObserver(OnCancel, Notifications.CANCEL);
     this.AddObserver(OnDiscard, Notifications.DISCARD);
   }
-  protected override void RemoveObservers() {
+  protected override void RemoveInputObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
     this.RemoveObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);

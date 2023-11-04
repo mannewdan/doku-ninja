@@ -8,6 +8,15 @@ public class StateMachine : MonoBehaviour {
     set { Transition(value); }
   }
   protected State _currentState;
+  public bool paused {
+    get { return _paused; }
+    set {
+      if (_paused == value) return;
+      _paused = value;
+      _currentState.paused = _paused;
+    }
+  }
+  [SerializeField] protected bool _paused;
   protected bool _inTransition;
   protected object _stateData;
   public object stateData { get { return _stateData; } set { _stateData = value; } }
@@ -28,7 +37,10 @@ public class StateMachine : MonoBehaviour {
     if (_currentState != null) _currentState.Exit();
     _currentState = value;
     debugCurrentState = value.ToString();
-    if (_currentState != null) _currentState.Enter();
+    if (_currentState != null) {
+      _currentState.Enter();
+      _currentState.paused = paused;
+    }
     _inTransition = false;
     _stateData = null;
   }

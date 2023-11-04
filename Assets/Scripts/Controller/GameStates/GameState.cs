@@ -10,13 +10,13 @@ public class GameState : State {
     owner = GetComponent<GameController>();
   }
 
-  protected override void AddObservers() {
+  protected override void AddInputObservers() {
     this.AddObserver(OnStart, Notifications.START);
     this.AddObserver(OnCancel, Notifications.CANCEL);
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnDebug, Notifications.DEBUG);
   }
-  protected override void RemoveObservers() {
+  protected override void RemoveInputObservers() {
     this.RemoveObserver(OnStart, Notifications.START);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);

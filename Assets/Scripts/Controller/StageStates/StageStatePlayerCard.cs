@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MEC;
 using UnityEngine;
 
 public class StageStatePlayerCard : StageState {
@@ -114,12 +115,20 @@ public class StageStatePlayerCard : StageState {
     }
   }
   protected override void OnCancel(object sender, object e) {
-    owner.ChangeState<StageStatePlayerMove>();
+    Timing.RunCoroutine(_Cancel().CancelWith(gameObject));
   }
   protected override void OnDiscard(object sender, object e) {
     if (card) {
       deck.RemoveCard(card);
       owner.ChangeState<StageStatePlayerMove>();
     }
+  }
+
+  IEnumerator<float> _Cancel() {
+    yield return 0;
+    owner.ChangeState<StageStatePlayerMove>();
+  }
+  public override bool IsPausable() {
+    return InputController.HardwareMode == HardwareMode.Gamepad;
   }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum HardwareMode { Keyboard, Gamepad };
 public class InputController : MonoBehaviour {
   //fields 
   Vector2 _screenSize;
@@ -24,14 +25,28 @@ public class InputController : MonoBehaviour {
   Repeater tabLeft { get { return _tabLeft ??= new Repeater(controls, controls.general.TabLeft.id); } }
   Repeater tabRight { get { return _tabRight ??= new Repeater(controls, controls.general.TabRight.id); } }
 
+  public static HardwareMode HardwareMode { get { return _hardwareMode; } }
+  static HardwareMode _hardwareMode;
+
   void OnEnable() { controls.Enable(); }
   void OnDisable() { controls.Disable(); }
   void Update() {
+    UpdateHardwareMode();
     UpdateScreen();
     UpdateMove();
     UpdateNumber();
     UpdateTab();
     UpdateCommand();
+  }
+  void UpdateHardwareMode() {
+    var keyboard = controls.FindAction(controls.general.AnyKey.id.ToString());
+    var gamepad = controls.FindAction(controls.general.GamepadButton.id.ToString());
+
+    if (gamepad != null && gamepad.WasPressedThisFrame()) {
+      _hardwareMode = HardwareMode.Gamepad;
+    } else if (keyboard != null && keyboard.WasPressedThisFrame()) {
+      _hardwareMode = HardwareMode.Keyboard;
+    }
   }
   void UpdateScreen() {
     if (_screenSize.x != Screen.width || _screenSize.y != Screen.height) {
