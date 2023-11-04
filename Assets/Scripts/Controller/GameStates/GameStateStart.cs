@@ -7,7 +7,7 @@ public class GameStateStart : GameState {
     if (e is int number) {
       switch (number) {
         case 1:
-          owner.ChangeState<GameStateStage>();
+          owner.ChangeState<GameStateStageInit>();
           break;
         case 2:
           owner.ChangeState<GameStateEdit>();

@@ -11,14 +11,20 @@ public class GameState : State {
   }
 
   protected override void AddObservers() {
+    this.AddObserver(OnStart, Notifications.START);
+    this.AddObserver(OnCancel, Notifications.CANCEL);
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnDebug, Notifications.DEBUG);
   }
   protected override void RemoveObservers() {
+    this.RemoveObserver(OnStart, Notifications.START);
+    this.RemoveObserver(OnCancel, Notifications.CANCEL);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
     this.RemoveObserver(OnDebug, Notifications.DEBUG);
   }
 
+  protected virtual void OnStart(object sender, object e) { }
+  protected virtual void OnCancel(object sender, object e) { }
   protected virtual void OnNumber(object sender, object e) { }
   protected virtual void OnDebug(object sender, object e) { }
 }

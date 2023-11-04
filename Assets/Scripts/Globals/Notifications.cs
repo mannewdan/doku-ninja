@@ -11,6 +11,7 @@ public static class Notifications {
   public const string TAB = "TAB_NOTIFICATION";
   public const string CONFIRM = "CONFIRM_NOTIFICATION";
   public const string CANCEL = "CANCEL_NOTIFICATION";
+  public const string START = "START_NOTIFICATION";
   public const string DISCARD = "DISCARD_NOTIFICATION";
 
   public const string PLAYER_PHASE_START = "PLAYER_PHASE_START_NOTIFICATION";

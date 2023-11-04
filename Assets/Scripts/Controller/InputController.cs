@@ -91,6 +91,7 @@ public class InputController : MonoBehaviour {
   void UpdateCommand() {
     var confirm = controls.FindAction(controls.general.Confirm.id.ToString());
     var cancel = controls.FindAction(controls.general.Cancel.id.ToString());
+    var start = controls.FindAction(controls.general.Start.id.ToString());
     var debug = controls.FindAction(controls.general.Debug.id.ToString());
     var discard = controls.FindAction(controls.general.Discard.id.ToString());
 
@@ -99,6 +100,9 @@ public class InputController : MonoBehaviour {
     }
     if (cancel != null && cancel.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CANCEL, null);
+    }
+    if (start != null && start.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.START, null);
     }
     if (debug != null && debug.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.DEBUG, null);
