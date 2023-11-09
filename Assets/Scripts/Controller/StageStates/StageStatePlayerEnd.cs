@@ -7,7 +7,7 @@ public class StageStatePlayerEnd : StageState {
   public override void Enter() {
     base.Enter();
     this.PostNotification(Notifications.PLAYER_PHASE_END);
-    Timing.RunCoroutine(_End().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_End().CancelWith(gameObject));
   }
   public override void Exit() {
     base.Exit();

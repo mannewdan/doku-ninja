@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameStateStageInit : GameState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Start().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_Start().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Start() {

@@ -7,7 +7,7 @@ public class StageStatePlayerDead : StageState {
   public override void Enter() {
     base.Enter();
     this.PostNotification(Notifications.PLAYER_DEAD);
-    Timing.RunCoroutine(_Dead().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_Dead().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Dead() {

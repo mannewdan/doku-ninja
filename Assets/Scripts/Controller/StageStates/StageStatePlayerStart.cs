@@ -7,7 +7,7 @@ public class StageStatePlayerStart : StageState {
   public override void Enter() {
     base.Enter();
     this.PostNotification(Notifications.PLAYER_PHASE_START);
-    Timing.RunCoroutine(_Start().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_Start().CancelWith(gameObject));
     player.isActive = true;
   }
 

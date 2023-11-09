@@ -6,7 +6,7 @@ using MEC;
 public class StageStateEnemyMove : StageState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Loop().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_Loop().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Loop() {

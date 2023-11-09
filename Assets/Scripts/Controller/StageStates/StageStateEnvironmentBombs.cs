@@ -6,7 +6,7 @@ using UnityEngine;
 public class StageStateEnvironmentBombs : StageState {
   public override void Enter() {
     base.Enter();
-    Timing.RunCoroutine(_Countdown().CancelWith(gameObject));
+    mainRoutine = Timing.RunCoroutine(_Countdown().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Countdown() {

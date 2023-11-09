@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MEC;
 using UnityEngine;
 
 public abstract class State : MonoBehaviour {
@@ -10,12 +11,15 @@ public abstract class State : MonoBehaviour {
       _paused = value;
       if (_paused) {
         RemoveInputObservers();
+        Timing.PauseCoroutines(mainRoutine);
       } else {
         AddInputObservers();
+        Timing.ResumeCoroutines(mainRoutine);
       }
     }
   }
   [SerializeField] protected bool _paused;
+  protected CoroutineHandle mainRoutine;
 
   public virtual void Enter() {
     AddLogicObservers();
