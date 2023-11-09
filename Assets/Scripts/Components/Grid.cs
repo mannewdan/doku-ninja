@@ -71,7 +71,7 @@ public class Grid : MonoBehaviour {
       if (d != null) mapData.tiles.Add(d);
     }
   }
-  public bool ValidateBoard(Tile latestTileEdited) {
+  public bool ValidateBoard(Tile latestTileEdited, bool reactToConflicts = true) {
     bool allSolved = true;
     List<Conflict> conflicts = new List<Conflict>();
     bool latestTileRow = false, latestTileColumn = false, latestTileBox = false;
@@ -93,12 +93,13 @@ public class Grid : MonoBehaviour {
       }
     }
 
-    foreach (Conflict c in conflicts) {
-      c.tile.Evaluate();
-    }
-
-    if (latestTileRow || latestTileColumn || latestTileBox || latestTileEdited.status == TileStatus.Wall) {
-      latestTileEdited.Evaluate();
+    if (reactToConflicts) {
+      foreach (Conflict c in conflicts) {
+        c.tile.Evaluate();
+      }
+      if (latestTileRow || latestTileColumn || latestTileBox || latestTileEdited.status == TileStatus.Wall) {
+        latestTileEdited.Evaluate();
+      }
     }
 
     return allSolved;

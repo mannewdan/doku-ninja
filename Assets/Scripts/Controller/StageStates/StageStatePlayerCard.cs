@@ -81,6 +81,7 @@ public class StageStatePlayerCard : StageState {
     if (card.data.isBomb && (unit || !tile.IsEmpty())) return; //bombs can only be placed on empty tiles
     if (apManager.HasAP(1)) {
       bool doValidation = false;
+      bool validationReactsToConflicts = true;
       bool doSpendAP = true;
       if (unit) {
         unit.Harm(card.data.value);
@@ -90,6 +91,8 @@ public class StageStatePlayerCard : StageState {
         bool allowWalling = tile.status == TileStatus.Wall;
         tile.DamageTile(card.data.value, allowConfirmation, allowWalling);
       } else if (card.data.isBomb) {
+        doValidation = true;
+        validationReactsToConflicts = false;
         tile.currentDigit = card.data.value;
         tile.status = card.data.type == CardType.BoxBomb ? TileStatus.BoxBomb :
           card.data.type == CardType.StarBomb ? TileStatus.StarBomb :
@@ -99,7 +102,7 @@ public class StageStatePlayerCard : StageState {
         tile.currentDigit = card.data.value;
       }
 
-      if (doValidation && grid.ValidateBoard(tile)) {
+      if (doValidation && grid.ValidateBoard(tile, validationReactsToConflicts)) {
         Debug.Log("Player won");
       }
 
