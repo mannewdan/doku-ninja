@@ -107,6 +107,7 @@ public class Tile : MonoBehaviour {
     var newVal = currentDigit - value;
     currentDigit = Mathf.Max(0, newVal);
     Evaluate(allowConfirmation, allowWalling);
+    grid.ValidateBoard(this, false);
   }
   public void Load(TileData data, Grid grid) {
     this.data = data;
