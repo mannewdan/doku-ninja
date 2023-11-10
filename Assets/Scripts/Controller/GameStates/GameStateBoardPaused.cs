@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MEC;
 using UnityEngine;
 
-public class GameStateStagePaused : GameState {
+public class GameStateBoardPaused : GameState {
 
   public override void Enter() {
     base.Enter();
@@ -23,6 +23,6 @@ public class GameStateStagePaused : GameState {
 
   IEnumerator<float> _Cancel() {
     yield return 0;
-    owner.ChangeState<GameStateStageRunning>();
+    owner.ChangeState<GameStateBoardRunning>();
   }
 }

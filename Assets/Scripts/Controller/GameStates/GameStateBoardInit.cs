@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MEC;
 using UnityEngine;
 
-public class GameStateStageInit : GameState {
+public class GameStateBoardInit : GameState {
   public override void Enter() {
     base.Enter();
     mainRoutine = Timing.RunCoroutine(_Start().CancelWith(gameObject));
@@ -18,6 +18,6 @@ public class GameStateStageInit : GameState {
     owner.currentBoard = stageController.GetComponent<StageController>();
 
     yield return 0;
-    owner.ChangeState<GameStateStageRunning>();
+    owner.ChangeState<GameStateBoardRunning>();
   }
 }

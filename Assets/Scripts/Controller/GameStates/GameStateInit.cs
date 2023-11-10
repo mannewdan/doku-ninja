@@ -11,7 +11,6 @@ public class GameStateInit : GameState {
 
   IEnumerator<float> _Init() {
     yield return 0;
-    //  owner.ChangeState<GameStateStart>();
-    owner.ChangeState<GameStateStageInit>();
+    owner.ChangeState<GameStateBoardInit>(); //REPLACE with start menu state
   }
 }
