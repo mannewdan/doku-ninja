@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameController : StateMachine {
   public GameObject stageControllerPrefab;
   public GameObject editControllerPrefab;
+  public GameObject pauseMenuPrefab;
+  public GameObject uiContainer;
+
   public StateMachineBoard currentBoard {
     get { return _currentBoard; }
     set {
