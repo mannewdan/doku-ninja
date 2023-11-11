@@ -4,11 +4,6 @@ using MEC;
 using UnityEngine;
 
 public class GameStateBoardRunning : GameState {
-
-  public override void Enter() {
-    base.Enter();
-  }
-
   protected override void OnStart(object sender, object e) {
     if (!owner.currentBoard || !owner.currentBoard.currentState.IsPausable()) return;
 

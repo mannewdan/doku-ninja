@@ -15,6 +15,7 @@ public abstract class State : MonoBehaviour {
       } else {
         AddInputObservers();
         Timing.ResumeCoroutines(mainRoutine);
+        OnUnpause();
       }
     }
   }
@@ -38,6 +39,6 @@ public abstract class State : MonoBehaviour {
   protected virtual void RemoveLogicObservers() { }
   protected virtual void AddInputObservers() { }
   protected virtual void RemoveInputObservers() { }
-
+  public virtual void OnUnpause() { }
   public virtual bool IsPausable() { return true; }
 }
