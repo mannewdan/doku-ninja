@@ -118,7 +118,7 @@ public class StageStatePlayerCard : StageState {
     }
   }
   protected override void OnCancel(object sender, object e) {
-    Timing.RunCoroutine(_Cancel().CancelWith(gameObject));
+    owner.ChangeState<StageStatePlayerMove>();
   }
   protected override void OnDiscard(object sender, object e) {
     if (card) {
@@ -127,11 +127,8 @@ public class StageStatePlayerCard : StageState {
     }
   }
 
-  IEnumerator<float> _Cancel() {
-    yield return 0;
-    owner.ChangeState<StageStatePlayerMove>();
-  }
   public override bool IsPausable() {
+    if (!base.IsPausable()) return false;
     return InputController.HardwareMode == HardwareMode.Gamepad;
   }
 }
