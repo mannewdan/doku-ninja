@@ -5,8 +5,9 @@ using UnityEngine;
 public class MenuController : StateMachine {
   public StateMachine invoker;
   public GameObject modalPrefab;
+  public GameObject buttonPrefab;
 
-  void Start() {
+  protected virtual void Start() {
     ChangeState<MenuStateInit>();
   }
 }

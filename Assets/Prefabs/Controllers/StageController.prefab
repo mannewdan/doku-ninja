@@ -212,7 +212,7 @@ Canvas:
   m_GameObject: {fileID: 4031663832627655729}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe1d25fba7eec14ba133f13a189c2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _paused: 0
   debugCurrentState: 
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 5271101477277584338}
