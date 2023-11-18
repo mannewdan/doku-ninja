@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MenuElement : MonoBehaviour {
+  [SerializeField] protected Image background;
+  [SerializeField] protected Image border;
+  [SerializeField] protected TextMeshProUGUI text;
+
+  public bool selected { get { return _selected; } set { _selected = value; } }
+  public bool clickable { get { return _clickable; } set { _clickable = value; } }
+
+  protected bool _selected;
+  protected bool _clickable;
+
+  void Awake() {
+    background = GetComponent<Image>();
+    border = GetComponentsInChildren<Image>().First((img) => { return img.name == "Border"; });
+    text = GetComponentInChildren<TextMeshProUGUI>();
+  }
+
+  public virtual void Initialize(string name) {
+    if (text) text.text = name;
+  }
+}

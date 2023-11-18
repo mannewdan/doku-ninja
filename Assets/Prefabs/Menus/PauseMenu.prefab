@@ -139,8 +139,8 @@ MonoBehaviour:
   debugCurrentState: 
   invoker: {fileID: 0}
   modalPrefab: {fileID: 3952157412623938672, guid: 19ac2d3518046e542a9dadff9ca1c5e6, type: 3}
-  buttonPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
-  buttonContainer: {fileID: 6878378919864778742}
+  elementPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
+  elementContainer: {fileID: 6878378919864778742}
 --- !u!114 &7163885200287214676
 MonoBehaviour:
   m_ObjectHideFlags: 0
