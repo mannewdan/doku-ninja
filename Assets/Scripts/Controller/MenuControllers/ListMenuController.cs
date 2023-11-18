@@ -8,9 +8,17 @@ public class ListMenuController : MenuController {
 
   protected List<MenuElement> elements = new List<MenuElement>();
 
-  //inputs for changing selection
+  public int selection {
+    get { return _selection; }
+    set {
+      if (_selection >= 0 && elements.Count > 0 && _selection < elements.Count) elements[_selection].selected = false;
 
-  //inputs for confirmation
+      _selection = value;
+      if (_selection < 0) _selection = elements.Count - 1;
+      if (_selection > elements.Count - 1) _selection = 0;
 
-  //inputs for secondary selection (horizontal inputs on options for example)
+      if (elements.Count > 0) elements[_selection].selected = true;
+    }
+  }
+  protected int _selection;
 }

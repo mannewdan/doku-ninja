@@ -10,7 +10,16 @@ public class MenuElement : MonoBehaviour {
   [SerializeField] protected Image border;
   [SerializeField] protected TextMeshProUGUI text;
 
-  public bool selected { get { return _selected; } set { _selected = value; } }
+  [SerializeField] protected Color selectedBorderColor;
+  [SerializeField] protected Color defaultBorderColor;
+
+  public bool selected {
+    get { return _selected; }
+    set {
+      _selected = value;
+      if (border) border.color = _selected ? selectedBorderColor : defaultBorderColor;
+    }
+  }
   public bool clickable { get { return _clickable; } set { _clickable = value; } }
 
   protected bool _selected;

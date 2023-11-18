@@ -7,6 +7,6 @@ public class MenuController : StateMachine {
   public GameObject modalPrefab;
 
   protected virtual void Start() {
-    ChangeState<MenuStateInit>();
+    ChangeState<MenuStateRunning>();
   }
 }
