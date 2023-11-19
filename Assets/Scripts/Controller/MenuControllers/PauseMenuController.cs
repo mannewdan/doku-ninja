@@ -18,6 +18,7 @@ public class PauseMenuController : ListMenuController {
       elements.Add(button);
     }
 
+    SetInitialSelection();
     ChangeState<ListMenuStateRunning>();
   }
 }
