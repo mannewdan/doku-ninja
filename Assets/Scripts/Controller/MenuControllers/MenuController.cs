@@ -9,4 +9,8 @@ public class MenuController : StateMachine {
   protected virtual void Start() {
     ChangeState<MenuStateRunning>();
   }
+  public virtual void Close() {
+    invoker.paused = false;
+    DestroyImmediate(gameObject);
+  }
 }

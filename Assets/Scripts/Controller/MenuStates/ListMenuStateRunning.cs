@@ -20,6 +20,9 @@ public class ListMenuStateRunning : MenuStateRunning {
   }
 
   protected override void OnConfirm(object sender, object e) {
-    //execute function on current element
+    var element = owner.currentElement;
+    if (element) {
+      element.Execute();
+    }
   }
 }

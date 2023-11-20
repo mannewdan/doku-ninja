@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MenuStateRunning : MenuState {
   protected override void OnCancel(object sender, object e) {
-    owner.invoker.paused = false;
-    DestroyImmediate(owner.gameObject);
+    owner.Close();
   }
   protected override void OnDebug(object sender, object e) {
     owner.ChangeState<MenuStateModal>();

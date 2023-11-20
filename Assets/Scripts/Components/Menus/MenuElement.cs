@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuElement : MonoBehaviour {
+public abstract class MenuElement : MonoBehaviour {
   [SerializeField] protected Image background;
   [SerializeField] protected Image border;
   [SerializeField] protected TextMeshProUGUI text;
@@ -34,4 +34,5 @@ public class MenuElement : MonoBehaviour {
   public virtual void Initialize(string name) {
     if (text) text.text = name;
   }
+  public abstract void Execute();
 }

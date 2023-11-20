@@ -28,6 +28,9 @@ public class ListMenuController : MenuController {
     }
   }
   protected int _selection;
+  public MenuElement currentElement {
+    get { return (selection >= 0 && selection < elements.Count) ? elements[selection] : null; }
+  }
 
   protected void SetInitialSelection() {
     selection = InputController.HardwareMode == HardwareMode.Gamepad ? 0 : NULL_SELECTION;
