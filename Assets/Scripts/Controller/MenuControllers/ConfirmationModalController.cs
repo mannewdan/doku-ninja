@@ -1,36 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PauseMenuController : ListMenuController {
+public class ConfirmationModalController : ListMenuController {
+  [SerializeField] protected TextMeshProUGUI text;
+
+  protected string prompt;
+  protected Action action;
+
+  public void Initialize(string prompt, Action action) {
+    this.prompt = prompt;
+    this.action = action;
+
+    text = GetComponentInChildren<TextMeshProUGUI>();
+    if (text) text.text = prompt;
+  }
+
   protected override void Start() {
     List<MenuButtonData> buttons = new List<MenuButtonData>() {
       new MenuButtonData() {
-        name = "Resume",
+        name = "No",
         prompt = null,
         action = () => {
           Close();
       }},
       new MenuButtonData() {
-        name = "Options",
+        name = "Yes",
         prompt = null,
         action = () => {
-          ChangeState<MenuStateModal>();
-      }},
-      new MenuButtonData() {
-        name = "Main Menu",
-        prompt = "Are you sure you want to return to the main menu?",
-        action = () => {
           Close();
-          Debug.Log("Return to main menu");
-        }},
-      new MenuButtonData() {
-        name = "Exit Game",
-        prompt = "Are you sure you want to exit the game?",
-        action = () => {
-          Close();
-          Debug.Log("Exit Game");
-          Application.Quit();
+          action();
       }}
     };
 

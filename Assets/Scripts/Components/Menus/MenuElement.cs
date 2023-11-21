@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class MenuElement : MonoBehaviour {
+  public MenuController owner;
+
   [SerializeField] protected Image background;
   [SerializeField] protected Image border;
   [SerializeField] protected TextMeshProUGUI text;
@@ -31,7 +33,8 @@ public abstract class MenuElement : MonoBehaviour {
     text = GetComponentInChildren<TextMeshProUGUI>();
   }
 
-  public virtual void Initialize(string name) {
+  public virtual void Initialize(MenuController owner, string name) {
+    this.owner = owner;
     if (text) text.text = name;
   }
   public abstract void Execute();

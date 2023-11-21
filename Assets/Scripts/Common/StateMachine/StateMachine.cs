@@ -8,6 +8,7 @@ public class StateMachine : MonoBehaviour {
     set { Transition(value); }
   }
   protected State _currentState;
+  protected State _previousState;
   public bool paused {
     get { return _paused; }
     set {
@@ -30,11 +31,15 @@ public class StateMachine : MonoBehaviour {
   public virtual void ChangeState<T>() where T : State {
     currentState = GetState<T>();
   }
+  public virtual void RevertState() {
+    currentState = _previousState;
+  }
   protected virtual void Transition(State value) {
     if (_currentState == value || _inTransition) return;
 
     _inTransition = true;
     if (_currentState != null) _currentState.Exit();
+    _previousState = _currentState;
     _currentState = value;
     debugCurrentState = value.ToString();
     if (_currentState != null) {

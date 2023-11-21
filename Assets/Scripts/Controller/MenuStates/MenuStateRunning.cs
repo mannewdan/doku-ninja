@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuStateRunning : MenuState {
+  public override void Enter() {
+    base.Enter();
+    owner.nextModal = null;
+  }
+
   protected override void OnCancel(object sender, object e) {
     owner.Close();
   }

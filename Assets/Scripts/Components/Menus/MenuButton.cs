@@ -11,15 +11,15 @@ public struct MenuButtonData {
 public class MenuButton : MenuElement {
   public MenuButtonData data;
 
-  public void Initialize(MenuButtonData data) {
+  public void Initialize(MenuController owner, MenuButtonData data) {
     this.data = data;
-    base.Initialize(data.name);
+    base.Initialize(owner, data.name);
   }
   public override void Execute() {
     if (string.IsNullOrEmpty(data.prompt)) {
       data.action();
     } else {
-      Debug.Log(data.prompt);
+      owner.ConfirmationModal(data.prompt, data.action);
     }
   }
 }
