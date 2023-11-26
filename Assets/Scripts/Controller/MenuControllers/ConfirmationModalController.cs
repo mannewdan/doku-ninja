@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 
 public class ConfirmationModalController : ListMenuController {
-  [SerializeField] protected TextMeshProUGUI text;
-
+  protected TextMeshProUGUI text;
   protected string prompt;
   protected Action action;
 

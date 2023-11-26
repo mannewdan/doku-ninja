@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Tweens;
 using UnityEngine.UI;
+using System;
 
 public class Card : MonoBehaviour {
   const float HAND_SPACING = 0.1f; //as a percentage of card width
@@ -35,7 +36,7 @@ public class Card : MonoBehaviour {
       gameObject.TweenLocalPosition(pos, 0.125f).SetEaseCubicOut();
     }
   }
-  public DeckController deck;
+  [NonSerialized] public DeckController deck;
   public TextMeshProUGUI digit;
   public Image icon;
   public Image border;

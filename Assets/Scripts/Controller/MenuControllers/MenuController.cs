@@ -6,9 +6,9 @@ using UnityEngine;
 public class MenuController : StateMachine {
   [SerializeField] GameObject confirmationPrefab;
 
-  public StateMachine invoker;
-  public GameObject nextModal;
-  public GameObject currentModal;
+  [NonSerialized] public StateMachine invoker;
+  [NonSerialized] public GameObject nextModal;
+  [NonSerialized] public GameObject currentModal;
 
   protected virtual void Start() {
     ChangeState<MenuStateRunning>();

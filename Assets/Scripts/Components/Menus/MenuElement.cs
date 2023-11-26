@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class MenuElement : MonoBehaviour {
-  public MenuController owner;
+  [NonSerialized] public MenuController owner;
 
-  [SerializeField] protected Image background;
-  [SerializeField] protected Image border;
-  [SerializeField] protected TextMeshProUGUI text;
+  protected Image background;
+  protected Image border;
+  protected TextMeshProUGUI text;
 
   [SerializeField] protected Color selectedBorderColor;
   [SerializeField] protected Color defaultBorderColor;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using System;
 
 public class UnitController : MonoBehaviour {
   const int PH_MOVES_PER_ROUND = 1; //pull this from some UnitData class eventually
@@ -39,9 +40,9 @@ public class UnitController : MonoBehaviour {
   [SerializeField] private bool _isActive;
   [SerializeField] private int _hp = 2;
   public List<Point> targetedTiles = new List<Point>();
-  public Grid grid;
-  public UnitManager units;
-  public Pathfinder pathfinder;
+  [NonSerialized] public Grid grid;
+  [NonSerialized] public UnitManager units;
+  protected Pathfinder pathfinder;
   public bool isPlayer;
 
   void OnEnable() {

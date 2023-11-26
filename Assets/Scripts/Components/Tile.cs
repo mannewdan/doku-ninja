@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tweens;
@@ -9,7 +10,7 @@ public class Tile : MonoBehaviour {
   [SerializeField] private TileEntity tileEntity;
   [SerializeField] private Digit digit;
 
-  public Grid grid;
+  [NonSerialized] public Grid grid;
   public TileData data;
   public TileStatus status {
     get { return _status; }
