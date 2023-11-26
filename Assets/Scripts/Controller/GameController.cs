@@ -8,6 +8,7 @@ public class GameController : StateMachine {
   public GameObject stageControllerPrefab;
   public GameObject editControllerPrefab;
   public GameObject pauseMenuPrefab;
+  public GameObject startMenuPrefab;
   public GameObject uiContainer;
   public BoardMode boardMode;
 

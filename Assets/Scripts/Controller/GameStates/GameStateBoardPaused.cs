@@ -17,8 +17,8 @@ public class GameStateBoardPaused : GameState {
     newMenu.transform.localScale = Vector3.one;
 
     MenuController menu = newMenu.GetComponent<MenuController>();
-    menu.invoker = owner;
     owner.paused = true;
+    menu.invoker = owner;
   }
   public override void Exit() {
     base.Exit();
