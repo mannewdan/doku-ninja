@@ -770,6 +770,8 @@ MonoBehaviour:
   editControllerPrefab: {fileID: 6642501387004276241, guid: deccceaf5af6f6d44a9690803303dad2, type: 3}
   pauseMenuPrefab: {fileID: 3952157412623938672, guid: 7271e93913869534592c4dd699844e8d, type: 3}
   uiContainer: {fileID: 1462007274}
+  boardMode: 0
+  debugSkipToBoard: 1
 --- !u!1 &1462007274
 GameObject:
   m_ObjectHideFlags: 0

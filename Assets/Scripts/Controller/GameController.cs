@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : StateMachine {
+  public enum BoardMode { Stage, Edit }
+
   public GameObject stageControllerPrefab;
   public GameObject editControllerPrefab;
   public GameObject pauseMenuPrefab;
   public GameObject uiContainer;
+  public BoardMode boardMode;
 
   public StateMachineBoard currentBoard {
     get { return _currentBoard; }
@@ -17,10 +20,15 @@ public class GameController : StateMachine {
       _currentBoard = value;
     }
   }
-
   protected StateMachineBoard _currentBoard;
 
+  [SerializeField] bool debugSkipToBoard;
+
   void Start() {
-    ChangeState<GameStateInit>();
+    if (debugSkipToBoard) {
+      ChangeState<GameStateBoardInit>();
+    } else {
+      ChangeState<GameStateInit>();
+    }
   }
 }

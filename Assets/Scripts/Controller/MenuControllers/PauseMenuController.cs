@@ -22,7 +22,7 @@ public class PauseMenuController : ListMenuController {
         prompt = "Are you sure you want to return to the main menu?",
         action = () => {
           Close();
-          Debug.Log("Return to main menu");
+          invoker.ChangeState<GameStateMain>();
         }},
       new MenuButtonData() {
         name = "Exit Game",

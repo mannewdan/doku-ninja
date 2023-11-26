@@ -10,12 +10,16 @@ public class GameStateBoardInit : GameState {
   }
 
   IEnumerator<float> _Start() {
-    GameObject stageController = Instantiate(owner.stageControllerPrefab);
-    stageController.transform.SetParent(owner.transform);
-    stageController.transform.localPosition = Vector3.zero;
-    stageController.transform.localEulerAngles = Vector3.zero;
-    stageController.transform.localScale = Vector3.one;
-    owner.currentBoard = stageController.GetComponent<StageController>();
+    GameObject prefab = owner.boardMode == GameController.BoardMode.Stage ?
+     owner.stageControllerPrefab :
+     owner.editControllerPrefab;
+
+    GameObject boardController = Instantiate(prefab);
+    boardController.transform.SetParent(owner.transform);
+    boardController.transform.localPosition = Vector3.zero;
+    boardController.transform.localEulerAngles = Vector3.zero;
+    boardController.transform.localScale = Vector3.one;
+    owner.currentBoard = boardController.GetComponent<StateMachineBoard>();
 
     yield return 0;
     owner.ChangeState<GameStateBoardRunning>();
