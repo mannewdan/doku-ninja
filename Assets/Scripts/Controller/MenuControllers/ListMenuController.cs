@@ -32,7 +32,18 @@ public class ListMenuController : MenuController {
     get { return (selection >= 0 && selection < elements.Count) ? elements[selection] : null; }
   }
 
-  protected void SetInitialSelection() {
+  protected void BuildList(List<object> datas) {
+    foreach (object data in datas) {
+      GameObject newElement = Instantiate(elementPrefab);
+      newElement.transform.SetParent(elementContainer);
+      newElement.transform.localPosition = Vector3.zero;
+      newElement.transform.localScale = Vector3.one;
+
+      MenuElement element = newElement.GetComponent<MenuElement>();
+      element.Initialize(this, data);
+      elements.Add(element);
+    }
+
     selection = InputController.HardwareMode == HardwareMode.Gamepad ? 0 : NULL_SELECTION;
   }
 }

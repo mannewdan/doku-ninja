@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseMenuController : ListMenuController {
   protected override void Start() {
-    List<MenuButtonData> buttons = new List<MenuButtonData>() {
+    List<object> buttons = new List<object>() {
       new MenuButtonData() {
         name = "Resume",
         prompt = null,
@@ -34,19 +34,7 @@ public class PauseMenuController : ListMenuController {
       }}
     };
 
-    foreach (MenuButtonData data in buttons) {
-      GameObject newButton = Instantiate(elementPrefab);
-      newButton.transform.SetParent(elementContainer);
-      newButton.transform.localPosition = Vector3.zero;
-      newButton.transform.localScale = Vector3.one;
-
-      MenuButton button = newButton.GetComponent<MenuButton>();
-      button.Initialize(this, data);
-
-      elements.Add(button);
-    }
-
-    SetInitialSelection();
+    BuildList(buttons);
     ChangeState<ListMenuStateRunning>();
   }
 }

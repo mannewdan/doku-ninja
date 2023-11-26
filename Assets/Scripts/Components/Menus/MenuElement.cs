@@ -33,9 +33,9 @@ public abstract class MenuElement : MonoBehaviour {
     text = GetComponentInChildren<TextMeshProUGUI>();
   }
 
-  public virtual void Initialize(MenuController owner, string name) {
+  public virtual void Initialize(MenuController owner, object data) {
     this.owner = owner;
-    if (text) text.text = name;
+    if (text && data is string name) text.text = name;
   }
   public abstract void Execute();
 }
