@@ -1020,6 +1020,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1c6e56d5-6af5-4216-af27-bfa0fec58b0e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f0226b63-c717-4643-ac2b-17624efd8496"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",

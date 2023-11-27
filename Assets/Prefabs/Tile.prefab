@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spark: {fileID: 4318760612920530518}
-  renderType: 0
 --- !u!33 &1648116412598684084
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -233,13 +232,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7248278eeab20484781cf90a7e8f177b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textColorDefault: {r: 0.7154361, g: 0.8, b: 0.6016, a: 1}
+  textColorDefault: {r: 0.55785596, g: 0.7406255, b: 0.936, a: 1}
+  textColorDefaultBright: {r: 0.5568628, g: 0.7411765, b: 0.93725497, a: 1}
   textColorSolution: {r: 0.98039216, g: 0.9111111, b: 0.5647059, a: 1}
   textColorFaded: {r: 0.25490198, g: 0.26666668, b: 0.29411766, a: 0.5019608}
-  textColorConfirmed: {r: 0.73800004, g: 0.73800004, b: 0.73800004, a: 1}
-  textColorWall: {r: 0.886, g: 0.4860744, b: 0.433254, a: 1}
-  textColorBombInitial: {r: 1, g: 1, b: 1, a: 1}
+  textColorConfirmed: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+  textColorConfirmedBright: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  textColorWrong: {r: 0.9019608, g: 0.49878433, b: 0.49878433, a: 1}
+  textColorWrongBright: {r: 0.90196085, g: 0.49803925, b: 0.49803925, a: 1}
+  textColorBombInitial: {r: 0.95, g: 0.95, b: 0.95, a: 1}
   textColorBombPrimed: {r: 1, g: 0.6786445, b: 0.22745097, a: 1}
+  _displayMode: 0
 --- !u!23 &2864296806081819133
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -428,7 +431,6 @@ MonoBehaviour:
   wallRenderer: {fileID: 8343930592349638507}
   tileEntity: {fileID: 1198590028287002968}
   digit: {fileID: 8285529469927111775}
-  grid: {fileID: 0}
   data:
     pos:
       x: 0
@@ -436,6 +438,7 @@ MonoBehaviour:
     given: 0
     solution: 0
     type: 0
+  _currentDigit: 0
   _status: 0
   _countdown: 0
 --- !u!114 &4238414771996760987

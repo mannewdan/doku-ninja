@@ -13,6 +13,8 @@ public static class Notifications {
   public const string CANCEL = "CANCEL_NOTIFICATION";
   public const string START = "START_NOTIFICATION";
   public const string DISCARD = "DISCARD_NOTIFICATION";
+  public const string SHIFT_HELD = "SHIFT_HELD_NOTIFICATION";
+  public const string SHIFT_RELEASED = "SHIFT_RELEASED_NOTIFICATION";
 
   public const string PLAYER_PHASE_START = "PLAYER_PHASE_START_NOTIFICATION";
   public const string PLAYER_PHASE_END = "PLAYER_PHASE_END_NOTIFICATION";

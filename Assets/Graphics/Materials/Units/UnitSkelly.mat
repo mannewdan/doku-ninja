@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: UnitSkelly
   m_Shader: {fileID: 4800000, guid: 6632d54455682ac4fa5551949c36e7fa, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _MASKISDEFAULTCOLORS_ON
@@ -18,6 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -106,7 +109,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _G1: {r: 0, g: 0, b: 0, a: 0}
     - _G2: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HighlightColor: {r: 0.1596154, g: 0.1798077, b: 0.2, a: 1}
     - _R1: {r: 1, g: 0.3066038, b: 0.3066038, a: 1}
     - _R2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

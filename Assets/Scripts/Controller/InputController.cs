@@ -37,6 +37,7 @@ public class InputController : MonoBehaviour {
     UpdateNumber();
     UpdateTab();
     UpdateCommand();
+    UpdateShift();
   }
   void UpdateHardwareMode() {
     var keyboard = controls.FindAction(controls.general.AnyKey.id.ToString());
@@ -124,6 +125,17 @@ public class InputController : MonoBehaviour {
     }
     if (discard != null && discard.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.DISCARD, null);
+    }
+  }
+  void UpdateShift() {
+    var shift = controls.FindAction(controls.general.Shift.id.ToString());
+    if (shift != null) {
+      if (shift.WasPressedThisFrame()) {
+        this.PostNotification(Notifications.SHIFT_HELD, null);
+      }
+      if (shift.WasReleasedThisFrame()) {
+        this.PostNotification(Notifications.SHIFT_RELEASED, null);
+      }
     }
   }
 }
