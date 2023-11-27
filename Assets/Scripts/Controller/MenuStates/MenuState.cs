@@ -10,14 +10,14 @@ public class MenuState : State {
   }
 
   protected override void AddInputObservers() {
-    this.AddObserver(OnMove, Notifications.MOVE);
+    this.AddObserver(OnMove, Notifications.MOVE_REPEAT);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnStart, Notifications.START);
     this.AddObserver(OnCancel, Notifications.CANCEL);
     this.AddObserver(OnDebug, Notifications.DEBUG);
   }
   protected override void RemoveInputObservers() {
-    this.RemoveObserver(OnMove, Notifications.MOVE);
+    this.RemoveObserver(OnMove, Notifications.MOVE_REPEAT);
     this.RemoveObserver(OnConfirm, Notifications.CONFIRM);
     this.RemoveObserver(OnStart, Notifications.START);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
