@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StartMenuController : ListMenuController {
   new protected GameController invoker { get { return (GameController)base.invoker; } }
+  [SerializeField] GameObject optionsMenuPrefab;
 
   protected override void Start() {
     List<object> buttons = new List<object>() {
@@ -27,6 +28,7 @@ public class StartMenuController : ListMenuController {
         name = "Options",
         prompt = null,
         action = () => {
+          nextModal = optionsMenuPrefab;
           ChangeState<MenuStateModal>();
       }},
       new MenuButtonData() {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenuController : ListMenuController {
+  [SerializeField] GameObject optionsMenuPrefab;
+
   protected override void Start() {
     List<object> buttons = new List<object>() {
       new MenuButtonData() {
@@ -15,6 +17,7 @@ public class PauseMenuController : ListMenuController {
         name = "Options",
         prompt = null,
         action = () => {
+          nextModal = optionsMenuPrefab;
           ChangeState<MenuStateModal>();
       }},
       new MenuButtonData() {

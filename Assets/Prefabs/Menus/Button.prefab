@@ -127,10 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a9046b599c267459d78aa4a37597b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 0}
-  border: {fileID: 0}
-  text: {fileID: 0}
-  selectedBorderColor: {r: 1, g: 0.3443396, b: 0.8685529, a: 1}
+  selectedBorderColor: {r: 1, g: 0.8095649, b: 0.34509802, a: 1}
   defaultBorderColor: {r: 0.403, g: 0.37466404, b: 0.35262498, a: 1}
 --- !u!222 &1575747242036150140
 CanvasRenderer:

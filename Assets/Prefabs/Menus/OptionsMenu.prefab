@@ -84,11 +84,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5711456158693535607}
-  - component: {fileID: 3446977305852362929}
+  - component: {fileID: 7667397707200192341}
   - component: {fileID: 5119686210783925147}
   - component: {fileID: 7163885200287214676}
   m_Layer: 5
-  m_Name: StartMenu
+  m_Name: OptionsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,9 +113,9 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 325}
+  m_SizeDelta: {x: 450, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3446977305852362929
+--- !u!114 &7667397707200192341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3952157412623938672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 841969f65975ff346ae80b774f939ffc, type: 3}
+  m_Script: {fileID: 11500000, guid: c5f1a62293524fc43926da264d9bdc85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _paused: 0
@@ -132,7 +132,6 @@ MonoBehaviour:
   confirmationPrefab: {fileID: 3952157412623938672, guid: 19ac2d3518046e542a9dadff9ca1c5e6, type: 3}
   elementPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
   elementContainer: {fileID: 6878378919864778742}
-  optionsMenuPrefab: {fileID: 3952157412623938672, guid: d2f19e1491608b84c8ca0290c3f773fb, type: 3}
 --- !u!222 &5119686210783925147
 CanvasRenderer:
   m_ObjectHideFlags: 0

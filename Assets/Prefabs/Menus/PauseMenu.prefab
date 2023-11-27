@@ -130,11 +130,9 @@ MonoBehaviour:
   _paused: 0
   debugCurrentState: 
   confirmationPrefab: {fileID: 3952157412623938672, guid: 19ac2d3518046e542a9dadff9ca1c5e6, type: 3}
-  invoker: {fileID: 0}
-  nextModal: {fileID: 0}
-  currentModal: {fileID: 0}
   elementPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
   elementContainer: {fileID: 6878378919864778742}
+  optionsMenuPrefab: {fileID: 3952157412623938672, guid: d2f19e1491608b84c8ca0290c3f773fb, type: 3}
 --- !u!222 &5119686210783925147
 CanvasRenderer:
   m_ObjectHideFlags: 0
