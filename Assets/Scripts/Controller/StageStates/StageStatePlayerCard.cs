@@ -78,7 +78,7 @@ public class StageStatePlayerCard : StageState {
     if (!tile) return;
     if (pos == player.pos) return; //cards can't be placed on the player
     if (!unit && tile.status == TileStatus.Confirmed) return; //cards can't interact with confirmed digits
-    if (card.data.isBomb && (unit || !tile.IsEmpty())) return; //bombs can only be placed on empty tiles
+    if (card.data.isBomb && (unit || (!tile.IsEmpty() && tile.status != TileStatus.Undecided))) return; //bombs can only be placed on empty or unconfirmed tiles
     if (apManager.HasAP(1)) {
       bool doValidation = false;
       bool validationReactsToConflicts = true;
