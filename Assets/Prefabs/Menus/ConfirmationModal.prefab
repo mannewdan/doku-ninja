@@ -131,12 +131,10 @@ MonoBehaviour:
   _paused: 0
   debugCurrentState: 
   confirmationPrefab: {fileID: 0}
-  invoker: {fileID: 0}
-  nextModal: {fileID: 0}
-  currentModal: {fileID: 0}
   elementPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
   elementContainer: {fileID: 1317593298336510145}
-  text: {fileID: 0}
+  orientation: 1
+  loopSelection: 0
 --- !u!222 &5119686210783925147
 CanvasRenderer:
   m_ObjectHideFlags: 0

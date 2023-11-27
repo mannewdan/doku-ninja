@@ -35,6 +35,7 @@ public class ConfirmationModalController : ListMenuController {
     };
 
     BuildList(buttons);
+    selection = 0;
     ChangeState<ListMenuStateRunning>();
   }
 }

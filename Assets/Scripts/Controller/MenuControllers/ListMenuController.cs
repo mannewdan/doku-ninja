@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ListMenuController : MenuController {
+  public enum Orientation { Vertical, Horizontal }
+
   protected const int NULL_SELECTION = -10;
 
   [SerializeField] protected GameObject elementPrefab;
   [SerializeField] protected Transform elementContainer;
-
   protected List<MenuElement> elements = new List<MenuElement>();
+
+  public Orientation orientation;
+  public bool loopSelection = true;
 
   public int selection {
     get { return _selection; }
@@ -22,8 +26,8 @@ public class ListMenuController : MenuController {
       }
 
       if (_selection == NULL_SELECTION) return;
-      if (_selection < 0) _selection = elements.Count - 1;
-      if (_selection > elements.Count - 1) _selection = 0;
+      if (_selection < 0) _selection = loopSelection ? elements.Count - 1 : 0;
+      if (_selection > elements.Count - 1) _selection = loopSelection ? 0 : elements.Count - 1;
       if (elements.Count > 0) elements[_selection].selected = true;
     }
   }

@@ -7,14 +7,18 @@ public class ListMenuStateRunning : MenuStateRunning {
 
   protected override void OnMove(object sender, object e) {
     if (e is Point delta) {
-      //vertical
-      if (delta.y != 0) {
+      if (owner.orientation == ListMenuController.Orientation.Vertical && delta.y != 0) {
         owner.selection -= delta.y;
       }
+      if (owner.orientation == ListMenuController.Orientation.Horizontal && delta.x != 0) {
+        owner.selection += delta.x;
+      }
 
-      //horizontal
-      if (delta.x != 0) {
-        //pass input to the current element
+      if (owner.orientation == ListMenuController.Orientation.Vertical && delta.x != 0) {
+        //pass input to element
+      }
+      if (owner.orientation == ListMenuController.Orientation.Horizontal && delta.y != 0) {
+        //pass input to element
       }
     }
   }
