@@ -42,6 +42,6 @@ public class StartMenuController : ListMenuController {
     };
 
     BuildList(buttons);
-    ChangeState<StartMenuStateRunning>();
+    ChangeState<ListMenuStateRunning>();
   }
 }

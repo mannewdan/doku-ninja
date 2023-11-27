@@ -10,6 +10,8 @@ public class MenuController : StateMachine {
   [NonSerialized] public GameObject nextModal;
   [NonSerialized] public GameObject currentModal;
 
+  public bool inputCloseable = true;
+
   protected virtual void Start() {
     ChangeState<MenuStateRunning>();
   }

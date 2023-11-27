@@ -9,7 +9,7 @@ public class MenuStateRunning : MenuState {
   }
 
   protected override void OnCancel(object sender, object e) {
-    owner.Close();
+    if (owner.inputCloseable) owner.Close();
   }
   protected override void OnDebug(object sender, object e) {
     owner.ChangeState<MenuStateModal>();
