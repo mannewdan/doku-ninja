@@ -8,11 +8,6 @@ public class StageController : StateMachineBoard {
 
   void Start() {
     Load(mapToLoad);
-  }
-
-  public void Load(string fileName) {
-    MapData data = persistence.LoadMapData(fileName);
-    stateData = data;
     ChangeState<StageStateLoad>();
   }
 }

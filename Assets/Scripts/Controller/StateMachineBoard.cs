@@ -27,4 +27,9 @@ public class StateMachineBoard : StateMachine, IPersistence {
   public UnitController player { get { return units.player; } }
   public List<UnitController> enemies { get { return units.enemies; } }
   public string mapToLoad;
+
+  public void Load(string fileName) {
+    MapData data = persistence.LoadMapData(fileName);
+    stateData = data;
+  }
 }

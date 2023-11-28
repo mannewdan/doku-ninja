@@ -10,20 +10,16 @@ public class EditStateLoad : EditState {
     base.Enter();
     if (owner.stateData is MapData mapData) {
       dataToLoad = mapData;
-      mainRoutine = Timing.RunCoroutine(_Load().CancelWith(gameObject));
     } else {
-      Debug.LogError(owner.stateData == null ? "Load data was not provided" : "Failed to load data");
-      mainRoutine = Timing.RunCoroutine(_Failure().CancelWith(gameObject));
+      dataToLoad = new MapData();
     }
+
+    mainRoutine = Timing.RunCoroutine(_Load().CancelWith(gameObject));
   }
 
   IEnumerator<float> _Load() {
     owner.mapData = dataToLoad;
     yield return 0;
     owner.ChangeState<EditStateGiven>();
-  }
-  IEnumerator<float> _Failure() {
-    yield return 0;
-    owner.ChangeState<EditStateInit>();
   }
 }

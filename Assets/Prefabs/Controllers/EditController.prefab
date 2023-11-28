@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8962576378142792163}
   - component: {fileID: 5388467752555676867}
-  - component: {fileID: 5723372009443660748}
   m_Layer: 0
   m_Name: EditController
   m_TagString: Untagged
@@ -48,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def265e347e10e649846cda5de27de1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _paused: 0
   debugCurrentState: 
   selectionIndicatorPrefab: {fileID: 407026169691666809, guid: 86d5128f124537c47a5d1d0d26adbfc1, type: 3}
   grid: {fileID: 5271654228726105987}
@@ -62,18 +62,6 @@ MonoBehaviour:
       y: 0
     tiles: []
     enemies: []
---- !u!114 &5723372009443660748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6642501387004276241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e5a1c88c4acec449f05dc02be93b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1233236478527366481
 PrefabInstance:
   m_ObjectHideFlags: 0
