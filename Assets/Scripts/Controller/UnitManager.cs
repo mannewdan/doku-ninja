@@ -57,6 +57,7 @@ public class UnitManager : MonoBehaviour {
     for (int i = 0; i < data.enemies.Count; i++) {
       EnemyData ed = data.enemies[i];
       UnitController enemy = NewUnit(ed.pos, skellyBasicPrefab);
+      enemy.TargetTiles();
       enemies.Add(enemy);
     }
 
