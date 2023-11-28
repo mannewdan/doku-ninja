@@ -104,6 +104,24 @@ public class Grid : MonoBehaviour {
 
     return allSolved;
   }
+  public void MarkSolutionConflicts() {
+    foreach (KeyValuePair<Point, Tile> currentTilePair in tiles) {
+      var currentTile = currentTilePair.Value;
+      currentTile.digitDisplayMode = DigitDisplayMode.EditSolution;
+      foreach (KeyValuePair<Point, Tile> potentialConflictPair in tiles) {
+        var potentialConflict = potentialConflictPair.Value;
+        if (currentTile == potentialConflict) continue;
+        if (currentTile.solutionDigit != potentialConflict.solutionDigit) continue;
+
+        if (currentTile.data.pos.y == potentialConflict.data.pos.y
+        || currentTile.data.pos.x == potentialConflict.data.pos.x
+        || BoxNumber(currentTile.data.pos.x, currentTile.data.pos.y) == BoxNumber(potentialConflict.data.pos.x, potentialConflict.data.pos.y)) {
+          currentTile.digitDisplayMode = DigitDisplayMode.EditConflict;
+          break;
+        }
+      }
+    }
+  }
 
   //construction
   void GenerateGrid() {

@@ -7,8 +7,10 @@ public class EditStateSolution : EditStateDraw {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     if (tile) {
       tile.solutionDigit = 0;
+      tile.status = TileStatus.Undecided;
       tile.Evaluate();
       tile.digitDisplayMode = DigitDisplayMode.EditSolution;
+      owner.grid.MarkSolutionConflicts();
     } else {
       Debug.Log("Couldn't find a tile at position: " + pos.ToString());
     }
@@ -18,8 +20,10 @@ public class EditStateSolution : EditStateDraw {
       var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (tile) {
         tile.solutionDigit = number;
+        tile.status = TileStatus.Undecided;
         tile.Evaluate();
         tile.digitDisplayMode = DigitDisplayMode.EditSolution;
+        owner.grid.MarkSolutionConflicts();
       } else {
         Debug.Log("Couldn't find a tile at position: " + pos.ToString());
       }

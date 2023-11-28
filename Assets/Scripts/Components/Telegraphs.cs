@@ -93,10 +93,10 @@ public class Telegraphs : MonoBehaviour {
         if (dictionary[pos].senders.Contains(tInfo.sender)) dictionary[pos].senders.Remove(tInfo.sender);
 
         for (int i = dictionary[pos].senders.Count - 1; i >= 0; i--) {
-          UnitController unit = dictionary[pos].senders[i]?.GetComponent<UnitController>();
-          if (unit != null && !unit.isAlive) {
-            Debug.Log("Removed a dead unit from telegraphs");
-            dictionary[pos].senders.Remove(unit.gameObject);
+          GameObject s = dictionary[pos].senders[i];
+          UnitController unit = s ? s.GetComponent<UnitController>() : null;
+          if (unit == null || !unit.isAlive) {
+            dictionary[pos].senders.RemoveAt(i);
             continue;
           }
         }

@@ -59,6 +59,10 @@ public class Digit : MonoBehaviour {
         target = solutionDigit;
         color = textColorSolution;
         break;
+      case DigitDisplayMode.EditConflict:
+        target = solutionDigit;
+        color = _wrongColor;
+        break;
       case DigitDisplayMode.EditGiven:
         target = currentDigit;
         if (currentDigit > 0 && solutionDigit > 0 && currentDigit != solutionDigit) {
