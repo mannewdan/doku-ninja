@@ -7,7 +7,6 @@ public class Digit : MonoBehaviour {
   [SerializeField] Color textColorDefault;
   [SerializeField] Color textColorDefaultBright;
   [SerializeField] Color textColorSolution;
-  [SerializeField] Color textColorFaded;
   [SerializeField] Color textColorConfirmed;
   [SerializeField] Color textColorConfirmedBright;
   [SerializeField] Color textColorWrong;
@@ -56,12 +55,19 @@ public class Digit : MonoBehaviour {
     var color = _defaultColor;
     var fontSize = _initialFontSize;
     switch (displayMode) {
-      case DigitDisplayMode.Solution:
+      case DigitDisplayMode.EditSolution:
         target = solutionDigit;
         color = textColorSolution;
         break;
-      case DigitDisplayMode.Faded:
-        color = textColorFaded;
+      case DigitDisplayMode.EditGiven:
+        target = currentDigit;
+        if (currentDigit > 0 && solutionDigit > 0 && currentDigit != solutionDigit) {
+          color = _wrongColor;
+        } else if (currentDigit > 0 && solutionDigit > 0 && currentDigit == solutionDigit) {
+          color = _confirmedColor;
+        } else {
+          color = _defaultColor;
+        }
         break;
       case DigitDisplayMode.Confirmed:
         color = _confirmedColor;
@@ -72,6 +78,9 @@ public class Digit : MonoBehaviour {
       case DigitDisplayMode.Bomb:
         color = owner.countdown == 2 ? textColorBombInitial : textColorBombPrimed;
         fontSize = _initialFontSize * 0.66f;
+        break;
+      case DigitDisplayMode.Hidden:
+        target = 0;
         break;
     }
 

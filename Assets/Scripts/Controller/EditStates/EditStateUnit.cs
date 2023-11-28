@@ -9,19 +9,12 @@ public class EditStateUnit : EditStateDraw {
   protected override void OnConfirm(object sender, object e) {
     units.SetSpawn(pos);
   }
-  protected override void OnCancel(object sender, object e) {
-    units.RemoveEnemy(pos);
-  }
   public override void Enter() {
     base.Enter();
+    owner.textEditMode.text = "Units";
+    owner.units.gameObject.SetActive(true);
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.digitDisplayMode = DigitDisplayMode.Faded;
-    }
-  }
-  public override void Exit() {
-    base.Exit();
-    foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
-      tile.Value.digitDisplayMode = DigitDisplayMode.Default;
+      tile.Value.digitDisplayMode = DigitDisplayMode.Hidden;
     }
   }
 }
