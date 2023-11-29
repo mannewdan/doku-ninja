@@ -26,4 +26,7 @@ public class EditController : StateMachineBoard {
     Load(mapToLoad);
     ChangeState<EditStateLoad>();
   }
+  public void Save() {
+    persistence.SaveMapData(mapData);
+  }
 }

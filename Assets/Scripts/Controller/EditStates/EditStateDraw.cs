@@ -52,4 +52,7 @@ public abstract class EditStateDraw : EditState {
       owner.mapData = newMap;
     }
   }
+  protected override void OnSave(object sender, object e) {
+    owner.Save();
+  }
 }

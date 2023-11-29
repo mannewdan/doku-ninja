@@ -14,6 +14,7 @@ public static class Notifications {
   public const string CANCEL = "CANCEL_NOTIFICATION";
   public const string START = "START_NOTIFICATION";
   public const string DISCARD = "DISCARD_NOTIFICATION";
+  public const string SAVE = "SAVE_NOTIFICATION";
   public const string SHIFT_HELD = "SHIFT_HELD_NOTIFICATION";
   public const string SHIFT_RELEASED = "SHIFT_RELEASED_NOTIFICATION";
 

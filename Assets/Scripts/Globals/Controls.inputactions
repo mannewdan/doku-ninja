@@ -177,6 +177,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "c2e1ebf5-a2d6-45ad-b852-75d1e2cf4625",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "0",
                     "type": "Button",
                     "id": "4682a683-3ae9-45b3-be89-3e3926a47130",
@@ -1081,6 +1090,39 @@
                     "action": "Control",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Save",
+                    "id": "20ff334e-1e6f-43aa-807c-3003e2be44c5",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "742fd9e5-ca0e-4443-beaf-577fcf748940",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "d6819cad-24ff-4ac9-ab87-9cb40810e7ec",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

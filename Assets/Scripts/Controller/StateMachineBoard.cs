@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateMachineBoard : StateMachine, IPersistence {
   [SerializeField] GameObject selectionIndicatorPrefab;
 
-  public IPersistence persistence { get { return (IPersistence)this; } }
+  public IPersistence persistence { get { return this; } }
   private Transform _marker;
   public Transform marker {
     get {

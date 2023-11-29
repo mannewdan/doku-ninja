@@ -23,6 +23,7 @@ public abstract class EditState : State {
     this.AddObserver(OnTab, Notifications.TAB);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnCancel, Notifications.CANCEL);
+    this.AddObserver(OnSave, Notifications.SAVE);
   }
   protected override void RemoveInputObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
@@ -32,6 +33,7 @@ public abstract class EditState : State {
     this.RemoveObserver(OnTab, Notifications.TAB);
     this.RemoveObserver(OnConfirm, Notifications.CONFIRM);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
+    this.RemoveObserver(OnSave, Notifications.SAVE);
   }
 
   protected virtual void OnMove(object sender, object e) { }
@@ -41,6 +43,7 @@ public abstract class EditState : State {
   protected virtual void OnTab(object sender, object e) { }
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
+  protected virtual void OnSave(object sender, object e) { }
 
   protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public enum HardwareMode { Keyboard, Gamepad };
 public class InputController : MonoBehaviour {
@@ -111,6 +112,7 @@ public class InputController : MonoBehaviour {
     var start = controls.FindAction(controls.general.Start.id.ToString());
     var debug = controls.FindAction(controls.general.Debug.id.ToString());
     var discard = controls.FindAction(controls.general.Discard.id.ToString());
+    var save = controls.FindAction(controls.general.Save.id.ToString());
 
     if (confirm != null && confirm.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CONFIRM, null);
@@ -126,6 +128,9 @@ public class InputController : MonoBehaviour {
     }
     if (discard != null && discard.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.DISCARD, null);
+    }
+    if (save != null && save.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.SAVE, null);
     }
   }
   void UpdateShift() {

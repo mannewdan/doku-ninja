@@ -15,12 +15,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @Controls: IInputActionCollection2, IDisposable
-{
-    public InputActionAsset asset { get; }
-    public @Controls()
-    {
-        asset = InputActionAsset.FromJson(@"{
+public partial class @Controls : IInputActionCollection2, IDisposable {
+  public InputActionAsset asset { get; }
+  public @Controls() {
+    asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
     ""maps"": [
         {
@@ -193,6 +191,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""6b7fcfad-0400-40ea-aee0-e4dbec14eea0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2e1ebf5-a2d6-45ad-b852-75d1e2cf4625"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1103,6 +1110,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""id"": ""20ff334e-1e6f-43aa-807c-3003e2be44c5"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""742fd9e5-ca0e-4443-beaf-577fcf748940"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""d6819cad-24ff-4ac9-ab87-9cb40810e7ec"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1342,542 +1382,520 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // general
-        m_general = asset.FindActionMap("general", throwIfNotFound: true);
-        m_general_AnyKey = m_general.FindAction("AnyKey", throwIfNotFound: true);
-        m_general_GamepadButton = m_general.FindAction("GamepadButton", throwIfNotFound: true);
-        m_general_Debug = m_general.FindAction("Debug", throwIfNotFound: true);
-        m_general_Start = m_general.FindAction("Start", throwIfNotFound: true);
-        m_general_LeftClick = m_general.FindAction("LeftClick", throwIfNotFound: true);
-        m_general_RightClick = m_general.FindAction("RightClick", throwIfNotFound: true);
-        m_general_ScrollWheel = m_general.FindAction("ScrollWheel", throwIfNotFound: true);
-        m_general_Shift = m_general.FindAction("Shift", throwIfNotFound: true);
-        m_general_Control = m_general.FindAction("Control", throwIfNotFound: true);
-        m_general_Tab = m_general.FindAction("Tab", throwIfNotFound: true);
-        m_general_TabLeft = m_general.FindAction("TabLeft", throwIfNotFound: true);
-        m_general_TabRight = m_general.FindAction("TabRight", throwIfNotFound: true);
-        m_general_Up = m_general.FindAction("Up", throwIfNotFound: true);
-        m_general_Down = m_general.FindAction("Down", throwIfNotFound: true);
-        m_general_Left = m_general.FindAction("Left", throwIfNotFound: true);
-        m_general_Right = m_general.FindAction("Right", throwIfNotFound: true);
-        m_general_Confirm = m_general.FindAction("Confirm", throwIfNotFound: true);
-        m_general_Discard = m_general.FindAction("Discard", throwIfNotFound: true);
-        m_general_Cancel = m_general.FindAction("Cancel", throwIfNotFound: true);
-        m_general__0 = m_general.FindAction("0", throwIfNotFound: true);
-        m_general__1 = m_general.FindAction("1", throwIfNotFound: true);
-        m_general__2 = m_general.FindAction("2", throwIfNotFound: true);
-        m_general__3 = m_general.FindAction("3", throwIfNotFound: true);
-        m_general__4 = m_general.FindAction("4", throwIfNotFound: true);
-        m_general__5 = m_general.FindAction("5", throwIfNotFound: true);
-        m_general__6 = m_general.FindAction("6", throwIfNotFound: true);
-        m_general__7 = m_general.FindAction("7", throwIfNotFound: true);
-        m_general__8 = m_general.FindAction("8", throwIfNotFound: true);
-        m_general__9 = m_general.FindAction("9", throwIfNotFound: true);
-        // camera
-        m_camera = asset.FindActionMap("camera", throwIfNotFound: true);
-        m_camera_Horizontal = m_camera.FindAction("Horizontal", throwIfNotFound: true);
-        m_camera_Vertical = m_camera.FindAction("Vertical", throwIfNotFound: true);
-        m_camera_RAnalogX = m_camera.FindAction("RAnalogX", throwIfNotFound: true);
-        m_camera_RAnalogY = m_camera.FindAction("RAnalogY", throwIfNotFound: true);
-        m_camera_MouseX = m_camera.FindAction("MouseX", throwIfNotFound: true);
-        m_camera_MouseY = m_camera.FindAction("MouseY", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    public IEnumerable<InputBinding> bindings => asset.bindings;
-
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
-
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
-
     // general
-    private readonly InputActionMap m_general;
-    private List<IGeneralActions> m_GeneralActionsCallbackInterfaces = new List<IGeneralActions>();
-    private readonly InputAction m_general_AnyKey;
-    private readonly InputAction m_general_GamepadButton;
-    private readonly InputAction m_general_Debug;
-    private readonly InputAction m_general_Start;
-    private readonly InputAction m_general_LeftClick;
-    private readonly InputAction m_general_RightClick;
-    private readonly InputAction m_general_ScrollWheel;
-    private readonly InputAction m_general_Shift;
-    private readonly InputAction m_general_Control;
-    private readonly InputAction m_general_Tab;
-    private readonly InputAction m_general_TabLeft;
-    private readonly InputAction m_general_TabRight;
-    private readonly InputAction m_general_Up;
-    private readonly InputAction m_general_Down;
-    private readonly InputAction m_general_Left;
-    private readonly InputAction m_general_Right;
-    private readonly InputAction m_general_Confirm;
-    private readonly InputAction m_general_Discard;
-    private readonly InputAction m_general_Cancel;
-    private readonly InputAction m_general__0;
-    private readonly InputAction m_general__1;
-    private readonly InputAction m_general__2;
-    private readonly InputAction m_general__3;
-    private readonly InputAction m_general__4;
-    private readonly InputAction m_general__5;
-    private readonly InputAction m_general__6;
-    private readonly InputAction m_general__7;
-    private readonly InputAction m_general__8;
-    private readonly InputAction m_general__9;
-    public struct GeneralActions
-    {
-        private @Controls m_Wrapper;
-        public GeneralActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @AnyKey => m_Wrapper.m_general_AnyKey;
-        public InputAction @GamepadButton => m_Wrapper.m_general_GamepadButton;
-        public InputAction @Debug => m_Wrapper.m_general_Debug;
-        public InputAction @Start => m_Wrapper.m_general_Start;
-        public InputAction @LeftClick => m_Wrapper.m_general_LeftClick;
-        public InputAction @RightClick => m_Wrapper.m_general_RightClick;
-        public InputAction @ScrollWheel => m_Wrapper.m_general_ScrollWheel;
-        public InputAction @Shift => m_Wrapper.m_general_Shift;
-        public InputAction @Control => m_Wrapper.m_general_Control;
-        public InputAction @Tab => m_Wrapper.m_general_Tab;
-        public InputAction @TabLeft => m_Wrapper.m_general_TabLeft;
-        public InputAction @TabRight => m_Wrapper.m_general_TabRight;
-        public InputAction @Up => m_Wrapper.m_general_Up;
-        public InputAction @Down => m_Wrapper.m_general_Down;
-        public InputAction @Left => m_Wrapper.m_general_Left;
-        public InputAction @Right => m_Wrapper.m_general_Right;
-        public InputAction @Confirm => m_Wrapper.m_general_Confirm;
-        public InputAction @Discard => m_Wrapper.m_general_Discard;
-        public InputAction @Cancel => m_Wrapper.m_general_Cancel;
-        public InputAction @_0 => m_Wrapper.m_general__0;
-        public InputAction @_1 => m_Wrapper.m_general__1;
-        public InputAction @_2 => m_Wrapper.m_general__2;
-        public InputAction @_3 => m_Wrapper.m_general__3;
-        public InputAction @_4 => m_Wrapper.m_general__4;
-        public InputAction @_5 => m_Wrapper.m_general__5;
-        public InputAction @_6 => m_Wrapper.m_general__6;
-        public InputAction @_7 => m_Wrapper.m_general__7;
-        public InputAction @_8 => m_Wrapper.m_general__8;
-        public InputAction @_9 => m_Wrapper.m_general__9;
-        public InputActionMap Get() { return m_Wrapper.m_general; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
-        public void AddCallbacks(IGeneralActions instance)
-        {
-            if (instance == null || m_Wrapper.m_GeneralActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GeneralActionsCallbackInterfaces.Add(instance);
-            @AnyKey.started += instance.OnAnyKey;
-            @AnyKey.performed += instance.OnAnyKey;
-            @AnyKey.canceled += instance.OnAnyKey;
-            @GamepadButton.started += instance.OnGamepadButton;
-            @GamepadButton.performed += instance.OnGamepadButton;
-            @GamepadButton.canceled += instance.OnGamepadButton;
-            @Debug.started += instance.OnDebug;
-            @Debug.performed += instance.OnDebug;
-            @Debug.canceled += instance.OnDebug;
-            @Start.started += instance.OnStart;
-            @Start.performed += instance.OnStart;
-            @Start.canceled += instance.OnStart;
-            @LeftClick.started += instance.OnLeftClick;
-            @LeftClick.performed += instance.OnLeftClick;
-            @LeftClick.canceled += instance.OnLeftClick;
-            @RightClick.started += instance.OnRightClick;
-            @RightClick.performed += instance.OnRightClick;
-            @RightClick.canceled += instance.OnRightClick;
-            @ScrollWheel.started += instance.OnScrollWheel;
-            @ScrollWheel.performed += instance.OnScrollWheel;
-            @ScrollWheel.canceled += instance.OnScrollWheel;
-            @Shift.started += instance.OnShift;
-            @Shift.performed += instance.OnShift;
-            @Shift.canceled += instance.OnShift;
-            @Control.started += instance.OnControl;
-            @Control.performed += instance.OnControl;
-            @Control.canceled += instance.OnControl;
-            @Tab.started += instance.OnTab;
-            @Tab.performed += instance.OnTab;
-            @Tab.canceled += instance.OnTab;
-            @TabLeft.started += instance.OnTabLeft;
-            @TabLeft.performed += instance.OnTabLeft;
-            @TabLeft.canceled += instance.OnTabLeft;
-            @TabRight.started += instance.OnTabRight;
-            @TabRight.performed += instance.OnTabRight;
-            @TabRight.canceled += instance.OnTabRight;
-            @Up.started += instance.OnUp;
-            @Up.performed += instance.OnUp;
-            @Up.canceled += instance.OnUp;
-            @Down.started += instance.OnDown;
-            @Down.performed += instance.OnDown;
-            @Down.canceled += instance.OnDown;
-            @Left.started += instance.OnLeft;
-            @Left.performed += instance.OnLeft;
-            @Left.canceled += instance.OnLeft;
-            @Right.started += instance.OnRight;
-            @Right.performed += instance.OnRight;
-            @Right.canceled += instance.OnRight;
-            @Confirm.started += instance.OnConfirm;
-            @Confirm.performed += instance.OnConfirm;
-            @Confirm.canceled += instance.OnConfirm;
-            @Discard.started += instance.OnDiscard;
-            @Discard.performed += instance.OnDiscard;
-            @Discard.canceled += instance.OnDiscard;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
-            @_0.started += instance.On_0;
-            @_0.performed += instance.On_0;
-            @_0.canceled += instance.On_0;
-            @_1.started += instance.On_1;
-            @_1.performed += instance.On_1;
-            @_1.canceled += instance.On_1;
-            @_2.started += instance.On_2;
-            @_2.performed += instance.On_2;
-            @_2.canceled += instance.On_2;
-            @_3.started += instance.On_3;
-            @_3.performed += instance.On_3;
-            @_3.canceled += instance.On_3;
-            @_4.started += instance.On_4;
-            @_4.performed += instance.On_4;
-            @_4.canceled += instance.On_4;
-            @_5.started += instance.On_5;
-            @_5.performed += instance.On_5;
-            @_5.canceled += instance.On_5;
-            @_6.started += instance.On_6;
-            @_6.performed += instance.On_6;
-            @_6.canceled += instance.On_6;
-            @_7.started += instance.On_7;
-            @_7.performed += instance.On_7;
-            @_7.canceled += instance.On_7;
-            @_8.started += instance.On_8;
-            @_8.performed += instance.On_8;
-            @_8.canceled += instance.On_8;
-            @_9.started += instance.On_9;
-            @_9.performed += instance.On_9;
-            @_9.canceled += instance.On_9;
-        }
-
-        private void UnregisterCallbacks(IGeneralActions instance)
-        {
-            @AnyKey.started -= instance.OnAnyKey;
-            @AnyKey.performed -= instance.OnAnyKey;
-            @AnyKey.canceled -= instance.OnAnyKey;
-            @GamepadButton.started -= instance.OnGamepadButton;
-            @GamepadButton.performed -= instance.OnGamepadButton;
-            @GamepadButton.canceled -= instance.OnGamepadButton;
-            @Debug.started -= instance.OnDebug;
-            @Debug.performed -= instance.OnDebug;
-            @Debug.canceled -= instance.OnDebug;
-            @Start.started -= instance.OnStart;
-            @Start.performed -= instance.OnStart;
-            @Start.canceled -= instance.OnStart;
-            @LeftClick.started -= instance.OnLeftClick;
-            @LeftClick.performed -= instance.OnLeftClick;
-            @LeftClick.canceled -= instance.OnLeftClick;
-            @RightClick.started -= instance.OnRightClick;
-            @RightClick.performed -= instance.OnRightClick;
-            @RightClick.canceled -= instance.OnRightClick;
-            @ScrollWheel.started -= instance.OnScrollWheel;
-            @ScrollWheel.performed -= instance.OnScrollWheel;
-            @ScrollWheel.canceled -= instance.OnScrollWheel;
-            @Shift.started -= instance.OnShift;
-            @Shift.performed -= instance.OnShift;
-            @Shift.canceled -= instance.OnShift;
-            @Control.started -= instance.OnControl;
-            @Control.performed -= instance.OnControl;
-            @Control.canceled -= instance.OnControl;
-            @Tab.started -= instance.OnTab;
-            @Tab.performed -= instance.OnTab;
-            @Tab.canceled -= instance.OnTab;
-            @TabLeft.started -= instance.OnTabLeft;
-            @TabLeft.performed -= instance.OnTabLeft;
-            @TabLeft.canceled -= instance.OnTabLeft;
-            @TabRight.started -= instance.OnTabRight;
-            @TabRight.performed -= instance.OnTabRight;
-            @TabRight.canceled -= instance.OnTabRight;
-            @Up.started -= instance.OnUp;
-            @Up.performed -= instance.OnUp;
-            @Up.canceled -= instance.OnUp;
-            @Down.started -= instance.OnDown;
-            @Down.performed -= instance.OnDown;
-            @Down.canceled -= instance.OnDown;
-            @Left.started -= instance.OnLeft;
-            @Left.performed -= instance.OnLeft;
-            @Left.canceled -= instance.OnLeft;
-            @Right.started -= instance.OnRight;
-            @Right.performed -= instance.OnRight;
-            @Right.canceled -= instance.OnRight;
-            @Confirm.started -= instance.OnConfirm;
-            @Confirm.performed -= instance.OnConfirm;
-            @Confirm.canceled -= instance.OnConfirm;
-            @Discard.started -= instance.OnDiscard;
-            @Discard.performed -= instance.OnDiscard;
-            @Discard.canceled -= instance.OnDiscard;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
-            @_0.started -= instance.On_0;
-            @_0.performed -= instance.On_0;
-            @_0.canceled -= instance.On_0;
-            @_1.started -= instance.On_1;
-            @_1.performed -= instance.On_1;
-            @_1.canceled -= instance.On_1;
-            @_2.started -= instance.On_2;
-            @_2.performed -= instance.On_2;
-            @_2.canceled -= instance.On_2;
-            @_3.started -= instance.On_3;
-            @_3.performed -= instance.On_3;
-            @_3.canceled -= instance.On_3;
-            @_4.started -= instance.On_4;
-            @_4.performed -= instance.On_4;
-            @_4.canceled -= instance.On_4;
-            @_5.started -= instance.On_5;
-            @_5.performed -= instance.On_5;
-            @_5.canceled -= instance.On_5;
-            @_6.started -= instance.On_6;
-            @_6.performed -= instance.On_6;
-            @_6.canceled -= instance.On_6;
-            @_7.started -= instance.On_7;
-            @_7.performed -= instance.On_7;
-            @_7.canceled -= instance.On_7;
-            @_8.started -= instance.On_8;
-            @_8.performed -= instance.On_8;
-            @_8.canceled -= instance.On_8;
-            @_9.started -= instance.On_9;
-            @_9.performed -= instance.On_9;
-            @_9.canceled -= instance.On_9;
-        }
-
-        public void RemoveCallbacks(IGeneralActions instance)
-        {
-            if (m_Wrapper.m_GeneralActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IGeneralActions instance)
-        {
-            foreach (var item in m_Wrapper.m_GeneralActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_GeneralActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public GeneralActions @general => new GeneralActions(this);
-
+    m_general = asset.FindActionMap("general", throwIfNotFound: true);
+    m_general_AnyKey = m_general.FindAction("AnyKey", throwIfNotFound: true);
+    m_general_GamepadButton = m_general.FindAction("GamepadButton", throwIfNotFound: true);
+    m_general_Debug = m_general.FindAction("Debug", throwIfNotFound: true);
+    m_general_Start = m_general.FindAction("Start", throwIfNotFound: true);
+    m_general_LeftClick = m_general.FindAction("LeftClick", throwIfNotFound: true);
+    m_general_RightClick = m_general.FindAction("RightClick", throwIfNotFound: true);
+    m_general_ScrollWheel = m_general.FindAction("ScrollWheel", throwIfNotFound: true);
+    m_general_Shift = m_general.FindAction("Shift", throwIfNotFound: true);
+    m_general_Control = m_general.FindAction("Control", throwIfNotFound: true);
+    m_general_Tab = m_general.FindAction("Tab", throwIfNotFound: true);
+    m_general_TabLeft = m_general.FindAction("TabLeft", throwIfNotFound: true);
+    m_general_TabRight = m_general.FindAction("TabRight", throwIfNotFound: true);
+    m_general_Up = m_general.FindAction("Up", throwIfNotFound: true);
+    m_general_Down = m_general.FindAction("Down", throwIfNotFound: true);
+    m_general_Left = m_general.FindAction("Left", throwIfNotFound: true);
+    m_general_Right = m_general.FindAction("Right", throwIfNotFound: true);
+    m_general_Confirm = m_general.FindAction("Confirm", throwIfNotFound: true);
+    m_general_Discard = m_general.FindAction("Discard", throwIfNotFound: true);
+    m_general_Cancel = m_general.FindAction("Cancel", throwIfNotFound: true);
+    m_general_Save = m_general.FindAction("Save", throwIfNotFound: true);
+    m_general__0 = m_general.FindAction("0", throwIfNotFound: true);
+    m_general__1 = m_general.FindAction("1", throwIfNotFound: true);
+    m_general__2 = m_general.FindAction("2", throwIfNotFound: true);
+    m_general__3 = m_general.FindAction("3", throwIfNotFound: true);
+    m_general__4 = m_general.FindAction("4", throwIfNotFound: true);
+    m_general__5 = m_general.FindAction("5", throwIfNotFound: true);
+    m_general__6 = m_general.FindAction("6", throwIfNotFound: true);
+    m_general__7 = m_general.FindAction("7", throwIfNotFound: true);
+    m_general__8 = m_general.FindAction("8", throwIfNotFound: true);
+    m_general__9 = m_general.FindAction("9", throwIfNotFound: true);
     // camera
-    private readonly InputActionMap m_camera;
-    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-    private readonly InputAction m_camera_Horizontal;
-    private readonly InputAction m_camera_Vertical;
-    private readonly InputAction m_camera_RAnalogX;
-    private readonly InputAction m_camera_RAnalogY;
-    private readonly InputAction m_camera_MouseX;
-    private readonly InputAction m_camera_MouseY;
-    public struct CameraActions
-    {
-        private @Controls m_Wrapper;
-        public CameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Horizontal => m_Wrapper.m_camera_Horizontal;
-        public InputAction @Vertical => m_Wrapper.m_camera_Vertical;
-        public InputAction @RAnalogX => m_Wrapper.m_camera_RAnalogX;
-        public InputAction @RAnalogY => m_Wrapper.m_camera_RAnalogY;
-        public InputAction @MouseX => m_Wrapper.m_camera_MouseX;
-        public InputAction @MouseY => m_Wrapper.m_camera_MouseY;
-        public InputActionMap Get() { return m_Wrapper.m_camera; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void AddCallbacks(ICameraActions instance)
-        {
-            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
-            @Horizontal.started += instance.OnHorizontal;
-            @Horizontal.performed += instance.OnHorizontal;
-            @Horizontal.canceled += instance.OnHorizontal;
-            @Vertical.started += instance.OnVertical;
-            @Vertical.performed += instance.OnVertical;
-            @Vertical.canceled += instance.OnVertical;
-            @RAnalogX.started += instance.OnRAnalogX;
-            @RAnalogX.performed += instance.OnRAnalogX;
-            @RAnalogX.canceled += instance.OnRAnalogX;
-            @RAnalogY.started += instance.OnRAnalogY;
-            @RAnalogY.performed += instance.OnRAnalogY;
-            @RAnalogY.canceled += instance.OnRAnalogY;
-            @MouseX.started += instance.OnMouseX;
-            @MouseX.performed += instance.OnMouseX;
-            @MouseX.canceled += instance.OnMouseX;
-            @MouseY.started += instance.OnMouseY;
-            @MouseY.performed += instance.OnMouseY;
-            @MouseY.canceled += instance.OnMouseY;
-        }
+    m_camera = asset.FindActionMap("camera", throwIfNotFound: true);
+    m_camera_Horizontal = m_camera.FindAction("Horizontal", throwIfNotFound: true);
+    m_camera_Vertical = m_camera.FindAction("Vertical", throwIfNotFound: true);
+    m_camera_RAnalogX = m_camera.FindAction("RAnalogX", throwIfNotFound: true);
+    m_camera_RAnalogY = m_camera.FindAction("RAnalogY", throwIfNotFound: true);
+    m_camera_MouseX = m_camera.FindAction("MouseX", throwIfNotFound: true);
+    m_camera_MouseY = m_camera.FindAction("MouseY", throwIfNotFound: true);
+  }
 
-        private void UnregisterCallbacks(ICameraActions instance)
-        {
-            @Horizontal.started -= instance.OnHorizontal;
-            @Horizontal.performed -= instance.OnHorizontal;
-            @Horizontal.canceled -= instance.OnHorizontal;
-            @Vertical.started -= instance.OnVertical;
-            @Vertical.performed -= instance.OnVertical;
-            @Vertical.canceled -= instance.OnVertical;
-            @RAnalogX.started -= instance.OnRAnalogX;
-            @RAnalogX.performed -= instance.OnRAnalogX;
-            @RAnalogX.canceled -= instance.OnRAnalogX;
-            @RAnalogY.started -= instance.OnRAnalogY;
-            @RAnalogY.performed -= instance.OnRAnalogY;
-            @RAnalogY.canceled -= instance.OnRAnalogY;
-            @MouseX.started -= instance.OnMouseX;
-            @MouseX.performed -= instance.OnMouseX;
-            @MouseX.canceled -= instance.OnMouseX;
-            @MouseY.started -= instance.OnMouseY;
-            @MouseY.performed -= instance.OnMouseY;
-            @MouseY.canceled -= instance.OnMouseY;
-        }
+  public void Dispose() {
+    UnityEngine.Object.Destroy(asset);
+  }
 
-        public void RemoveCallbacks(ICameraActions instance)
-        {
-            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
+  public InputBinding? bindingMask {
+    get => asset.bindingMask;
+    set => asset.bindingMask = value;
+  }
 
-        public void SetCallbacks(ICameraActions instance)
-        {
-            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
+  public ReadOnlyArray<InputDevice>? devices {
+    get => asset.devices;
+    set => asset.devices = value;
+  }
+
+  public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+  public bool Contains(InputAction action) {
+    return asset.Contains(action);
+  }
+
+  public IEnumerator<InputAction> GetEnumerator() {
+    return asset.GetEnumerator();
+  }
+
+  IEnumerator IEnumerable.GetEnumerator() {
+    return GetEnumerator();
+  }
+
+  public void Enable() {
+    asset.Enable();
+  }
+
+  public void Disable() {
+    asset.Disable();
+  }
+
+  public IEnumerable<InputBinding> bindings => asset.bindings;
+
+  public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false) {
+    return asset.FindAction(actionNameOrId, throwIfNotFound);
+  }
+
+  public int FindBinding(InputBinding bindingMask, out InputAction action) {
+    return asset.FindBinding(bindingMask, out action);
+  }
+
+  // general
+  private readonly InputActionMap m_general;
+  private List<IGeneralActions> m_GeneralActionsCallbackInterfaces = new List<IGeneralActions>();
+  private readonly InputAction m_general_AnyKey;
+  private readonly InputAction m_general_GamepadButton;
+  private readonly InputAction m_general_Debug;
+  private readonly InputAction m_general_Start;
+  private readonly InputAction m_general_LeftClick;
+  private readonly InputAction m_general_RightClick;
+  private readonly InputAction m_general_ScrollWheel;
+  private readonly InputAction m_general_Shift;
+  private readonly InputAction m_general_Control;
+  private readonly InputAction m_general_Tab;
+  private readonly InputAction m_general_TabLeft;
+  private readonly InputAction m_general_TabRight;
+  private readonly InputAction m_general_Up;
+  private readonly InputAction m_general_Down;
+  private readonly InputAction m_general_Left;
+  private readonly InputAction m_general_Right;
+  private readonly InputAction m_general_Confirm;
+  private readonly InputAction m_general_Discard;
+  private readonly InputAction m_general_Cancel;
+  private readonly InputAction m_general_Save;
+  private readonly InputAction m_general__0;
+  private readonly InputAction m_general__1;
+  private readonly InputAction m_general__2;
+  private readonly InputAction m_general__3;
+  private readonly InputAction m_general__4;
+  private readonly InputAction m_general__5;
+  private readonly InputAction m_general__6;
+  private readonly InputAction m_general__7;
+  private readonly InputAction m_general__8;
+  private readonly InputAction m_general__9;
+  public struct GeneralActions {
+    private @Controls m_Wrapper;
+    public GeneralActions(@Controls wrapper) { m_Wrapper = wrapper; }
+    public InputAction @AnyKey => m_Wrapper.m_general_AnyKey;
+    public InputAction @GamepadButton => m_Wrapper.m_general_GamepadButton;
+    public InputAction @Debug => m_Wrapper.m_general_Debug;
+    public InputAction @Start => m_Wrapper.m_general_Start;
+    public InputAction @LeftClick => m_Wrapper.m_general_LeftClick;
+    public InputAction @RightClick => m_Wrapper.m_general_RightClick;
+    public InputAction @ScrollWheel => m_Wrapper.m_general_ScrollWheel;
+    public InputAction @Shift => m_Wrapper.m_general_Shift;
+    public InputAction @Control => m_Wrapper.m_general_Control;
+    public InputAction @Tab => m_Wrapper.m_general_Tab;
+    public InputAction @TabLeft => m_Wrapper.m_general_TabLeft;
+    public InputAction @TabRight => m_Wrapper.m_general_TabRight;
+    public InputAction @Up => m_Wrapper.m_general_Up;
+    public InputAction @Down => m_Wrapper.m_general_Down;
+    public InputAction @Left => m_Wrapper.m_general_Left;
+    public InputAction @Right => m_Wrapper.m_general_Right;
+    public InputAction @Confirm => m_Wrapper.m_general_Confirm;
+    public InputAction @Discard => m_Wrapper.m_general_Discard;
+    public InputAction @Cancel => m_Wrapper.m_general_Cancel;
+    public InputAction @Save => m_Wrapper.m_general_Save;
+    public InputAction @_0 => m_Wrapper.m_general__0;
+    public InputAction @_1 => m_Wrapper.m_general__1;
+    public InputAction @_2 => m_Wrapper.m_general__2;
+    public InputAction @_3 => m_Wrapper.m_general__3;
+    public InputAction @_4 => m_Wrapper.m_general__4;
+    public InputAction @_5 => m_Wrapper.m_general__5;
+    public InputAction @_6 => m_Wrapper.m_general__6;
+    public InputAction @_7 => m_Wrapper.m_general__7;
+    public InputAction @_8 => m_Wrapper.m_general__8;
+    public InputAction @_9 => m_Wrapper.m_general__9;
+    public InputActionMap Get() { return m_Wrapper.m_general; }
+    public void Enable() { Get().Enable(); }
+    public void Disable() { Get().Disable(); }
+    public bool enabled => Get().enabled;
+    public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
+    public void AddCallbacks(IGeneralActions instance) {
+      if (instance == null || m_Wrapper.m_GeneralActionsCallbackInterfaces.Contains(instance)) return;
+      m_Wrapper.m_GeneralActionsCallbackInterfaces.Add(instance);
+      @AnyKey.started += instance.OnAnyKey;
+      @AnyKey.performed += instance.OnAnyKey;
+      @AnyKey.canceled += instance.OnAnyKey;
+      @GamepadButton.started += instance.OnGamepadButton;
+      @GamepadButton.performed += instance.OnGamepadButton;
+      @GamepadButton.canceled += instance.OnGamepadButton;
+      @Debug.started += instance.OnDebug;
+      @Debug.performed += instance.OnDebug;
+      @Debug.canceled += instance.OnDebug;
+      @Start.started += instance.OnStart;
+      @Start.performed += instance.OnStart;
+      @Start.canceled += instance.OnStart;
+      @LeftClick.started += instance.OnLeftClick;
+      @LeftClick.performed += instance.OnLeftClick;
+      @LeftClick.canceled += instance.OnLeftClick;
+      @RightClick.started += instance.OnRightClick;
+      @RightClick.performed += instance.OnRightClick;
+      @RightClick.canceled += instance.OnRightClick;
+      @ScrollWheel.started += instance.OnScrollWheel;
+      @ScrollWheel.performed += instance.OnScrollWheel;
+      @ScrollWheel.canceled += instance.OnScrollWheel;
+      @Shift.started += instance.OnShift;
+      @Shift.performed += instance.OnShift;
+      @Shift.canceled += instance.OnShift;
+      @Control.started += instance.OnControl;
+      @Control.performed += instance.OnControl;
+      @Control.canceled += instance.OnControl;
+      @Tab.started += instance.OnTab;
+      @Tab.performed += instance.OnTab;
+      @Tab.canceled += instance.OnTab;
+      @TabLeft.started += instance.OnTabLeft;
+      @TabLeft.performed += instance.OnTabLeft;
+      @TabLeft.canceled += instance.OnTabLeft;
+      @TabRight.started += instance.OnTabRight;
+      @TabRight.performed += instance.OnTabRight;
+      @TabRight.canceled += instance.OnTabRight;
+      @Up.started += instance.OnUp;
+      @Up.performed += instance.OnUp;
+      @Up.canceled += instance.OnUp;
+      @Down.started += instance.OnDown;
+      @Down.performed += instance.OnDown;
+      @Down.canceled += instance.OnDown;
+      @Left.started += instance.OnLeft;
+      @Left.performed += instance.OnLeft;
+      @Left.canceled += instance.OnLeft;
+      @Right.started += instance.OnRight;
+      @Right.performed += instance.OnRight;
+      @Right.canceled += instance.OnRight;
+      @Confirm.started += instance.OnConfirm;
+      @Confirm.performed += instance.OnConfirm;
+      @Confirm.canceled += instance.OnConfirm;
+      @Discard.started += instance.OnDiscard;
+      @Discard.performed += instance.OnDiscard;
+      @Discard.canceled += instance.OnDiscard;
+      @Cancel.started += instance.OnCancel;
+      @Cancel.performed += instance.OnCancel;
+      @Cancel.canceled += instance.OnCancel;
+      @Save.started += instance.OnSave;
+      @Save.performed += instance.OnSave;
+      @Save.canceled += instance.OnSave;
+      @_0.started += instance.On_0;
+      @_0.performed += instance.On_0;
+      @_0.canceled += instance.On_0;
+      @_1.started += instance.On_1;
+      @_1.performed += instance.On_1;
+      @_1.canceled += instance.On_1;
+      @_2.started += instance.On_2;
+      @_2.performed += instance.On_2;
+      @_2.canceled += instance.On_2;
+      @_3.started += instance.On_3;
+      @_3.performed += instance.On_3;
+      @_3.canceled += instance.On_3;
+      @_4.started += instance.On_4;
+      @_4.performed += instance.On_4;
+      @_4.canceled += instance.On_4;
+      @_5.started += instance.On_5;
+      @_5.performed += instance.On_5;
+      @_5.canceled += instance.On_5;
+      @_6.started += instance.On_6;
+      @_6.performed += instance.On_6;
+      @_6.canceled += instance.On_6;
+      @_7.started += instance.On_7;
+      @_7.performed += instance.On_7;
+      @_7.canceled += instance.On_7;
+      @_8.started += instance.On_8;
+      @_8.performed += instance.On_8;
+      @_8.canceled += instance.On_8;
+      @_9.started += instance.On_9;
+      @_9.performed += instance.On_9;
+      @_9.canceled += instance.On_9;
     }
-    public CameraActions @camera => new CameraActions(this);
-    private int m_KeyboardMouseSchemeIndex = -1;
-    public InputControlScheme KeyboardMouseScheme
-    {
-        get
-        {
-            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
-            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
-        }
+
+    private void UnregisterCallbacks(IGeneralActions instance) {
+      @AnyKey.started -= instance.OnAnyKey;
+      @AnyKey.performed -= instance.OnAnyKey;
+      @AnyKey.canceled -= instance.OnAnyKey;
+      @GamepadButton.started -= instance.OnGamepadButton;
+      @GamepadButton.performed -= instance.OnGamepadButton;
+      @GamepadButton.canceled -= instance.OnGamepadButton;
+      @Debug.started -= instance.OnDebug;
+      @Debug.performed -= instance.OnDebug;
+      @Debug.canceled -= instance.OnDebug;
+      @Start.started -= instance.OnStart;
+      @Start.performed -= instance.OnStart;
+      @Start.canceled -= instance.OnStart;
+      @LeftClick.started -= instance.OnLeftClick;
+      @LeftClick.performed -= instance.OnLeftClick;
+      @LeftClick.canceled -= instance.OnLeftClick;
+      @RightClick.started -= instance.OnRightClick;
+      @RightClick.performed -= instance.OnRightClick;
+      @RightClick.canceled -= instance.OnRightClick;
+      @ScrollWheel.started -= instance.OnScrollWheel;
+      @ScrollWheel.performed -= instance.OnScrollWheel;
+      @ScrollWheel.canceled -= instance.OnScrollWheel;
+      @Shift.started -= instance.OnShift;
+      @Shift.performed -= instance.OnShift;
+      @Shift.canceled -= instance.OnShift;
+      @Control.started -= instance.OnControl;
+      @Control.performed -= instance.OnControl;
+      @Control.canceled -= instance.OnControl;
+      @Tab.started -= instance.OnTab;
+      @Tab.performed -= instance.OnTab;
+      @Tab.canceled -= instance.OnTab;
+      @TabLeft.started -= instance.OnTabLeft;
+      @TabLeft.performed -= instance.OnTabLeft;
+      @TabLeft.canceled -= instance.OnTabLeft;
+      @TabRight.started -= instance.OnTabRight;
+      @TabRight.performed -= instance.OnTabRight;
+      @TabRight.canceled -= instance.OnTabRight;
+      @Up.started -= instance.OnUp;
+      @Up.performed -= instance.OnUp;
+      @Up.canceled -= instance.OnUp;
+      @Down.started -= instance.OnDown;
+      @Down.performed -= instance.OnDown;
+      @Down.canceled -= instance.OnDown;
+      @Left.started -= instance.OnLeft;
+      @Left.performed -= instance.OnLeft;
+      @Left.canceled -= instance.OnLeft;
+      @Right.started -= instance.OnRight;
+      @Right.performed -= instance.OnRight;
+      @Right.canceled -= instance.OnRight;
+      @Confirm.started -= instance.OnConfirm;
+      @Confirm.performed -= instance.OnConfirm;
+      @Confirm.canceled -= instance.OnConfirm;
+      @Discard.started -= instance.OnDiscard;
+      @Discard.performed -= instance.OnDiscard;
+      @Discard.canceled -= instance.OnDiscard;
+      @Cancel.started -= instance.OnCancel;
+      @Cancel.performed -= instance.OnCancel;
+      @Cancel.canceled -= instance.OnCancel;
+      @Save.started -= instance.OnSave;
+      @Save.performed -= instance.OnSave;
+      @Save.canceled -= instance.OnSave;
+      @_0.started -= instance.On_0;
+      @_0.performed -= instance.On_0;
+      @_0.canceled -= instance.On_0;
+      @_1.started -= instance.On_1;
+      @_1.performed -= instance.On_1;
+      @_1.canceled -= instance.On_1;
+      @_2.started -= instance.On_2;
+      @_2.performed -= instance.On_2;
+      @_2.canceled -= instance.On_2;
+      @_3.started -= instance.On_3;
+      @_3.performed -= instance.On_3;
+      @_3.canceled -= instance.On_3;
+      @_4.started -= instance.On_4;
+      @_4.performed -= instance.On_4;
+      @_4.canceled -= instance.On_4;
+      @_5.started -= instance.On_5;
+      @_5.performed -= instance.On_5;
+      @_5.canceled -= instance.On_5;
+      @_6.started -= instance.On_6;
+      @_6.performed -= instance.On_6;
+      @_6.canceled -= instance.On_6;
+      @_7.started -= instance.On_7;
+      @_7.performed -= instance.On_7;
+      @_7.canceled -= instance.On_7;
+      @_8.started -= instance.On_8;
+      @_8.performed -= instance.On_8;
+      @_8.canceled -= instance.On_8;
+      @_9.started -= instance.On_9;
+      @_9.performed -= instance.On_9;
+      @_9.canceled -= instance.On_9;
     }
-    private int m_GamepadSchemeIndex = -1;
-    public InputControlScheme GamepadScheme
-    {
-        get
-        {
-            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
-            return asset.controlSchemes[m_GamepadSchemeIndex];
-        }
+
+    public void RemoveCallbacks(IGeneralActions instance) {
+      if (m_Wrapper.m_GeneralActionsCallbackInterfaces.Remove(instance))
+        UnregisterCallbacks(instance);
     }
-    private int m_TouchSchemeIndex = -1;
-    public InputControlScheme TouchScheme
-    {
-        get
-        {
-            if (m_TouchSchemeIndex == -1) m_TouchSchemeIndex = asset.FindControlSchemeIndex("Touch");
-            return asset.controlSchemes[m_TouchSchemeIndex];
-        }
+
+    public void SetCallbacks(IGeneralActions instance) {
+      foreach (var item in m_Wrapper.m_GeneralActionsCallbackInterfaces)
+        UnregisterCallbacks(item);
+      m_Wrapper.m_GeneralActionsCallbackInterfaces.Clear();
+      AddCallbacks(instance);
     }
-    private int m_JoystickSchemeIndex = -1;
-    public InputControlScheme JoystickScheme
-    {
-        get
-        {
-            if (m_JoystickSchemeIndex == -1) m_JoystickSchemeIndex = asset.FindControlSchemeIndex("Joystick");
-            return asset.controlSchemes[m_JoystickSchemeIndex];
-        }
+  }
+  public GeneralActions @general => new GeneralActions(this);
+
+  // camera
+  private readonly InputActionMap m_camera;
+  private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+  private readonly InputAction m_camera_Horizontal;
+  private readonly InputAction m_camera_Vertical;
+  private readonly InputAction m_camera_RAnalogX;
+  private readonly InputAction m_camera_RAnalogY;
+  private readonly InputAction m_camera_MouseX;
+  private readonly InputAction m_camera_MouseY;
+  public struct CameraActions {
+    private @Controls m_Wrapper;
+    public CameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
+    public InputAction @Horizontal => m_Wrapper.m_camera_Horizontal;
+    public InputAction @Vertical => m_Wrapper.m_camera_Vertical;
+    public InputAction @RAnalogX => m_Wrapper.m_camera_RAnalogX;
+    public InputAction @RAnalogY => m_Wrapper.m_camera_RAnalogY;
+    public InputAction @MouseX => m_Wrapper.m_camera_MouseX;
+    public InputAction @MouseY => m_Wrapper.m_camera_MouseY;
+    public InputActionMap Get() { return m_Wrapper.m_camera; }
+    public void Enable() { Get().Enable(); }
+    public void Disable() { Get().Disable(); }
+    public bool enabled => Get().enabled;
+    public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+    public void AddCallbacks(ICameraActions instance) {
+      if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+      m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+      @Horizontal.started += instance.OnHorizontal;
+      @Horizontal.performed += instance.OnHorizontal;
+      @Horizontal.canceled += instance.OnHorizontal;
+      @Vertical.started += instance.OnVertical;
+      @Vertical.performed += instance.OnVertical;
+      @Vertical.canceled += instance.OnVertical;
+      @RAnalogX.started += instance.OnRAnalogX;
+      @RAnalogX.performed += instance.OnRAnalogX;
+      @RAnalogX.canceled += instance.OnRAnalogX;
+      @RAnalogY.started += instance.OnRAnalogY;
+      @RAnalogY.performed += instance.OnRAnalogY;
+      @RAnalogY.canceled += instance.OnRAnalogY;
+      @MouseX.started += instance.OnMouseX;
+      @MouseX.performed += instance.OnMouseX;
+      @MouseX.canceled += instance.OnMouseX;
+      @MouseY.started += instance.OnMouseY;
+      @MouseY.performed += instance.OnMouseY;
+      @MouseY.canceled += instance.OnMouseY;
     }
-    private int m_XRSchemeIndex = -1;
-    public InputControlScheme XRScheme
-    {
-        get
-        {
-            if (m_XRSchemeIndex == -1) m_XRSchemeIndex = asset.FindControlSchemeIndex("XR");
-            return asset.controlSchemes[m_XRSchemeIndex];
-        }
+
+    private void UnregisterCallbacks(ICameraActions instance) {
+      @Horizontal.started -= instance.OnHorizontal;
+      @Horizontal.performed -= instance.OnHorizontal;
+      @Horizontal.canceled -= instance.OnHorizontal;
+      @Vertical.started -= instance.OnVertical;
+      @Vertical.performed -= instance.OnVertical;
+      @Vertical.canceled -= instance.OnVertical;
+      @RAnalogX.started -= instance.OnRAnalogX;
+      @RAnalogX.performed -= instance.OnRAnalogX;
+      @RAnalogX.canceled -= instance.OnRAnalogX;
+      @RAnalogY.started -= instance.OnRAnalogY;
+      @RAnalogY.performed -= instance.OnRAnalogY;
+      @RAnalogY.canceled -= instance.OnRAnalogY;
+      @MouseX.started -= instance.OnMouseX;
+      @MouseX.performed -= instance.OnMouseX;
+      @MouseX.canceled -= instance.OnMouseX;
+      @MouseY.started -= instance.OnMouseY;
+      @MouseY.performed -= instance.OnMouseY;
+      @MouseY.canceled -= instance.OnMouseY;
     }
-    public interface IGeneralActions
-    {
-        void OnAnyKey(InputAction.CallbackContext context);
-        void OnGamepadButton(InputAction.CallbackContext context);
-        void OnDebug(InputAction.CallbackContext context);
-        void OnStart(InputAction.CallbackContext context);
-        void OnLeftClick(InputAction.CallbackContext context);
-        void OnRightClick(InputAction.CallbackContext context);
-        void OnScrollWheel(InputAction.CallbackContext context);
-        void OnShift(InputAction.CallbackContext context);
-        void OnControl(InputAction.CallbackContext context);
-        void OnTab(InputAction.CallbackContext context);
-        void OnTabLeft(InputAction.CallbackContext context);
-        void OnTabRight(InputAction.CallbackContext context);
-        void OnUp(InputAction.CallbackContext context);
-        void OnDown(InputAction.CallbackContext context);
-        void OnLeft(InputAction.CallbackContext context);
-        void OnRight(InputAction.CallbackContext context);
-        void OnConfirm(InputAction.CallbackContext context);
-        void OnDiscard(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
-        void On_0(InputAction.CallbackContext context);
-        void On_1(InputAction.CallbackContext context);
-        void On_2(InputAction.CallbackContext context);
-        void On_3(InputAction.CallbackContext context);
-        void On_4(InputAction.CallbackContext context);
-        void On_5(InputAction.CallbackContext context);
-        void On_6(InputAction.CallbackContext context);
-        void On_7(InputAction.CallbackContext context);
-        void On_8(InputAction.CallbackContext context);
-        void On_9(InputAction.CallbackContext context);
+
+    public void RemoveCallbacks(ICameraActions instance) {
+      if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+        UnregisterCallbacks(instance);
     }
-    public interface ICameraActions
-    {
-        void OnHorizontal(InputAction.CallbackContext context);
-        void OnVertical(InputAction.CallbackContext context);
-        void OnRAnalogX(InputAction.CallbackContext context);
-        void OnRAnalogY(InputAction.CallbackContext context);
-        void OnMouseX(InputAction.CallbackContext context);
-        void OnMouseY(InputAction.CallbackContext context);
+
+    public void SetCallbacks(ICameraActions instance) {
+      foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+        UnregisterCallbacks(item);
+      m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+      AddCallbacks(instance);
     }
+  }
+  public CameraActions @camera => new CameraActions(this);
+  private int m_KeyboardMouseSchemeIndex = -1;
+  public InputControlScheme KeyboardMouseScheme {
+    get {
+      if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+      return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+    }
+  }
+  private int m_GamepadSchemeIndex = -1;
+  public InputControlScheme GamepadScheme {
+    get {
+      if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+      return asset.controlSchemes[m_GamepadSchemeIndex];
+    }
+  }
+  private int m_TouchSchemeIndex = -1;
+  public InputControlScheme TouchScheme {
+    get {
+      if (m_TouchSchemeIndex == -1) m_TouchSchemeIndex = asset.FindControlSchemeIndex("Touch");
+      return asset.controlSchemes[m_TouchSchemeIndex];
+    }
+  }
+  private int m_JoystickSchemeIndex = -1;
+  public InputControlScheme JoystickScheme {
+    get {
+      if (m_JoystickSchemeIndex == -1) m_JoystickSchemeIndex = asset.FindControlSchemeIndex("Joystick");
+      return asset.controlSchemes[m_JoystickSchemeIndex];
+    }
+  }
+  private int m_XRSchemeIndex = -1;
+  public InputControlScheme XRScheme {
+    get {
+      if (m_XRSchemeIndex == -1) m_XRSchemeIndex = asset.FindControlSchemeIndex("XR");
+      return asset.controlSchemes[m_XRSchemeIndex];
+    }
+  }
+  public interface IGeneralActions {
+    void OnAnyKey(InputAction.CallbackContext context);
+    void OnGamepadButton(InputAction.CallbackContext context);
+    void OnDebug(InputAction.CallbackContext context);
+    void OnStart(InputAction.CallbackContext context);
+    void OnLeftClick(InputAction.CallbackContext context);
+    void OnRightClick(InputAction.CallbackContext context);
+    void OnScrollWheel(InputAction.CallbackContext context);
+    void OnShift(InputAction.CallbackContext context);
+    void OnControl(InputAction.CallbackContext context);
+    void OnTab(InputAction.CallbackContext context);
+    void OnTabLeft(InputAction.CallbackContext context);
+    void OnTabRight(InputAction.CallbackContext context);
+    void OnUp(InputAction.CallbackContext context);
+    void OnDown(InputAction.CallbackContext context);
+    void OnLeft(InputAction.CallbackContext context);
+    void OnRight(InputAction.CallbackContext context);
+    void OnConfirm(InputAction.CallbackContext context);
+    void OnDiscard(InputAction.CallbackContext context);
+    void OnCancel(InputAction.CallbackContext context);
+    void OnSave(InputAction.CallbackContext context);
+    void On_0(InputAction.CallbackContext context);
+    void On_1(InputAction.CallbackContext context);
+    void On_2(InputAction.CallbackContext context);
+    void On_3(InputAction.CallbackContext context);
+    void On_4(InputAction.CallbackContext context);
+    void On_5(InputAction.CallbackContext context);
+    void On_6(InputAction.CallbackContext context);
+    void On_7(InputAction.CallbackContext context);
+    void On_8(InputAction.CallbackContext context);
+    void On_9(InputAction.CallbackContext context);
+  }
+  public interface ICameraActions {
+    void OnHorizontal(InputAction.CallbackContext context);
+    void OnVertical(InputAction.CallbackContext context);
+    void OnRAnalogX(InputAction.CallbackContext context);
+    void OnRAnalogY(InputAction.CallbackContext context);
+    void OnMouseX(InputAction.CallbackContext context);
+    void OnMouseY(InputAction.CallbackContext context);
+  }
 }
