@@ -100,6 +100,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Control"",
+                    ""type"": ""Button"",
+                    ""id"": ""2bef1af4-cfc0-4fad-8daf-511564773f65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Tab"",
                     ""type"": ""Button"",
                     ""id"": ""746efc01-ff42-42d5-8704-4c83b16d419f"",
@@ -1072,6 +1081,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Discard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92a4865a-86b8-4ea8-a063-fc312858b336"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d452d073-0e39-494d-8af3-c66b427a7b03"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1321,6 +1352,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_general_RightClick = m_general.FindAction("RightClick", throwIfNotFound: true);
         m_general_ScrollWheel = m_general.FindAction("ScrollWheel", throwIfNotFound: true);
         m_general_Shift = m_general.FindAction("Shift", throwIfNotFound: true);
+        m_general_Control = m_general.FindAction("Control", throwIfNotFound: true);
         m_general_Tab = m_general.FindAction("Tab", throwIfNotFound: true);
         m_general_TabLeft = m_general.FindAction("TabLeft", throwIfNotFound: true);
         m_general_TabRight = m_general.FindAction("TabRight", throwIfNotFound: true);
@@ -1418,6 +1450,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_general_RightClick;
     private readonly InputAction m_general_ScrollWheel;
     private readonly InputAction m_general_Shift;
+    private readonly InputAction m_general_Control;
     private readonly InputAction m_general_Tab;
     private readonly InputAction m_general_TabLeft;
     private readonly InputAction m_general_TabRight;
@@ -1450,6 +1483,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_general_RightClick;
         public InputAction @ScrollWheel => m_Wrapper.m_general_ScrollWheel;
         public InputAction @Shift => m_Wrapper.m_general_Shift;
+        public InputAction @Control => m_Wrapper.m_general_Control;
         public InputAction @Tab => m_Wrapper.m_general_Tab;
         public InputAction @TabLeft => m_Wrapper.m_general_TabLeft;
         public InputAction @TabRight => m_Wrapper.m_general_TabRight;
@@ -1503,6 +1537,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Shift.started += instance.OnShift;
             @Shift.performed += instance.OnShift;
             @Shift.canceled += instance.OnShift;
+            @Control.started += instance.OnControl;
+            @Control.performed += instance.OnControl;
+            @Control.canceled += instance.OnControl;
             @Tab.started += instance.OnTab;
             @Tab.performed += instance.OnTab;
             @Tab.canceled += instance.OnTab;
@@ -1591,6 +1628,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Shift.started -= instance.OnShift;
             @Shift.performed -= instance.OnShift;
             @Shift.canceled -= instance.OnShift;
+            @Control.started -= instance.OnControl;
+            @Control.performed -= instance.OnControl;
+            @Control.canceled -= instance.OnControl;
             @Tab.started -= instance.OnTab;
             @Tab.performed -= instance.OnTab;
             @Tab.canceled -= instance.OnTab;
@@ -1809,6 +1849,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
+        void OnControl(InputAction.CallbackContext context);
         void OnTab(InputAction.CallbackContext context);
         void OnTabLeft(InputAction.CallbackContext context);
         void OnTabRight(InputAction.CallbackContext context);

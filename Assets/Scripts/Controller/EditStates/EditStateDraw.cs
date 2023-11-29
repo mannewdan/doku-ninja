@@ -32,4 +32,25 @@ public abstract class EditStateDraw : EditState {
       stateMethod.Invoke(owner, null);
     }
   }
+  protected override void OnNumberModified(object sender, object e) {
+    if (e is int number && number > 0 && number <= 3) {
+      MapData newMap = new MapData();
+      switch (number) {
+        case 1:
+          newMap.width = 4;
+          newMap.height = 4;
+          break;
+        case 2:
+          newMap.width = 6;
+          newMap.height = 6;
+          break;
+        case 3:
+          newMap.width = 9;
+          newMap.height = 9;
+          break;
+      }
+      grid.Load(newMap);
+      units.Clear();
+    }
+  }
 }

@@ -80,10 +80,11 @@ public class InputController : MonoBehaviour {
     }
   }
   void UpdateNumber() {
+    var control = controls.FindAction(controls.general.Control.id.ToString());
     for (int i = 0; i <= 9; i++) {
       var action = controls.FindAction($"general/{i}");
       if (action != null && action.WasReleasedThisFrame()) {
-        this.PostNotification(Notifications.NUMBER, i);
+        this.PostNotification((control != null && control.IsPressed()) ? Notifications.CONTROL_NUMBER : Notifications.NUMBER, i);
       }
     }
   }

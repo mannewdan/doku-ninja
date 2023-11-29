@@ -18,6 +18,22 @@ public class TileRenderer : MonoBehaviour {
   protected void Awake() {
     owner = GetComponent<Tile>();
     if (!owner) owner = GetComponentInParent<Tile>();
+    SetBlank();
+  }
+  public void SetBlank() {
+    MeshFilter mFilter = GetComponent<MeshFilter>();
+    List<Vector2> uvs = new List<Vector2>(mFilter.mesh.uv);
+
+    float t = GridParams.TexScale;
+    Vector2 coordinates = new Vector2(7, 7);
+
+    uvs[0] = new Vector2(coordinates.x * t, coordinates.y * t);
+    uvs[1] = new Vector2(coordinates.x * t + t, coordinates.y * t);
+    uvs[2] = new Vector2(coordinates.x * t, coordinates.y * t + t);
+    uvs[3] = new Vector2(coordinates.x * t + t, coordinates.y * t + t);
+
+    Mesh mesh = mFilter.mesh;
+    mesh.uv = uvs.ToArray();
   }
   public void Render() {
     MeshRenderer mRenderer = GetComponent<MeshRenderer>();

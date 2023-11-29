@@ -19,6 +19,7 @@ public abstract class EditState : State {
     this.AddObserver(OnMove, Notifications.MOVE);
     this.AddObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.AddObserver(OnNumber, Notifications.NUMBER);
+    this.AddObserver(OnNumberModified, Notifications.CONTROL_NUMBER);
     this.AddObserver(OnTab, Notifications.TAB);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
     this.AddObserver(OnCancel, Notifications.CANCEL);
@@ -27,6 +28,7 @@ public abstract class EditState : State {
     this.RemoveObserver(OnMove, Notifications.MOVE);
     this.RemoveObserver(OnMoveRepeat, Notifications.MOVE_REPEAT);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
+    this.RemoveObserver(OnNumberModified, Notifications.CONTROL_NUMBER);
     this.RemoveObserver(OnTab, Notifications.TAB);
     this.RemoveObserver(OnConfirm, Notifications.CONFIRM);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
@@ -35,6 +37,7 @@ public abstract class EditState : State {
   protected virtual void OnMove(object sender, object e) { }
   protected virtual void OnMoveRepeat(object sender, object e) { }
   protected virtual void OnNumber(object sender, object e) { }
+  protected virtual void OnNumberModified(object sender, object e) { }
   protected virtual void OnTab(object sender, object e) { }
   protected virtual void OnConfirm(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
