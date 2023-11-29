@@ -49,8 +49,7 @@ public abstract class EditStateDraw : EditState {
           newMap.height = 9;
           break;
       }
-      grid.Load(newMap);
-      units.Clear();
+      owner.mapData = newMap;
     }
   }
 }

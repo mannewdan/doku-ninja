@@ -36,5 +36,6 @@ public class EditStateSolution : EditStateDraw {
     foreach (KeyValuePair<Point, Tile> tile in grid.tiles) {
       tile.Value.digitDisplayMode = DigitDisplayMode.EditSolution;
     }
+    owner.grid.MarkSolutionConflicts();
   }
 }

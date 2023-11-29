@@ -95,9 +95,9 @@ public class Tile : MonoBehaviour {
       countdown = 0;
     }
 
-    if (allowWalling && currentDigit != 0 && currentDigit != solutionDigit) {
+    if (allowWalling && currentDigit != 0 && solutionDigit > 0 && currentDigit != solutionDigit) {
       status = TileStatus.Wall;
-    } else if (allowConfirmation && currentDigit != 0 && currentDigit == solutionDigit) {
+    } else if (allowConfirmation && currentDigit != 0 && solutionDigit > 0 && currentDigit == solutionDigit) {
       status = TileStatus.Confirmed;
     } else {
       status = TileStatus.Undecided;
