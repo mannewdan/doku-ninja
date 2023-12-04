@@ -46,10 +46,10 @@ public class UnitController : MonoBehaviour {
   public bool isPlayer;
 
   void OnEnable() {
-    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.AddObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
   }
   void OnDisable() {
-    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.RemoveObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
   }
 
   //commands

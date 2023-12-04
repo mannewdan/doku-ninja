@@ -40,6 +40,8 @@ public class Grid : MonoBehaviour {
         tiles[t.pos].RenderWall();
       }
     }
+
+    this.PostNotification(Notifications.MAP_SIZE_CHANGED, new Point(width, height));
   }
   public void BuildMap() {
     GenerateGrid();

@@ -49,5 +49,6 @@ public static class Notifications {
   public const string BOMB_ADD_TARGET = "BOMB_ADD_TARGET_NOTIFICATION";
   public const string BOMB_REMOVE_TARGET = "BOMB_REMOVE_TARGET_NOTIFICATION";
 
-  public const string TILE_WALL_CHANGED = "WALL_CHANGED_NOTIFICATION";
+  public const string MAP_WALL_CHANGED = "MAP_WALL_CHANGED_NOTIFICATION";
+  public const string MAP_SIZE_CHANGED = "MAP_SIZE_CHANGED_NOTIFICATION";
 }

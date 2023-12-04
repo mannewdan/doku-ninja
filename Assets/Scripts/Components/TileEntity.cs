@@ -18,13 +18,13 @@ public class TileEntity : MonoBehaviour {
   private TileStatus status { get { return owner.status; } }
 
   void OnEnable() {
-    this.AddObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.AddObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
     this.AddObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
     this.AddObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
     this.AddObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
   }
   void OnDisable() {
-    this.RemoveObserver(TargetTiles, Notifications.TILE_WALL_CHANGED);
+    this.RemoveObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
     this.RemoveObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
     this.RemoveObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
     this.RemoveObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
