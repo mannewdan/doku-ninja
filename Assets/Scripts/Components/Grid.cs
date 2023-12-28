@@ -73,34 +73,13 @@ public class Grid : MonoBehaviour {
       if (d != null) mapData.tiles.Add(d);
     }
   }
-  public bool ValidateBoard(Tile latestTileEdited, bool reactToConflicts = true) {
+  public bool ValidateBoard() {
     bool allSolved = true;
-    List<Conflict> conflicts = new List<Conflict>();
-    bool latestTileRow = false, latestTileColumn = false, latestTileBox = false;
     foreach (KeyValuePair<Point, Tile> tileEntry in tiles) {
       Tile tile = tileEntry.Value;
-      if (tile.currentDigit != tile.solutionDigit) allSolved = false;
-      if (tile.pos == latestTileEdited.pos) continue;
-      if (tile.currentDigit != latestTileEdited.currentDigit) continue;
-
-      bool row = false, column = false, box = false;
-      if (tile.data.pos.y == latestTileEdited.data.pos.y) { row = true; latestTileRow = true; }
-      if (tile.data.pos.x == latestTileEdited.data.pos.x) { column = true; latestTileColumn = true; }
-      if (BoxNumber(tile.data.pos.x, tile.data.pos.y) == BoxNumber(latestTileEdited.pos.x, latestTileEdited.pos.y)) {
-        box = true; latestTileBox = true;
-      }
-
-      if (row || column || box) {
-        conflicts.Add(new Conflict(tile, row, column, box));
-      }
-    }
-
-    if (reactToConflicts) {
-      foreach (Conflict c in conflicts) {
-        c.tile.Evaluate();
-      }
-      if (latestTileRow || latestTileColumn || latestTileBox || latestTileEdited.status == TileStatus.Wall) {
-        latestTileEdited.Evaluate();
+      if (tile.digitStatus != DigitStatus.Confirmed) {
+        allSolved = false;
+        break;
       }
     }
 
@@ -160,6 +139,10 @@ public class Grid : MonoBehaviour {
   public bool IsWalkable(Point p) {
     Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;
     return tile && tile.IsWalkable();
+  }
+  public bool IsWall(Point p) {
+    Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;
+    return tile && tile.IsWall();
   }
   public bool BlocksVisibility(Point p) {
     Tile tile = tiles.ContainsKey(p) ? tiles[p] : null;

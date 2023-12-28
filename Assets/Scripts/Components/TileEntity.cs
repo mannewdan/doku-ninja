@@ -15,7 +15,8 @@ public class TileEntity : MonoBehaviour {
   private UnitManager units { get { return grid.units; } }
   private int countdown { get { return owner.countdown; } }
   private int currentDigit { get { return owner.currentDigit; } }
-  private TileStatus status { get { return owner.status; } }
+  private DigitStatus digitStatus { get { return owner.digitStatus; } }
+  private BombStatus bombStatus { get { return owner.bombStatus; } }
 
   void OnEnable() {
     this.AddObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
@@ -46,11 +47,11 @@ public class TileEntity : MonoBehaviour {
   public void Render() {
     var coordinates = new Vector2(3, 3);
 
-    switch (status) {
-      case TileStatus.BoxBomb:
+    switch (bombStatus) {
+      case BombStatus.Box:
         coordinates = new Vector2(0, countdown == 2 ? 1 : 2);
         break;
-      case TileStatus.StarBomb:
+      case BombStatus.Star:
         coordinates = new Vector2(1, countdown == 2 ? 1 : 2);
         break;
     }
@@ -79,9 +80,9 @@ public class TileEntity : MonoBehaviour {
       if (!tile) continue;
       if (unit) {
         unit.Harm(currentDigit);
-      } else if (tile.status == TileStatus.Wall) {
-        tile.DamageTile(currentDigit, true, true);
-      } else if (tile.IsBomb()) {
+      } else if (digitStatus == DigitStatus.Wall) {
+        tile.DamageWall(currentDigit);
+      } else if (tile.HasBomb()) {
         while (tile.countdown > 0) {
           tile.countdown--;
         }
@@ -93,12 +94,12 @@ public class TileEntity : MonoBehaviour {
   public void TargetTiles(object sender = null, object data = null) {
     ClearTargets();
 
-    if (!owner.IsBomb()) return;
+    if (!owner.HasBomb()) return;
 
     targetedTiles.Add(pos);
     List<Point> candidates = new List<Point>();
-    switch (status) {
-      case TileStatus.BoxBomb:
+    switch (bombStatus) {
+      case BombStatus.Box:
         //n, e, s, w, nw, ne, sw, se
         candidates.AddRange(new List<Point>() {
           new Point(pos.x, pos.y + 1),
@@ -111,7 +112,7 @@ public class TileEntity : MonoBehaviour {
           new Point(pos.x + 1, pos.y - 1)
         });
         break;
-      case TileStatus.StarBomb:
+      case BombStatus.Star:
         for (int x = pos.x - 1; x >= 0; x--) {
           if (TryAddTile(new Point(x, pos.y), candidates)) break;
         }

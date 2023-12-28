@@ -7,7 +7,6 @@ public class EditStateGiven : EditStateDraw {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     if (tile) {
       tile.currentDigit = 0;
-      tile.status = TileStatus.Undecided;
       tile.Evaluate();
       tile.digitDisplayMode = DigitDisplayMode.EditGiven;
     } else {
@@ -19,7 +18,6 @@ public class EditStateGiven : EditStateDraw {
       var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (tile) {
         tile.currentDigit = number;
-        tile.status = TileStatus.Undecided;
         tile.Evaluate();
         tile.digitDisplayMode = DigitDisplayMode.EditGiven;
       } else {

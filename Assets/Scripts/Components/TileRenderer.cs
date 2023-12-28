@@ -67,16 +67,16 @@ public class TileRenderer : MonoBehaviour {
       case TileType.Cliff: coordinates = CliffCoords(west, south, east, north); break;
       case TileType.Ground: coordinates = GroundCoords(west, south, east, north); break;
       case TileType.Wall:
-        if (owner.status != TileStatus.Wall) { coordinates = new Vector2(7, 7); break; }
+        if (owner.digitStatus != DigitStatus.Wall) { coordinates = new Vector2(7, 7); break; }
 
-        west = !grid.tiles.ContainsKey(pWest) ? -1 : grid.tiles[pWest].status == TileStatus.Wall ? 0 : 1;
-        south = !grid.tiles.ContainsKey(pSouth) ? -1 : grid.tiles[pSouth].status == TileStatus.Wall ? 0 : 1;
-        east = !grid.tiles.ContainsKey(pEast) ? -1 : grid.tiles[pEast].status == TileStatus.Wall ? 0 : 1;
-        north = !grid.tiles.ContainsKey(pNorth) ? -1 : grid.tiles[pNorth].status == TileStatus.Wall ? 0 : 1;
-        int southwest = !grid.tiles.ContainsKey(pSouthwest) ? -1 : grid.tiles[pSouthwest].status == TileStatus.Wall ? 0 : 1;
-        int southeast = !grid.tiles.ContainsKey(pSoutheast) ? -1 : grid.tiles[pSoutheast].status == TileStatus.Wall ? 0 : 1;
-        int northwest = !grid.tiles.ContainsKey(pNorthwest) ? -1 : grid.tiles[pNorthwest].status == TileStatus.Wall ? 0 : 1;
-        int northeast = !grid.tiles.ContainsKey(pNortheast) ? -1 : grid.tiles[pNortheast].status == TileStatus.Wall ? 0 : 1;
+        west = !grid.tiles.ContainsKey(pWest) ? -1 : grid.tiles[pWest].digitStatus == DigitStatus.Wall ? 0 : 1;
+        south = !grid.tiles.ContainsKey(pSouth) ? -1 : grid.tiles[pSouth].digitStatus == DigitStatus.Wall ? 0 : 1;
+        east = !grid.tiles.ContainsKey(pEast) ? -1 : grid.tiles[pEast].digitStatus == DigitStatus.Wall ? 0 : 1;
+        north = !grid.tiles.ContainsKey(pNorth) ? -1 : grid.tiles[pNorth].digitStatus == DigitStatus.Wall ? 0 : 1;
+        int southwest = !grid.tiles.ContainsKey(pSouthwest) ? -1 : grid.tiles[pSouthwest].digitStatus == DigitStatus.Wall ? 0 : 1;
+        int southeast = !grid.tiles.ContainsKey(pSoutheast) ? -1 : grid.tiles[pSoutheast].digitStatus == DigitStatus.Wall ? 0 : 1;
+        int northwest = !grid.tiles.ContainsKey(pNorthwest) ? -1 : grid.tiles[pNorthwest].digitStatus == DigitStatus.Wall ? 0 : 1;
+        int northeast = !grid.tiles.ContainsKey(pNortheast) ? -1 : grid.tiles[pNortheast].digitStatus == DigitStatus.Wall ? 0 : 1;
         coordinates = WallCoords(west, south, east, north, southwest, southeast, northwest, northeast); break;
       default: coordinates = Vector2.zero; break;
     }

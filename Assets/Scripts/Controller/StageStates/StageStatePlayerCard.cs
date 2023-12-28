@@ -76,38 +76,46 @@ public class StageStatePlayerCard : StageState {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     var unit = units.unitMap.ContainsKey(pos) ? units.unitMap[pos] : null;
     if (!tile) return;
-    if (pos == player.pos) return; //cards can't be placed on the player
-    if (!unit && tile.status == TileStatus.Confirmed) return; //cards can't interact with confirmed digits
-    if (card.data.isBomb && (unit || (!tile.IsEmpty() && tile.status != TileStatus.Undecided))) return; //bombs can only be placed on empty or unconfirmed tiles
+
+    //cards can't be placed on the player
+    if (pos == player.pos) return;
+
+    bool isBomb = card.data.isBomb;
+    if (isBomb) {
+      //bombs can't be placed on units
+      if (unit) return;
+      //bombs can't be placed on walls
+      if (tile.digitStatus == DigitStatus.Wall) return;
+      //bombs can't be placed on bombs
+      if (tile.HasBomb()) return;
+    } else {
+      //basic cards can only be used on units or empty tiles
+      if (!unit && !tile.IsEmpty()) return;
+    }
+
     if (apManager.HasAP(1)) {
       bool doValidation = false;
-      bool validationReactsToConflicts = true;
-      bool doSpendAP = true;
-      if (unit) {
-        unit.Harm(card.data.value);
-      } else if (tile.status == TileStatus.Wall || tile.IsBomb()) {
-        doValidation = true;
-        bool allowConfirmation = tile.status == TileStatus.Wall;
-        bool allowWalling = tile.status == TileStatus.Wall;
-        tile.DamageTile(card.data.value, allowConfirmation, allowWalling);
-      } else if (card.data.isBomb) {
-        doValidation = true;
-        validationReactsToConflicts = false;
-        tile.currentDigit = card.data.value;
-        tile.status = card.data.type == CardType.BoxBomb ? TileStatus.BoxBomb :
-          card.data.type == CardType.StarBomb ? TileStatus.StarBomb :
-          TileStatus.BoxBomb;
+
+      if (isBomb) {
+        //send this to tile entity and let it handle it?
+        tile.bombDigit = card.data.value;
+        tile.bombStatus = card.data.type == CardType.BoxBomb ? BombStatus.Box :
+          card.data.type == CardType.StarBomb ? BombStatus.Star : BombStatus.Box;
       } else {
-        doValidation = true;
-        tile.currentDigit = card.data.value;
+        if (unit) {
+          unit.Harm(card.data.value);
+        } else if (tile.digitStatus == DigitStatus.Empty) {
+          doValidation = true;
+          tile.currentDigit = card.data.value;
+        }
       }
 
-      if (doValidation && grid.ValidateBoard(tile, validationReactsToConflicts)) {
+      if (doValidation && grid.ValidateBoard()) {
         Debug.Log("Player won");
       }
 
       deck.RemoveCard(card);
-      if (doSpendAP) apManager.SpendAP(1);
+      apManager.SpendAP(1);
     }
   }
   protected override void OnSpentAP(object sender, object e) {

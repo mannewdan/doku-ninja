@@ -12,33 +12,39 @@ public class Tile : MonoBehaviour {
 
   [NonSerialized] public Grid grid;
   public TileData data;
-  public TileStatus status {
-    get { return _status; }
+  public DigitStatus digitStatus {
+    get { return _digitStatus; }
     set {
-      bool updateWalls = (_status == TileStatus.Wall || value == TileStatus.Wall) && _status != value;
-      bool wasBomb = IsBomb();
-
-      _status = value;
-      switch (_status) {
-        case TileStatus.Confirmed: digitDisplayMode = DigitDisplayMode.Confirmed; break;
-        case TileStatus.Wall: digitDisplayMode = DigitDisplayMode.Wall; break;
-        case TileStatus.BoxBomb:
-        case TileStatus.StarBomb:
-          digitDisplayMode = DigitDisplayMode.Bomb;
-          if (!wasBomb) countdown = 2;
+      bool updateWalls = (_digitStatus == DigitStatus.Wall || value == DigitStatus.Wall) && _digitStatus != value;
+      _digitStatus = value;
+      switch (_digitStatus) {
+        case DigitStatus.Confirmed:
+          digitDisplayMode = DigitDisplayMode.Confirmed;
           break;
-        default: digitDisplayMode = DigitDisplayMode.Default; break;
+        case DigitStatus.Wall:
+          digitDisplayMode = DigitDisplayMode.Wall;
+          break;
+        default:
+          digitDisplayMode = DigitDisplayMode.Default;
+          break;
       }
-
       if (updateWalls) {
         this.PostNotification(Notifications.MAP_WALL_CHANGED, pos);
         RenderWall();
         var neighbors = GetNeighbors();
         neighbors.ForEach((Tile t) => {
-          if (t.status == TileStatus.Wall) t.RenderWall();
+          if (t.digitStatus == DigitStatus.Wall) t.RenderWall();
         });
       }
-      if (wasBomb != IsBomb()) {
+
+    }
+  }
+  public BombStatus bombStatus {
+    get { return _bombStatus; }
+    set {
+      bool wasBomb = HasBomb();
+      _bombStatus = value;
+      if (wasBomb != HasBomb()) {
         RenderEntity();
       }
     }
@@ -52,10 +58,13 @@ public class Tile : MonoBehaviour {
       _countdown = value;
       switch (_countdown) {
         case 0:
-          if (currentDigit > 0) {
+          if (bombDigit > 0) {
             this.PostNotification(Notifications.BOMB_EXPLODED, currentDigit);
           }
-          Evaluate(true, false, true);
+          if (digitStatus == DigitStatus.Empty && bombDigit == solutionDigit) {
+            currentDigit = bombDigit;
+            Evaluate();
+          }
           break;
         case 1:
           this.PostNotification(Notifications.BOMB_PRIMED);
@@ -76,39 +85,39 @@ public class Tile : MonoBehaviour {
   }
   public int currentDigit {
     get { return _currentDigit; }
-    set { _currentDigit = value; digitDisplayMode = DigitDisplayMode.Default; }
+    set { _currentDigit = value; if (_currentDigit < 0) _currentDigit = 0; Evaluate(); }
+  }
+  public int bombDigit {
+    get { return _bombDigit; }
+    set { _bombDigit = value; }
   }
   public DigitDisplayMode digitDisplayMode { get { return digit.displayMode; } set { digit.displayMode = value; } }
   [SerializeField] private int _currentDigit;
-  [SerializeField] private TileStatus _status;
+  [SerializeField] private int _bombDigit;
+  [SerializeField] private DigitStatus _digitStatus;
+  [SerializeField] private BombStatus _bombStatus;
   [SerializeField] private int _countdown;
 
   //commands
-  public void Evaluate(bool allowConfirmation = false, bool allowWalling = true, bool clearOnUndecided = false) {
-    if (status == TileStatus.Confirmed) return;
-    if (IsBomb() && currentDigit > 0 && countdown > 0) {
-      digitDisplayMode = DigitDisplayMode.Bomb;
-      return;
-    }
-    if (IsBomb() && currentDigit == 0) {
-      this.PostNotification(Notifications.BOMB_REMOVED);
-      countdown = 0;
-    }
+  public void Evaluate() {
+    if (digitStatus == DigitStatus.Wall && currentDigit > 0) return;
 
-    if (allowWalling && currentDigit != 0 && solutionDigit > 0 && currentDigit != solutionDigit) {
-      status = TileStatus.Wall;
-    } else if (allowConfirmation && currentDigit != 0 && solutionDigit > 0 && currentDigit == solutionDigit) {
-      status = TileStatus.Confirmed;
+    if (currentDigit <= 0) {
+      digitStatus = DigitStatus.Empty;
+    } else if (currentDigit > 0 && solutionDigit > 0) {
+      digitStatus = currentDigit == solutionDigit ? DigitStatus.Confirmed : DigitStatus.Wall;
     } else {
-      status = TileStatus.Undecided;
-      if (clearOnUndecided) currentDigit = 0;
+      digitStatus = DigitStatus.Confirmed;
+      Debug.Log("Confirmed a digit because no solution was defined.");
     }
   }
-  public void DamageTile(int value, bool allowConfirmation = false, bool allowWalling = true) {
+  public void DamageWall(int value) {
+    if (digitStatus != DigitStatus.Wall) return;
+    if (value <= 0) return;
+
     var newVal = currentDigit - value;
     currentDigit = Mathf.Max(0, newVal);
-    Evaluate(allowConfirmation, allowWalling);
-    grid.ValidateBoard(this, false);
+    if (currentDigit <= 0) digitStatus = DigitStatus.Empty;
   }
   public void Load(TileData data, Grid grid) {
     this.data = data;
@@ -120,7 +129,7 @@ public class Tile : MonoBehaviour {
       Destroy(digit.gameObject);
       Destroy(wallRenderer.gameObject);
     } else {
-      Evaluate(true);
+      Evaluate();
     }
   }
   public void RenderTile() {
@@ -166,15 +175,18 @@ public class Tile : MonoBehaviour {
     return neighbors;
   }
   public bool IsWalkable() {
-    return status != TileStatus.Wall && !IsBomb();
+    return digitStatus != DigitStatus.Wall && !HasBomb();
+  }
+  public bool IsWall() {
+    return digitStatus == DigitStatus.Wall;
   }
   public bool BlocksVisibility() {
-    return status == TileStatus.Wall;
+    return digitStatus == DigitStatus.Wall;
   }
-  public bool IsBomb() {
-    return status == TileStatus.BoxBomb || status == TileStatus.StarBomb;
+  public bool HasBomb() {
+    return bombStatus != BombStatus.None;
   }
   public bool IsEmpty() {
-    return status == TileStatus.Undecided && currentDigit <= 0;
+    return !HasBomb() && digitStatus == DigitStatus.Empty;
   }
 }

@@ -137,13 +137,13 @@ public class Card : MonoBehaviour {
     }
 
     foreach (Point p in candidates) {
-      if (deck.grid.InBounds(p)) points.Add(p);
+      if (deck.grid.InBounds(p) && !deck.grid.IsWall(p)) points.Add(p);
     }
 
     return points;
   }
   bool TryAddTile(Point p, List<Point> candidates) {
-    if (deck.grid.InBounds(p)) candidates.Add(p);
+    if (deck.grid.InBounds(p) && !deck.grid.IsWall(p)) candidates.Add(p);
     return BlocksVisibility(p);
   }
   bool BlocksVisibility(Point p) {
