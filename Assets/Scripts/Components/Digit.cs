@@ -11,8 +11,6 @@ public class Digit : MonoBehaviour {
   [SerializeField] Color textColorConfirmedBright;
   [SerializeField] Color textColorWrong;
   [SerializeField] Color textColorWrongBright;
-  [SerializeField] Color textColorBombInitial;
-  [SerializeField] Color textColorBombPrimed;
 
   private Tile owner;
   private TextMeshPro text;
@@ -78,10 +76,6 @@ public class Digit : MonoBehaviour {
         break;
       case DigitDisplayMode.Wall:
         color = _wrongColor;
-        break;
-      case DigitDisplayMode.Bomb:
-        color = owner.countdown == 2 ? textColorBombInitial : textColorBombPrimed;
-        fontSize = _initialFontSize * 0.66f;
         break;
       case DigitDisplayMode.Hidden:
         target = 0;

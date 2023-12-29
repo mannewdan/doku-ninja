@@ -6,7 +6,7 @@ public class TileEntityRenderer : MonoBehaviour {
   private const float SPARK_ROTATE_SPEED = 60.0f;
 
   [SerializeField] private GameObject spark;
-  [SerializeField] private Digit digit;
+  [SerializeField] private TileEntityDigit digit;
 
   private TileEntity owner;
   private bool showSpark;

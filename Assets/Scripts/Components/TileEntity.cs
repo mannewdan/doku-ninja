@@ -24,11 +24,13 @@ public class TileEntity : MonoBehaviour {
           if (bombValue > 0) {
             this.PostNotification(Notifications.BOMB_EXPLODED, bombValue);
             DamageTargets();
+
+            if (digitStatus == DigitStatus.Empty && bombValue == owner.solutionDigit) {
+              owner.currentDigit = bombValue;
+            }
+
             tile.bombStatus = BombStatus.None;
             tile.bombDigit = 0;
-          }
-          if (digitStatus == DigitStatus.Empty && bombValue == owner.solutionDigit) {
-            owner.solutionDigit = bombValue;
           }
           break;
         case 1:

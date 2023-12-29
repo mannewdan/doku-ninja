@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spark: {fileID: 4318760612920530518}
-  digit: {fileID: 8285529469927111775}
+  digit: {fileID: 1841764656526093614}
 --- !u!33 &1648116412598684084
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8937306551094841411}
-  - component: {fileID: 8285529469927111775}
+  - component: {fileID: 1841764656526093614}
   - component: {fileID: 2864296806081819133}
   - component: {fileID: 6399961573229984480}
   m_Layer: 0
@@ -235,7 +235,7 @@ RectTransform:
   m_AnchoredPosition: {x: -0.056, y: -0.09200001}
   m_SizeDelta: {x: 0.9, y: 0.9}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8285529469927111775
+--- !u!114 &1841764656526093614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,16 +244,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5038549708512903986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7248278eeab20484781cf90a7e8f177b, type: 3}
+  m_Script: {fileID: 11500000, guid: 15fb88e57e26dcb46bfacaf0aed47cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textColorDefault: {r: 0.55785596, g: 0.7406255, b: 0.936, a: 1}
-  textColorDefaultBright: {r: 0.5568628, g: 0.7411765, b: 0.93725497, a: 1}
-  textColorSolution: {r: 0.98039216, g: 0.9111111, b: 0.5647059, a: 1}
-  textColorConfirmed: {r: 0.72, g: 0.72, b: 0.72, a: 1}
-  textColorConfirmedBright: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  textColorWrong: {r: 0.9019608, g: 0.49878433, b: 0.49878433, a: 1}
-  textColorWrongBright: {r: 0.90196085, g: 0.49803925, b: 0.49803925, a: 1}
   textColorBombInitial: {r: 0.95, g: 0.95, b: 0.95, a: 1}
   textColorBombPrimed: {r: 1, g: 0.6786445, b: 0.22745097, a: 1}
   _displayMode: 0
@@ -346,8 +339,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -448,8 +441,6 @@ MonoBehaviour:
   textColorConfirmedBright: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   textColorWrong: {r: 0.9019608, g: 0.49878433, b: 0.49878433, a: 1}
   textColorWrongBright: {r: 0.90196085, g: 0.49803925, b: 0.49803925, a: 1}
-  textColorBombInitial: {r: 0.95, g: 0.95, b: 0.95, a: 1}
-  textColorBombPrimed: {r: 1, g: 0.6786445, b: 0.22745097, a: 1}
   _displayMode: 0
 --- !u!23 &3151316801971102889
 MeshRenderer:
