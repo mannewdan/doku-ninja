@@ -3,88 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TileEntity : MonoBehaviour {
-  private const float SPARK_ROTATE_SPEED = 60.0f;
-
-  [SerializeField] private GameObject spark;
-
-  private Tile owner;
-  private bool showSpark;
+  private Tile owner; public Tile tile { get { return owner; } }
   private readonly List<Point> targetedTiles = new List<Point>();
-  private Point pos { get { return owner.pos; } }
-  private Grid grid { get { return owner.grid; } }
-  private UnitManager units { get { return grid.units; } }
-  private int countdown { get { return owner.countdown; } }
-  private int currentDigit { get { return owner.currentDigit; } }
-  private DigitStatus digitStatus { get { return owner.digitStatus; } }
-  private BombStatus bombStatus { get { return owner.bombStatus; } }
+  public Point pos { get { return owner.pos; } }
+  public Grid grid { get { return owner.grid; } }
+  public UnitManager units { get { return grid.units; } }
+  public int bombValue { get { return owner.bombDigit; } }
+  public DigitStatus digitStatus { get { return owner.digitStatus; } }
+  public BombStatus bombStatus { get { return owner.bombStatus; } }
+
+  public int countdown {
+    get { return _countdown; }
+    set {
+      if (_countdown == value) return;
+
+      _countdown = value;
+      this.PostNotification(Notifications.BOMB_COUNTDOWN, _countdown);
+      switch (_countdown) {
+        case 0:
+          if (bombValue > 0) {
+            this.PostNotification(Notifications.BOMB_EXPLODED, bombValue);
+            DamageTargets();
+            tile.bombStatus = BombStatus.None;
+            tile.bombDigit = 0;
+          }
+          if (digitStatus == DigitStatus.Empty && bombValue == owner.solutionDigit) {
+            owner.solutionDigit = bombValue;
+          }
+          break;
+        case 1:
+          this.PostNotification(Notifications.BOMB_PRIMED);
+          TargetTiles();
+          break;
+      }
+    }
+  }
+  [SerializeField] private int _countdown;
 
   void OnEnable() {
     this.AddObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
-    this.AddObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
     this.AddObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
-    this.AddObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
   }
   void OnDisable() {
     this.RemoveObserver(TargetTiles, Notifications.MAP_WALL_CHANGED);
-    this.RemoveObserver(TargetTiles, Notifications.BOMB_PRIMED, owner);
     this.RemoveObserver(ClearTargets, Notifications.BOMB_REMOVED, owner);
-    this.RemoveObserver(DamageTargets, Notifications.BOMB_EXPLODED, owner);
   }
 
   protected void Awake() {
     owner = GetComponent<Tile>();
     if (!owner) owner = GetComponentInParent<Tile>();
   }
-  protected void Start() {
-    Render();
-  }
-  protected void Update() {
-    if (showSpark) {
-      spark.transform.localEulerAngles = Vector3.forward * Time.time * SPARK_ROTATE_SPEED;
-      transform.localScale = Vector3.one * (1.0f + 0.035f * Mathf.Sin(Time.time * 8.0f));
-    }
-  }
-  public void Render() {
-    var coordinates = new Vector2(3, 3);
 
-    switch (bombStatus) {
-      case BombStatus.Box:
-        coordinates = new Vector2(0, countdown == 2 ? 1 : 2);
-        break;
-      case BombStatus.Star:
-        coordinates = new Vector2(1, countdown == 2 ? 1 : 2);
-        break;
-    }
-
-    MeshFilter mFilter = GetComponent<MeshFilter>();
-    List<Vector2> uvs = new List<Vector2>(mFilter.mesh.uv);
-    float t = 0.25f;
-    uvs[0] = new Vector2(coordinates.x * t, coordinates.y * t);
-    uvs[1] = new Vector2(coordinates.x * t + t, coordinates.y * t);
-    uvs[2] = new Vector2(coordinates.x * t, coordinates.y * t + t);
-    uvs[3] = new Vector2(coordinates.x * t + t, coordinates.y * t + t);
-
-    Mesh mesh = mFilter.mesh;
-    mesh.uv = uvs.ToArray();
-
-    showSpark = countdown == 1;
-    spark.gameObject.SetActive(showSpark);
-    transform.localScale = Vector3.one;
-  }
   public void DamageTargets(object sender = null, object data = null) {
     foreach (Point p in new List<Point>(targetedTiles)) {
       if (p == pos) continue;
-
       var tile = grid.tiles.ContainsKey(p) ? grid.tiles[p] : null;
       var unit = units.unitMap.ContainsKey(p) ? units.unitMap[p] : null;
       if (!tile) continue;
       if (unit) {
-        unit.Harm(currentDigit);
-      } else if (digitStatus == DigitStatus.Wall) {
-        tile.DamageWall(currentDigit);
+        unit.Harm(bombValue);
+      } else if (tile.digitStatus == DigitStatus.Wall) {
+        tile.DamageWall(bombValue);
       } else if (tile.HasBomb()) {
-        while (tile.countdown > 0) {
-          tile.countdown--;
+        while (countdown > 0) {
+          countdown--;
         }
       }
     }

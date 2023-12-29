@@ -36,7 +36,6 @@ public class Tile : MonoBehaviour {
           if (t.digitStatus == DigitStatus.Wall) t.RenderWall();
         });
       }
-
     }
   }
   public BombStatus bombStatus {
@@ -45,35 +44,7 @@ public class Tile : MonoBehaviour {
       bool wasBomb = HasBomb();
       _bombStatus = value;
       if (wasBomb != HasBomb()) {
-        RenderEntity();
-      }
-    }
-  }
-  public int countdown {
-    get { return _countdown; }
-    set {
-      if (_countdown == value) return;
-
-      var updateEntity = _countdown > 0 || value > 0;
-      _countdown = value;
-      switch (_countdown) {
-        case 0:
-          if (bombDigit > 0) {
-            this.PostNotification(Notifications.BOMB_EXPLODED, currentDigit);
-          }
-          if (digitStatus == DigitStatus.Empty && bombDigit == solutionDigit) {
-            currentDigit = bombDigit;
-            Evaluate();
-          }
-          break;
-        case 1:
-          this.PostNotification(Notifications.BOMB_PRIMED);
-          break;
-      }
-
-      if (updateEntity) {
-        RenderEntity();
-        RenderDigit();
+        this.PostNotification(Notifications.BOMB_STATUS_CHANGED);
       }
     }
   }
@@ -91,12 +62,15 @@ public class Tile : MonoBehaviour {
     get { return _bombDigit; }
     set { _bombDigit = value; }
   }
+  public int countdown {
+    get { return tileEntity != null ? tileEntity.countdown : 0; }
+    set { if (tileEntity) tileEntity.countdown = value; }
+  }
   public DigitDisplayMode digitDisplayMode { get { return digit.displayMode; } set { digit.displayMode = value; } }
   [SerializeField] private int _currentDigit;
   [SerializeField] private int _bombDigit;
   [SerializeField] private DigitStatus _digitStatus;
   [SerializeField] private BombStatus _bombStatus;
-  [SerializeField] private int _countdown;
 
   //commands
   public void Evaluate() {
@@ -137,9 +111,6 @@ public class Tile : MonoBehaviour {
   }
   public void RenderWall() {
     if (wallRenderer) wallRenderer.Render();
-  }
-  public void RenderEntity() {
-    if (tileEntity) tileEntity.Render();
   }
   public void RenderDigit() {
     digit.UpdateDigit();

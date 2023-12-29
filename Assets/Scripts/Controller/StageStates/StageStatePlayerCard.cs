@@ -97,10 +97,10 @@ public class StageStatePlayerCard : StageState {
       bool doValidation = false;
 
       if (isBomb) {
-        //send this to tile entity and let it handle it?
         tile.bombDigit = card.data.value;
         tile.bombStatus = card.data.type == CardType.BoxBomb ? BombStatus.Box :
           card.data.type == CardType.StarBomb ? BombStatus.Star : BombStatus.Box;
+        tile.countdown = 2;
       } else {
         if (unit) {
           unit.Harm(card.data.value);

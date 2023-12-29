@@ -43,6 +43,8 @@ public static class Notifications {
   public const string CARD_ACTIVE = "CARD_ACTIVE_NOTIFICATION";
   public const string CARD_INACTIVE = "CARD_INACTIVE_NOTIFICATION";
 
+  public const string BOMB_STATUS_CHANGED = "BOMB_STATUS_CHANGED_NOTIFICATION";
+  public const string BOMB_COUNTDOWN = "BOMB_COUNTDOWN_NOTIFICATON";
   public const string BOMB_PRIMED = "BOMB_PRIMED_NOTIFICATION";
   public const string BOMB_EXPLODED = "BOMB_EXPLODED_NOTIFICATION";
   public const string BOMB_REMOVED = "BOMB_DESTROYED_NOTIFICATION";
