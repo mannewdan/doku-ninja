@@ -11,4 +11,7 @@ public class GameStateBoardRunning : GameState {
     owner.boardMode = GameController.BoardMode.Edit;
     owner.ChangeState<GameStateBoardInit>();
   }
+  protected override void OnReset(object sender, object e) {
+    owner.ChangeState<GameStateBoardInit>();
+  }
 }

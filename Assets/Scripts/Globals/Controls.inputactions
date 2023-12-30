@@ -186,6 +186,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "be4b82e0-baa0-4b85-befe-f7c9f58a7870",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "0",
                     "type": "Button",
                     "id": "4682a683-3ae9-45b3-be89-3e3926a47130",
@@ -1123,6 +1132,17 @@
                     "action": "Save",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f9a38ba4-f865-4735-8733-3738fccb869c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

@@ -114,6 +114,7 @@ public class InputController : MonoBehaviour {
     var discard = controls.FindAction(controls.general.Discard.id.ToString());
     var save = controls.FindAction(controls.general.Save.id.ToString());
     var ctrl = controls.FindAction(controls.general.Control.id.ToString());
+    var reset = controls.FindAction(controls.general.Reset.id.ToString());
 
     if (confirm != null && confirm.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CONFIRM, null);
@@ -136,6 +137,9 @@ public class InputController : MonoBehaviour {
     }
     if (save != null && save.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.SAVE, null);
+    }
+    if (reset != null && reset.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.RESET, null);
     }
   }
   void UpdateShift() {

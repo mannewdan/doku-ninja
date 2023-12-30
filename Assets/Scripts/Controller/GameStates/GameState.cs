@@ -16,6 +16,7 @@ public class GameState : State {
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnDebug, Notifications.DEBUG);
     this.AddObserver(OnDebugCtrl, Notifications.DEBUG_CTRL);
+    this.AddObserver(OnReset, Notifications.RESET);
   }
   protected override void RemoveInputObservers() {
     this.RemoveObserver(OnStart, Notifications.START);
@@ -23,6 +24,7 @@ public class GameState : State {
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
     this.RemoveObserver(OnDebug, Notifications.DEBUG);
     this.RemoveObserver(OnDebugCtrl, Notifications.DEBUG_CTRL);
+    this.RemoveObserver(OnReset, Notifications.RESET);
   }
 
   protected virtual void OnStart(object sender, object e) { }
@@ -30,4 +32,5 @@ public class GameState : State {
   protected virtual void OnNumber(object sender, object e) { }
   protected virtual void OnDebug(object sender, object e) { }
   protected virtual void OnDebugCtrl(object sender, object e) { }
+  protected virtual void OnReset(object sender, object e) { }
 }
