@@ -67,8 +67,8 @@ public class TileEntity : MonoBehaviour {
       } else if (tile.digitStatus == DigitStatus.Wall) {
         tile.DamageWall(bombValue);
       } else if (tile.HasBomb()) {
-        while (countdown > 0) {
-          countdown--;
+        while (tile.countdown > 0) {
+          tile.countdown--;
         }
       }
     }
