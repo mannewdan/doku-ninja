@@ -56,7 +56,10 @@ public class Tile : MonoBehaviour {
   }
   public int currentDigit {
     get { return _currentDigit; }
-    set { _currentDigit = value; if (_currentDigit < 0) _currentDigit = 0; Evaluate(); }
+    set {
+      _currentDigit = value;
+      if (_currentDigit < 0) _currentDigit = 0; Evaluate();
+    }
   }
   public int bombDigit {
     get { return _bombDigit; }

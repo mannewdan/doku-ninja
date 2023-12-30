@@ -7,7 +7,9 @@ public class EditStateSolution : EditStateDraw {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     if (tile) {
       tile.solutionDigit = 0;
-      tile.Evaluate();
+      var cache = tile.currentDigit;
+      tile.currentDigit = 0;
+      tile.currentDigit = cache;
       tile.digitDisplayMode = DigitDisplayMode.EditSolution;
       owner.grid.MarkSolutionConflicts();
     } else {
@@ -19,7 +21,9 @@ public class EditStateSolution : EditStateDraw {
       var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (tile) {
         tile.solutionDigit = number;
-        tile.Evaluate();
+        var cache = tile.currentDigit;
+        tile.currentDigit = 0;
+        tile.currentDigit = cache;
         tile.digitDisplayMode = DigitDisplayMode.EditSolution;
         owner.grid.MarkSolutionConflicts();
       } else {

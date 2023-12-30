@@ -7,7 +7,6 @@ public class EditStateGiven : EditStateDraw {
     var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
     if (tile) {
       tile.currentDigit = 0;
-      tile.Evaluate();
       tile.digitDisplayMode = DigitDisplayMode.EditGiven;
     } else {
       Debug.Log("Couldn't find a tile at position: " + pos.ToString());
@@ -17,8 +16,8 @@ public class EditStateGiven : EditStateDraw {
     if (e is int number) {
       var tile = grid.tiles.ContainsKey(pos) ? grid.tiles[pos] : null;
       if (tile) {
+        tile.currentDigit = 0;
         tile.currentDigit = number;
-        tile.Evaluate();
         tile.digitDisplayMode = DigitDisplayMode.EditGiven;
       } else {
         Debug.Log("Couldn't find a tile at position: " + pos.ToString());
