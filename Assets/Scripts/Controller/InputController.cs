@@ -113,6 +113,7 @@ public class InputController : MonoBehaviour {
     var debug = controls.FindAction(controls.general.Debug.id.ToString());
     var discard = controls.FindAction(controls.general.Discard.id.ToString());
     var save = controls.FindAction(controls.general.Save.id.ToString());
+    var ctrl = controls.FindAction(controls.general.Control.id.ToString());
 
     if (confirm != null && confirm.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CONFIRM, null);
@@ -124,7 +125,11 @@ public class InputController : MonoBehaviour {
       this.PostNotification(Notifications.START, null);
     }
     if (debug != null && debug.WasReleasedThisFrame()) {
-      this.PostNotification(Notifications.DEBUG, null);
+      if (ctrl != null && ctrl.IsPressed()) {
+        this.PostNotification(Notifications.DEBUG_CTRL, null);
+      } else {
+        this.PostNotification(Notifications.DEBUG, null);
+      }
     }
     if (discard != null && discard.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.DISCARD, null);

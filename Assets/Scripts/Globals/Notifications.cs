@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Notifications {
   public const string DEBUG = "DEBUG_NOTIFICATION";
+  public const string DEBUG_CTRL = "DEBUG_CTRL_NOTIFICATON";
   public const string RESIZE = "RESIZE_NOTIFICATION";
   public const string MOVE = "MOVE_NOTIFICATION";
   public const string MOVE_REPEAT = "MOVE_MULTI_NOTIFICATION";

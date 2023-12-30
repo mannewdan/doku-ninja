@@ -7,4 +7,8 @@ public class GameStateBoardRunning : GameState {
     if (!owner.currentBoard || !owner.currentBoard.currentState.IsPausable()) return;
     owner.ChangeState<GameStateBoardPaused>();
   }
+  protected override void OnDebugCtrl(object sender, object e) {
+    owner.boardMode = GameController.BoardMode.Edit;
+    owner.ChangeState<GameStateBoardInit>();
+  }
 }
