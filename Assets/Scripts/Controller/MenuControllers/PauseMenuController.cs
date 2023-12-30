@@ -14,6 +14,27 @@ public class PauseMenuController : ListMenuController {
           Close();
       }},
       new MenuButtonData() {
+        name = "Exit Game",
+        prompt = "Are you sure you want to exit the game?",
+        action = () => {
+          Close();
+          Debug.Log("Exit Game");
+          Application.Quit();
+      }}
+    };
+
+    BuildList(buttons);
+    ChangeState<ListMenuStateRunning>();
+  }
+  protected void OldStart() {
+    List<object> buttons = new List<object>() {
+      new MenuButtonData() {
+        name = "Resume",
+        prompt = null,
+        action = () => {
+          Close();
+      }},
+      new MenuButtonData() {
         name = "Options",
         prompt = null,
         action = () => {

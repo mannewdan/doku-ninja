@@ -113,7 +113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 250, y: 325}
+  m_SizeDelta: {x: 250, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4168465097848583168
 MonoBehaviour:
@@ -130,8 +130,11 @@ MonoBehaviour:
   _paused: 0
   debugCurrentState: 
   confirmationPrefab: {fileID: 3952157412623938672, guid: 19ac2d3518046e542a9dadff9ca1c5e6, type: 3}
+  inputCloseable: 1
   elementPrefab: {fileID: 3673330353177770539, guid: 33dc3c886f91467468bb04f36b710710, type: 3}
   elementContainer: {fileID: 6878378919864778742}
+  orientation: 0
+  loopSelection: 1
   optionsMenuPrefab: {fileID: 3952157412623938672, guid: d2f19e1491608b84c8ca0290c3f773fb, type: 3}
 --- !u!222 &5119686210783925147
 CanvasRenderer:
