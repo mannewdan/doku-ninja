@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 607188333785102553}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: -2.1}
+  m_LocalPosition: {x: 0, y: 0.05, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294111986
+  m_fontColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -437,7 +437,7 @@ MonoBehaviour:
   textColorDefault: {r: 0.55785596, g: 0.7406255, b: 0.936, a: 1}
   textColorDefaultBright: {r: 0.5568628, g: 0.7411765, b: 0.93725497, a: 1}
   textColorSolution: {r: 0.98039216, g: 0.9111111, b: 0.5647059, a: 1}
-  textColorConfirmed: {r: 0.72, g: 0.72, b: 0.72, a: 1}
+  textColorConfirmed: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   textColorConfirmedBright: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   textColorWrong: {r: 0.9019608, g: 0.49878433, b: 0.49878433, a: 1}
   textColorWrongBright: {r: 0.90196085, g: 0.49803925, b: 0.49803925, a: 1}

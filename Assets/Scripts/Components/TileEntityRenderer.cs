@@ -14,19 +14,27 @@ public class TileEntityRenderer : MonoBehaviour {
   public int bombValue { get { return owner.bombValue; } }
   public int countdown { get { return owner.countdown; } }
   public BombStatus bombStatus { get { return owner.bombStatus; } }
+  private Material _material;
+  private Material _sparkMaterial;
 
   void OnEnable() {
     this.AddObserver(Render, Notifications.BOMB_STATUS_CHANGED, owner.tile);
     this.AddObserver(Render, Notifications.BOMB_COUNTDOWN, owner);
     this.AddObserver(UpdateDigit, Notifications.BOMB_COUNTDOWN, owner);
+    this.AddObserver(DarkenHighlight, Notifications.SHIFT_HELD);
+    this.AddObserver(ResetHighlight, Notifications.SHIFT_RELEASED);
   }
   void OnDisable() {
     this.RemoveObserver(Render, Notifications.BOMB_STATUS_CHANGED, owner.tile);
     this.RemoveObserver(Render, Notifications.BOMB_COUNTDOWN, owner);
     this.RemoveObserver(UpdateDigit, Notifications.BOMB_COUNTDOWN, owner);
+    this.RemoveObserver(DarkenHighlight, Notifications.SHIFT_HELD);
+    this.RemoveObserver(ResetHighlight, Notifications.SHIFT_RELEASED);
   }
   protected void Awake() {
     owner = GetComponent<TileEntity>();
+    _material = GetComponent<MeshRenderer>()?.material;
+    _sparkMaterial = spark?.GetComponent<MeshRenderer>()?.material;
   }
   protected void Start() {
     Render();
@@ -70,5 +78,21 @@ public class TileEntityRenderer : MonoBehaviour {
   }
   void UpdateDigit(object sender = null, object e = null) {
     digit.UpdateDigit();
+  }
+  private void ResetHighlight(object sender, object e) {
+    if (_material) {
+      _material.SetFloat("_HighlightPower", 0);
+    }
+    if (_sparkMaterial) {
+      _sparkMaterial.SetFloat("_HighlightPower", 0);
+    }
+  }
+  private void DarkenHighlight(object sender, object e) {
+    if (_material) {
+      _material.SetFloat("_HighlightPower", 0.65f);
+    }
+    if (_sparkMaterial) {
+      _sparkMaterial.SetFloat("_HighlightPower", 0.65f);
+    }
   }
 }

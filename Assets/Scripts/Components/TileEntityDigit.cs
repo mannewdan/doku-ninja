@@ -17,7 +17,34 @@ public class TileEntityDigit : MonoBehaviour {
   private TextMeshPro text;
   public int bombValue { get { return owner.bombValue; } }
   public int countdown { get { return owner.countdown; } }
+  private Color color {
+    get => _color;
+    set {
+      _color = value;
+      var c = _color * colorMultiplier; c.a = 1;
+      text.color = c;
+    }
+  }
+  private float colorMultiplier {
+    get => _colorMultiplier;
+    set {
+      _colorMultiplier = value;
+      var c = color * _colorMultiplier; c.a = 1;
+      text.color = c;
+    }
+  }
 
+  private Color _color;
+  private float _colorMultiplier = 1;
+
+  void OnEnable() {
+    this.AddObserver(DarkenHighlight, Notifications.SHIFT_HELD);
+    this.AddObserver(ResetHighlight, Notifications.SHIFT_RELEASED);
+  }
+  void OnDisable() {
+    this.RemoveObserver(DarkenHighlight, Notifications.SHIFT_HELD);
+    this.RemoveObserver(ResetHighlight, Notifications.SHIFT_RELEASED);
+  }
   protected void Awake() {
     owner = GetComponentInParent<TileEntity>();
     text = GetComponent<TextMeshPro>();
@@ -30,9 +57,14 @@ public class TileEntityDigit : MonoBehaviour {
     if (!text) return;
 
     var target = countdown > 0 ? bombValue : 0;
-    var color = countdown == 2 ? textColorBombInitial : textColorBombPrimed;
-
     text.text = target > 0 ? target.ToString() : "";
-    text.color = color;
+
+    color = countdown == 2 ? textColorBombInitial : textColorBombPrimed;
+  }
+  private void ResetHighlight(object sender, object e) {
+    colorMultiplier = 1.0f;
+  }
+  private void DarkenHighlight(object sender, object e) {
+    colorMultiplier = 0.35f;
   }
 }
