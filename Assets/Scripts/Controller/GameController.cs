@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameController : StateMachine {
   public enum BoardMode { Stage, Edit }
 
+  public List<string> campaignMaps;
+
   public GameObject stageControllerPrefab;
   public GameObject editControllerPrefab;
   public GameObject pauseMenuPrefab;

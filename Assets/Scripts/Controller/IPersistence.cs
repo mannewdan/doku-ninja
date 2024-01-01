@@ -20,8 +20,9 @@ public interface IPersistence {
   public void SaveMapData(MapData data) {
     WriteToFile<MapData>(dataPathForGrids, data, MAP_DATA_EXTENSION);
   }
-  public MapData LoadMapData(string fileName) {
-    MapData data = ReadFromFile<MapData>(dataPathForGrids, fileName, MAP_DATA_EXTENSION);
+  public MapData LoadMapData(string fileName, string subdirectory = null) {
+    var path = subdirectory != null ? $"{dataPathForGrids}{subdirectory}" : dataPathForGrids;
+    MapData data = ReadFromFile<MapData>(path, fileName, MAP_DATA_EXTENSION);
     return data;
   }
 

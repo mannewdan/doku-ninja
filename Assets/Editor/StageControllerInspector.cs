@@ -12,7 +12,7 @@ public class StageControllerInspector : Editor {
     DrawDefaultInspector();
 
     if (GUILayout.Button("Load Map")) {
-      current.Load(current.mapToLoad);
+      current.LoadMap();
     }
   }
 }

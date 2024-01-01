@@ -7,7 +7,7 @@ public class StageController : StateMachineBoard {
   public DeckController deck;
 
   void Start() {
-    Load(mapToLoad);
+    LoadMap();
     ChangeState<StageStateLoad>();
   }
 }

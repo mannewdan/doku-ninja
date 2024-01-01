@@ -151,7 +151,14 @@
       "type": 1
     }
   ],
-  "enemies": [],
-  "id": "idk map",
-  "fileName": "idk map"
+  "enemies": [
+    {
+      "pos": {
+        "x": 3,
+        "y": 3
+      }
+    }
+  ],
+  "id": "map 1",
+  "fileName": "map 1"
 }

@@ -19,7 +19,10 @@ public class GameStateBoardInit : GameState {
     boardController.transform.localPosition = Vector3.zero;
     boardController.transform.localEulerAngles = Vector3.zero;
     boardController.transform.localScale = Vector3.one;
+
     owner.currentBoard = boardController.GetComponent<StateMachineBoard>();
+    owner.currentBoard.mapToLoad = owner.campaignMaps[0];
+    owner.currentBoard.subdirectory = "/Campaign";
 
     yield return 0;
     owner.ChangeState<GameStateBoardRunning>();

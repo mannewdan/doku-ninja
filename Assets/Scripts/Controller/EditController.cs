@@ -23,7 +23,7 @@ public class EditController : StateMachineBoard {
   [SerializeField] private MapData _mapData;
 
   void Start() {
-    Load(mapToLoad);
+    LoadMap();
     ChangeState<EditStateLoad>();
   }
   public void Save() {
