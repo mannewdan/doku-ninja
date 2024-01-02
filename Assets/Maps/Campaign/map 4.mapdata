@@ -11,24 +11,6 @@
         "x": 0,
         "y": 0
       },
-      "given": 2,
-      "solution": 2,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 0,
-        "y": 1
-      },
-      "given": 5,
-      "solution": 5,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 0,
-        "y": 2
-      },
       "given": 1,
       "solution": 1,
       "type": 1
@@ -36,10 +18,28 @@
     {
       "pos": {
         "x": 0,
+        "y": 1
+      },
+      "given": 1,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
         "y": 3
       },
-      "given": 6,
-      "solution": 4,
+      "given": 5,
+      "solution": 5,
       "type": 1
     },
     {
@@ -56,6 +56,15 @@
         "x": 0,
         "y": 5
       },
+      "given": 4,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 0
+      },
       "given": 3,
       "solution": 3,
       "type": 1
@@ -63,79 +72,79 @@
     {
       "pos": {
         "x": 1,
+        "y": 1
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 2
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 3
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 4
+      },
+      "given": 4,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 1,
+        "y": 5
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
         "y": 0
       },
       "given": 0,
-      "solution": 6,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 1
-      },
-      "given": 1,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 2
-      },
-      "given": 2,
-      "solution": 3,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 3
-      },
-      "given": 3,
       "solution": 2,
       "type": 1
     },
     {
       "pos": {
-        "x": 1,
-        "y": 4
+        "x": 2,
+        "y": 1
       },
-      "given": 1,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 5
-      },
-      "given": 5,
+      "given": 2,
       "solution": 5,
       "type": 1
     },
     {
       "pos": {
         "x": 2,
-        "y": 0
+        "y": 2
       },
-      "given": 1,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 2,
-        "y": 1
-      },
-      "given": 3,
+      "given": 0,
       "solution": 3,
       "type": 1
     },
     {
       "pos": {
         "x": 2,
-        "y": 2
+        "y": 3
       },
       "given": 6,
       "solution": 6,
@@ -144,7 +153,133 @@
     {
       "pos": {
         "x": 2,
+        "y": 4
+      },
+      "given": 0,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 5
+      },
+      "given": 4,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "given": 3,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 2
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
         "y": 3
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 4
+      },
+      "given": 4,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 5
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 0
+      },
+      "given": 6,
+      "solution": 6,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 1
+      },
+      "given": 4,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 2
+      },
+      "given": 0,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 3
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 4
+      },
+      "given": 5,
+      "solution": 5,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 5
+      },
+      "given": 4,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 5,
+        "y": 0
       },
       "given": 0,
       "solution": 5,
@@ -152,125 +287,17 @@
     },
     {
       "pos": {
-        "x": 2,
-        "y": 4
-      },
-      "given": 6,
-      "solution": 2,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 2,
-        "y": 5
-      },
-      "given": 4,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 0
-      },
-      "given": 4,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
+        "x": 5,
         "y": 1
-      },
-      "given": 2,
-      "solution": 2,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 2
       },
       "given": 5,
-      "solution": 5,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 3
-      },
-      "given": 0,
-      "solution": 6,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 4
-      },
-      "given": 6,
-      "solution": 3,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
-        "y": 5
-      },
-      "given": 1,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 0
-      },
-      "given": 2,
-      "solution": 5,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 1
-      },
-      "given": 4,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 2
-      },
-      "given": 2,
       "solution": 2,
       "type": 1
     },
     {
       "pos": {
-        "x": 4,
-        "y": 3
-      },
-      "given": 2,
-      "solution": 3,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 4
-      },
-      "given": 4,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 4,
-        "y": 5
+        "x": 5,
+        "y": 2
       },
       "given": 6,
       "solution": 6,
@@ -279,7 +306,7 @@
     {
       "pos": {
         "x": 5,
-        "y": 0
+        "y": 3
       },
       "given": 3,
       "solution": 3,
@@ -288,37 +315,10 @@
     {
       "pos": {
         "x": 5,
-        "y": 1
-      },
-      "given": 6,
-      "solution": 6,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 2
-      },
-      "given": 4,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 5,
-        "y": 3
-      },
-      "given": 6,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 5,
         "y": 4
       },
-      "given": 5,
-      "solution": 5,
+      "given": 1,
+      "solution": 1,
       "type": 1
     },
     {
@@ -326,36 +326,55 @@
         "x": 5,
         "y": 5
       },
-      "given": 2,
-      "solution": 2,
+      "given": 4,
+      "solution": 4,
       "type": 1
     }
   ],
   "enemies": [
     {
       "pos": {
-        "x": 5,
-        "y": 4
+        "x": 1,
+        "y": 5
       }
     },
     {
       "pos": {
-        "x": 0,
+        "x": 3,
         "y": 5
       }
     },
     {
       "pos": {
         "x": 5,
-        "y": 0
+        "y": 5
       }
     },
     {
       "pos": {
-        "x": 3,
-        "y": 3
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "pos": {
+        "x": 2,
+        "y": 4
+      }
+    },
+    {
+      "pos": {
+        "x": 4,
+        "y": 4
       }
     }
+  ],
+  "availableTypes": [
+    0,
+    1,
+    2,
+    3,
+    4
   ],
   "id": "map 4",
   "fileName": "map 4"

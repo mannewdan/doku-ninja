@@ -20,8 +20,8 @@
         "x": 0,
         "y": 1
       },
-      "given": 1,
-      "solution": 1,
+      "given": 2,
+      "solution": 2,
       "type": 1
     },
     {
@@ -39,7 +39,7 @@
         "y": 3
       },
       "given": 0,
-      "solution": 2,
+      "solution": 1,
       "type": 1
     },
     {
@@ -48,7 +48,7 @@
         "y": 0
       },
       "given": 0,
-      "solution": 2,
+      "solution": 1,
       "type": 1
     },
     {
@@ -74,8 +74,8 @@
         "x": 1,
         "y": 3
       },
-      "given": 1,
-      "solution": 1,
+      "given": 2,
+      "solution": 2,
       "type": 1
     },
     {
@@ -83,8 +83,8 @@
         "x": 2,
         "y": 0
       },
-      "given": 1,
-      "solution": 1,
+      "given": 2,
+      "solution": 2,
       "type": 1
     },
     {
@@ -102,7 +102,7 @@
         "y": 2
       },
       "given": 0,
-      "solution": 2,
+      "solution": 1,
       "type": 1
     },
     {
@@ -129,7 +129,7 @@
         "y": 1
       },
       "given": 0,
-      "solution": 2,
+      "solution": 1,
       "type": 1
     },
     {
@@ -137,8 +137,8 @@
         "x": 3,
         "y": 2
       },
-      "given": 1,
-      "solution": 1,
+      "given": 2,
+      "solution": 2,
       "type": 1
     },
     {
@@ -158,6 +158,9 @@
         "y": 3
       }
     }
+  ],
+  "availableTypes": [
+    0,
   ],
   "id": "map 1",
   "fileName": "map 1"

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,6 +28,10 @@ public class EditController : StateMachineBoard {
     ChangeState<EditStateLoad>();
   }
   public void Save() {
+    for (int i = 0; i < Enum.GetValues(typeof(CardType)).Length; i++) {
+      mapData.availableTypes.Add((CardType)i);
+    }
+
     persistence.SaveMapData(mapData);
   }
 }

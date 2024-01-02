@@ -11,14 +11,41 @@
         "x": 0,
         "y": 0
       },
+      "given": 4,
+      "solution": 4,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 1
+      },
+      "given": 2,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "given": 3,
+      "solution": 3,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 0,
+        "y": 3
+      },
       "given": 2,
       "solution": 2,
       "type": 1
     },
     {
       "pos": {
-        "x": 0,
-        "y": 1
+        "x": 1,
+        "y": 0
       },
       "given": 3,
       "solution": 3,
@@ -26,62 +53,26 @@
     },
     {
       "pos": {
-        "x": 0,
-        "y": 2
-      },
-      "given": 1,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 0,
-        "y": 3
-      },
-      "given": 0,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 0
-      },
-      "given": 1,
-      "solution": 1,
-      "type": 1
-    },
-    {
-      "pos": {
         "x": 1,
         "y": 1
       },
-      "given": 1,
-      "solution": 4,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 1,
-        "y": 2
-      },
-      "given": 1,
+      "given": 2,
       "solution": 2,
       "type": 1
     },
     {
       "pos": {
         "x": 1,
-        "y": 3
+        "y": 2
       },
-      "given": 3,
-      "solution": 3,
+      "given": 2,
+      "solution": 1,
       "type": 1
     },
     {
       "pos": {
-        "x": 2,
-        "y": 0
+        "x": 1,
+        "y": 3
       },
       "given": 4,
       "solution": 4,
@@ -90,10 +81,19 @@
     {
       "pos": {
         "x": 2,
+        "y": 0
+      },
+      "given": 0,
+      "solution": 1,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 2,
         "y": 1
       },
-      "given": 1,
-      "solution": 1,
+      "given": 2,
+      "solution": 4,
       "type": 1
     },
     {
@@ -101,8 +101,8 @@
         "x": 2,
         "y": 2
       },
-      "given": 3,
-      "solution": 3,
+      "given": 2,
+      "solution": 2,
       "type": 1
     },
     {
@@ -110,14 +110,23 @@
         "x": 2,
         "y": 3
       },
-      "given": 0,
-      "solution": 2,
+      "given": 3,
+      "solution": 3,
       "type": 1
     },
     {
       "pos": {
         "x": 3,
         "y": 0
+      },
+      "given": 2,
+      "solution": 2,
+      "type": 1
+    },
+    {
+      "pos": {
+        "x": 3,
+        "y": 1
       },
       "given": 3,
       "solution": 3,
@@ -126,18 +135,9 @@
     {
       "pos": {
         "x": 3,
-        "y": 1
-      },
-      "given": 1,
-      "solution": 2,
-      "type": 1
-    },
-    {
-      "pos": {
-        "x": 3,
         "y": 2
       },
-      "given": 1,
+      "given": 4,
       "solution": 4,
       "type": 1
     },
@@ -146,7 +146,7 @@
         "x": 3,
         "y": 3
       },
-      "given": 1,
+      "given": 4,
       "solution": 1,
       "type": 1
     }
@@ -154,10 +154,14 @@
   "enemies": [
     {
       "pos": {
-        "x": 3,
-        "y": 3
+        "x": 0,
+        "y": 2
       }
     }
+  ],
+  "availableTypes": [
+	0,
+	3
   ],
   "id": "map 2",
   "fileName": "map 2"

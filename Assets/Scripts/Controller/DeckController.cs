@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeckController : MonoBehaviour {
@@ -18,9 +19,13 @@ public class DeckController : MonoBehaviour {
     }
     cards.Clear();
     for (int i = 0; i < Mathf.Min(size, Enum.GetValues(typeof(CardType)).Length); i++) {
+      if (!grid.data.availableTypes.Contains((CardType)i)) continue;
       Card card = NewCard(new CardData(i + 1, (CardType)i));
-      card.Initialize(i, size);
       cards.Add(card);
+    }
+
+    for (int i = 0; i < cards.Count; i++) {
+      cards[i].Initialize(i, cards.Count);
     }
   }
   Card NewCard(CardData data) {

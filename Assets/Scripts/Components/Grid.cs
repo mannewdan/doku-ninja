@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour {
   public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
   public int width;
   public int height;
+  public MapData data;
 
   public class Conflict {
     public Tile tile;
@@ -24,6 +25,7 @@ public class Grid : MonoBehaviour {
 
   //commands
   public void Load(MapData data) {
+    this.data = data;
     width = data.width;
     height = data.height;
     ClearMap();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class MapData : SaveData {
   public Point spawn;
   public List<TileData> tiles;
   public List<EnemyData> enemies;
+  public List<CardType> availableTypes;
 
   public MapData() : base() {
     SetDefaults();
@@ -23,5 +25,6 @@ public class MapData : SaveData {
     height = 6;
     tiles = new List<TileData>();
     enemies = new List<EnemyData>();
+    availableTypes = new List<CardType>();
   }
 }
