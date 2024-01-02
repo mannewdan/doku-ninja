@@ -46,8 +46,8 @@ public class DeckController : MonoBehaviour {
     */
 
     for (int i = 0; i < 10; i++) {
-      deck.Add(NewCard(new CardData(4, CardType.BoxBomb)));
-      // deck.Add(NewCard(new CardData(2, CardType.Shuriken)));
+      deck.Add(NewCard(new CardData(2, CardType.Sai)));
+      deck.Add(NewCard(new CardData(2, CardType.Shuriken)));
     }
 
     ShuffleDeck();

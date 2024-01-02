@@ -28,11 +28,26 @@ public class GameController : StateMachine {
 
   [SerializeField] bool debugSkipToBoard;
 
+  void OnEnable() {
+    this.AddObserver(OnMapSolved, Notifications.MAP_SOLVED);
+  }
+  void OnDisable() {
+    this.RemoveObserver(OnMapSolved, Notifications.MAP_SOLVED);
+  }
   void Start() {
     if (debugSkipToBoard) {
       ChangeState<GameStateBoardInit>();
     } else {
       ChangeState<GameStateInit>();
+    }
+  }
+
+  void OnMapSolved(object sender, object e) {
+    currentMap++;
+    if (currentMap > campaignMaps.Count - 1) {
+      Debug.Log("Game won!");
+    } else {
+      ChangeState<GameStateBoardInit>();
     }
   }
 }

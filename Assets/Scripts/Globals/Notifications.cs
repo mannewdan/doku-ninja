@@ -20,6 +20,8 @@ public static class Notifications {
   public const string SHIFT_HELD = "SHIFT_HELD_NOTIFICATION";
   public const string SHIFT_RELEASED = "SHIFT_RELEASED_NOTIFICATION";
 
+  public const string MAP_SOLVED = "MAP_SOLVED_NOTIFICATION";
+
   public const string PLAYER_PHASE_START = "PLAYER_PHASE_START_NOTIFICATION";
   public const string PLAYER_PHASE_END = "PLAYER_PHASE_END_NOTIFICATION";
   public const string PLAYER_SPENT_AP = "PLAYER_SPENT_AP_NOTIFICATION";

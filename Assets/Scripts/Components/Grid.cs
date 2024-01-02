@@ -84,7 +84,7 @@ public class Grid : MonoBehaviour {
     }
 
     if (allSolved) {
-      Debug.Log("Player won");
+      this.PostNotification(Notifications.MAP_SOLVED);
     }
   }
   public void MarkSolutionConflicts() {
