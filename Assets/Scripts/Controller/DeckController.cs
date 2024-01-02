@@ -3,98 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckController : MonoBehaviour {
-  const int MAX_CARDS_IN_HAND = 3;
-
   public Grid grid;
   public UnitManager units;
   [SerializeField] GameObject cardPrefab;
-  [SerializeField] Transform handT;
-  [SerializeField] Transform deadT;
 
-  public List<Card> hand = new List<Card>();
-  public List<Card> deck = new List<Card>();
-  public List<Card> dead = new List<Card>();
+  public List<Card> cards = new List<Card>();
 
-  public void BuildDeck() {
-    dead.Clear();
-    hand.Clear();
-    deck.Clear();
-
-    /*
-    for (int i = 2; i <= 6; i += 2) {
-      if (i > grid.width) break;
-      deck.Add(NewCard(new CardData(i, CardType.Sai)));
-      deck.Add(NewCard(new CardData(i, CardType.Sai)));
-    }
-    for (int i = 1; i <= 5; i += 2) {
-      if (i > grid.width) break;
-      deck.Add(NewCard(new CardData(i, CardType.Kunai)));
-      deck.Add(NewCard(new CardData(i, CardType.Kunai)));
-    }
-    for (int i = 1; i <= 3; i++) {
-      if (i > grid.width) break;
-      deck.Add(NewCard(new CardData(i, CardType.Shuriken)));
-      deck.Add(NewCard(new CardData(i, CardType.Shuriken)));
-    }
-    for (int i = 4; i <= 6; i++) {
-      if (i > grid.width) break;
-      for (int q = 0; q < (grid.width == 4 ? 3 : 1); q++) {
-        deck.Add(NewCard(new CardData(i, CardType.BoxBomb)));
-        deck.Add(NewCard(new CardData(i, CardType.StarBomb)));
+  public void BuildDeck(int size) {
+    for (int i = cards.Count - 1; i >= 0; i--) {
+      if (cards[i] != null) {
+        Destroy(cards[i].gameObject);
       }
     }
-    */
-
-    for (int i = 0; i < 10; i++) {
-      deck.Add(NewCard(new CardData(2, CardType.Sai)));
-      deck.Add(NewCard(new CardData(2, CardType.Shuriken)));
-    }
-
-    ShuffleDeck();
-
-    for (int i = 0; i < MAX_CARDS_IN_HAND; i++) {
-      DrawCard();
+    cards.Clear();
+    for (int i = 0; i < size; i++) {
+      Card card = NewCard(new CardData(i + 1, CardType.Sai));
+      card.Initialize(i, size);
+      cards.Add(card);
     }
   }
-  public bool DrawCard() {
-    if (deck.Count == 0) return false;
-    if (hand.Count >= MAX_CARDS_IN_HAND) return false;
-
-    var card = deck[0];
-    hand.Add(card);
-    card.Move(handT);
-    deck.RemoveAt(0);
-    this.PostNotification(Notifications.CARD_DRAW);
-    return true;
-  }
-  public void ShuffleDeck() {
-    deck = U.Shuffle(deck);
-  }
-  public void ShuffleGraveyard() {
-    deck.AddRange(dead);
-    dead.ForEach(c => c.Move(transform));
-    dead.Clear();
-    ShuffleDeck();
-  }
-  public Card SelectCard(int input) {
-    if (input == 0) input = 10;
-    int index = input - 1;
-    if (index >= 0 && index < hand.Count) {
-      return hand[index];
-    } else return null;
-  }
-  public bool RemoveCard(Card card) {
-    if (!hand.Contains(card)) {
-      Debug.Log("Tried to remove a card that is not in the hand!");
-      return false;
-    }
-    hand.Remove(card);
-    dead.Add(card);
-    card.Move(deadT);
-    this.PostNotification(Notifications.CARD_DISCARD);
-    return true;
-  }
-
   Card NewCard(CardData data) {
     GameObject newCard = Instantiate(cardPrefab);
     newCard.transform.SetParent(transform);
@@ -106,8 +33,34 @@ public class DeckController : MonoBehaviour {
 
     card.deck = this;
     card.data = data;
-    card.Move(transform);
 
     return card;
+  }
+
+  public Card SelectCard(int input) {
+    int index = IndexOfInput(input);
+    if (index >= 0 && index < cards.Count) {
+      return cards[index].active ? cards[index] : null;
+    } else return null;
+  }
+  public bool DrawCard() {
+    List<Card> candidates = new List<Card>();
+    foreach (Card c in cards) {
+      if (!c.active) candidates.Add(c);
+    }
+
+    if (candidates.Count > 0) {
+      candidates[Random.Range(0, candidates.Count)].active = true;
+
+      return true;
+    } else return false;
+  }
+  public void RemoveCard(Card card) {
+    card.active = false;
+  }
+
+  int IndexOfInput(int input) {
+    if (input <= 0) input = 10;
+    return input - 1;
   }
 }

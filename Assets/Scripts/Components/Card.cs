@@ -9,6 +9,7 @@ using System;
 public class Card : MonoBehaviour {
   const float HAND_SPACING = 0.1f; //as a percentage of card width
   const float SELECTED_OFFSET = 0.2f; //as a percentage of card height
+  const float INACTIVE_OFFSET = -1.25f;
 
   public CardData data {
     get { return _data; }
@@ -21,17 +22,25 @@ public class Card : MonoBehaviour {
     }
   }
   public Vector3 pos {
-    get { return _pos + _offset; }
+    get { return _pos + _selectedOffset + _activeOffset; }
     set {
       _pos = value;
       gameObject.TweenCancelAll();
       gameObject.TweenLocalPosition(pos, 0.25f).SetEaseCubicOut();
     }
   }
-  public Vector3 offset {
-    get { return _offset; }
+  public Vector3 selectedOffset {
+    get { return _selectedOffset; }
     set {
-      _offset = value;
+      _selectedOffset = value;
+      gameObject.TweenCancelAll();
+      gameObject.TweenLocalPosition(pos, 0.125f).SetEaseCubicOut();
+    }
+  }
+  public Vector3 activeOffset {
+    get { return _activeOffset; }
+    set {
+      _activeOffset = value;
       gameObject.TweenCancelAll();
       gameObject.TweenLocalPosition(pos, 0.125f).SetEaseCubicOut();
     }
@@ -40,21 +49,32 @@ public class Card : MonoBehaviour {
   public TextMeshProUGUI digit;
   public Image icon;
   public Image border;
+  public bool selected {
+    get { return _selected; }
+    set {
+      if (_selected != value) {
+        _selected = value;
+        selectedOffset = _selected ? Vector3.up * _rect.rect.height * SELECTED_OFFSET : Vector3.zero;
+      }
+    }
+  }
   public bool active {
     get { return _active; }
     set {
       if (_active != value) {
         _active = value;
-        offset = _active ? Vector3.up * _rect.rect.height * SELECTED_OFFSET : Vector3.zero;
+        activeOffset = _active ? Vector3.zero : Vector3.up * _rect.rect.height * INACTIVE_OFFSET;
       }
     }
   }
 
   private CardData _data;
   private RectTransform _rect;
-  private Vector3 _pos;
-  private Vector3 _offset;
-  private bool _active;
+  [SerializeField] private Vector3 _pos;
+  [SerializeField] private Vector3 _selectedOffset;
+  [SerializeField] private Vector3 _activeOffset;
+  [SerializeField] private bool _selected;
+  [SerializeField] private bool _active;
 
   void Awake() {
     _rect = transform as RectTransform;
@@ -62,27 +82,13 @@ public class Card : MonoBehaviour {
     var mat = icon.material;
     icon.material = new Material(mat);
   }
-  void OnEnable() {
-    this.AddObserver(UpdatePosition, Notifications.CARD_DRAW);
-    this.AddObserver(UpdatePosition, Notifications.CARD_DISCARD);
-  }
-  void OnDisable() {
-    this.RemoveObserver(UpdatePosition, Notifications.CARD_DRAW);
-    this.RemoveObserver(UpdatePosition, Notifications.CARD_DISCARD);
+
+  public void Initialize(int index, int total) {
+    var left = _rect.rect.width * 0.5f - (total * _rect.rect.width * 0.5f) - ((total - 1) * _rect.rect.width * HAND_SPACING * 0.5f);
+    pos = new Vector3(left + index * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
+    active = true;
   }
 
-  void UpdatePosition(object sender, object e) {
-    if (deck.hand.Contains(this)) {
-      var i = deck.hand.IndexOf(this);
-      var c = deck.hand.Count;
-      var left = _rect.rect.width * 0.5f - (c * _rect.rect.width * 0.5f) - ((c - 1) * _rect.rect.width * HAND_SPACING * 0.5f);
-      pos = new Vector3(left + i * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
-    }
-  }
-  public void Move(Transform location) {
-    transform.SetParent(location, true);
-    pos = Vector3.zero;
-  }
   public List<Point> TargetableTiles(Point origin) {
     List<Point> points = new List<Point>();
     List<Point> candidates;

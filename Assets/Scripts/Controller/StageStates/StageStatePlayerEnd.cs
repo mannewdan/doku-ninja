@@ -15,11 +15,6 @@ public class StageStatePlayerEnd : StageState {
   }
 
   IEnumerator<float> _End() {
-    if (deck.deck.Count == 0) {
-      deck.ShuffleGraveyard();
-      yield return Timing.WaitForSeconds(0.25f);
-    }
-
     yield return 0;
     owner.ChangeState<StageStateEnvironmentStart>();
   }

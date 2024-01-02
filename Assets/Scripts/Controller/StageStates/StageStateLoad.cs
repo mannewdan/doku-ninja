@@ -20,7 +20,7 @@ public class StageStateLoad : StageState {
   IEnumerator<float> _Load() {
     grid.Load(dataToLoad);
     units.Load(dataToLoad);
-    deck.BuildDeck();
+    deck.BuildDeck(dataToLoad.width);
     yield return 0;
     owner.ChangeState<StageStatePlayerStart>();
   }

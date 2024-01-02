@@ -7,20 +7,20 @@ public class StageStatePlayerCard : StageState {
   private Card card {
     get { return _card; }
     set {
-      if (_card && _card.active) {
-        _card.active = false;
+      if (_card && _card.selected) {
+        _card.selected = false;
         this.PostNotification(Notifications.CARD_INACTIVE, new TelegraphInfo(player.gameObject, _targetableTiles));
       }
       _card = value;
-      if (_card && !_card.active) {
-        _card.active = true;
+      if (_card && !_card.selected) {
+        _card.selected = true;
         _targetableTiles = _card.TargetableTiles(player.pos);
         pos = BestPos(player.pos, player.lastDirection, _targetableTiles);
         this.PostNotification(Notifications.CARD_ACTIVE, new TelegraphInfo(player.gameObject, _targetableTiles));
       }
     }
   }
-  private Card _card;
+  [SerializeField] private Card _card;
   private List<Point> _targetableTiles;
   public override Point pos {
     get => base.pos;
