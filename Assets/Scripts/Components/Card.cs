@@ -11,6 +11,9 @@ public class Card : MonoBehaviour {
   const float SELECTED_OFFSET = 0.2f; //as a percentage of card height
   const float INACTIVE_OFFSET = -1.25f;
 
+  [SerializeField] GameObject background;
+  [SerializeField] TextMeshProUGUI cooldownText;
+
   public CardData data {
     get { return _data; }
     set {
@@ -64,6 +67,21 @@ public class Card : MonoBehaviour {
       if (_active != value) {
         _active = value;
         activeOffset = _active ? Vector3.zero : Vector3.up * _rect.rect.height * INACTIVE_OFFSET;
+        background.SetActive(!_active);
+        if (!_active) cooldown = _data.value;
+      }
+    }
+  }
+  public int cooldown {
+    get { return _cooldown; }
+    set {
+      if (_cooldown != value) {
+        _cooldown = value;
+        cooldownText.text = _cooldown.ToString();
+
+        if (_cooldown == 0) {
+          active = true;
+        }
       }
     }
   }
@@ -75,6 +93,7 @@ public class Card : MonoBehaviour {
   [SerializeField] private Vector3 _activeOffset;
   [SerializeField] private bool _selected;
   [SerializeField] private bool _active;
+  [SerializeField] private int _cooldown;
 
   void Awake() {
     _rect = transform as RectTransform;
@@ -85,7 +104,7 @@ public class Card : MonoBehaviour {
 
   public void Initialize(int index, int total) {
     var left = _rect.rect.width * 0.5f - (total * _rect.rect.width * 0.5f) - ((total - 1) * _rect.rect.width * HAND_SPACING * 0.5f);
-    pos = new Vector3(left + index * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
+    transform.parent.localPosition = new Vector3(left + index * _rect.rect.width * (1.0f + HAND_SPACING), 0, 0);
     active = true;
   }
 

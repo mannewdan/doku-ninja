@@ -25,12 +25,11 @@ public class DeckController : MonoBehaviour {
   Card NewCard(CardData data) {
     GameObject newCard = Instantiate(cardPrefab);
     newCard.transform.SetParent(transform);
+    newCard.transform.localPosition = Vector3.zero;
+    newCard.transform.localEulerAngles = Vector3.zero;
+    newCard.transform.localScale = Vector3.one;
 
-    Card card = newCard.GetComponent<Card>();
-    card.transform.localPosition = Vector3.zero;
-    card.transform.localEulerAngles = Vector3.zero;
-    card.transform.localScale = Vector3.one;
-
+    Card card = newCard.GetComponentInChildren<Card>();
     card.deck = this;
     card.data = data;
 
@@ -43,17 +42,15 @@ public class DeckController : MonoBehaviour {
       return cards[index].active ? cards[index] : null;
     } else return null;
   }
-  public bool DrawCard() {
-    List<Card> candidates = new List<Card>();
-    foreach (Card c in cards) {
-      if (!c.active) candidates.Add(c);
+  public bool DrawCards() {
+    bool cardDrawn = false;
+    foreach (Card card in cards) {
+      if (card.cooldown > 0) {
+        card.cooldown--;
+        cardDrawn = true;
+      }
     }
-
-    if (candidates.Count > 0) {
-      candidates[Random.Range(0, candidates.Count)].active = true;
-
-      return true;
-    } else return false;
+    return cardDrawn;
   }
   public void RemoveCard(Card card) {
     card.active = false;

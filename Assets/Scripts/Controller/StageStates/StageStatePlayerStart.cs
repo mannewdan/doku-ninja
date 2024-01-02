@@ -12,7 +12,7 @@ public class StageStatePlayerStart : StageState {
   }
 
   IEnumerator<float> _Start() {
-    if (deck.DrawCard()) {
+    if (deck.DrawCards()) {
       yield return Timing.WaitForSeconds(0.25f);
     }
 
