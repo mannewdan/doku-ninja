@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class DeckController : MonoBehaviour {
       }
     }
     cards.Clear();
-    for (int i = 0; i < size; i++) {
-      Card card = NewCard(new CardData(i + 1, CardType.Sai));
+    for (int i = 0; i < Mathf.Min(size, Enum.GetValues(typeof(CardType)).Length); i++) {
+      Card card = NewCard(new CardData(i + 1, (CardType)i));
       card.Initialize(i, size);
       cards.Add(card);
     }
