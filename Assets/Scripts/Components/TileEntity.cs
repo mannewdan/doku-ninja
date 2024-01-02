@@ -27,6 +27,7 @@ public class TileEntity : MonoBehaviour {
 
             if (digitStatus == DigitStatus.Empty && bombValue == owner.solutionDigit) {
               owner.currentDigit = bombValue;
+              owner.grid.ValidateBoard();
             }
 
             tile.bombStatus = BombStatus.None;

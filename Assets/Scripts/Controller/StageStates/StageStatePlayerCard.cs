@@ -94,8 +94,6 @@ public class StageStatePlayerCard : StageState {
     }
 
     if (apManager.HasAP(1)) {
-      bool doValidation = false;
-
       if (isBomb) {
         tile.bombDigit = card.data.value;
         tile.bombStatus = card.data.type == CardType.BoxBomb ? BombStatus.Box :
@@ -105,13 +103,9 @@ public class StageStatePlayerCard : StageState {
         if (unit) {
           unit.Harm(card.data.value);
         } else if (tile.digitStatus == DigitStatus.Empty) {
-          doValidation = true;
           tile.currentDigit = card.data.value;
+          grid.ValidateBoard();
         }
-      }
-
-      if (doValidation && grid.ValidateBoard()) {
-        Debug.Log("Player won");
       }
 
       deck.RemoveCard(card);

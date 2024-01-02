@@ -6,6 +6,7 @@ public class GameController : StateMachine {
   public enum BoardMode { Stage, Edit }
 
   public List<string> campaignMaps;
+  public int currentMap;
 
   public GameObject stageControllerPrefab;
   public GameObject editControllerPrefab;

@@ -20,6 +20,7 @@ public class DeckController : MonoBehaviour {
     hand.Clear();
     deck.Clear();
 
+    /*
     for (int i = 2; i <= 6; i += 2) {
       if (i > grid.width) break;
       deck.Add(NewCard(new CardData(i, CardType.Sai)));
@@ -41,6 +42,12 @@ public class DeckController : MonoBehaviour {
         deck.Add(NewCard(new CardData(i, CardType.BoxBomb)));
         deck.Add(NewCard(new CardData(i, CardType.StarBomb)));
       }
+    }
+    */
+
+    for (int i = 0; i < 10; i++) {
+      deck.Add(NewCard(new CardData(4, CardType.BoxBomb)));
+      // deck.Add(NewCard(new CardData(2, CardType.Shuriken)));
     }
 
     ShuffleDeck();

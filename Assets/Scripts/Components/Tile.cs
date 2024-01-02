@@ -94,7 +94,7 @@ public class Tile : MonoBehaviour {
 
     var newVal = currentDigit - value;
     currentDigit = Mathf.Max(0, newVal);
-    if (currentDigit <= 0) digitStatus = DigitStatus.Empty;
+    digitStatus = currentDigit <= 0 ? DigitStatus.Empty : DigitStatus.Wall;
   }
   public void Load(TileData data, Grid grid) {
     this.data = data;

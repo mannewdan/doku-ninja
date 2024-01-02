@@ -73,17 +73,19 @@ public class Grid : MonoBehaviour {
       if (d != null) mapData.tiles.Add(d);
     }
   }
-  public bool ValidateBoard() {
+  public void ValidateBoard() {
     bool allSolved = true;
     foreach (KeyValuePair<Point, Tile> tileEntry in tiles) {
       Tile tile = tileEntry.Value;
-      if (tile.digitStatus != DigitStatus.Confirmed) {
+      if (tile.currentDigit != tile.solutionDigit) {
         allSolved = false;
         break;
       }
     }
 
-    return allSolved;
+    if (allSolved) {
+      Debug.Log("Player won");
+    }
   }
   public void MarkSolutionConflicts() {
     foreach (KeyValuePair<Point, Tile> currentTilePair in tiles) {
