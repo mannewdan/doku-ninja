@@ -31,21 +31,21 @@ public class Telegraphs : MonoBehaviour {
     this.AddObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.AddObserver(AddTelegraph, Notifications.BOMB_ADD_TARGET);
     this.AddObserver(AddTelegraph, Notifications.CARD_ACTIVE);
-
     this.AddObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.BOMB_REMOVE_TARGET);
     this.AddObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.AddObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
+    this.AddObserver(ResetAll, Notifications.RESET);
   }
   void OnDisable() {
     this.RemoveObserver(AddTelegraph, Notifications.UNIT_ADD_TARGET);
     this.RemoveObserver(AddTelegraph, Notifications.BOMB_ADD_TARGET);
     this.RemoveObserver(AddTelegraph, Notifications.CARD_ACTIVE);
-
     this.RemoveObserver(RemoveTelegraph, Notifications.UNIT_REMOVE_TARGET);
     this.RemoveObserver(RemoveTelegraph, Notifications.BOMB_REMOVE_TARGET);
     this.RemoveObserver(RemoveTelegraph, Notifications.CARD_INACTIVE);
     this.RemoveObserver(HideSafeTelegraphs, Notifications.ENEMY_PHASE_START);
+    this.RemoveObserver(ResetAll, Notifications.RESET);
   }
 
   void AddTelegraph(object sender, object e) {
@@ -103,6 +103,17 @@ public class Telegraphs : MonoBehaviour {
 
         if (dictionary[pos].senders.Count == 0) dictionary[pos].telegraphObject.SetActive(false);
       }
+    }
+  }
+  void ResetAll(object sender, object e) {
+    ResetTelegraphs(playerHighlights);
+    ResetTelegraphs(enemyTelegraphs);
+    ResetTelegraphs(bombTelegraphs);
+  }
+  void ResetTelegraphs(Dictionary<Point, Data> telegraphs) {
+    foreach (Point pos in telegraphs.Keys) {
+      telegraphs[pos].senders.Clear();
+      telegraphs[pos].telegraphObject.SetActive(false);
     }
   }
   void HideSafeTelegraphs(object sender, object e) {
