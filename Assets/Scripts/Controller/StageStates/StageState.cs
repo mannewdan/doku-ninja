@@ -21,24 +21,33 @@ public abstract class StageState : State {
     this.AddObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.AddObserver(OnNumber, Notifications.NUMBER);
     this.AddObserver(OnConfirm, Notifications.CONFIRM);
+    this.AddObserver(OnEndTurn, Notifications.END_TURN);
+    this.AddObserver(OnPickCard, Notifications.PICK_CARD);
     this.AddObserver(OnCancel, Notifications.CANCEL);
     this.AddObserver(OnDiscard, Notifications.DISCARD);
+    this.AddObserver(OnTab, Notifications.TAB);
   }
   protected override void RemoveInputObservers() {
     this.RemoveObserver(OnMove, Notifications.MOVE);
     this.RemoveObserver(OnSpentAP, Notifications.PLAYER_SPENT_AP);
     this.RemoveObserver(OnNumber, Notifications.NUMBER);
     this.RemoveObserver(OnConfirm, Notifications.CONFIRM);
+    this.RemoveObserver(OnEndTurn, Notifications.END_TURN);
+    this.RemoveObserver(OnPickCard, Notifications.PICK_CARD);
     this.RemoveObserver(OnCancel, Notifications.CANCEL);
     this.RemoveObserver(OnDiscard, Notifications.DISCARD);
+    this.RemoveObserver(OnTab, Notifications.TAB);
   }
 
   protected virtual void OnMove(object sender, object e) { }
   protected virtual void OnSpentAP(object sender, object e) { }
   protected virtual void OnNumber(object sender, object e) { }
   protected virtual void OnConfirm(object sender, object e) { }
+  protected virtual void OnEndTurn(object sender, object e) { }
+  protected virtual void OnPickCard(object sender, object e) { }
   protected virtual void OnCancel(object sender, object e) { }
   protected virtual void OnDiscard(object sender, object e) { }
+  protected virtual void OnTab(object sender, object e) { }
 
   protected bool InBounds(Point p) { return owner.grid.InBounds(p); }
   protected bool IsOccupied(Point p) { return owner.units.IsOccupied(p); }

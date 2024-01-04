@@ -30,7 +30,22 @@ public class StageStatePlayerMove : StageState {
       }
     }
   }
-  protected override void OnConfirm(object sender, object e) {
+  protected override void OnTab(object sender, object e) {
+    PickCard();
+  }
+  protected override void OnPickCard(object sender, object e) {
+    PickCard();
+  }
+  protected override void OnEndTurn(object sender, object e) {
     owner.ChangeState<StageStatePlayerEnd>();
+  }
+
+  void PickCard() {
+    for (int i = 0; i < deck.cards.Count; i++) {
+      if (deck.cards[i].active) {
+        owner.stateData = deck.cards[i];
+        owner.ChangeState<StageStatePlayerCard>();
+      }
+    }
   }
 }

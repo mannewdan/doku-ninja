@@ -12,6 +12,7 @@ public static class Notifications {
   public const string CONTROL_NUMBER = "CONTROL_NUMBER_NOTIFICATION";
   public const string TAB = "TAB_NOTIFICATION";
   public const string CONFIRM = "CONFIRM_NOTIFICATION";
+  public const string END_TURN = "END_TURN_NOTIFICATION";
   public const string CANCEL = "CANCEL_NOTIFICATION";
   public const string START = "START_NOTIFICATION";
   public const string DISCARD = "DISCARD_NOTIFICATION";
@@ -19,6 +20,7 @@ public static class Notifications {
   public const string RESET = "RESET_NOTIFICATION";
   public const string SHIFT_HELD = "SHIFT_HELD_NOTIFICATION";
   public const string SHIFT_RELEASED = "SHIFT_RELEASED_NOTIFICATION";
+  public const string PICK_CARD = "PICK_CARD_NOTIFICATION";
 
   public const string MAP_SOLVED = "MAP_SOLVED_NOTIFICATION";
 

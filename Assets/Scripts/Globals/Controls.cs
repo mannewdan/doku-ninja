@@ -181,6 +181,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""EndTurn"",
+                    ""type"": ""Button"",
+                    ""id"": ""98fa78e8-670b-4ff0-82a8-bc4b164c7f3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PickCard"",
+                    ""type"": ""Button"",
+                    ""id"": ""08666bdf-099f-48b3-8114-3179eb86466e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Discard"",
                     ""type"": ""Button"",
                     ""id"": ""05463eba-8844-4a32-bbc0-9c0354b8b233"",
@@ -1165,6 +1183,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c220a8d8-57b6-471d-8cd0-20a1a9f4d5d4"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e041b4b8-8736-4b63-bee4-e8fbb7948626"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c64987e-ce98-4afb-b1e6-d60a8082ed40"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91978ae4-da6a-4ef7-a827-ee5f958852f3"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickCard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1423,6 +1485,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_general_Left = m_general.FindAction("Left", throwIfNotFound: true);
         m_general_Right = m_general.FindAction("Right", throwIfNotFound: true);
         m_general_Confirm = m_general.FindAction("Confirm", throwIfNotFound: true);
+        m_general_EndTurn = m_general.FindAction("EndTurn", throwIfNotFound: true);
+        m_general_PickCard = m_general.FindAction("PickCard", throwIfNotFound: true);
         m_general_Discard = m_general.FindAction("Discard", throwIfNotFound: true);
         m_general_Cancel = m_general.FindAction("Cancel", throwIfNotFound: true);
         m_general_Save = m_general.FindAction("Save", throwIfNotFound: true);
@@ -1523,6 +1587,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_general_Left;
     private readonly InputAction m_general_Right;
     private readonly InputAction m_general_Confirm;
+    private readonly InputAction m_general_EndTurn;
+    private readonly InputAction m_general_PickCard;
     private readonly InputAction m_general_Discard;
     private readonly InputAction m_general_Cancel;
     private readonly InputAction m_general_Save;
@@ -1558,6 +1624,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Left => m_Wrapper.m_general_Left;
         public InputAction @Right => m_Wrapper.m_general_Right;
         public InputAction @Confirm => m_Wrapper.m_general_Confirm;
+        public InputAction @EndTurn => m_Wrapper.m_general_EndTurn;
+        public InputAction @PickCard => m_Wrapper.m_general_PickCard;
         public InputAction @Discard => m_Wrapper.m_general_Discard;
         public InputAction @Cancel => m_Wrapper.m_general_Cancel;
         public InputAction @Save => m_Wrapper.m_general_Save;
@@ -1632,6 +1700,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @EndTurn.started += instance.OnEndTurn;
+            @EndTurn.performed += instance.OnEndTurn;
+            @EndTurn.canceled += instance.OnEndTurn;
+            @PickCard.started += instance.OnPickCard;
+            @PickCard.performed += instance.OnPickCard;
+            @PickCard.canceled += instance.OnPickCard;
             @Discard.started += instance.OnDiscard;
             @Discard.performed += instance.OnDiscard;
             @Discard.canceled += instance.OnDiscard;
@@ -1729,6 +1803,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @EndTurn.started -= instance.OnEndTurn;
+            @EndTurn.performed -= instance.OnEndTurn;
+            @EndTurn.canceled -= instance.OnEndTurn;
+            @PickCard.started -= instance.OnPickCard;
+            @PickCard.performed -= instance.OnPickCard;
+            @PickCard.canceled -= instance.OnPickCard;
             @Discard.started -= instance.OnDiscard;
             @Discard.performed -= instance.OnDiscard;
             @Discard.canceled -= instance.OnDiscard;
@@ -1938,6 +2018,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
+        void OnEndTurn(InputAction.CallbackContext context);
+        void OnPickCard(InputAction.CallbackContext context);
         void OnDiscard(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);

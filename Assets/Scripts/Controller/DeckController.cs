@@ -44,6 +44,9 @@ public class DeckController : MonoBehaviour {
 
   public Card SelectCard(int input) {
     int index = IndexOfInput(input);
+    return SelectCardAt(index);
+  }
+  public Card SelectCardAt(int index) {
     if (index >= 0 && index < cards.Count) {
       return cards[index].active ? cards[index] : null;
     } else return null;

@@ -115,6 +115,8 @@ public class InputController : MonoBehaviour {
     var save = controls.FindAction(controls.general.Save.id.ToString());
     var ctrl = controls.FindAction(controls.general.Control.id.ToString());
     var reset = controls.FindAction(controls.general.Reset.id.ToString());
+    var endTurn = controls.FindAction(controls.general.EndTurn.id.ToString());
+    var pickCard = controls.FindAction(controls.general.PickCard.id.ToString());
 
     if (confirm != null && confirm.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.CONFIRM, null);
@@ -140,6 +142,12 @@ public class InputController : MonoBehaviour {
     }
     if (reset != null && reset.WasReleasedThisFrame()) {
       this.PostNotification(Notifications.RESET, null);
+    }
+    if (endTurn != null && endTurn.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.END_TURN, null);
+    }
+    if (pickCard != null && pickCard.WasReleasedThisFrame()) {
+      this.PostNotification(Notifications.PICK_CARD, null);
     }
   }
   void UpdateShift() {

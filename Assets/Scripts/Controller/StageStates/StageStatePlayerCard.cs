@@ -65,6 +65,17 @@ public class StageStatePlayerCard : StageState {
       }
     }
   }
+  protected override void OnTab(object sender, object e) {
+    if (e is int direction && card) {
+      int index = deck.cards.IndexOf(card);
+      do {
+        index += direction;
+        if (index < 0) index = deck.cards.Count - 1;
+        if (index > deck.cards.Count - 1) index = 0;
+        card = deck.SelectCardAt(index);
+      } while (!card || !card.active);
+    }
+  }
   protected override void OnConfirm(object sender, object e) {
     if (card == null) {
       Debug.Log("No card is selected!");
