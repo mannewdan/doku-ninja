@@ -24,6 +24,15 @@ public class GameStateBoardInit : GameState {
     owner.currentBoard.mapToLoad = owner.campaignMaps[owner.currentMap];
     owner.currentBoard.subdirectory = "/Campaign";
 
+    List<HelpInfo> helps = new List<HelpInfo>(boardController.GetComponentsInChildren<HelpInfo>());
+    foreach (HelpInfo help in helps) {
+      if (help.mapsToInvertOn.Contains(owner.currentMap)) {
+        help.gameObject.SetActive(!help.activeByDefault);
+      } else {
+        help.gameObject.SetActive(help.activeByDefault);
+      }
+    }
+
     yield return 0;
     owner.ChangeState<GameStateBoardRunning>();
   }
