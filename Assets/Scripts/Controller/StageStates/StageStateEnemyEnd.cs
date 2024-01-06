@@ -11,6 +11,9 @@ public class StageStateEnemyEnd : StageState {
   }
 
   IEnumerator<float> _End() {
+    yield return units.spawnCounter <= 0 ? Timing.WaitForSeconds(0.25f) : 0;
+
+    units.DecrementSpawnCounter();
     yield return 0;
     owner.ChangeState<StageStatePlayerStart>();
   }

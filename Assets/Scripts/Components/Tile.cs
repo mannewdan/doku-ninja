@@ -149,7 +149,7 @@ public class Tile : MonoBehaviour {
     return neighbors;
   }
   public bool IsWalkable() {
-    return digitStatus != DigitStatus.Wall && !HasBomb();
+    return data.type == TileType.Ground && digitStatus != DigitStatus.Wall && !HasBomb();
   }
   public bool IsWall() {
     return digitStatus == DigitStatus.Wall;
