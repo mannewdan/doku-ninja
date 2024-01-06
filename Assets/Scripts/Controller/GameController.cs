@@ -14,6 +14,7 @@ public class GameController : StateMachine {
   public GameObject startMenuPrefab;
   public GameObject uiContainer;
   public BoardMode boardMode;
+  public GameObject victoryText;
 
   public StateMachineBoard currentBoard {
     get { return _currentBoard; }
@@ -45,7 +46,7 @@ public class GameController : StateMachine {
   void OnMapSolved(object sender, object e) {
     currentMap++;
     if (currentMap > campaignMaps.Count - 1) {
-      Debug.Log("Game won!");
+      victoryText.SetActive(true);
     } else {
       ChangeState<GameStateBoardInit>();
     }

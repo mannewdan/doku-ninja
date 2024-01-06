@@ -62,7 +62,7 @@ public class DeckController : MonoBehaviour {
     return cardDrawn;
   }
   public void RemoveCard(Card card) {
-    card.active = false;
+    if (card) card.active = false;
   }
 
   int IndexOfInput(int input) {

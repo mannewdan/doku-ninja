@@ -10,4 +10,15 @@ public class StageController : StateMachineBoard {
     LoadMap();
     ChangeState<StageStateLoad>();
   }
+
+  void OnEnable() {
+    this.AddObserver(OnMapSolved, Notifications.MAP_SOLVED);
+  }
+  void OnDisable() {
+    this.RemoveObserver(OnMapSolved, Notifications.MAP_SOLVED);
+  }
+
+  void OnMapSolved(object sender, object e) {
+    ChangeState<StageStatePlayerWon>();
+  }
 }
