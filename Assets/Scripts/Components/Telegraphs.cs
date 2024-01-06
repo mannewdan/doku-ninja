@@ -106,15 +106,14 @@ public class Telegraphs : MonoBehaviour {
     }
   }
   void ResetAll(object sender, object e) {
-    ResetTelegraphs(playerHighlights);
-    ResetTelegraphs(enemyTelegraphs);
-    ResetTelegraphs(bombTelegraphs);
-  }
-  void ResetTelegraphs(Dictionary<Point, Data> telegraphs) {
-    foreach (Point pos in telegraphs.Keys) {
-      telegraphs[pos].senders.Clear();
-      telegraphs[pos].telegraphObject.SetActive(false);
+    foreach (Transform t in transform) {
+      if (t == transform) continue;
+      Destroy(t.gameObject);
     }
+
+    playerHighlights.Clear();
+    enemyTelegraphs.Clear();
+    bombTelegraphs.Clear();
   }
   void HideSafeTelegraphs(object sender, object e) {
     foreach (KeyValuePair<Point, Data> t in enemyTelegraphs) {

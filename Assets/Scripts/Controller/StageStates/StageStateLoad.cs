@@ -18,6 +18,7 @@ public class StageStateLoad : StageState {
   }
 
   IEnumerator<float> _Load() {
+    yield return 0;
     grid.Load(dataToLoad);
     units.Load(dataToLoad);
     deck.BuildDeck(dataToLoad.width);

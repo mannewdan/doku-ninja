@@ -11,7 +11,8 @@ public class StageStatePlayerDead : StageState {
   }
 
   IEnumerator<float> _Dead() {
-    Debug.Log("Game over!");
+    yield return Timing.WaitForSeconds(0.5f);
+    owner.PostNotification(Notifications.RESET);
     yield return 0;
   }
 }
