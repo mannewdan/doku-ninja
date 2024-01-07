@@ -17,6 +17,30 @@ public class StartMenuController : ListMenuController {
           invoker.ChangeState<GameStateBoardInit>();
       }},
       new MenuButtonData() {
+        name = "Exit Game",
+        prompt = "Are you sure you want to exit the game?",
+        action = () => {
+          Close();
+          Debug.Log("Exit Game");
+          Application.Quit();
+      }}
+    };
+
+    BuildList(buttons);
+    ChangeState<ListMenuStateRunning>();
+  }
+  /*
+  protected override void Start() {
+    List<object> buttons = new List<object>() {
+      new MenuButtonData() {
+        name = "Enter Stage",
+        prompt = null,
+        action = () => {
+          Close();
+          invoker.boardMode = GameController.BoardMode.Stage;
+          invoker.ChangeState<GameStateBoardInit>();
+      }},
+      new MenuButtonData() {
         name = "Edit Mode",
         prompt = null,
         action = () => {
@@ -44,4 +68,5 @@ public class StartMenuController : ListMenuController {
     BuildList(buttons);
     ChangeState<ListMenuStateRunning>();
   }
+  */
 }

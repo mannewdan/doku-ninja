@@ -10,7 +10,8 @@ public interface IPersistence {
 
   private string dataPath {
     get {
-      return !Application.isEditor || DEBUG.alwaysSaveToPersistentPath ? Application.persistentDataPath : Application.dataPath;
+      //  return !Application.isEditor || DEBUG.alwaysSaveToPersistentPath ? Application.persistentDataPath : Application.dataPath;
+      return Application.dataPath;
     }
   }
   private string dataPathForGrids {
